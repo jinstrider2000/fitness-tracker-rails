@@ -1,24 +1,46 @@
-# README
+# Fitness Tracker (Rails)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple fitness tracker web app made in Rails (now with Friend Requests!), by Efrain Perez Jr.
 
-Things you may want to cover:
 
-* Ruby version
+## Installation
 
-* System dependencies
+Open your BASH console to the desired download directory, and type the following to download the app repository
 
-* Configuration
+    $ git clone git@github.com:jinstrider2000/fitness-tracker-rails.git
 
-* Database creation
+Once in the repository, type the following to ensure you have all the prerequiste software
 
-* Database initialization
+    $ bundle install
 
-* How to run the test suite
+## Usage
 
-* Services (job queues, cache servers, search engines, etc.)
+In the repository, with your BASH console, type the following to run the local server
 
-* Deployment instructions
+    $ rails s
 
-* ...
+Lastly, open your favorite browser (i.e. Chrome, Edge, etc...) and visit this address: localhost:3000
+
+## Development
+
+To develop further upon this app, fork and clone the repository located at https://github.com/jinstrider2000/fitness-tracker-rails. Again, be sure to have the Bundler gem installed, and run:
+
+    $ bundle install
+
+This will download any dependencies for development.
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/jinstrider2000/fitness-tracker-rails
+
+## Version Changes
+
+None
+
+## License
+
+This app is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
+Find me on Twitter: [@Efrain_P_Jr](https://twitter.com/@Efrain_P_Jr)
+
+Also, my blog: [One line (of code) at a time](http://www.one-line-at-a-time.com/)
