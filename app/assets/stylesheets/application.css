@@ -13,3 +13,269 @@
  *= require_tree .
  *= require_self
  */
+ @import url('https://fonts.googleapis.com/css?family=Expletus+Sans|Montserrat|Open+Sans+Condensed:300|Open+Sans:300i,400');
+ 
+ html
+ {
+   height: 100%;
+ }
+ 
+ body
+ {
+   position: relative;
+   min-height: 100%;
+   background: rgb(214,217,219);
+ }
+ 
+ footer
+ {
+   width: 100%;
+   padding-top: 5px;
+   padding-bottom: 5px;
+   border-top: 1px solid #e7e7e7;
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   background-color: rgb(199,202,204);
+ }
+ 
+ footer p
+ {
+   font-family: "Open Sans", sans-serif;
+   font-weight: 400;
+   color: #777;
+   margin: 0px;
+ }
+ 
+ h1, h2, h3, h4, h5, h6
+ {
+   font-family: "Montserrat", sans-serif;
+   line-height: 1.25em;
+   margin-bottom: 15px;
+ }
+ 
+ .navbar-default
+ {
+   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f2f3f4+0,d1d4d6+100 */
+   background: rgb(242,243,244); /* Old browsers */
+   background: -moz-linear-gradient(top,  rgb(242,243,244) 0%, rgb(209,212,214) 100%); /* FF3.6-15 */
+   background: -webkit-linear-gradient(top,  rgb(242,243,244) 0%,rgb(209,212,214) 100%); /* Chrome10-25,Safari5.1-6 */
+   background: linear-gradient(to bottom,  rgb(242,243,244) 0%,rgb(209,212,214) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f3f4', endColorstr='#d1d4d6',GradientType=0 ); /* IE6-9 */
+   border-bottom: 1px solid rgba(50, 50, 50, .3);
+ }
+ 
+ main
+ {
+   padding-top: 15px;
+   padding-bottom: 40px;
+ }
+ 
+ .row
+ {
+   margin-bottom: 10px;
+ }
+ 
+ .navbar-brand
+ {
+   font-family: "Montserrat", sans-serif;
+   border-right: 1px solid rgb(180,180,180);
+ }
+ 
+ .navbar-left > li
+ {
+   border-right: 1px solid rgb(180,180,180);
+ }
+ 
+ .navbar-right .dropdown-menu, .navbar-left .dropdown-menu
+ {
+   background: rgb(214,217,219);
+ }
+ 
+ .dropdown-menu .divider
+ {
+   background-color: rgb(180, 180, 180);
+ }
+ 
+ .vis-sm-inline
+ {
+   display: none;
+ }
+ 
+ .profile-pic-select
+ {
+   vertical-align: bottom;
+   height: 140px;
+   width: 140px;
+ }
+ 
+ .profile-pic-select + input[type="file"]
+ {
+   display: inline-block;
+ }
+ 
+ .mini-pic-display
+ {
+   margin-top: 2px;
+   height: 45px;
+   width: 45px;
+ }
+ 
+ .profile-pic-display
+ {
+   height: 140px;
+   width: 140px;
+   vertical-align: top;
+ }
+ 
+ #calorie-goal-display
+ {
+   position: absolute;
+   left: 170px;
+   top: 50px;
+ }
+ 
+ .profile-pic-display + h2, .index-icon + h2
+ {
+   display: inline-block;
+   margin-left: 10px;
+ }
+ 
+ .index-icon
+ {
+   display: inline-block;
+   width: 75px;
+   height: 75px;
+ }
+ 
+ .index-icon-mini
+ {
+   display: inline-block;
+   height: 45px;
+   width: 45px;
+   margin-right: 10px;
+ }
+ 
+ .more-link
+ {
+   float: right;
+ }
+ 
+ .card-style
+ {
+   border: 1px solid rgb(207,220,232);
+   box-shadow: 2px 1px 3px 1px rgb(180,180,180);
+   border-radius: 6px;
+   background-color: rgb(235, 235, 235);
+ }
+ 
+ .error-msg
+ {
+   color: red;
+ }
+ 
+ #error-pic
+ {
+   width: 50%;
+ }
+ 
+ .index-style, a.index-style:active
+ {
+   font: 16px "Open Sans", sans-serif;
+   color: black;
+ }
+ 
+ a.index-style:hover
+ {
+   text-decoration: none;
+   color: grey;
+ }
+ 
+ .activity-block
+ {
+   width: 500px;
+   padding: 5px 0;
+ }
+ 
+ .activity-block > div > form
+ {
+   display: inline-block;
+ }
+ 
+ .activity-row
+ {
+   margin-bottom: 4px;
+ }
+ 
+ @media (max-width: 768px)
+ {
+   .vis-sm-inline
+   {
+     display: inline-block;
+   }
+ 
+   footer
+   {
+     display: none;
+   }
+ 
+   .navbar-brand
+   {
+     border-right-style: none; 
+   }
+ 
+   .navbar-left > li
+   {
+     border-right-style: none;
+   }
+ 
+   .mini-pic-display
+   {
+     display: none;
+   }
+ 
+   .profile-pic-display
+   {
+     width: 160px;
+     height: 160px;
+     display: block;
+     margin: 0 auto;
+   }
+ 
+   .profile-pic-display + h2, .index-icon + h2
+   {
+     display: none;
+   }
+ 
+   .profile-pic-display + h2 + a
+   {
+     font-size: 18px;
+     position: absolute;
+     bottom: 0;
+     right: 15px;
+   }
+ 
+   #calorie-goal-display
+   {
+     position: static;
+     text-align: center;
+   }
+ 
+   .more-link
+   {
+     font-size: 18px;
+   }
+ 
+   .index-style
+   {
+     font-size: 20px;
+   }
+ }
+ 
+ @media (max-width: 500px)
+ {
+   .activity-block
+   {
+     width: 100%;
+   }
+ }
