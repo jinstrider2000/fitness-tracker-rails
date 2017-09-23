@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
  @import url('https://fonts.googleapis.com/css?family=Expletus+Sans|Montserrat|Open+Sans+Condensed:300|Open+Sans:300i,400');
  
  html
