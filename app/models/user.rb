@@ -13,4 +13,12 @@ class User < ApplicationRecord
   def first_name
     self.name.split(" ")[0]
   end
+
+  def recent_exercises
+    self.exercises.order(created_at: :desc).limit(6)
+  end
+
+  def recent_meals
+    self.foods.order(created_at: :desc).limit(6)
+  end
 end
