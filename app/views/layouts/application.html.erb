@@ -16,8 +16,13 @@
     <header>
       <%= render partial: 'nav', locals: @nav_elements %>   
     </header>
-    <div class="container">
-      <%= yield %>
-    </div>
+    <main>
+      <div class="container">
+        <%= yield %>
+      </div>
+    </main>
+    <footer>
+      <p class="text-center">Designed by Efrain Perez Jr</p>
+    </footer>
   </body>
 </html>
