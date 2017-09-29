@@ -12,6 +12,8 @@
     <header>
       <%= render partial: 'nav', locals: @nav_elements %>   
     </header>
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

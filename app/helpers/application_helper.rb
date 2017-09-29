@@ -27,4 +27,17 @@ module ApplicationHelper
   def link_status(link)
     request.path_info =~ /#{link}/ ? "active" : ""
   end
+
+  def on_recent_activity?
+    !!(request.path_info =~ /\/recent-activity/)
+  end
+
+  def profile_pic_url(user)
+    profile_pic_file = Dir.glob(File.join("public","images","users","#{user.id}","*profilepic*")).first.match(/(?<=\/)\d+_profilepic.+/)[0]
+    url("images/users/#{user.id}/#{profile_pic_file}")
+  end
+
+  def referred_by_recent_activity?
+    !!(/\/recent-activity\Z/.match(request.referrer))
+  end
 end
