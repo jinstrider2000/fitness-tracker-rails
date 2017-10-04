@@ -11,8 +11,8 @@ class User < ApplicationRecord
   has_many :exercises, through: :achievements, source: :activity, source_type: "Exercise"
   has_many :foods, through: :achievements, source: :activity, source_type: "Food"
   validates_presence_of :username, :name, :daily_calorie_goal
-  validates :username, uniqueness: true
-  validates :daily_calorie_goal, numericality: {greater_than_or_equal_to: 1}
+  validates :email, uniqueness: true
+  validates :daily_calorie_intake_goal, numericality: {greater_than_or_equal_to: 1}
 
   def first_name
     self.name.split(" ")[0]
