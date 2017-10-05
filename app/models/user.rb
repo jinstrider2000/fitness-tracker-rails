@@ -10,9 +10,10 @@ class User < ApplicationRecord
   has_many :achievements
   has_many :exercises, through: :achievements, source: :activity, source_type: "Exercise"
   has_many :foods, through: :achievements, source: :activity, source_type: "Food"
-  validates_presence_of :username, :name, :daily_calorie_goal
+  validates_presence_of :name, :daily_calorie_intake_goal
   validates :email, uniqueness: true
   validates :daily_calorie_intake_goal, numericality: {greater_than_or_equal_to: 1}
+  after_validation :set_slug
 
   def first_name
     self.name.split(" ")[0]
@@ -24,6 +25,10 @@ class User < ApplicationRecord
 
   def recent_meals
     self.foods.order(created_at: :desc).limit(6)
+  end
+
+  def set_slug
+    
   end
 
   def achievement_timeline
