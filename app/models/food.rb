@@ -1,5 +1,5 @@
 class Food < ApplicationRecord
-  has_one :achievement, as: :activity
+  has_one :achievement, as: :activity, dependent: :destroy
   validates_presence_of :name, :calories
   validates :calories, numericality: {greater_than_or_equal_to: 0}
 end

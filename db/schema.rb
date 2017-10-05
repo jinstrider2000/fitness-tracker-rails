@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20171003202127) do
     t.integer "follower_id"
     t.integer "followee_id"
     t.boolean "blocked", default: false, null: false
+    t.boolean "following_each_other", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["followee_id"], name: "index_relationships_on_followee_id"

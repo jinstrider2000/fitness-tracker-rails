@@ -4,6 +4,7 @@ class CreateRelationships < ActiveRecord::Migration[5.1]
       t.belongs_to :follower
       t.belongs_to :followee
       t.boolean :blocked, null: false, default: false
+      t.boolean :following_each_other, null: false 
 
       t.timestamps
     end
