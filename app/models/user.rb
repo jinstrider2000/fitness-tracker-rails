@@ -1,3 +1,5 @@
+require 'cgi'
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -13,7 +15,8 @@ class User < ApplicationRecord
   validates_presence_of :name, :daily_calorie_intake_goal
   validates :email, uniqueness: true
   validates :daily_calorie_intake_goal, numericality: {greater_than_or_equal_to: 1}
-  after_validation :set_slug
+  after_create :update_slug_column
+  before_save :set_slug, on: :update, unless: :slug_set_properly? 
 
   def first_name
     self.name.split(" ")[0]
@@ -27,13 +30,27 @@ class User < ApplicationRecord
     self.foods.order(created_at: :desc).limit(6)
   end
 
-  def set_slug
-    
-  end
-
   def achievement_timeline
     timeline_user_ids = [self.id, self.following.distinct.pluck(:id)].flatten
     Achievement.where(user_id: timeline_user_ids)
+  end
+
+  protected
+
+  def slug_set_properly?
+    self.id != nil && self.slug == get_proper_slug
+  end
+
+  def get_proper_slug
+    "#{self.id}-#{CGI.escape(self.name.downcase).gsub("+","-")}"
+  end
+
+  def update_slug_column
+    self.update_column(:slug, get_proper_slug)
+  end
+
+  def set_slug
+    self.slug = get_proper_slug
   end
 
 end
