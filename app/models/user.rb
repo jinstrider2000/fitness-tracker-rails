@@ -32,7 +32,15 @@ class User < ApplicationRecord
 
   def achievement_timeline
     timeline_user_ids = [self.id, self.following.distinct.pluck(:id)].flatten
-    Achievement.where(user_id: timeline_user_ids)
+    Achievement.where(user_id: timeline_user_ids).order(updated_at: :desc)
+  end
+
+  def block(user)
+    self.block = true
+  end
+
+  def unblock(user)
+    self.block = false
   end
 
   protected
