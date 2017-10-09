@@ -8,7 +8,7 @@ class Relationship < ApplicationRecord
 
   def update_following_each_other
     reciprocal_relationship = Relationship.find_by(follower: self.followee, followee: self.follower)
-    if !blocked? && reciprocal_relationship.present?
+    if !self.blocked? && reciprocal_relationship.present?
       self.following_each_other = true
     else
       self.following_each_other = false
