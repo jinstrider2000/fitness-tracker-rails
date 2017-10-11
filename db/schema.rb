@@ -23,15 +23,17 @@ ActiveRecord::Schema.define(version: 20171003202127) do
   end
 
   create_table "exercises", force: :cascade do |t|
-    t.string "name"
-    t.integer "calories_burned"
+    t.string "name", null: false
+    t.integer "calories_burned", null: false
+    t.string "comment", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "foods", force: :cascade do |t|
-    t.string "name"
-    t.integer "calories"
+    t.string "name", null: false
+    t.integer "calories", null: false
+    t.string "comment", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
