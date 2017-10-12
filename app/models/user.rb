@@ -5,10 +5,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :following_relationships, class_name: "Relationship", foreign_key: "follower_id"
+  has_many :following_relationships, -> {where(blocked: false)}, class_name: "Relationship", foreign_key: "follower_id"
   has_many :following, through: :following_relationships, source: :followee
-  has_many :follower_relationships, class_name: "Relationship", foreign_key: "followee_id"
+  has_many :follower_relationships, -> {where(blocked: false)}, class_name: "Relationship", foreign_key: "followee_id"
   has_many :followers, through: :follower_relationships, source: :follower
+  has_many :blocked_relationships, -> {where(blocked: true)}, class_name: "Relationship", foreign_key: "followee_id"
+  has_many :blocked_users, through: :blocked_relationships, source: :follower
   has_many :achievements
   has_many :exercises, through: :achievements, source: :activity, source_type: "Exercise"
   has_many :foods, through: :achievements, source: :activity, source_type: "Food"
@@ -30,20 +32,37 @@ class User < ApplicationRecord
     self.foods.order(created_at: :desc).limit(6)
   end
 
-  def achievement_timeline
+  def achievement_following_timeline
     timeline_user_ids = [self.id, self.following.distinct.pluck(:id)].flatten
     Achievement.where(user_id: timeline_user_ids).order(updated_at: :desc)
   end
 
+  def blocked?(user)
+    !!self.blocked_users.find_by(id: user.id)
+  end
+
   def block(user)
-    self.block = true
+    !!find_follower_relationship_with(user).try(:block)
   end
 
   def unblock(user)
-    self.block = false
+    !!find_blocked_relationship_with(user).try(:unblock)
   end
 
-  protected
+  def follow(user)
+    if !self.blocked?(user)
+      self.following_relationships.build(follower: self, followee: user)
+      self.save
+    else
+      false
+    end
+  end
+
+  def unfollow(user)
+    !!find_following_relationship_with(user).try(:destroy)
+  end
+
+  private
 
   def slug_set_properly?
     self.id != nil && self.slug == get_proper_slug
@@ -59,6 +78,18 @@ class User < ApplicationRecord
 
   def set_slug
     self.slug = get_proper_slug
+  end
+
+  def find_follower_relationship_with(user)
+    self.follower_relationships.find_by(follower: user)
+  end
+
+  def find_following_relationship_with(user)
+    self.following_relationships.find_by(followee: user)
+  end
+
+  def find_blocked_relationship_with(user)
+    self.blocked_relationships.find_by(follower: user)
   end
 
 end
