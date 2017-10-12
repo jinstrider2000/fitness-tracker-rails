@@ -41,17 +41,26 @@ class User < ApplicationRecord
     !!self.blocked_users.find_by(id: user.id)
   end
 
+  def blocked_by?(user)
+    user.blocked?(self)
+  end
+
   def block(user)
-    !!find_follower_relationship_with(user).try(:block)
+    !self.blocked?(user) ?  !!find_follower_relationship_with(user).try(:block) : false
+    # !!find_follower_relationship_with(user).try(:block) if !self.blocked?(user)
   end
 
   def unblock(user)
     !!find_blocked_relationship_with(user).try(:unblock)
   end
 
+  def following?(user)
+    !!find_following_relationship_with(user)
+  end
+
   def follow(user)
-    if !self.blocked?(user)
-      self.following_relationships.build(follower: self, followee: user)
+    if !self.blocked?(user) && !self.blocked_by?(user) && !self.following?(user)
+      self.following_relationships.build(followee: user)
       self.save
     else
       false

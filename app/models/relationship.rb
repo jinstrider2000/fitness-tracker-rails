@@ -7,7 +7,9 @@ class Relationship < ApplicationRecord
 
   def block
     reciprocal_relationship = get_reciprocal_relationship
-    reciprocal_relationship.destroy if self.update(blocked: true, following_each_other: false) && reciprocal_relationship.present? 
+    updated = self.update(blocked: true, following_each_other: false)
+    reciprocal_relationship.destroy if updated && reciprocal_relationship.present?
+    updated
   end
 
   def unblock
@@ -19,11 +21,9 @@ class Relationship < ApplicationRecord
   def update_following_each_other
     if !self.blocked?
       reciprocal_relationship = get_reciprocal_relationship
-      if reciprocal_relationship.present?
-        if !self.following_each_other?
-          self.following_each_other = true
-          reciprocal_relationship.update_column(:following_each_other, true)
-        end
+      if reciprocal_relationship.present? && !self.following_each_other?
+        self.following_each_other = true
+        reciprocal_relationship.update_column(:following_each_other, true)
       elsif self.following_each_other?
         self.following_each_other = false
         reciprocal_relationship.update_column(:following_each_other, false)
