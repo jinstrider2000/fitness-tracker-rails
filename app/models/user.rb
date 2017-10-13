@@ -5,18 +5,23 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :following_relationships, -> {where(blocked: false)}, class_name: "Relationship", foreign_key: "follower_id"
+
+  has_many :following_relationships, class_name: "Relationship", foreign_key: "follower_id"
   has_many :following, through: :following_relationships, source: :followee
-  has_many :follower_relationships, -> {where(blocked: false)}, class_name: "Relationship", foreign_key: "followee_id"
+  has_many :follower_relationships, class_name: "Relationship", foreign_key: "followee_id"
   has_many :followers, through: :follower_relationships, source: :follower
-  has_many :blocked_relationships, -> {where(blocked: true)}, class_name: "Relationship", foreign_key: "followee_id"
-  has_many :blocked_users, through: :blocked_relationships, source: :follower
+  has_many :blocked_relationships, class_name: "Block"
+  has_many :blocked_users, through: :blocked_relationships
+  has_many :muted_relationships, class_name: "Mute"
+  has_many :muted_users, through: :muted_relationships
   has_many :achievements
   has_many :exercises, through: :achievements, source: :activity, source_type: "Exercise"
   has_many :foods, through: :achievements, source: :activity, source_type: "Food"
+
   validates_presence_of :name, :daily_calorie_intake_goal
   validates :email, uniqueness: true
   validates :daily_calorie_intake_goal, numericality: {greater_than_or_equal_to: 1}
+  
   after_create :update_slug_column
   before_save :set_slug, on: :update, unless: :slug_set_properly? 
 
