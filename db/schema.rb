@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171003202127) do
+ActiveRecord::Schema.define(version: 20171014004454) do
 
   create_table "achievements", force: :cascade do |t|
     t.string "activity_type"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 20171003202127) do
     t.datetime "updated_at", null: false
     t.index ["activity_type", "activity_id"], name: "index_achievements_on_activity_type_and_activity_id"
     t.index ["user_id"], name: "index_achievements_on_user_id"
+  end
+
+  create_table "blocks", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "blocked_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blocked_user_id"], name: "index_blocks_on_blocked_user_id"
+    t.index ["user_id"], name: "index_blocks_on_user_id"
   end
 
   create_table "exercises", force: :cascade do |t|
@@ -38,10 +47,18 @@ ActiveRecord::Schema.define(version: 20171003202127) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "mutes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "muted_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["muted_user_id"], name: "index_mutes_on_muted_user_id"
+    t.index ["user_id"], name: "index_mutes_on_user_id"
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followee_id"
-    t.boolean "blocked", default: false
     t.boolean "following_each_other", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
