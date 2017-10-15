@@ -51,12 +51,23 @@ class User < ApplicationRecord
   end
 
   def block(user)
-    !self.blocked?(user) ?  !!find_follower_relationship_with(user).try(:block) : false
-    # !!find_follower_relationship_with(user).try(:block) if !self.blocked?(user)
+    !!find_follower_relationship_with(user).try(:block) || !!Block.create(user: self, blocked_user: user)
   end
 
   def unblock(user)
-    !!find_blocked_relationship_with(user).try(:unblock)
+    !!find_blocked_relationship_with(user).try(:destroy)
+  end
+
+  def muted?(user)
+    !!find_muted_relationship_with(user)
+  end
+
+  def mute
+    
+  end
+
+  def unmute
+    
   end
 
   def following?(user)
@@ -103,7 +114,11 @@ class User < ApplicationRecord
   end
 
   def find_blocked_relationship_with(user)
-    self.blocked_relationships.find_by(follower: user)
+    self.blocked_relationships.find_by(blocked_user: user)
+  end
+
+  def find_muted_relationship_with(user)
+    self.muted_relationships.find_by(muted_users: user)
   end
 
 end
