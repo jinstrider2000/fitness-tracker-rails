@@ -18,7 +18,7 @@ class User < ApplicationRecord
   has_many :exercises, through: :achievements, source: :activity, source_type: "Exercise"
   has_many :foods, through: :achievements, source: :activity, source_type: "Food"
 
-  validates_presence_of :name, :daily_calorie_intake_goal
+  validates_presence_of :name, :daily_calorie_intake_goal, :email
   validates :email, uniqueness: true
   validates :daily_calorie_intake_goal, numericality: {greater_than_or_equal_to: 1}
   
@@ -51,31 +51,56 @@ class User < ApplicationRecord
   end
 
   def block(user)
-    !!find_follower_relationship_with(user).try(:block) || !!Block.create(user: self, blocked_user: user)
+    unless self.blocked?(user) 
+      self.unfollow(user) if self.following?(user)
+      find_follower_relationship_with(user).destroy if self.follower?(user)
+      self.blocked_relationships.build(blocked_user: user)
+      self.save
+    else
+      false
+    end
   end
 
   def unblock(user)
-    !!find_blocked_relationship_with(user).try(:destroy)
+    if self.blocked?(user)
+      find_blocked_relationship_with(user).destroy
+    else
+      false
+    end
   end
 
   def muted?(user)
     !!find_muted_relationship_with(user)
   end
 
-  def mute
-    
+  def mute(user)
+    unless self.muted?(user) 
+      self.muted_relationships.build(muted_user: user)
+      self.save
+    else
+      false
+    end
   end
 
-  def unmute
-    
+  def unmute(user)
+    if self.muted?(user) 
+      find_muted_relationship_with(user).destroy
+      self.save
+    else
+      false
+    end
   end
 
   def following?(user)
     !!find_following_relationship_with(user)
   end
 
+  def follower?(user)
+    !!find_follower_relationship_with(user)
+  end
+
   def follow(user)
-    if !self.blocked?(user) && !self.blocked_by?(user) && !self.following?(user)
+    unless self.blocked?(user) || self.blocked_by?(user) || self.following?(user)
       self.following_relationships.build(followee: user)
       self.save
     else
@@ -84,7 +109,7 @@ class User < ApplicationRecord
   end
 
   def unfollow(user)
-    !!find_following_relationship_with(user).try(:destroy)
+    find_following_relationship_with(user).destroy if self.following?(user)
   end
 
   private
@@ -118,7 +143,7 @@ class User < ApplicationRecord
   end
 
   def find_muted_relationship_with(user)
-    self.muted_relationships.find_by(muted_users: user)
+    self.muted_relationships.find_by(muted_user: user)
   end
 
 end
