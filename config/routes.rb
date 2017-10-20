@@ -9,8 +9,8 @@ Rails.application.routes.draw do
       get 'blocked', as: "blocked_users"
       get 'muted', as: 'muted_users'
       get 'feed', as: 'user_feed'
-      get 'followers', 'followers'
-      get 'following', 'following'
+      get 'followers', as: 'followers'
+      get 'following', as: 'following'
     end
     resources :achievements, only: [:index]
     resources :foods, only: [:index]

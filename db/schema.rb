@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171014004454) do
+ActiveRecord::Schema.define(version: 20171019164354) do
 
   create_table "achievements", force: :cascade do |t|
     t.string "activity_type"
@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(version: 20171014004454) do
     t.datetime "updated_at", null: false
     t.index ["blocked_user_id"], name: "index_blocks_on_blocked_user_id"
     t.index ["user_id"], name: "index_blocks_on_user_id"
+  end
+
+  create_table "daily_totals", force: :cascade do |t|
+    t.integer "total_calories_in", default: 0, null: false
+    t.integer "total_calories_out", default: 0, null: false
+    t.integer "net_calories", default: 0, null: false
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_daily_totals_on_user_id"
   end
 
   create_table "exercises", force: :cascade do |t|
