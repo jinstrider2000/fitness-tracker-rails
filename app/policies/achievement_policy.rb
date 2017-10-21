@@ -1,0 +1,3 @@
+class AchievementPolicy < ApplicationPolicy
+  
+end

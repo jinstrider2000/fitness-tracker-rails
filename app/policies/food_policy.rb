@@ -1,0 +1,3 @@
+class FoodPolicy < ApplicationPolicy
+  
+end

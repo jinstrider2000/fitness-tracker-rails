@@ -1,0 +1,3 @@
+class BlockPolicy < ApplicationPolicy
+  
+end

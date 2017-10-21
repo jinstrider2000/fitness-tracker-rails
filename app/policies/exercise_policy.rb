@@ -1,0 +1,3 @@
+class ExercisePolicy < ApplicationPolicy
+  
+end
