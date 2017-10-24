@@ -1,3 +1,0 @@
-class MutePolicy < ApplicationPolicy
-  
-end
