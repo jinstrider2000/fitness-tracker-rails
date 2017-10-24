@@ -1,6 +1,6 @@
 class ActivityFeedController < ApplicationController
 
-  def index
+  def show
     
   end
 
