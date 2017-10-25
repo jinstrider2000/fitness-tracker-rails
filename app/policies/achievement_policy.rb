@@ -1,11 +1,7 @@
 class AchievementPolicy < ApplicationPolicy
 
   def create?
-    
-  end
-
-  def index?
-    
+    record.user_id == user.id
   end
   
 end
