@@ -26,10 +26,11 @@ class AchievementsController < ApplicationController
 
   def index
     @user = User.find_by(slug: params[:user_slug])
-    unless @user.present?
-      redirect_to request.referrer || root_path, notice: "The requested user cannot be located"
-    else
+    if @user.present?
+      authorize @user
       @achievements = @user.achievements
+    else
+      skip_authorization
     end
   end
 
