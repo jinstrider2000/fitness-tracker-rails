@@ -1,7 +1,6 @@
 class AchievementsController < ApplicationController
 
-  before_action :authenticate_user!
-  after_action :verify_authorized, only: [:create]
+  skip_after_action :verify_authorized, except: [:create]
 
   def new
     if params[:activity_type].try(:downcase) == "exercise"
@@ -20,17 +19,18 @@ class AchievementsController < ApplicationController
       @achievement.save
       redirect_to achievements_path
     else
+      flash[:warnings] = @achievement.errors.full_messages
       render :new
     end
   end
 
   def index
     @user = User.find_by(slug: params[:user_slug])
-    unless user.present?
-      flash.notice = "The requested user cannot be located."
-      redirect_to request.referrer
+    unless @user.present?
+      redirect_to request.referrer || root_path, notice: "The requested user cannot be located"
+    else
+      @achievements = @user.achievements
     end
-    @achievements = user.try(:achievements)
   end
 
   private

@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
-  before_action :configure_sign_up_parameters, if: :devise_controller?, only: [:create]
-  before_action :configure_account_update_parameters, if: :devise_controller?, only: [:update]
+  before_action :authenticate_user!
+  before_action :configure_sign_up_parameters, if: :devise_controller?, if: [:create]
+  before_action :configure_account_update_parameters, if: :devise_controller?, if: [:update]
+  after_action :verify_authorized
   
   protected
 
