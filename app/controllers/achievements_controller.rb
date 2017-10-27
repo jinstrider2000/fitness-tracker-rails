@@ -1,6 +1,6 @@
 class AchievementsController < ApplicationController
 
-  skip_after_action :verify_authorized, except: [:create]
+  skip_after_action :verify_authorized, except: [:create, :index]
 
   def new
     if params[:activity_type].try(:downcase) == "exercise"
@@ -17,7 +17,7 @@ class AchievementsController < ApplicationController
     authorize @achievement
     if @achievement.valid?
       @achievement.save
-      redirect_to achievements_path
+      redirect_to user_achievements_path(user_slug: current_user.slug)
     else
       flash[:warnings] = @achievement.errors.full_messages
       render :new
@@ -31,6 +31,7 @@ class AchievementsController < ApplicationController
       @achievements = @user.achievements
     else
       skip_authorization
+      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist."
     end
   end
 

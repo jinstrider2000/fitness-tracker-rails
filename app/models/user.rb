@@ -51,22 +51,14 @@ class User < ApplicationRecord
   end
 
   def block(user)
-    unless self.blocked?(user) 
-      self.unfollow(user) if self.following?(user)
-      find_follower_relationship_with(user).destroy if self.follower?(user)
-      self.blocked_relationships.build(blocked_user: user)
-      self.save
-    else
-      false
-    end
+    self.unfollow(user) if self.following?(user)
+    find_follower_relationship_with(user).destroy if self.follower?(user)
+    self.blocked_relationships.build(blocked_user: user)
+    self.save
   end
 
   def unblock(user)
-    if self.blocked?(user)
-      find_blocked_relationship_with(user).destroy
-    else
-      false
-    end
+    find_blocked_relationship_with(user).destroy
   end
 
   def muted?(user)
@@ -74,21 +66,13 @@ class User < ApplicationRecord
   end
 
   def mute(user)
-    unless self.muted?(user) 
-      self.muted_relationships.build(muted_user: user)
-      self.save
-    else
-      false
-    end
+    self.muted_relationships.build(muted_user: user)
+    self.save
   end
 
   def unmute(user)
-    if self.muted?(user) 
-      find_muted_relationship_with(user).destroy
-      self.save
-    else
-      false
-    end
+    find_muted_relationship_with(user).destroy
+    self.save
   end
 
   def following?(user)
@@ -100,16 +84,12 @@ class User < ApplicationRecord
   end
 
   def follow(user)
-    unless self.blocked?(user) || self.blocked_by?(user) || self.following?(user)
-      self.following_relationships.build(followee: user)
-      self.save
-    else
-      false
-    end
+    self.following_relationships.build(followee: user)
+    self.save
   end
 
   def unfollow(user)
-    find_following_relationship_with(user).destroy if self.following?(user)
+    find_following_relationship_with(user).destroy
   end
 
   private

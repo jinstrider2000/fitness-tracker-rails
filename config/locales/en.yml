@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+  pundit:
+    default_msg: "You are unauthorized perform this action"
+    achievement_policy:
+      create?: "You can't add achievements to another user's profile"
+      index?: "This user has blocked you from viewing their achievements"
