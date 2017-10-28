@@ -1,6 +1,6 @@
 class AchievementsController < ApplicationController
 
-  skip_after_action :verify_authorized, except: [:create, :index]
+  skip_after_action :verify_authorized, unless: [:create, :index]
 
   def new
     if params[:activity_type].try(:downcase) == "exercise"

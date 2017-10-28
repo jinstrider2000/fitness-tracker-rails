@@ -5,15 +5,15 @@ class UserPolicy < ApplicationPolicy
     end
   
     def following?
-      !user.blocked_by?(record)
+      followers?
     end
   
     def blocked?
-      !user.blocked_by?(record)
+      followers?
     end
   
     def muted?
-      !user.blocked_by?(record)
+      followers?
     end
   
     def follow?
