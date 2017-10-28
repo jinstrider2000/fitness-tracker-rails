@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
 
   skip_before_action :verify_authorizated, if: [:show, :index]
-  before_action :load_and_authorize_user_resource, unless: [:show, :index]
+  before_action :load_user_resource, unless: :index
 
   def show
-    @blocked = current_user.blocked_by?(@user)
+    if @user.present?
+      @blocked = current_user.blocked_by?(@user)
+    else
+      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+    end
   end
 
   def index
@@ -12,54 +16,94 @@ class UsersController < ApplicationController
   end
 
   def followers
-    @users = @user.followers
+    if @user.present?
+      @users = @user.followers
+    else
+      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+    end
   end
 
   def following
-    @users = @user.following
+    if @user.present?
+      @users = @user.following
+    else
+      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+    end
   end
 
   def blocked
-    @users = @user.blocked_users
+    if @user.present?
+      @users = @user.blocked_users
+    else
+      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+    end
   end
 
   def muted
-    @users = @user.muted_users
+    if @user.present?
+      @users = @user.muted_users
+    else
+      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+    end
   end
 
   def follow
-    current_user.follow(@user)
-    redirect_to request.referrer || root_path, notice: "You're following #{@user.name}"
+    if @user.present?
+      current_user.follow(@user)
+      redirect_to request.referrer || root_path, notice: "You're following #{@user.name}"
+    else
+      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+    end
   end
 
   def unfollow
-    current_user.unfollow(@user)
-    redirect_to request.referrer || root_path, notice: "You've unfollowed #{@user.name}"
+    if @user.present?
+      current_user.unfollow(@user)
+      redirect_to request.referrer || root_path, notice: "You've unfollowed #{@user.name}"
+    else
+      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+    end
   end
 
   def block
-    current_user.block(@user)
-    redirect_to request.referrer || root_path, notice: "You've blocked #{@user.name}"
+    if @user.present?
+      current_user.block(@user)
+      redirect_to request.referrer || root_path, notice: "You've blocked #{@user.name}"
+    else
+      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+    end
   end
 
   def unblock
-    current_user.unblock(@user)
-    redirect_to request.referrer || root_path, notice: "You've unblocked #{@user.name}"
+    if @user.present?
+      current_user.unblock(@user)
+      redirect_to request.referrer || root_path, notice: "You've unblocked #{@user.name}"
+    else
+      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+    end
   end
 
   def mute
-    current_user.mute(@user)
-    redirect_to request.referrer || root_path, notice: "You've muted #{@user.name}"
+    if @user.present?
+      current_user.mute(@user)
+      redirect_to request.referrer || root_path, notice: "You've muted #{@user.name}"
+    else
+      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+    end
   end
 
   def unmute
-    current_user.unmute(@user)
-    redirect_to request.referrer || root_path, notice: "You've unmuted #{@user.name}"
+    if @user.present?
+      current_user.unmute(@user)
+      redirect_to request.referrer || root_path, notice: "You've unmuted #{@user.name}"
+    else
+      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+    end
   end
 
   private
 
-  def load_and_authorize_user_resource
+  def load_user_resource
     @user = User.find_by(slug: params[:slug])
     authorize @user
   end
