@@ -34,8 +34,13 @@ class ExercisesController < ApplicationController
   def update
     if @exercise.present?
       authorize @exercise
-      @exercise.update(exercise_params)
-      redirect_to request.referrer, error: "Exercise successfully updated"
+      if @exercise.valid?
+        @exercise.update(exercise_params)
+        redirect_to request.referrer, error: "Exercise successfully updated"
+      else
+        flash[:warnings] = @exercise.errors.full_messages
+        render :edit
+      end
     else
       skip_authorization
       redirect_to request.referrer || root_path, error: "Sorry, that exercise couldn't be found"

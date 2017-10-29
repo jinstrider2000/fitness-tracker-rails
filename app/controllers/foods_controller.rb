@@ -37,8 +37,13 @@ class FoodsController < ApplicationController
     @food = food.find_by(id: params[:id])
     if @food.present?
       authorize @food
-      @food.update(food_params)
-      redirect_to request.referrer, notice: "Food successfully updated"
+      if @food.valid?
+        @food.update(food_params)
+        redirect_to request.referrer, notice: "Food successfully updated"
+      else
+        flash[:warnings] = @food.errors.full_messages
+        render :edit
+      end
     else
       skip_authorization
       redirect_to request.referrer || root_path, error: "Sorry, that food couldn't be found"
