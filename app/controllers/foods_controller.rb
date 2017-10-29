@@ -14,7 +14,6 @@ class FoodsController < ApplicationController
   end
 
   def show
-    @food = food.find_by(id: params[:id])
     if @food.present?
       authorize @food
     else
@@ -24,7 +23,6 @@ class FoodsController < ApplicationController
   end
 
   def edit
-    @food = food.find_by(id: params[:id])
     if @food.present?
       authorize @food
     else
@@ -34,12 +32,10 @@ class FoodsController < ApplicationController
   end
 
   def update
-    @food = food.find_by(id: params[:id])
     if @food.present?
       authorize @food
-      if @food.valid?
-        @food.update(food_params)
-        redirect_to request.referrer, notice: "Food successfully updated"
+      if !!@food.update(food_params)
+        redirect_to food_path(@food), notice: "Food successfully updated"
       else
         flash[:warnings] = @food.errors.full_messages
         render :edit
@@ -51,11 +47,14 @@ class FoodsController < ApplicationController
   end
 
   def destroy
-    @food = food.find_by(id: params[:id])
     if @food.present?
       authorize @food
       @food.destroy
-      redirect_to request.referrer, error: "Food successfully deleted"
+      if referred_by_activity_feed?
+        redirect_to request.referrer, notice: "Food successfully deleted"
+      else
+        redirect_to user_foods_path, notice: "Food successfully deleted"
+      end
     else
       skip_authorization
       redirect_to request.referrer || root_path, error: "Sorry, that food couldn't be found"
@@ -69,7 +68,7 @@ class FoodsController < ApplicationController
   end
 
   def load_food_resource
-    @food = food.find_by(id: params[:id])
+    @food = Food.find_by(id: params[:id])
   end
 
 end

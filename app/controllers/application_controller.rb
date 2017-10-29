@@ -19,4 +19,8 @@ class ApplicationController < ActionController::Base
     redirect_to(request.referrer || root_path)
   end
 
+  def referred_by_activity_feed?
+    !!request.referrer ~= /activity-feed/
+  end
+
 end

@@ -15,8 +15,7 @@ class AchievementsController < ApplicationController
   def create
     @achievement = Achievement.new(achievement_params)
     authorize @achievement
-    if @achievement.valid?
-      @achievement.save
+    if !!@achievement.save
       redirect_to user_achievements_path(user_slug: current_user.slug)
     else
       flash[:warnings] = @achievement.errors.full_messages
