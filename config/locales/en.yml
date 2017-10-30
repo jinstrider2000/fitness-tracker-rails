@@ -30,9 +30,27 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
   pundit:
     default_msg: "You are unauthorized perform this action"
     achievement_policy:
       create?: "You can't add achievements to another user's profile"
       index?: "This user has blocked you from viewing their achievements"
+    user_policy:
+      followers?: "You can't view this user's followers"
+      following?: "You can't view who this user is following"
+      blocked?: "You can't view another user's blocked list"
+      muted?: "You can't view another user's muted list"
+      follow?: "You can't follow this user"
+      unfollow?: "You aren't following this user"
+    exercise_policy:
+      index?: "You can't view this user's exercises"
+      show?: "You can't view this user's exercise stats"
+      edit?: "You can't edit this user's exercise stats"
+      update?: "You can't update this user's exercise stats"
+      destroy?: "You can't delete this user's exercise stats"
+    food_policy:
+      index?: "You can't view this user's foods"
+      show?: "You can't view this user's food stats"
+      edit?: "You can't edit this user's food stats"
+      update?: "You can't update this user's food stats"
+      destroy?: "You can't delete this user's food stats"

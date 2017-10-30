@@ -9,35 +9,35 @@ class UserPolicy < ApplicationPolicy
     end
   
     def blocked?
-      followers?
+      user.id == record.id
     end
   
     def muted?
-      followers?
+      blocked?
     end
   
     def follow?
-      !user.following?(record) && !user.blocked?(record) && !user.blocked_by?(record)
+      user.id != record.id && !user.following?(record) && !user.blocked?(record) && !user.blocked_by?(record)
     end
   
     def unfollow?
-      user.following?(record) && !user.blocked?(record) && !user.blocked_by?(record)
+      user.id != record.id && user.following?(record) && !user.blocked?(record) && !user.blocked_by?(record)
     end
   
     def block?
-      !user.blocked?(record)
+      user.id != record.id && !user.blocked?(record)
     end
   
     def unblock?
-      user.blocked?(record)
+      user.id != record.id && user.blocked?(record)
     end
   
     def mute?
-      !user.muted?(record)
+      user.id != record.id && !user.muted?(record)
     end
   
     def unmute?
-      user.muted?(record)
+      user.id != record.id && user.muted?(record)
     end
     
   end
