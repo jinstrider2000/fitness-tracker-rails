@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if ImageSaverService.image_present_and_valid?(params)
         flash[:warnings] = "File uploaded not an image"
       else 
-        UserService::ImageSaver.save_profile_pic(new_user.id, params)
+        ImageSaverService.save_profile_pic(new_user.id, params)
       end
     end
   end

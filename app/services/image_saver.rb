@@ -21,7 +21,6 @@ class ImageSaverService
   end
 
   def self.update_profile_pic(id,params)
-    # testing git
     if params[:profile_img]
       profile_pic_array = profile_pic_dir_and_file(id)
       profile_pic_dir_w_file = profile_pic_array[0]
