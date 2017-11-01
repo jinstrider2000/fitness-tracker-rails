@@ -1,5 +1,5 @@
-class UsersController < ApplicationController
-
+class Users::UserActionsController < ApplicationController
+  
   skip_before_action :verify_authorizated, if: [:show, :index]
   before_action :load_user_resource, unless: :index
 

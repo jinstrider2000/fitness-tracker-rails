@@ -10,7 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do |new_user|
-      ImageSaverService.save_profile_pic(user.id, params, flash)
+      flash[:warnings] = ["File uploaded must be an image"] unless !!ImageSaverService.save_profile_pic(new_user.id, params)
     end
   end
 
@@ -22,7 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     super do |user|
-      
+      flash[:warnings] = ["File uploaded must be an image"] if !ImageSaverService.update_profile_pic(user.id, params) && params[:profile_pic].present?
     end
   end
 

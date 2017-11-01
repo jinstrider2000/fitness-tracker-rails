@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   root 'activity_feed#show'
   get '/activity-feed' => 'activity_feed#show'
   devise_for :users, controllers: {registrations: 'users/registrations'}, skip: [:passwords]
-  resources :users, param: :slug, only: [:index, :show] do
+  
+  resources :user_actions, param: :slug, only: [:index, :show], path: 'users', module: "users" do
     member do
       post 'follow'
       delete 'unfollow'
@@ -15,6 +16,9 @@ Rails.application.routes.draw do
       get 'followers'
       get 'following'
     end
+  end
+
+  scope 'users' do
     resources :achievements, only: [:index]
     resources :foods, only: [:index]
     resources :exercises, only: [:index]
