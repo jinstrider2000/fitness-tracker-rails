@@ -5,23 +5,23 @@ class ImageSaverService
     [File.join("public","images","users","#{id}",profile_pic_file), profile_pic_file]
   end
 
-  def self.image_present_and_valid?(params)
-    params[:profile_img] && !(params[:profile_img][:type] =~ /image/)
-  end
-
-  def self.save_profile_pic(id, params)
-    profile_pic_dir = File.join(Dir.pwd,"public","images","users","#{id}")
-    Dir.mkdir(profile_pic_dir) unless Dir.exist?(profile_pic_dir)
-    if params[:profile_img]
-      file_ext = File.extname(params[:profile_img][:filename])
-      File.open("public/images/users/#{id}/#{id}_profilepic_1_#{file_ext}", mode: "w", binmode: true){|file| file.write(File.read(params[:profile_img][:tempfile], binmode: true))}
+  def self.save_profile_pic(id, params, flash)
+    if image_present_and_valid?(params)
+      profile_pic_dir = File.join(Dir.pwd,"public","images","users","#{id}")
+      Dir.mkdir(profile_pic_dir) unless Dir.exist?(profile_pic_dir)
+      if params[:profile_img]
+        file_ext = File.extname(params[:profile_img][:filename])
+        File.open("public/images/users/#{id}/#{id}_profilepic_1_#{file_ext}", mode: "w", binmode: true){|file| file.write(File.read(params[:profile_img][:tempfile], binmode: true))}
+      else
+        File.open("public/images/users/#{id}/#{id}_profilepic_1_.png", mode: "w", binmode: true){|file| file.write(File.read("public/images/users/generic/profile_pic.png", binmode: true))}
+      end
     else
-      File.open("public/images/users/#{id}/#{id}_profilepic_1_.png", mode: "w", binmode: true){|file| file.write(File.read("public/images/users/generic/profile_pic.png", binmode: true))}
+      flash[:warnings] = ["File uploaded not an image"]
     end
   end
 
-  def self.update_profile_pic(id,params)
-    if params[:profile_img]
+  def self.update_profile_pic(id, params, flash)
+    if image_present_and_valid?(params)
       profile_pic_array = profile_pic_dir_and_file(id)
       profile_pic_dir_w_file = profile_pic_array[0]
       new_pic_instance_num = profile_pic_array[1].split("_")[2].to_i + 1
@@ -29,6 +29,13 @@ class ImageSaverService
       file_ext = File.extname(params[:profile_img][:filename])
       File.open("public/images/users/#{id}/#{id}_profilepic_#{new_pic_instance_num}_#{file_ext}", mode: "w", binmode: true){|file| file.write(File.read(params[:profile_img][:tempfile], binmode: true))}
     end
+
+  end
+
+  private
+
+  def image_present_and_valid?(params)
+    params[:profile_img] && !(params[:profile_img][:type] =~ /image/)
   end
 
 end
