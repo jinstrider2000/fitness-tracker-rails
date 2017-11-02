@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/activity-feed' => 'activity_feed#show'
   devise_for :users, controllers: {registrations: 'users/registrations'}, skip: [:passwords]
   
-  resources :user_actions, param: :slug, only: [:index, :show], path: 'users', module: "users" do
+  resources :users, param: :slug, only: [:index, :show], module: "users", controller: "user_actions" do
     member do
       post 'follow'
       delete 'unfollow'
