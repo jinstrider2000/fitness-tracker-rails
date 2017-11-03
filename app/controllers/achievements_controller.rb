@@ -38,9 +38,9 @@ class AchievementsController < ApplicationController
 
   def achievement_params
     if params[:activity_type].try(:downcase) == "exercise"
-      params.require(:achievement).permit(:name, :user_id ,activity_attributes: {:name, :calories_burned, :comment})
+      params.require(:achievement).permit(:name, :user_id, :completed_on, activity_attributes: {:name, :calories_burned, :comment})
     elsif params[:activity_type].try(:downcase) == "food"
-      params.require(:achievement).permit(:name, :user_id , activity_attributes: {:name, :calories, :comment})
+      params.require(:achievement).permit(:name, :user_id, :completed_on, activity_attributes: {:name, :calories, :comment})
     else
       params.require(:achievement)
     end
