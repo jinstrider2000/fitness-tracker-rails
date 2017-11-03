@@ -1,13 +1,14 @@
 class Achievement < ApplicationRecord
   belongs_to :activity, polymorphic: true, dependent: :destroy
   belongs_to :user
-  validates_presence_of :activity, :user
+  validates_presence_of :activity, :user, :completed_on
 
 
   after_create :create_daily_total, unless: :daily_total_exists?
   after_commit :add_to_daily_total, on: :create
 
   def activity_attributes=(values)
+    values[:completed_on] = self.completed_on
     if values.key?(:calories_burned)
       self.activity = Exercise.new(values)
     else

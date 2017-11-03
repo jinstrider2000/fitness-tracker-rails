@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def referred_by_activity_feed?
-    !!request.referrer ~= /activity-feed/
+    !!request.referrer =~ /activity-feed/
   end
 
 end

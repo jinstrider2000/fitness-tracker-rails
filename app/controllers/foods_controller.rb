@@ -3,7 +3,7 @@ class FoodsController < ApplicationController
   before_action :load_food_resource, unless: :index
 
   def index
-    @user = User.find_by(slug: params[:user_slug])
+    @user = User.find_by(slug: params[:slug])
     if @user.present?
       authorize @user
       @foods = @user.foods
