@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171019164354) do
+ActiveRecord::Schema.define(version: 20171104140718) do
 
   create_table "achievements", force: :cascade do |t|
     t.string "activity_type"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20171019164354) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "completed_on"
+    t.integer "daily_total_id"
     t.index ["activity_type", "activity_id"], name: "index_achievements_on_activity_type_and_activity_id"
     t.index ["user_id"], name: "index_achievements_on_user_id"
   end
@@ -38,6 +40,7 @@ ActiveRecord::Schema.define(version: 20171019164354) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "completed_on"
     t.index ["user_id"], name: "index_daily_totals_on_user_id"
   end
 

@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :achievements, dependent: :destroy
   has_many :exercises, through: :achievements, source: :activity, source_type: "Exercise"
   has_many :foods, through: :achievements, source: :activity, source_type: "Food"
+  has_many :daily_totals, dependent: :destroy
 
   validates_presence_of :name, :daily_calorie_intake_goal, :email
   validates :email, uniqueness: true

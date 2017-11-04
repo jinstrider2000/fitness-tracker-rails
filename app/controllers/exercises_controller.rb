@@ -3,7 +3,7 @@ class ExercisesController < ApplicationController
   before_action :load_exercise_resource, unless: :index
 
   def index
-    @user = User.find_by(slug: params[:user_slug])
+    @user = User.find_by(slug: params[:slug])
     if @user.present?
       authorize @user
       @exercises = @user.exercises
