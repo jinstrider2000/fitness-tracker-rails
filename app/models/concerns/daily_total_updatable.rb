@@ -2,8 +2,9 @@ module DailyTotalUpdatable
 
   def update_daily_total
     old_activity = self.class.find_by(id: self.id)
-    old_daily_total = DailyTotal.find_or_create_daily_total_for(old_activity.achievement)
-    new_daily_total = DailyTotal.find_or_create_daily_total_for(self.achievement)
+    old_daily_total = old_activity.achievement.daily_total
+    self.achievement.daily_total = DailyTotal.find_or_create_daily_total_for(self.achievement)
+    new_daily_total = self.achievement.daily_total
 
     if old_daily_total == new_daily_total
       if self.class.to_s == "Food"
