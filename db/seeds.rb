@@ -9,5 +9,5 @@ user = User.create(name: "Generic Guy", email: "genericguy@email.com", daily_cal
 user2 = User.create(name: "Generic Gal", email: "genericgal@email.com", daily_calorie_intake_goal: 800, password: "password", quote: "Gonna try my best!")
 relationship = Relationship.create(follower: user, followee: user2)
 relationship2 = Relationship.create(follower: user2, followee: user)
-achievement1 = Achievement.create(user: user, activity_attributes: {name: "Running", calories_burned: 500, comment: "Wow, that was a great workout!"})
-achievement2 = Achievement.create(user: user2, activity_attributes: {name: "Asparagus", calories: 15, comment: "Tasty, well seasoned!"})
+achievement1 = Achievement.create(user: user, completed_on: Date.today, activity_attributes: {name: "Running", calories_burned: 500, comment: "Wow, that was a great workout!"})
+achievement2 = Achievement.create(user: user2, completed_on: Date.today, activity_attributes: {name: "Asparagus", calories: 15, comment: "Tasty, well seasoned!"})
