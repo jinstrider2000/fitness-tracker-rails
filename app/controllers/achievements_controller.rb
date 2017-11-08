@@ -16,7 +16,7 @@ class AchievementsController < ApplicationController
     @achievement = Achievement.new(achievement_params)
     authorize @achievement
     if !!@achievement.save
-      redirect_to user_achievements_path(user_slug: current_user.slug)
+      redirect_to user_achievements_path(slug: current_user.slug)
     else
       flash[:warnings] = @achievement.errors.full_messages
       render :new
@@ -24,7 +24,7 @@ class AchievementsController < ApplicationController
   end
 
   def index
-    @user = User.find_by(slug: params[:user_slug])
+    @user = User.find_by(slug: params[:slug])
     if @user.present?
       authorize @user
       @achievements = @user.achievements

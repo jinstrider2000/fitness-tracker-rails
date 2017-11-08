@@ -3,8 +3,7 @@ require 'cgi'
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :rememberable, :trackable, :validatable, :omniauthable
 
   has_many :following_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :following, through: :following_relationships, source: :followee
@@ -36,6 +35,17 @@ class User < ApplicationRecord
 
   def recent_meals
     self.foods.order(created_at: :desc).limit(6)
+  end
+
+  def achievements_ordered_by(order = nil)
+    dates_array = (order == "asc" ? self.daily_totals.order(completed_on: :asc).pluck(:completed_on) : self.daily_totals.order(completed_on: :desc).pluck(:completed_on))
+    
+    achievements_by_date = []
+    achievements_by_date.tap do |array|
+      dates_array.each do |date|
+        array << self.achievements.where(completed_on: date)
+      end
+    end
   end
 
   def achievement_following_timeline
