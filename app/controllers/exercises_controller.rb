@@ -6,7 +6,7 @@ class ExercisesController < ApplicationController
     @user = User.find_by(slug: params[:slug])
     if @user.present?
       authorize @user
-      @exercises = @user.exercises
+      @exercises = @user.exercises_ordered_by(params[:filter], params[:order])
     else
       skip_authorization
       redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"

@@ -38,7 +38,7 @@ class User < ApplicationRecord
   end
 
   def achievements_ordered_by(order = nil)
-    dates_array = (order.downcase == "ascending" ? self.daily_totals.order(completed_on: :asc).pluck(:completed_on) : self.daily_totals.order(completed_on: :desc).pluck(:completed_on))
+    dates_array = (order.try(:downcase) == "ascending" ? self.daily_totals.order(completed_on: :asc).pluck(:completed_on) : self.daily_totals.order(completed_on: :desc).pluck(:completed_on))
     
     [].tap do |array|
       dates_array.each do |date|
@@ -48,18 +48,38 @@ class User < ApplicationRecord
   end
 
   def exercises_ordered_by(filter = nil, order = nil)
-    if filter.downcase == "date" || filter.downcase == "name" || filter.downcase == "calories_burned"
-      
+    achievements_table = Achievement.arel_table
+    case filter.try(:downcase)
+    when "name"
+      order.try(:downcase) == "ascending" ? self.exercises.order(name: :asc) : self.exercises.order(name: :desc)
+    when "calories burned"
+      order.try(:downcase) == "ascending" ? self.exercises.order(calories_burned: :asc) : self.exercises.order(calories_burned: :desc)
     else
+      dates_array = (order.try(:downcase) == "ascending" ? self.daily_totals.order(completed_on: :asc).pluck(:completed_on) : self.daily_totals.order(completed_on: :desc).pluck(:completed_on))
       
+      [].tap do |array|
+        dates_array.each do |date|
+          array << self.exercises.where(achievements_table[:completed_on].eq(date))
+        end
+      end
     end
   end
 
   def foods_ordered_by(filter = nil, order = nil)
-    if filter.downcase == "completed_on" || filter.downcase == "name" || filter.downcase == "calories"
-      
+    achievements_table = Achievement.arel_table
+    case filter.try(:downcase)
+    when "name"
+      order.try(:downcase) == "ascending" ? self.foods.order(name: :asc) : self.foods.order(name: :desc)
+    when "calories"
+      order.try(:downcase) == "ascending" ? self.foods.order(calories: :asc) : self.foods.order(calories: :desc)
     else
+      dates_array = (order.try(:downcase) == "ascending" ? self.daily_totals.order(completed_on: :asc).pluck(:completed_on) : self.daily_totals.order(completed_on: :desc).pluck(:completed_on))
       
+      [].tap do |array|
+        dates_array.each do |date|
+          array << self.foods.where(achievements_table[:completed_on].eq(date))
+        end
+      end
     end
   end
 

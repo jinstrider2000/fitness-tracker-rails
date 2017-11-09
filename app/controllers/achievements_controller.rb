@@ -27,7 +27,7 @@ class AchievementsController < ApplicationController
     @user = User.find_by(slug: params[:slug])
     if @user.present?
       authorize @user
-      @achievements = @user.achievements
+      @achievements = @user.achievements_ordered_by(params[:filter], params[:order])
     else
       skip_authorization
       redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist."
