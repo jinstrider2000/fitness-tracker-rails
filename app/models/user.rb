@@ -38,13 +38,28 @@ class User < ApplicationRecord
   end
 
   def achievements_ordered_by(order = nil)
-    dates_array = (order == "asc" ? self.daily_totals.order(completed_on: :asc).pluck(:completed_on) : self.daily_totals.order(completed_on: :desc).pluck(:completed_on))
+    dates_array = (order.downcase == "ascending" ? self.daily_totals.order(completed_on: :asc).pluck(:completed_on) : self.daily_totals.order(completed_on: :desc).pluck(:completed_on))
     
-    achievements_by_date = []
-    achievements_by_date.tap do |array|
+    [].tap do |array|
       dates_array.each do |date|
         array << self.achievements.where(completed_on: date)
       end
+    end
+  end
+
+  def exercises_ordered_by(filter = nil, order = nil)
+    if filter.downcase == "date" || filter.downcase == "name" || filter.downcase == "calories_burned"
+      
+    else
+      
+    end
+  end
+
+  def foods_ordered_by(filter = nil, order = nil)
+    if filter.downcase == "completed_on" || filter.downcase == "name" || filter.downcase == "calories"
+      
+    else
+      
     end
   end
 
