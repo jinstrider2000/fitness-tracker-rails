@@ -6,7 +6,7 @@ class ActivityFeedController < ApplicationController
     if user_signed_in?
       @feed = current_user.achievement_following_timeline
     else
-      render 'landing'
+      render 'application/landing'
     end
   end
 
