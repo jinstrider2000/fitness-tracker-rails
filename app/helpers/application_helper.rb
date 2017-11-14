@@ -29,7 +29,7 @@ module ApplicationHelper
   end
 
   def on_recent_activity?
-    !!(request.path_info =~ /\/recent-activity/)
+    !!(request.path_info =~ /\/activity-feed/)
   end
 
   def profile_pic_url(user)
@@ -38,6 +38,6 @@ module ApplicationHelper
   end
 
   def referred_by_recent_activity?
-    !!(/\/recent-activity\Z/.match(request.referrer))
+    !!(/\/activity-feed\Z/.match(request.referrer))
   end
 end
