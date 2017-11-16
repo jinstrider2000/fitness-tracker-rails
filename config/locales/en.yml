@@ -30,6 +30,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  default: "Fitness Tracker"
   pundit:
     default_msg: "You are unauthorized perform this action"
     achievement_policy:
@@ -54,3 +55,38 @@ en:
       edit?: "You can't edit this user's food stats"
       update?: "You can't update this user's food stats"
       destroy?: "You can't delete this user's food stats"
+  activity_feed:
+    show:
+      title: "My Activity Feed"
+  achievements:
+    index:
+      title: "%{name}'s Achievements"
+    new:
+      title: "New Achievement"
+  exercises:
+    edit:
+      title: "Edit Exercise"
+    index:
+      title: "%{name}'s Exercises"
+    show:
+      title: "%{name}'s Exercise: %{record_name}"
+  foods:
+    edit:
+      title: "Edit Food"
+    index:
+      title: "%{name}'s Foods"
+    show:
+      title: "%{name}'s Food: %{record_name}"
+  user_actions:
+    blocked:
+      title: "My Blocked Users"
+    followers:
+      title: "%{name}: Followers"
+    following:
+      title: "%{name}: Following"
+    index:
+      title: "User Index"
+    muted:
+      title: "My Muted Users"
+    show:
+      title: "%{name}'s Profile"

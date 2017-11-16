@@ -1,2 +1,36 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="row" style="margin-bottom:20px;">
+	<div class="col-sm-12">
+		<img class="profile-pic-display img-circle" src="<%=profile_pic_path(@user)%>" alt="<%=@user.first_name%>'s Profile Pic">
+		<h2><%=@main_heading%></h2>
+		<%= tag.a "Edit", href: edit_user_registration_path if viewing_own_profile_while_logged_in?(@user) %>
+		<h4 id="calorie-goal-display">Daily Calorie Goal: <%=@user.daily_calorie_intake_goal%></h4>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-5 card-style clearfix">
+		<h3>Recent Exercises</h3>
+		<% if @user.exercises.count < 1 %>
+			<p>No Recent Activity</p>
+		<% else %>
+			<ul>
+			<% recent_exercises(@user).each do |exercise| %>
+				<li class="index-style"><%=print_time(exercise.created_at)%> - <%=attr_display_str(exercise,["name","calories_burned"])%></li>
+			<% end %>
+			</ul>
+		<% end %>
+		<a class="more-link" href="/exercises/users/<%=@user.slug%>">more</a>
+	</div>
+	<div class="col-sm-5 col-sm-offset-2 card-style clearfix">
+		<h3>Recent Meals</h3>
+		<% if @user.foods.count < 1 %>
+			<p>No Recent Activity</p>
+		<% else %>
+			<ul>
+			<% recent_meals(@user).each do |food| %>
+				<li class="index-style"><%=print_time(food.created_at)%> - <%=attr_display_str(food,["name","calories"])%></li>
+			<% end %>
+			</ul>
+		<% end %>
+		<a class="more-link" href="/foods/users/<%=@user.slug%>">more</a>
+	</div>
+</div>

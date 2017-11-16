@@ -1,7 +1,8 @@
 class Users::UserActionsController < ApplicationController
   
-  skip_before_action :verify_authorizated, if: [:show, :index]
-  before_action :load_user_resource, unless: :index
+  before_action :load_and_authorize_user_resource, unless: :index
+  after_action :verify_authorized, except: [:show, :index]
+  
 
   def show
     if @user.present?
@@ -103,7 +104,7 @@ class Users::UserActionsController < ApplicationController
 
   private
 
-  def load_user_resource
+  def load_and_authorize_user_resource
     @user = User.find_by(slug: params[:slug])
     authorize @user
   end
