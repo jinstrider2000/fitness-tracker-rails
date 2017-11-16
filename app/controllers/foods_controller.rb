@@ -1,6 +1,7 @@
 class FoodsController < ApplicationController
 
   before_action :load_food_resource, unless: :index
+  after_action :verify_authorized
 
   def index
     @user = User.find_by(slug: params[:slug])
