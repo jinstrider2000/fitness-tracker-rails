@@ -1,6 +1,6 @@
 class Users::UserActionsController < ApplicationController
   
-  before_action :load_and_authorize_user_resource, unless: :index
+  before_action :load_and_authorize_user_resource, unless: [:index]
   after_action :verify_authorized, except: [:show, :index]
   
 

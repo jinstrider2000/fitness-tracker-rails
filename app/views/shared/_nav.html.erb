@@ -8,31 +8,31 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/">Fitness Tracker</a>
+			<a class="navbar-brand" href="/"><%= t "default" %></a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="main_nav">
 			<ul class="nav navbar-nav navbar-left">
 				<% if user_signed_in? %>
-					<li class="<%=link_status("activity-feed")%>"><a href="<%="/activity-feed"%>">Activity Feed<%="<span class=\"sr-only\"> (current)</span>" if link_status("activity-feed") == "active"%></a></li>
+					<li class="<%=link_status("activity-feed")%>"><a href="<%=activity_feed_path%>"><%= t "nav.activity_feed" %></a></li>
 					<li class="dropdown <%=link_status("achievements")%>">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Achievement<%="<span class=\"sr-only\"> (current)</span>" if link_status("achievements") == "active"%><span class="caret vis-sm-inline"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= t "nav.achievement.heading" %><span class="caret vis-sm-inline"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="<%=new_achievement_path%>%">New Achievement</a></li>
+							<li><a href="<%=new_achievement_path%>"><%= t "nav.achievement.new" %></a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="<%=user_achievements_path(current_user)%>">My Achievements</a></li>
+							<li><a href="<%=user_achievements_path(current_user.slug)%>"><%= t "nav.achievement.index" %></a></li>
 						</ul>
 					</li>
 					<li class="dropdown <%=link_status("exercises")%>">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Exercise<%="<span class=\"sr-only\"> (current)</span>" if link_status("exercises") == "active"%><span class="caret vis-sm-inline"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= t "nav.exercise.heading" %><span class="caret vis-sm-inline"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="<%=user_exercises_path(current_user)%>">My Exercises</a></li>
+							<li><a href="<%=user_exercises_path(current_user.slug)%>"><%= t "nav.exercise.index" %></a></li>
 						</ul>
 					</li>
 					<li class="dropdown <%=link_status("foods")%>">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Food<%="<span class=\"sr-only\"> (current)</span>" if link_status("foods") == "active"%><span class="caret vis-sm-inline"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= t "nav.food.heading" %><span class="caret vis-sm-inline"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="<%=user_foods_path(current_user)%>">My Foods</a></li>
+							<li><a href="<%=user_foods_path(current_user.slug)%>"><%= t "nav.food.index" %></a></li>
 						</ul>
 					</li>
 				<% end %>
@@ -43,20 +43,13 @@
 					<li class="dropdown">
 						<a id="acct-dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=current_user.first_name%><span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="<%=user_path(current_user)%>">My Profile</a></li>
+							<li><a href="<%=user_path(current_user.slug)%>"><%= t "nav.profile" %></a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="<%=destroy_user_session_path%>">Log Out</a></li>
+							<li><%= link_to t("nav.logout"), destroy_user_session_path, method: :delete %></li>
 						</ul>
 					</li>
 				<% else %>
-				<!--
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="<%=new_user_session_path%>%">Log In</a></li>
-						</ul>
-					</li> -->
-					<li><a href="<%=new_user_session_path%>">Log In</a></li>
+					<li><a href="<%=new_user_session_path%>"><%= t "nav.login" %></a></li>
 				<% end %>
 			</ul>
 		</div><!-- /.navbar-collapse -->
