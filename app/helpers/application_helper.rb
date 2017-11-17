@@ -51,5 +51,9 @@ module ApplicationHelper
   def referred_by_recent_activity?
     !!(/\/activity-feed\Z/.match(request.referrer))
   end
+
+  def text_finder(yml_ext,default=nil,scope=nil,args*)
+    t "#{params[:controller].gsub("/","_")}.#{params[:action]}.#{yml_ext}", default
+  end
   
 end

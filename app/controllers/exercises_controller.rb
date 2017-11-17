@@ -1,8 +1,8 @@
 class ExercisesController < ApplicationController
 
-  before_action :load_exercise_resource, except: [:index]
+  before_action :and_user_, except: [:index]
   after_action :verify_authorized
-
+ = @exercise
   def index
     @user = User.find_by(slug: params[:slug])
     if @user.present?
@@ -68,8 +68,9 @@ class ExercisesController < ApplicationController
     params.require(:exercise).permit(:name, :calories_burned, :comment)
   end
 
-  def load_exercise_resource
+  def load_exercise_and_user_resource
     @exercise = Exercise.find_by(id: params[:id])
+    @user = @exercise
   end
   
 end

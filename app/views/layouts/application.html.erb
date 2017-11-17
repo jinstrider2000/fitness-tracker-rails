@@ -5,9 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
-    <title><%= t("#{user_signed_in?}.#{params[:controller]}.#{params[:action]}.title", default: :default) %></title>
     <!-- Icon Link -->
     <%= favicon_link_tag %>
+    <!-- Title Tag -->
+    <% if user_signed_in? %>
+      <%= tag.title t("#{params[:controller].gsub("/","_")}.#{params[:action]}.title", user_name: @user.name) %>
+    <% else %>
+      <%= tag.tag t "default"%>
+    <% end %>
+    <!-- Stylesheets and Javascript Links -->
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
