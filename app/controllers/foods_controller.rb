@@ -1,6 +1,6 @@
 class FoodsController < ApplicationController
 
-  before_action :load_food_resource, unless: :index
+  before_action :load_food_resource, except: [:index]
   after_action :verify_authorized
 
   def index

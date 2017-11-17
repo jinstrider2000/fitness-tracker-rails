@@ -1,6 +1,6 @@
 class ExercisesController < ApplicationController
 
-  before_action :load_exercise_resource, unless: :index
+  before_action :load_exercise_resource, except: [:index]
   after_action :verify_authorized
 
   def index

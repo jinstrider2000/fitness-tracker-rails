@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
-    <title><%= t "#{user_signed_in?}.#{params[:controller]}.#{params[:action]}.title", default: :default %></title>
+    <title><%= t("#{user_signed_in?}.#{params[:controller]}.#{params[:action]}.title", default: :default) %></title>
     <!-- Icon Link -->
     <%= favicon_link_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>

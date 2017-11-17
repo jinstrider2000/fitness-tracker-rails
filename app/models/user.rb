@@ -33,7 +33,7 @@ class User < ApplicationRecord
     self.exercises.order(created_at: :desc).limit(6)
   end
 
-  def recent_meals
+  def recent_foods
     self.foods.order(created_at: :desc).limit(6)
   end
 

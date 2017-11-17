@@ -1,6 +1,6 @@
 class Users::UserActionsController < ApplicationController
   
-  before_action :load_and_authorize_user_resource, unless: [:index]
+  before_action :load_and_authorize_user_resource, except: [:index]
   after_action :verify_authorized, except: [:show, :index]
   
 
@@ -8,7 +8,7 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       @blocked = current_user.blocked_by?(@user)
     else
-      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
     end
   end
 
@@ -20,7 +20,7 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       @users = @user.followers
     else
-      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
     end
   end
 
@@ -28,7 +28,7 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       @users = @user.following
     else
-      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
     end
   end
 
@@ -36,7 +36,7 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       @users = @user.blocked_users
     else
-      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
     end
   end
 
@@ -44,7 +44,7 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       @users = @user.muted_users
     else
-      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
     end
   end
 
@@ -53,7 +53,7 @@ class Users::UserActionsController < ApplicationController
       current_user.follow(@user)
       redirect_to request.referrer || root_path, notice: "You're following #{@user.name}"
     else
-      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
     end
   end
 
@@ -62,7 +62,7 @@ class Users::UserActionsController < ApplicationController
       current_user.unfollow(@user)
       redirect_to request.referrer || root_path, notice: "You've unfollowed #{@user.name}"
     else
-      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
     end
   end
 
@@ -71,7 +71,7 @@ class Users::UserActionsController < ApplicationController
       current_user.block(@user)
       redirect_to request.referrer || root_path, notice: "You've blocked #{@user.name}"
     else
-      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
     end
   end
 
@@ -80,7 +80,7 @@ class Users::UserActionsController < ApplicationController
       current_user.unblock(@user)
       redirect_to request.referrer || root_path, notice: "You've unblocked #{@user.name}"
     else
-      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
     end
   end
 
@@ -89,7 +89,7 @@ class Users::UserActionsController < ApplicationController
       current_user.mute(@user)
       redirect_to request.referrer || root_path, notice: "You've muted #{@user.name}"
     else
-      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
     end
   end
 
@@ -98,7 +98,7 @@ class Users::UserActionsController < ApplicationController
       current_user.unmute(@user)
       redirect_to request.referrer || root_path, notice: "You've unmuted #{@user.name}"
     else
-      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
     end
   end
 

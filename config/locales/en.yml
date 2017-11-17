@@ -109,7 +109,7 @@ en:
         my_heading: "Welcome %{first_name}"
         other_user_heading: "%{full_name}"
         edit: "Edit"
-        daily_calorie_goal: "Daily Calorie Goal:"
+        daily_calorie_goal: "Daily Calorie Goal: "
         recent_exercises: "Recent Exercises"
         recent_foods: "Recent Foods"
         no_activity: "No Recent Activity"

@@ -1,11 +1,11 @@
 <div class="row" style="margin-bottom:20px;">
 	<div class="col-sm-12">
 		<img class="profile-pic-display img-circle" src="<%=profile_pic_path(@user)%>" alt="<%=@user.first_name%>'s Profile Pic">
-    <% if viewing_own_profile_while_logged_in?(@user) %>
-      <%= tag.h2 t "#{params[:controller]}.#{params[:action]}.my_heading", first_name: @user.first_name %>
+    <% if viewing_own_profile_while_logged_in? %>
+      <%= tag.h2 t("#{params[:controller]}.#{params[:action]}.my_heading", first_name: @user.first_name) %>
       <%= tag.a "Edit", href: edit_user_registration_path %>
     <% else %>
-      <%= tag.h2 t "#{params[:controller]}.#{params[:action]}.other_user_heading", full_name: @user.name %>
+      <%= tag.h2 t("#{params[:controller]}.#{params[:action]}.other_user_heading", full_name: @user.name) %>
     <% end %>
 		<h4 id="calorie-goal-display"><%=t "#{params[:controller]}.#{params[:action]}.daily_calorie_goal"%> <%=@user.daily_calorie_intake_goal%></h4>
 	</div>
@@ -30,7 +30,7 @@
 			<p><%= t "#{params[:controller]}.#{params[:action]}.no_activity" %></p>
 		<% else %>
 			<ul>
-			<% @user.recent_meals.each do |food| %>
+			<% @user.recent_foods.each do |food| %>
 				<li class="index-style"><%=print_time(food.created_at)%> - <%=attr_display_str(food,["name","calories"])%></li>
 			<% end %>
 			</ul>
