@@ -1,8 +1,8 @@
 class ExercisesController < ApplicationController
 
-  before_action :and_user_, except: [:index]
+  before_action :load_exercise_and_user_resource, except: [:index]
   after_action :verify_authorized
- = @exercise
+
   def index
     @user = User.find_by(slug: params[:slug])
     if @user.present?
@@ -10,7 +10,7 @@ class ExercisesController < ApplicationController
       @exercises = @user.exercises_ordered_by(params[:filter], params[:order])
     else
       skip_authorization
-      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
     end
   end
 
@@ -19,7 +19,7 @@ class ExercisesController < ApplicationController
       authorize @exercise
     else
       skip_authorization
-      redirect_to request.referrer || root_path, error: "Sorry, that exercise couldn't be found"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that exercise couldn't be found"}
     end
   end
 
@@ -28,7 +28,7 @@ class ExercisesController < ApplicationController
       authorize @exercise
     else
       skip_authorization
-      redirect_to request.referrer || root_path, error: "Sorry, that exercise couldn't be found"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that exercise couldn't be found"}
     end
   end
 
@@ -43,7 +43,7 @@ class ExercisesController < ApplicationController
       end
     else
       skip_authorization
-      redirect_to request.referrer || root_path, error: "Sorry, that exercise couldn't be found"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that exercise couldn't be found"}
     end
   end
 
@@ -58,7 +58,7 @@ class ExercisesController < ApplicationController
       end
     else
       skip_authorization
-      redirect_to request.referrer || root_path, error: "Sorry, that exercise couldn't be found"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that exercise couldn't be found"}
     end
   end
 
@@ -70,7 +70,7 @@ class ExercisesController < ApplicationController
 
   def load_exercise_and_user_resource
     @exercise = Exercise.find_by(id: params[:id])
-    @user = @exercise
+    @user = @exercise.achievement.user
   end
   
 end

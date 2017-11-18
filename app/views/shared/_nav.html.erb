@@ -14,25 +14,25 @@
 		<div class="collapse navbar-collapse" id="main_nav">
 			<ul class="nav navbar-nav navbar-left">
 				<% if user_signed_in? %>
-					<li class="<%=link_status("activity-feed")%>"><a href="<%=activity_feed_path%>"><%= t "nav.activity_feed" %></a></li>
+					<li class="<%=link_status("activity-feed")%>"><a href="<%=activity_feed_path%>"><%= t ".activity_feed" %></a></li>
 					<li class="dropdown <%=link_status("achievements")%>">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= t "nav.achievement.heading" %><span class="caret vis-sm-inline"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= t ".achievement.heading" %><span class="caret vis-sm-inline"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="<%=new_achievement_path%>"><%= t "nav.achievement.new" %></a></li>
+							<li><a href="<%=new_achievement_path%>"><%= t ".achievement.new" %></a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="<%=user_achievements_path(current_user.slug)%>"><%= t "nav.achievement.index" %></a></li>
+							<li><a href="<%=user_achievements_path(current_user.slug)%>"><%= t ".achievement.index" %></a></li>
 						</ul>
 					</li>
 					<li class="dropdown <%=link_status("exercises")%>">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= t "nav.exercise.heading" %><span class="caret vis-sm-inline"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= t ".exercise.heading" %><span class="caret vis-sm-inline"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="<%=user_exercises_path(current_user.slug)%>"><%= t "nav.exercise.index" %></a></li>
+							<li><a href="<%=user_exercises_path(current_user.slug)%>"><%= t ".exercise.index" %></a></li>
 						</ul>
 					</li>
 					<li class="dropdown <%=link_status("foods")%>">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= t "nav.food.heading" %><span class="caret vis-sm-inline"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= t ".food.heading" %><span class="caret vis-sm-inline"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="<%=user_foods_path(current_user.slug)%>"><%= t "nav.food.index" %></a></li>
+							<li><a href="<%=user_foods_path(current_user.slug)%>"><%= t ".food.index" %></a></li>
 						</ul>
 					</li>
 				<% end %>
@@ -43,13 +43,13 @@
 					<li class="dropdown">
 						<a id="acct-dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=current_user.first_name%><span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="<%=user_path(current_user.slug)%>"><%= t "nav.profile" %></a></li>
+							<li><a href="<%=user_path(current_user.slug)%>"><%= t ".profile" %></a></li>
 							<li role="separator" class="divider"></li>
-							<li><%= link_to t("nav.logout"), destroy_user_session_path, method: :delete %></li>
+							<li><%= link_to t(".logout"), destroy_user_session_path, method: :delete %></li>
 						</ul>
 					</li>
 				<% else %>
-					<li><a href="<%=new_user_session_path%>"><%= t "nav.login" %></a></li>
+					<li><a href="<%=new_user_session_path%>"><%= t ".login" %></a></li>
 				<% end %>
 			</ul>
 		</div><!-- /.navbar-collapse -->

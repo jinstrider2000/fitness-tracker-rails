@@ -55,21 +55,22 @@ en:
       edit?: "You can't edit this user's food stats"
       update?: "You can't update this user's food stats"
       destroy?: "You can't delete this user's food stats"
-  nav:
-    login: "Log In"
-    logout: "Log Out"
-    profile: "My Profile"
-    achievement:
-      heading: "Achievement"
-      new: "New Achievement"
-      index: "My Achievements"
-    exercise:
-      heading: "Exercise"
-      index: "My Exercises"
-    food:
-      heading: "Food"
-      index: "My Foods"
-    activity_feed: "Activity Feed"
+  shared:
+    nav:
+      login: "Log In"
+      logout: "Log Out"
+      profile: "My Profile"
+      achievement:
+        heading: "Achievement"
+        new: "New Achievement"
+        index: "My Achievements"
+      exercise:
+        heading: "Exercise"
+        index: "My Exercises"
+      food:
+        heading: "Food"
+        index: "My Foods"
+      activity_feed: "Activity Feed"
   activity_feed:
     show:
       title: "Fitness Tracker - Activity Feed"
@@ -92,6 +93,21 @@ en:
       title: "Fitness Tracker - %{user_name}'s Foods"
     show:
       title: "Fitness Tracker - %{user_name}'s Food: %{record_name}"
+  users:
+    user_actions:
+      blocked:
+      followers:
+      following:
+      index:
+      muted:
+      show:
+        my_heading: "Welcome %{first_name}"
+        other_user_heading: "%{full_name}"
+        edit: "Edit"
+        daily_calorie_goal: "Daily Calorie Goal: "
+        recent_exercises: "Recent Exercises"
+        recent_foods: "Recent Foods"
+        no_activity: "No Recent Activity"
   users_user_actions:
     blocked:
       title: "Fitness Tracker - %{user_name}'s Blocked Users"
@@ -105,10 +121,3 @@ en:
       title: "Fitness Tracker - %{user_name}'s Muted Users"
     show:
       title: "Fitness Tracker - %{user_name}'s Profile"
-      my_heading: "Welcome %{first_name}"
-      other_user_heading: "%{full_name}"
-      edit: "Edit"
-      daily_calorie_goal: "Daily Calorie Goal: "
-      recent_exercises: "Recent Exercises"
-      recent_foods: "Recent Foods"
-      no_activity: "No Recent Activity"

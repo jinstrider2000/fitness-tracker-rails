@@ -1,6 +1,6 @@
 class FoodsController < ApplicationController
 
-  before_action :load_food_resource, except: [:index]
+  before_action :load_food_and_user_resource, except: [:index]
   after_action :verify_authorized
 
   def index
@@ -10,7 +10,7 @@ class FoodsController < ApplicationController
       @foods = @user.foods_ordered_by(params[:filter], params[:order])
     else
       skip_authorization
-      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
     end
   end
 
@@ -19,7 +19,7 @@ class FoodsController < ApplicationController
       authorize @food
     else
       skip_authorization
-      redirect_to request.referrer || root_path, error: "Sorry, that food couldn't be found"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that food couldn't be found"}
     end
   end
 
@@ -28,7 +28,7 @@ class FoodsController < ApplicationController
       authorize @food
     else
       skip_authorization
-      redirect_to request.referrer || root_path, error: "Sorry, that food couldn't be found"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that food couldn't be found"}
     end
   end
 
@@ -43,7 +43,7 @@ class FoodsController < ApplicationController
       end
     else
       skip_authorization
-      redirect_to request.referrer || root_path, error: "Sorry, that food couldn't be found"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that food couldn't be found"}
     end
   end
 
@@ -58,7 +58,7 @@ class FoodsController < ApplicationController
       end
     else
       skip_authorization
-      redirect_to request.referrer || root_path, error: "Sorry, that food couldn't be found"
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that food couldn't be found"}
     end
   end
 
@@ -70,6 +70,7 @@ class FoodsController < ApplicationController
 
   def load_food_resource
     @food = Food.find_by(id: params[:id])
+    @user = @food.achievement.user
   end
 
 end

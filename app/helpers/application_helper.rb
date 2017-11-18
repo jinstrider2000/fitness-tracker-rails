@@ -52,8 +52,12 @@ module ApplicationHelper
     !!(/\/activity-feed\Z/.match(request.referrer))
   end
 
-  def text_finder(yml_ext,default=nil,scope=nil,args*)
-    t "#{params[:controller].gsub("/","_")}.#{params[:action]}.#{yml_ext}", default
-  end
+  # def text_finder(yml_ext="", args={})
+  #   if yml_ext == "title"
+  #     t "#{params[:controller].gsub("/","_")}.#{params[:action]}.#{yml_ext}", default: :default, args
+  #   else
+  #     t "#{params[:controller].gsub("/","_")}.#{params[:action]}.#{yml_ext}", args
+  #   end
+  # end
   
 end

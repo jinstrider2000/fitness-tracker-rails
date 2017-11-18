@@ -9,9 +9,9 @@
     <%= favicon_link_tag %>
     <!-- Title Tag -->
     <% if user_signed_in? %>
-      <%= tag.title t("#{params[:controller].gsub("/","_")}.#{params[:action]}.title", user_name: @user.name) %>
+      <%= tag.title t("#{params[:controller].gsub("/","_")}.#{params[:action]}.title", user_name: @user.try(:name)) %>
     <% else %>
-      <%= tag.tag t "default"%>
+      <%= tag.title t "default"%>
     <% end %>
     <!-- Stylesheets and Javascript Links -->
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>

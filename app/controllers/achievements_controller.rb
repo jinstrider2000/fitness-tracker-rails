@@ -30,7 +30,7 @@ class AchievementsController < ApplicationController
       @achievements = @user.achievements_ordered_by(params[:filter], params[:order])
     else
       skip_authorization
-      redirect_to request.referrer || root_path, error: "Sorry, that user doesn't exist."
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist."}
     end
   end
 
