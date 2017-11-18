@@ -105,9 +105,10 @@ en:
         other_user_heading: "%{full_name}"
         edit: "Edit"
         daily_calorie_goal: "Daily Calorie Goal: "
-        recent_exercises: "Recent Exercises"
-        recent_foods: "Recent Foods"
+        recent_exercises: "Recently Added Exercises"
+        recent_foods: "Recent Added Foods"
         no_activity: "No Recent Activity"
+        more_link: "more"
   users_user_actions:
     blocked:
       title: "Fitness Tracker - %{user_name}'s Blocked Users"

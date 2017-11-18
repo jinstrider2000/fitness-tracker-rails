@@ -6,7 +6,6 @@ class Users::UserActionsController < ApplicationController
 
   def show
     if @user.present?
-      binding.pry
       @blocked = current_user.blocked_by?(@user)
     else
       redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}

@@ -2,19 +2,19 @@
 	<div class="col-sm-12">
 		<img class="profile-pic-display img-circle" src="<%=profile_pic_path(@user)%>" alt="<%=@user.first_name%>'s Profile Pic">
     <% if viewing_own_profile_while_logged_in? %>
-      <%= tag.h2 t("#{params[:controller]}.#{params[:action]}.my_heading", first_name: @user.first_name) %>
-      <%= tag.a "Edit", href: edit_user_registration_path %>
+      <%= tag.h2 t(".my_heading", first_name: @user.first_name) %>
+      <%= tag.a t(".edit"), href: edit_user_registration_path %>
     <% else %>
-      <%= tag.h2 t("#{params[:controller]}.#{params[:action]}.other_user_heading", full_name: @user.name) %>
+      <%= tag.h2 t(".other_user_heading", full_name: @user.name) %>
     <% end %>
-		<h4 id="calorie-goal-display"><%=t "#{params[:controller]}.#{params[:action]}.daily_calorie_goal"%> <%=@user.daily_calorie_intake_goal%></h4>
+		<h4 id="calorie-goal-display"><%=t ".daily_calorie_goal"%> <%=@user.daily_calorie_intake_goal%></h4>
 	</div>
 </div>
 <div class="row">
 	<div class="col-sm-5 card-style clearfix">
-		<h3><%= t "#{params[:controller]}.#{params[:action]}.recent_exercises" %></h3>
+		<h3><%= t ".recent_exercises" %></h3>
 		<% if @user.recent_exercises.count < 1 %>
-			<p><%= t "#{params[:controller]}.#{params[:action]}.no_activity" %></p>
+			<p><%= t ".no_activity" %></p>
 		<% else %>
 			<ul>
 			<% @user.recent_exercises.each do |exercise| %>
@@ -22,12 +22,12 @@
 			<% end %>
 			</ul>
 		<% end %>
-		<a class="more-link" href="<%=user_exercises_path(@user)%>">more</a>
+		<a class="more-link" href="<%=user_exercises_path(@user)%>"><%= t ".more_link" %></a>
 	</div>
 	<div class="col-sm-5 col-sm-offset-2 card-style clearfix">
-		<h3><%= t "#{params[:controller]}.#{params[:action]}.recent_foods" %></h3>
+		<h3><%= t ".recent_foods" %></h3>
 		<% if @user.recent_foods.count < 1 %>
-			<p><%= t "#{params[:controller]}.#{params[:action]}.no_activity" %></p>
+			<p><%= t ".no_activity" %></p>
 		<% else %>
 			<ul>
 			<% @user.recent_foods.each do |food| %>
@@ -35,6 +35,6 @@
 			<% end %>
 			</ul>
 		<% end %>
-		<a class="more-link" href="<%=user_foods_path(@user)%>">more</a>
+		<a class="more-link" href="<%=user_foods_path(@user)%>"><%= t ".more_link" %></a>
 	</div>
 </div>
