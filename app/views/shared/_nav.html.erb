@@ -3,7 +3,6 @@
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main_nav" aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
@@ -15,24 +14,28 @@
 			<ul class="nav navbar-nav navbar-left">
 				<% if user_signed_in? %>
 					<li class="<%=link_status("activity-feed")%>"><a href="<%=activity_feed_path%>"><%= t ".activity_feed" %></a></li>
-					<li class="dropdown <%=link_status("achievements")%>">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= t ".achievement.heading" %><span class="caret vis-sm-inline"></span></a>
+					<li class="dropdown <%=link_status("achievements exercises foods")%>">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= t ".my_achievements.heading" %><span class="caret vis-sm-inline"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="<%=new_achievement_path%>"><%= t ".achievement.new" %></a></li>
+							<li><a href="<%=new_achievement_path%>"><%= t ".my_achievements.new" %></a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="<%=user_achievements_path(current_user.slug)%>"><%= t ".achievement.index" %></a></li>
+							<li><a href="<%=user_achievements_path(current_user.slug)%>"><%= t ".my_achievements.achievements" %></a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="<%=user_exercises_path(current_user.slug)%>"><%= t ".my_achievements.exercises" %></a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="<%=user_foods_path(current_user.slug)%>"><%= t ".my_achievements.foods" %></a></li>
 						</ul>
 					</li>
-					<li class="dropdown <%=link_status("exercises")%>">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= t ".exercise.heading" %><span class="caret vis-sm-inline"></span></a>
+					<li class="dropdown <%=link_status("following followers blocked muted")%>">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= t ".my_relationships.heading" %><span class="caret vis-sm-inline"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="<%=user_exercises_path(current_user.slug)%>"><%= t ".exercise.index" %></a></li>
-						</ul>
-					</li>
-					<li class="dropdown <%=link_status("foods")%>">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= t ".food.heading" %><span class="caret vis-sm-inline"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="<%=user_foods_path(current_user.slug)%>"><%= t ".food.index" %></a></li>
+							<li><a href="<%=following_user_path(current_user.slug)%>"><%= t ".my_relationships.following" %></a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="<%=followers_user_path(current_user.slug)%>"><%= t ".my_relationships.followers" %></a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="<%=blocked_user_path(current_user.slug)%>"><%= t ".my_relationships.blocked" %></a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="<%=muted_user_path(current_user.slug)%>"><%= t ".my_relationships.muted" %></a></li>
 						</ul>
 					</li>
 				<% end %>

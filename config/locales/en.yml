@@ -60,16 +60,18 @@ en:
       login: "Log In"
       logout: "Log Out"
       profile: "My Profile"
-      achievement:
-        heading: "Achievement"
+      my_achievements:
+        heading: "Achievements"
         new: "New Achievement"
-        index: "My Achievements"
-      exercise:
-        heading: "Exercise"
-        index: "My Exercises"
-      food:
-        heading: "Food"
-        index: "My Foods"
+        achievements: "All Achievements"
+        foods: "Foods Only"
+        exercises: "Exercises Only"
+      my_relationships:
+        heading: "Relationships"
+        following: "Following"
+        followers: "Followers"
+        blocked: "Blocked"
+        muted: "Muted"
       activity_feed: "Activity Feed"
   activity_feed:
     show:

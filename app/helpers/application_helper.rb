@@ -29,27 +29,27 @@ module ApplicationHelper
     attr_array = attrs_to_display.collect {|attr| obj.send(attr).to_s}
     attr_string = "#{attr_array[0]} <em>(Cals: "
 
-    if obj.class.to_s == "Exercise"
+    if obj.class == Exercise
       (attr_string + "-#{attr_array[1]})</em>").html_safe
     else
       (attr_string + "+#{attr_array[1]})</em>").html_safe
     end
   end
 
-  def link_status(link)
-    request.path_info =~ /#{link}/ ? "active" : ""
+  def link_status(links)
+    request.path_info =~ /#{links}/ ? "active" : ""
   end
 
-  def on_recent_activity?
-    !!(request.path_info =~ /\/activity-feed/)
+  def on_activity_feed?
+    !!(request.path_info =~ /activity-feed/)
   end
 
   def profile_pic_path(user)
     asset_path("users/#{user.id}/profile_pic", type: :image)
   end
 
-  def referred_by_recent_activity?
-    !!(/\/activity-feed\Z/.match(request.referrer))
+  def referred_by_activity_feed?
+    !!(request.referrer =~ /activity-feed/)
   end
 
   # def text_finder(yml_ext="", args={})
