@@ -30,11 +30,11 @@ class User < ApplicationRecord
   end
 
   def recent_exercises
-    self.exercises.order(created_at: :desc).limit(6)
+    self.exercises.order(id: :desc).limit(6)
   end
 
   def recent_foods
-    self.foods.order(created_at: :desc).limit(6)
+    self.foods.order(id: :desc).limit(6)
   end
 
   def achievements_ordered_by(order = nil)
