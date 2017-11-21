@@ -65,7 +65,7 @@ class FoodsController < ApplicationController
   private
 
   def food_params
-    params.require(:food).permit(:name, :calories, :comment)
+    params.require(:food).permit(:name, :calories)
   end
 
   def load_food_resource

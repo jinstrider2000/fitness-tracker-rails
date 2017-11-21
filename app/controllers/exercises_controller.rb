@@ -65,7 +65,7 @@ class ExercisesController < ApplicationController
   private
 
   def exercise_params
-    params.require(:exercise).permit(:name, :calories_burned, :comment)
+    params.require(:exercise).permit(:name, :calories_burned)
   end
 
   def load_exercise_and_user_resource
