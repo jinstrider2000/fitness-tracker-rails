@@ -1,0 +1,12 @@
+<% if index_by_date_col_counter == 0 %>
+  <%= tag.div class: %w[col-sm-3 card-style], style: "padding-bottom:5px;" do %>
+    <%= tag.h3 print_date_index_style(index_by_date_col.first.achievement.completed_on), class: "text-center" %>
+    <%= render collection: index_by_date_col, partial: 'food' %>
+  <% end %>
+<% else %>
+  <%= tag.div class: %w[col-sm-3 col-sm-offset-1 card-style], style: "padding-bottom:5px;" do %>
+    <%= tag.h3 print_date_index_style(index_by_date_col.first.achievement.completed_on), class: "text-center" %>
+    <%= render collection: index_by_date_col, partial: 'food' %>
+    <%= tag.p "Total Calories In: <em>#{index_by_date_col.first.achievement.daily_total.total_calories_in}</em>".html_safe, class: %w[text-center index-style], style: "padding-top:10px;" %>
+  <% end %>
+<% end %>

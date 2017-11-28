@@ -18,7 +18,5 @@
 <% if params[:filter] == "name" || params[:filter] == "calories" %>
   <%= render @foods %>
 <% else %>
-  <% @foods.each do |date_sorted_array| %>
-    <%= render collection: date_sorted_array, partial: 'food', layout: 'shared/index_by_date', locals: {date: date_sorted_array.first.achievement.completed_on}  %>
-  <% end %>
+    <%= render collection: @foods, partial: 'shared/index_by_date_row' %>
 <% end %>

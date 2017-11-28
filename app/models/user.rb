@@ -39,10 +39,14 @@ class User < ApplicationRecord
 
   def achievements_ordered_by(order = nil)
     dates_array = (order.try(:downcase) == "ascending" ? self.daily_totals.order(completed_on: :asc).pluck(:completed_on) : self.daily_totals.order(completed_on: :desc).pluck(:completed_on))
-    
+
     [].tap do |array|
-      dates_array.each do |date|
-        array << self.achievements.where(completed_on: date)
+      dates_array.each_slice(3) do |date_array|
+        date_row = []
+        date_array.each do |date|
+          date_row << self.achievements.where(completed_on: date)
+        end
+        array << date_row
       end
     end
   end
@@ -58,8 +62,12 @@ class User < ApplicationRecord
       dates_array = (order.try(:downcase) == "ascending" ? self.daily_totals.order(completed_on: :asc).pluck(:completed_on) : self.daily_totals.order(completed_on: :desc).pluck(:completed_on))
       
       [].tap do |array|
-        dates_array.each do |date|
-          array << self.exercises.where(achievements_table[:completed_on].eq(date))
+        dates_array.each_slice(3) do |date_array|
+          date_row = []
+          date_array.each do |date|
+            date_row << self.exercises.where(achievements_table[:completed_on].eq(date))
+          end
+          array << date_row
         end
       end
     end
@@ -76,8 +84,12 @@ class User < ApplicationRecord
       dates_array = (order.try(:downcase) == "ascending" ? self.daily_totals.order(completed_on: :asc).pluck(:completed_on) : self.daily_totals.order(completed_on: :desc).pluck(:completed_on))
       
       [].tap do |array|
-        dates_array.each do |date|
-          array << self.foods.where(achievements_table[:completed_on].eq(date))
+        dates_array.each_slice(3) do |date_array|
+          date_row = []
+          date_array.each do |date|
+            date_row << self.foods.where(achievements_table[:completed_on].eq(date))
+          end
+          array << date_row
         end
       end
     end
