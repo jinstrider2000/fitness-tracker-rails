@@ -1,6 +1,6 @@
 class AchievementsController < ApplicationController
   
-  after_action :verify_authorized, except: [:create, :index]
+  after_action :verify_authorized, except: :new
 
   def new
     if params[:activity_type].try(:downcase) == "exercise"
@@ -38,9 +38,9 @@ class AchievementsController < ApplicationController
 
   def achievement_params
     if params[:activity_type].try(:downcase) == "exercise"
-      params.require(:achievement).permit(:name, :user_id, :completed_on, :comment, activity_attributes: {:name, :calories_burned})
+      params.require(:achievement).permit(:name, :user_id, :completed_on, :comment, activity_attributes: [:name, :calories_burned])
     elsif params[:activity_type].try(:downcase) == "food"
-      params.require(:achievement).permit(:name, :user_id, :completed_on, :comment, activity_attributes: {:name, :calories})
+      params.require(:achievement).permit(:name, :user_id, :completed_on, :comment, activity_attributes: [:name, :calories])
     else
       params.require(:achievement)
     end

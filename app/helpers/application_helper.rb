@@ -1,11 +1,7 @@
 module ApplicationHelper
 
   def viewing_own_profile_while_logged_in?
-    if @user && current_user
-      @user.id == current_user.id
-    else
-      false
-    end
+    @user.id == current_user.id
   end
 
   def viewing_own_achievement?
@@ -16,12 +12,12 @@ module ApplicationHelper
     end
   end
 
-  def print_time(date)
+  def print_date(date)
     ordinal_suffix = date.day.ordinal
-    date.strftime("%B %-d<sup>#{ordinal_suffix}</sup>, %Y").html_safe
+    date.strftime("%b. %-d<sup>#{ordinal_suffix}</sup>, %Y").html_safe
   end
 
-  def print_time_index_style(date)
+  def print_date_index_style(date)
     date.strftime("%-m/ %d/ %y")
   end
 
@@ -51,13 +47,5 @@ module ApplicationHelper
   def referred_by_activity_feed?
     !!(request.referrer =~ /activity-feed/)
   end
-
-  # def text_finder(yml_ext="", args={})
-  #   if yml_ext == "title"
-  #     t "#{params[:controller].gsub("/","_")}.#{params[:action]}.#{yml_ext}", default: :default, args
-  #   else
-  #     t "#{params[:controller].gsub("/","_")}.#{params[:action]}.#{yml_ext}", args
-  #   end
-  # end
   
 end

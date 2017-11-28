@@ -1,11 +1,11 @@
 class FoodPolicy < ApplicationPolicy
 
   def index?
-    user.blocked_by?(record)
+    !user.blocked_by?(record)
   end
 
   def show?
-    user.blocked_by?(record.achievement.user)
+    !user.blocked_by?(record.achievement.user)
   end
 
   def update?
