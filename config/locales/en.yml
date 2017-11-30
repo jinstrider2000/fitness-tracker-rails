@@ -71,12 +71,18 @@ en:
         blocked: "Blocked"
         muted: "Muted"
       activity_feed: "Activity Feed"
+    index_heading_achievement_items:
+      my_heading: "My %{items}"
+      other_user_heading: "%{user_name}'s %{items}"
+      new_link: "Add New"
   activity_feed:
     show:
       title: "Fitness Tracker - Activity Feed"
   achievements:
     index:
       title: "Fitness Tracker - %{user_name}'s Achievements"
+      my_heading: "My Achievements"
+      other_user_heading: "%{user_name}'s Achievements"
     new:
       title: "Fitness Tracker - New Achievement"
   exercises:
@@ -91,9 +97,6 @@ en:
       title: "Fitness Tracker - Edit Food"
     index:
       title: "Fitness Tracker - %{user_name}'s Foods"
-      my_heading: "My Foods"
-      other_user_heading: "%{user_name}'s Foods"
-      new_link: "Add New"
     show:
       title: "Fitness Tracker - %{user_name}'s Food: %{record_name}"
   users:

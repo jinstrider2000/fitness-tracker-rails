@@ -1,0 +1,10 @@
+<%= tag.div class: %w[row text-center], style: "margin-bottom:25px;" do %>
+  <%= form_tag user_achievements_path, method: :get do %>
+    <%= label_tag 'order', 'Order:' %>
+    <%= tag.select name: 'order', id: 'order' do %>
+      <option value="descending" <%= "selected" if params[:order] == 'descending' %>>Descending</option>
+      <option value="ascending" <%= "selected" if params[:order] == 'ascending' %>>Ascending</option>
+    <% end %>
+    <%= submit_tag 'Sort', class: %w[btn btn-default btn-xs] %>
+  <% end %>
+<% end %>

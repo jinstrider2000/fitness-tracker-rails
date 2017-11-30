@@ -1,21 +1,8 @@
-<%= tag.div class: %w[row text-center] do %>
-  <%= image_tag "food_icon", class: %w[img-responsive index-icon], alt: "Food Icon" %>
-  <% if viewing_own_profile_while_logged_in? %>
-    <%= tag.h2 t ".my_heading" %>
-  <% else %>
-    <%= tag.h2 t ".other_user_heading" %>
-  <% end %>
-<% end %>
+<%= render partial: 'shared/index_heading_achievement_items' %>
 
-<%= tag.div class: %w[row text-center], style: "margin-bottom:25px;" do %>
-  <% if viewing_own_profile_while_logged_in? %>
-    <%= tag.span do %>
-      <%= link_to t(".new_link"), new_achievement_path(activity_type: "food"), class: %w[btn btn-primary btn-lg], role: "button" %>
-    <% end %>
-  <% end %>
-<% end %>
+<%= render partial: 'index_sort' %>
 
-<% if params[:filter] == "name" || params[:filter] == "calories" %>
+<% if params[:filter].try(:downcase) == "name" || params[:filter].try(:downcase) == "calories" %>
   <%= render @foods %>
 <% else %>
     <%= render collection: @foods, partial: 'shared/index_by_date_row' %>

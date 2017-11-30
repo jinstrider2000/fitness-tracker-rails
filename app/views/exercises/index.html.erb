@@ -1,0 +1,9 @@
+<%= render partial: 'shared/index_heading_achievement_items' %>
+
+<%= render partial: 'index_sort' %>
+
+<% if params[:filter].try(:downcase) == "name" || params[:filter].try(:downcase) == "calories burned" %>
+  <%= render @exercises %>
+<% else %>
+    <%= render collection: @exercises, partial: 'shared/index_by_date_row' %>
+<% end %>
