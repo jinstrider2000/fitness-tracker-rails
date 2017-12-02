@@ -17,6 +17,7 @@ class ExercisesController < ApplicationController
   def show
     if @exercise.present?
       authorize @exercise
+      @activity = @exercise
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: "Sorry, that exercise couldn't be found"}
@@ -26,6 +27,7 @@ class ExercisesController < ApplicationController
   def edit
     if @exercise.present?
       authorize @exercise
+      @activity = @exercise
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: "Sorry, that exercise couldn't be found"}

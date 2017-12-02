@@ -17,6 +17,7 @@ class FoodsController < ApplicationController
   def show
     if @food.present?
       authorize @food
+      @activity = @exercise
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: "Sorry, that food couldn't be found"}
@@ -26,6 +27,7 @@ class FoodsController < ApplicationController
   def edit
     if @food.present?
       authorize @food
+      @activity = @exercise
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: "Sorry, that food couldn't be found"}
@@ -68,7 +70,7 @@ class FoodsController < ApplicationController
     params.require(:food).permit(:name, :calories)
   end
 
-  def load_food_resource
+  def load_food_and_user_resource
     @food = Food.find_by(id: params[:id])
     @user = @food.achievement.user
   end
