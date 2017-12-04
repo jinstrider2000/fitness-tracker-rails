@@ -18,7 +18,7 @@ module ApplicationHelper
   end
 
   def link_status(links)
-    request.path_info =~ /#{links}/ ? "active" : ""
+    links.split(" ").any? { |link| request.path_info =~ /#{link}/ } ? "active" : ""
   end
 
   def on_activity_feed?
