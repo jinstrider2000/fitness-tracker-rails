@@ -18,7 +18,7 @@
 		<% else %>
 			<ul>
 			<% @user.recent_exercises.each do |exercise| %>
-				<li class="index-style"><%=print_date(exercise.achievement.completed_on)%> - <%=attr_display_str(exercise,["name","calories_burned"])%></li>
+				<li class="index-style"><%=print_date(exercise.achievement.completed_on)%> - <%=render partial: 'exercises/exercise', locals: {exercise: exercise}%></li>
 			<% end %>
 			</ul>
 		<% end %>
@@ -31,7 +31,7 @@
 		<% else %>
 			<ul>
 			<% @user.recent_foods.each do |food| %>
-				<li class="index-style"><%=print_date(food.achievement.completed_on)%> - <%=attr_display_str(food,["name","calories"])%></li>
+				<li class="index-style"><%=print_date(food.achievement.completed_on)%> - <%=render partial: 'foods/food', locals: {food: food}%></li>
 			<% end %>
 			</ul>
 		<% end %>

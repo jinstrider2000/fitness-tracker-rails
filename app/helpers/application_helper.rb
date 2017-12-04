@@ -17,17 +17,6 @@ module ApplicationHelper
     date.strftime("%-m/ %d/ %y")
   end
 
-  def attr_display_str(obj, attrs_to_display)
-    attr_array = attrs_to_display.collect {|attr| obj.send(attr).to_s}
-    attr_string = "#{attr_array[0]} <em>(Cals: "
-
-    if obj.class == Exercise
-      (attr_string + "-#{attr_array[1]})</em>").html_safe
-    else
-      (attr_string + "+#{attr_array[1]})</em>").html_safe
-    end
-  end
-
   def link_status(links)
     request.path_info =~ /#{links}/ ? "active" : ""
   end

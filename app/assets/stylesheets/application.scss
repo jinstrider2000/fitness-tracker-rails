@@ -186,6 +186,12 @@
    font: 16px "Open Sans", sans-serif;
    color: black;
  }
+
+ li.index-style > a.index-style
+ {
+   display: inline;
+   text-align: left;
+ }
  
  a.index-style:hover
  {

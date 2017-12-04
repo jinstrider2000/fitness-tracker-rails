@@ -5,7 +5,7 @@ class AchievementPolicy < ApplicationPolicy
   end
 
   def index?
-    user.blocked_by?(record)
+    !user.blocked_by?(record)
   end
   
 end
