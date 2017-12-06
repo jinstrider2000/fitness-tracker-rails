@@ -24,9 +24,7 @@ Rails.application.routes.draw do
     resources :exercises, only: [:index]
   end
 
-  resources :achievements, only: [:new, :create]
-  resources :foods, except: [:index, :new, :create]
-  resources :exercises, except: [:index, :new, :create]
+  resources :achievements, except: [:index]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

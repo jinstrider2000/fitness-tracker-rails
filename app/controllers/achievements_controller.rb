@@ -23,6 +23,16 @@ class AchievementsController < ApplicationController
     end
   end
 
+  def show
+    if @achievement.present?
+      authorize @achievement
+      @activity = @achievement.activity
+    else
+      skip_authorization
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that achievement couldn't be found"}
+    end
+  end
+
   def index
     @user = User.find_by(slug: params[:slug])
     if @user.present?
@@ -35,6 +45,11 @@ class AchievementsController < ApplicationController
   end
 
   private
+
+  def load_achievement_and_user_resource
+    @achievement = Achievement.find_by(id: params[:id])
+    @user = @achievement.user
+  end
 
   def achievement_params
     if params[:activity_type].try(:downcase) == "exercise"
