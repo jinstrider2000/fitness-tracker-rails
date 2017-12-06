@@ -2,7 +2,7 @@
   <div class="activity-block center-block text-center card-style">
     <div>
       <a href="<%=user_path(activity.achievement.user.slug)%>"><img class="index-icon-mini img-circle" src="<%=profile_pic_path(activity.achievement.user)%>" alt="Profile Pic" title="<%=activity.achievement.user.name%>"></a>
-      <a href="<%=Rails.application.routes.url_helpers.send "user_#{activity.class.to_s.pluralize.downcase}_path", activity.achievement.user.slug%>"><img class="index-icon-mini" src="<%=asset_path "#{activity.class.to_s.downcase}_icon", type: :image %>" alt="<%="#{activity.class} Icon"%>" title="<%=activity.achievement.user.first_name%>'s Meals"></a>
+      <a href="<%=route_helpers.send "user_#{activity.class.to_s.pluralize.downcase}_path", activity.achievement.user.slug%>"><img class="index-icon-mini" src="<%=asset_path "#{activity.class.to_s.downcase}_icon", type: :image %>" alt="<%="#{activity.class} Icon"%>" title="<%=activity.achievement.user.first_name%>'s Meals"></a>
     </div>
     <h3><%=print_date(activity.achievement.completed_on)%></h3>
     <div>
@@ -10,8 +10,8 @@
     </div>
     <% if viewing_own_activity?(activity) %>
       <div>
-        <a href="<%=Rails.application.routes.url_helpers.send "edit_#{activity.class.to_s.downcase}_path", activity%>" class="btn btn-default btn-xs" role="button">  Edit  </a>
-        <%= link_to "Delete", Rails.application.routes.url_helpers.send("#{activity.class.to_s.downcase}_path", activity), class: %w[btn btn-danger btn-xs], method: :delete %>
+        <a href="<%=route_helpers.send "edit_#{activity.class.to_s.downcase}_path", activity%>" class="btn btn-default btn-xs" role="button">  Edit  </a>
+        <%= link_to "Delete", route_helpers.send("#{activity.class.to_s.downcase}_path", activity), class: %w[btn btn-danger btn-xs], method: :delete %>
       </div>
     <% end %>
   </div>

@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def print_date_index_style(date)
-    date.strftime("%-m/ %d/ %y")
+    date.strftime("%-m/%d/%y")
   end
 
   def link_status(links)
@@ -31,6 +31,10 @@ module ApplicationHelper
 
   def referred_by_activity_feed?
     !!(request.referrer =~ /activity-feed/)
+  end
+
+  def route_helpers
+    Rails.application.routes.url_helpers
   end
   
 end
