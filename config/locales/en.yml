@@ -85,20 +85,18 @@ en:
       other_user_heading: "%{user_name}'s Achievements"
     new:
       title: "Fitness Tracker - New Achievement"
-  exercises:
     edit:
-      title: "Fitness Tracker - Edit Exercise"
+      title: "Fitness Tracker - Edit Achievement"
+    show:
+      title: "Fitness Tracker - %{user_name}'s Achievement: %{record_name}"
+      my_heading: "My %{item}"
+      other_user_heading: "%{user_name}'s %{item}"
+  exercises:
     index:
       title: "Fitness Tracker - %{user_name}'s Exercises"
-    show:
-      title: "Fitness Tracker - %{user_name}'s Exercise: %{record_name}"
   foods:
-    edit:
-      title: "Fitness Tracker - Edit Food"
     index:
       title: "Fitness Tracker - %{user_name}'s Foods"
-    show:
-      title: "Fitness Tracker - %{user_name}'s Food: %{record_name}"
   users:
     user_actions:
       blocked:

@@ -4,8 +4,16 @@ class AchievementPolicy < ApplicationPolicy
     record.user_id == user.id
   end
 
-  def index?
-    !user.blocked_by?(record)
+  def show?
+    !user.blocked_by?(record.user)
+  end
+
+  def update?
+    user.id == record.user.id
+  end
+
+  def destroy?
+    update?
   end
   
 end

@@ -1,1 +1,9 @@
+<%= tag.div class: %w[row text-center] do %>
+  <% if viewing_own_achievement?(@achievement) %>
+    <%= tag.h2 t ".my_heading", item: @achievement.activity_type %>
+  <% else %>
+    <%= tag.h2 t ".other_user_heading", item: @achievement.activity_type %>
+  <% end %>
+<% end %>
+
 <%= render partial: 'shared/show_template', locals: {achievement: @achievement} %>

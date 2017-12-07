@@ -1,1 +1,1 @@
-<%= link_to "#{exercise.name} <em>(Cals: -#{exercise.calories_burned})</em>".html_safe, exercise_path(exercise), class: %w[center-block text-center index-style] %>
+<%= link_to "#{exercise.name} <em>(Cals: -#{exercise.calories_burned})</em>".html_safe, achievement_path(exercise.achievement), class: %w[center-block text-center index-style] %>

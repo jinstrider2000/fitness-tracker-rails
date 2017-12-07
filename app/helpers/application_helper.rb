@@ -4,8 +4,8 @@ module ApplicationHelper
     @user.id == current_user.id
   end
 
-  def viewing_own_activity?(activity)
-    current_user.id == activity.achievement.user_id
+  def viewing_own_achievement?(achievement)
+    current_user.id == achievement.user_id
   end
 
   def print_date(date)

@@ -1,5 +1,6 @@
 class AchievementsController < ApplicationController
   
+  before_action :load_achievement_and_user_resource, except: [:index, :new]
   after_action :verify_authorized, except: :new
 
   def new

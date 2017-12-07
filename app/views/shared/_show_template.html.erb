@@ -1,20 +1,20 @@
-<div class="row">
-  <div class="activity-block center-block text-center card-style">
+<div class="row text-center">
+  <div class="activity-block center-block card-style">
     <div>
       <a href="<%=user_path(achievement.user.slug)%>"><img class="index-icon-mini img-circle" src="<%=profile_pic_path(achievement.user)%>" alt="Profile Pic" title="<%=achievement.user.name%>"></a>
-      <a href="<%=route_helpers.send "user_#{achievement.activity.class.to_s.pluralize.downcase}_path", achievement.activity.user.slug%>"><img class="index-icon-mini" src="<%=asset_path "#{achievement.activity.class.to_s.downcase}_icon", type: :image %>" alt="<%="#{achievement.activity.class} Icon"%>" title="<%=achievement.activity.user.first_name%>'s Meals"></a>
+      <a href="<%=route_helpers.send "user_#{achievement.activity.class.to_s.pluralize.downcase}_path", achievement.user.slug%>"><img class="index-icon-mini" src="<%=asset_path "#{achievement.activity.class.to_s.downcase}_icon", type: :image %>" alt="<%="#{achievement.activity.class} Icon"%>" title="<%=achievement.user.first_name%>'s Meals"></a>
     </div>
     <h3><%=print_date(achievement.completed_on)%></h3>
     <div>
       <h4><%= render partial: "#{achievement.activity.class.to_s.pluralize.downcase}/#{achievement.activity.class.to_s.downcase}", locals: {achievement.activity.class.to_s.downcase.to_sym => achievement.activity} %></h4>
     </div>
     <div>
-      <p><%= achievement.comment %></p>
+      <p class="center-block" style="width:50%;"><%= achievement.comment %></p>
     </div>
-    <% if viewing_own_activity?(achievement.activity) %>
+    <% if viewing_own_achievement?(achievement) %>
       <div>
-        <a href="<%=route_helpers.send "edit_#{achievement.activity.class.to_s.downcase}_path", achievement.activity%>" class="btn btn-default btn-xs" role="button">  Edit  </a>
-        <%= link_to "Delete", route_helpers.send("#{achievement.activity.class.to_s.downcase}_path", achievement.activity), class: %w[btn btn-danger btn-xs], method: :delete %>
+        <a href="<%= edit_achievement_path achievement%>" class="btn btn-default btn-xs" role="button">  Edit  </a>
+        <%= link_to "Delete", achievement_path(achievement), class: %w[btn btn-danger btn-xs], method: :delete %>
       </div>
     <% end %>
   </div>
