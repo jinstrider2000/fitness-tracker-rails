@@ -1,9 +1,9 @@
 <%= tag.div class: %w[row text-center] do %>
-  <% if viewing_own_achievement?(@achievement) %>
+  <% if policy(@achievement).update? %>
     <%= tag.h2 t ".my_heading", item: @achievement.activity_type %>
   <% else %>
     <%= tag.h2 t ".other_user_heading", user_name: @user.first_name, item: @achievement.activity_type %>
   <% end %>
 <% end %>
 
-<%= render partial: 'shared/show_template', locals: {achievement: @achievement} %>
+<%= render partial: 'show_template', locals: {achievement: @achievement} %>

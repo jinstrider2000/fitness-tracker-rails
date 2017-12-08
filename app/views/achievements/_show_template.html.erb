@@ -7,7 +7,7 @@
     <div>
       <p class="center-block" style="width:75%;"><%= achievement.comment %></p>
     </div>
-    <% if viewing_own_achievement?(achievement) %>
+    <% if policy(achievement).update? %>
       <a href="<%= edit_achievement_path achievement%>" class="btn btn-default btn-xs" role="button">  Edit  </a>
       <%= link_to "Delete", achievement_path(achievement), class: %w[btn btn-danger btn-xs], role: "button", method: :delete %>
     <% end %>
