@@ -4,10 +4,6 @@ module ApplicationHelper
     @user.id == current_user.id
   end
 
-  def viewing_own_achievement?(achievement)
-    current_user.id == achievement.user_id
-  end
-
   def print_date(date)
     ordinal_suffix = date.day.ordinal
     date.strftime("%b. %-d<sup>#{ordinal_suffix}</sup>, %Y").html_safe
@@ -17,8 +13,8 @@ module ApplicationHelper
     date.strftime("%-m/%d/%y")
   end
 
-  def link_status(links)
-    links.split(" ").any? { |link| request.path_info =~ /#{link}/ } ? "active" : ""
+  def link_status(*links)
+    links.any? { |link| request.path_info =~ /#{link}/ } ? "active" : ""
   end
 
   def on_activity_feed?

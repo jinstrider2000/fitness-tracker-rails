@@ -9,7 +9,7 @@
       <h4><%= render partial: "#{achievement.activity.class.to_s.pluralize.downcase}/#{achievement.activity.class.to_s.downcase}", locals: {achievement.activity.class.to_s.downcase.to_sym => achievement.activity} %></h4>
     </div>
     <div>
-      <p class="center-block" style="width:50%;"><%= achievement.comment %></p>
+      <p class="center-block" style="width:75%;"><%= achievement.comment %></p>
     </div>
     <% if viewing_own_achievement?(achievement) %>
       <div>
