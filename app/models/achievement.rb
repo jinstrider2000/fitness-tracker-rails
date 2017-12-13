@@ -1,4 +1,7 @@
 class Achievement < ApplicationRecord
+
+  VALID_ACTIVITIES = ["Food", "Exercise"]
+
   belongs_to :activity, polymorphic: true, dependent: :destroy
   belongs_to :user
   belongs_to :daily_total
@@ -13,6 +16,14 @@ class Achievement < ApplicationRecord
     else
       self.activity = Food.new(values)
     end
+  end
+
+  def self.valid_activities
+    VALID_ACTIVITIES
+  end
+
+  def self.valid_activity?(activity_name)
+    VALID_ACTIVITIES.any? {|activity| activity == activity_name}
   end
 
   private

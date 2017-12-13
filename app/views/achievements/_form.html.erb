@@ -1,0 +1,24 @@
+<%= form_for achievement, method: html_method, url: path do |form| %>
+  <%= tag.div class: 'form-group' do %>
+    <%= label_tag 'activity_type', "Activity Type: " %>
+    <%= render partial: 'activity_type_selection', locals: {html_method: html_method, achievement: achievement} %>
+  <% end %>
+  <% if activity_type_param_valid? %>
+    <%= tag.div class: 'form-group' do %>
+      <%= render partial: "#{achievement.activity_type.pluralize.downcase}/activity_fields", locals: {form: form,activity: achievement.activity} %>
+    <% end %>
+    <%= tag.div class: 'form-group' do %>
+      <%= form.label :completed_on %>
+      <%= form.date_select :completed_on, default: Date.today, order: [:month, :day, :year], date_separator: "/ ", start_year: Date.today.year - 20, end_year: Date.today.year, class: 'form-control' %>
+    <% end %>
+    <%= tag.div class: 'form-group' do %>
+      <%= form.label :comment %>
+      <%= form.text_area :comment, class: 'form-control' %>
+    <% end %>
+    <%= tag.div class: 'form-group' do %>
+      <%= form.submit class: %w[btn btn-default btn-xs] %>
+    <% end %>
+  <% else %>
+    <%= tag.h3 "Select an activity", class: "text-center" %>
+  <% end %>
+<% end %>

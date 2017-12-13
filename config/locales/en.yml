@@ -85,6 +85,7 @@ en:
       other_user_heading: "%{user_name}'s Achievements"
     new:
       title: "Fitness Tracker - New Achievement"
+      heading: "New Achievement"
     edit:
       title: "Fitness Tracker - Edit Achievement"
     show:

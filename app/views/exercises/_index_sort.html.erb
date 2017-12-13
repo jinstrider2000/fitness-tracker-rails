@@ -1,4 +1,5 @@
 <%= tag.div class: %w[row text-center], style: "margin-bottom:25px;" do %>
+
   <%= form_tag user_exercises_path, method: :get do %>
     <%= label_tag 'filter', 'Sort by:' %>
     <%= tag.select name: 'filter', id: 'filter' do %>
