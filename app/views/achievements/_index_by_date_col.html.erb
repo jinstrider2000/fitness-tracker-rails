@@ -1,5 +1,2 @@
-<div class="col-sm-3 card-style <%="col-sm-offset-1" if index_by_date_col_counter > 0 %>">
-  <%= tag.h3 print_date_index_style(index_by_date_col.first.completed_on), class: "text-center" %>
-  <%= render collection: index_by_date_col, partial: 'achievement' %>
-  <%= tag.p "Net Calories: #{index_by_date_col.first.daily_total.net_calories}", class: %w[text-center index-style], style: "padding-top:10px;" %>
-</div>
+<%= render collection: index_by_date_col, partial: 'achievement' %>
+<%= tag.p "Net Calories: #{index_by_date_col.first.daily_total.net_calories}", class: %w[text-center index-style], style: "padding-top:10px;" %>

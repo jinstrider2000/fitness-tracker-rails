@@ -1,6 +1,8 @@
 class Achievement < ApplicationRecord
 
   VALID_ACTIVITIES = ["Food", "Exercise"]
+  VALID_FILTER_OPTIONS = ["Date"]
+  VALID_ORDER_OPTIONS = ["Descending", "Ascending"]
 
   belongs_to :activity, polymorphic: true, dependent: :destroy
   belongs_to :user
@@ -8,6 +10,7 @@ class Achievement < ApplicationRecord
   validates_presence_of :activity, :user, :completed_on, :daily_total
 
   before_validation :find_or_create_daily_total, on: :create
+  # before_update :update_daily_total, on: :update
   after_create :add_to_daily_total
 
   def activity_attributes=(values)
@@ -26,7 +29,11 @@ class Achievement < ApplicationRecord
     VALID_ACTIVITIES.any? {|activity| activity == activity_name}
   end
 
+  extend FitnessTracker::SortableActivity
+
   private
+
+  # include FitnessTracker::DailyTotalUpdatable
 
   def find_or_create_daily_total
     self.daily_total = DailyTotal.find_or_create_daily_total_for(self)

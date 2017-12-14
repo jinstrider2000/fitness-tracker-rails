@@ -1,3 +1,3 @@
 <%= tag.div class: %w[row clearfix] do %>
-  <%= render collection: index_by_date_row, partial: "#{index_by_date_row.first.first.class.to_s.pluralize.downcase}/index_by_date_col" %>
+  <%= render collection: index_by_date_row, partial: "#{index_by_date_row.first.first.class.to_s.pluralize.downcase}/index_by_date_col", layout: 'shared/index_by_date_col_layout' %>
 <% end %>

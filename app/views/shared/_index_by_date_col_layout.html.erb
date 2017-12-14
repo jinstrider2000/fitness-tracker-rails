@@ -1,0 +1,8 @@
+<div class="col-sm-3 card-style <%="col-sm-offset-1" if index_by_date_col_counter > 0 %>">
+  <% if params[:controller] == 'achievements' %>
+    <%= tag.h3 print_date_index_style(index_by_date_col.first.completed_on), class: "text-center" %>
+  <% else %>
+    <%= tag.h3 print_date_index_style(index_by_date_col.first.achievement.completed_on), class: "text-center" %>
+  <% end %>
+  <%= yield %>
+</div>

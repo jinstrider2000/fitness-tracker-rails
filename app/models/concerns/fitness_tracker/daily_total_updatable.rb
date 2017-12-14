@@ -1,4 +1,4 @@
-module DailyTotalUpdatable
+module FitnessTracker::DailyTotalUpdatable
 
   def update_daily_total
     old_activity = self.class.find_by(id: self.id)

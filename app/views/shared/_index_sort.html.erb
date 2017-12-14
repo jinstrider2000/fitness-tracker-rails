@@ -1,0 +1,13 @@
+<%= tag.div class: %w[row text-center], style: "margin-bottom:25px;" do %>
+  <%= form_tag path, method: :get do %>
+    <%= label_tag 'filter', 'Sort by:' %>
+    <%= tag.select name: 'filter', id: 'filter' do %>
+      <%= render collection: filter_options_array, partial: 'shared/index_sort_option' ,locals: {selection_name: :filter} %>
+    <% end %>
+    <%= label_tag 'order', 'Order:' %>
+    <%= tag.select name: 'order', id: 'order' do %>
+      <%= render collection: order_options_array, partial: 'shared/index_sort_option' ,locals: {selection_name: :order} %>
+    <% end %>
+    <%= submit_tag 'Sort', class: %w[btn btn-default btn-xs] %>
+  <% end %>
+<% end %>
