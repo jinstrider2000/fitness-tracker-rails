@@ -7,7 +7,7 @@ class FoodsController < ApplicationController
     @user = User.find_by(slug: params[:slug])
     if @user.present?
       authorize @user
-      @foods = @user.foods_ordered_by(params[:filter], params[:order])
+      @foods = @user.collection_ordered_by(params[:controller], params[:filter], params[:order])
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}

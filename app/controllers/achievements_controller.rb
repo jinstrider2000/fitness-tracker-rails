@@ -16,7 +16,7 @@ class AchievementsController < ApplicationController
   def create
     @achievement = Achievement.new(achievement_params)
     authorize @achievement
-    if !!@achievement.save
+    if @achievement.save
       redirect_to user_achievements_path(slug: current_user.slug)
     else
       flash[:warnings] = @achievement.errors.full_messages
@@ -38,7 +38,7 @@ class AchievementsController < ApplicationController
     @user = User.find_by(slug: params[:slug])
     if @user.present?
       authorize @user
-      @achievements = @user.achievements_ordered_by(params[:order])
+      @achievements = @user.collection_ordered_by(params[:controller], params[:filter], params[:order])
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist."}

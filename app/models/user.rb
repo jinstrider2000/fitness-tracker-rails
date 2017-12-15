@@ -37,59 +37,33 @@ class User < ApplicationRecord
     self.foods.order(id: :desc).limit(6)
   end
 
-  def achievements_ordered_by(order = nil)
-    dates_array = (order.try(:downcase) == "ascending" ? self.daily_totals.order(completed_on: :asc).pluck(:completed_on) : self.daily_totals.order(completed_on: :desc).pluck(:completed_on))
+  def collection_ordered_by(collection, filter = nil, order = nil)
+    valid_filters = collection.capitalize.singularize.constantize.valid_filter_options
 
-    [].tap do |array|
-      dates_array.each_slice(3) do |date_array|
-        date_row = []
-        date_array.each do |date|
-          date_row << self.achievements.where(completed_on: date)
-        end
-        array << date_row
-      end
-    end
-  end
-
-  def exercises_ordered_by(filter = nil, order = nil)
-    achievements_table = Achievement.arel_table
-    case filter.try(:downcase)
-    when "name"
-      order.try(:downcase) == "ascending" ? self.exercises.order(name: :asc) : self.exercises.order(name: :desc)
-    when "calories burned"
-      order.try(:downcase) == "ascending" ? self.exercises.order(calories_burned: :asc) : self.exercises.order(calories_burned: :desc)
+    if collection != "achievements" && valid_filters.any? {|valid_filter| valid_filter.downcase == filter.try(:downcase) && filter.try(:downcase) != "date"}
+      order.try(:downcase) == "ascending" ? self.send(collection).order(filter.downcase.gsub(" ","_").to_sym => :asc) : self.send(collection).order(filter.downcase.gsub(" ","_").to_sym => :desc)
     else
       dates_array = (order.try(:downcase) == "ascending" ? self.daily_totals.order(completed_on: :asc).pluck(:completed_on) : self.daily_totals.order(completed_on: :desc).pluck(:completed_on))
-      
-      [].tap do |array|
-        dates_array.each_slice(3) do |date_array|
-          date_row = []
-          date_array.each do |date|
-            date_row << self.exercises.where(achievements_table[:completed_on].eq(date))
+      if collection == "achievement"
+        [].tap do |array|
+          dates_array.each_slice(3) do |date_array|
+            date_row = []
+            date_array.each do |date|
+              date_row << self.achievements.where(completed_on: date)
+            end
+            array << date_row
           end
-          array << date_row
         end
-      end
-    end
-  end
-
-  def foods_ordered_by(filter = nil, order = nil)
-    achievements_table = Achievement.arel_table
-    case filter.try(:downcase)
-    when "name"
-      order.try(:downcase) == "ascending" ? self.foods.order(name: :asc) : self.foods.order(name: :desc)
-    when "calories"
-      order.try(:downcase) == "ascending" ? self.foods.order(calories: :asc) : self.foods.order(calories: :desc)
-    else
-      dates_array = (order.try(:downcase) == "ascending" ? self.daily_totals.order(completed_on: :asc).pluck(:completed_on) : self.daily_totals.order(completed_on: :desc).pluck(:completed_on))
-      
-      [].tap do |array|
-        dates_array.each_slice(3) do |date_array|
-          date_row = []
-          date_array.each do |date|
-            date_row << self.foods.where(achievements_table[:completed_on].eq(date))
+      else
+        achievements_table = Achievement.arel_table
+        [].tap do |array|
+          dates_array.each_slice(3) do |date_array|
+            date_row = []
+            date_array.each do |date|
+              date_row << self.send(collection).where(achievements_table[:completed_on].eq(date))
+            end
+            array << date_row
           end
-          array << date_row
         end
       end
     end
