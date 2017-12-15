@@ -1,6 +1,5 @@
 class FoodsController < ApplicationController
 
-  before_action :load_food_and_user_resource, except: [:index]
   after_action :verify_authorized
 
   def index
@@ -12,67 +11,6 @@ class FoodsController < ApplicationController
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
     end
-  end
-
-  def show
-    if @food.present?
-      authorize @food
-      @activity = @exercise
-    else
-      skip_authorization
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that food couldn't be found"}
-    end
-  end
-
-  def edit
-    if @food.present?
-      authorize @food
-      @activity = @exercise
-    else
-      skip_authorization
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that food couldn't be found"}
-    end
-  end
-
-  def update
-    if @food.present?
-      authorize @food
-      if !!@food.update(food_params)
-        redirect_to food_path(@food), notice: "Food successfully updated"
-      else
-        flash[:warnings] = @food.errors.full_messages
-        render :edit
-      end
-    else
-      skip_authorization
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that food couldn't be found"}
-    end
-  end
-
-  def destroy
-    if @food.present?
-      authorize @food
-      @food.destroy
-      if referred_by_activity_feed?
-        redirect_to request.referrer, notice: "Food successfully deleted"
-      else
-        redirect_to user_foods_path, notice: "Food successfully deleted"
-      end
-    else
-      skip_authorization
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that food couldn't be found"}
-    end
-  end
-
-  private
-
-  def food_params
-    params.require(:food).permit(:name, :calories)
-  end
-
-  def load_food_and_user_resource
-    @food = Food.find_by(id: params[:id])
-    @user = @food.achievement.user
   end
 
 end

@@ -4,6 +4,7 @@ class AchievementsController < ApplicationController
   after_action :verify_authorized, except: :new
 
   def new
+
     if params[:activity_type].try(:downcase) == "exercise"
       @achievement = Achievement.new(user: current_user, activity: Exercise.new)
     elsif params[:activity_type].try(:downcase) == "food"
@@ -42,6 +43,46 @@ class AchievementsController < ApplicationController
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist."}
+    end
+  end
+
+  def edit
+    if @achievement.present?
+      authorize @achievement
+      @activity = @achievement
+    else
+      skip_authorization
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that achievement couldn't be found"}
+    end
+  end
+
+  def update
+    if @achievement.present?
+      authorize @achievement
+      if @achievement.update(achievement_params)
+        redirect_to achievement_path(@achievement), notice: "Achievement successfully updated"
+      else
+        flash[:warnings] = @achievement.errors.full_messages
+        render :edit
+      end
+    else
+      skip_authorization
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that achievement couldn't be found"}
+    end
+  end
+
+  def destroy
+    if @achievement.present?
+      authorize @achievement
+      @achievement.destroy
+      if referred_by_activity_feed?
+        redirect_to request.referrer, notice: "Achievement successfully deleted"
+      else
+        redirect_to user_achievements_path, notice: "Achievement successfully deleted"
+      end
+    else
+      skip_authorization
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that Achievement couldn't be found"}
     end
   end
 
