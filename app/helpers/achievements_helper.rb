@@ -9,7 +9,7 @@ module AchievementsHelper
   end
 
   def activity_type_param_valid?
-    Achievement.valid_activity?(params[:activity_type].try(:capitalize))
+    Achievement.valid_activity?(params[:activity_type])
   end
 
 end

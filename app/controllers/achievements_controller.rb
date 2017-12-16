@@ -4,7 +4,7 @@ class AchievementsController < ApplicationController
   after_action :verify_authorized, except: :new
 
   def new
-    if Achievement.valid_activities.any? {|activity| params[:activity_type].try(:capitalize) == activity }
+    if Achievement.valid_activity?(params[:activity_type])
       @achievement = Achievement.new(activity: params[:activity_type].capitalize.constantize.new)
     else
       @achievement = Achievement.new

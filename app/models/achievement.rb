@@ -1,8 +1,12 @@
 class Achievement < ApplicationRecord
 
-  VALID_ACTIVITIES = ["Food", "Exercise"]
-  VALID_FILTER_OPTIONS = ["Date"]
-  VALID_ORDER_OPTIONS = ["Descending", "Ascending"]
+  VALID_FILTER_OPTIONS = ["Date"].freeze
+  VALID_ORDER_OPTIONS = ["Descending", "Ascending"].freeze
+  VALID_ACTIVITIES = ["Food", "Exercise"].freeze
+  VALID_ACTIVITY_PARAMS = {
+    [:name, :calories_burned].sort => "Exercise",
+    [:name, :calories ].sort => "Food"
+  }.freeze
 
   belongs_to :activity, polymorphic: true, dependent: :destroy
   belongs_to :user
@@ -14,19 +18,13 @@ class Achievement < ApplicationRecord
   after_create :add_to_daily_total
 
   def activity_attributes=(values)
-    if values.key?(:calories_burned)
-      self.activity = Exercise.new(values)
-    else
-      self.activity = Food.new(values)
-    end
-  end
-
-  def self.valid_activities
-    VALID_ACTIVITIES
+    klass = VALID_ACTIVITY_PARAMS[values.keys.sort].try(:constantize)
+    self.activity = klass.try(:new, values)
+    self.activity.achievement = self
   end
 
   def self.valid_activity?(activity_name)
-    VALID_ACTIVITIES.any? {|activity| activity == activity_name}
+    VALID_ACTIVITIES.any? {|activity| activity == activity_name.try(:capitalize)}
   end
 
   extend FitnessTracker::SortableActivity
