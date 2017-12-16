@@ -1,3 +1,4 @@
 <% Achievement.valid_activities.each do |activity_name| %>
   <%= radio_button_tag 'activity_type', activity_name, activity_selected?(activity_name, html_method, achievement), disabled: html_method == :edit, onclick: "window.location=\"#{new_achievement_path activity_type: activity_name}\"" %>
+  <%= label_tag "activity_type_#{activity_name}", activity_name %>
 <% end %>

@@ -139,7 +139,7 @@
  
  .profile-pic-display + h2, .index-icon + h2
  {
-   display: inline-block;
+   display: inline;
    margin-left: 10px;
  }
  
@@ -198,6 +198,12 @@
    text-decoration: none;
    color: grey;
  }
+
+ .form-block
+  {
+    width: 650px;
+    padding: 20px 0 0;
+  }
  
  .activity-block
  {
@@ -247,7 +253,7 @@
  
    .profile-pic-display + h2, .index-icon + h2
    {
-     display: none;
+     display: block;
    }
  
    .profile-pic-display + h2 + a
@@ -273,6 +279,14 @@
    {
      font-size: 20px;
    }
+ }
+
+ @media (max-width: 650px)
+ {
+  .form-block
+  {
+    width: 100%;
+  }
  }
  
  @media (max-width: 500px)
