@@ -1,19 +1,23 @@
 class AchievementPolicy < ApplicationPolicy
 
-  def create?
-    record.user_id == user.id
-  end
-
   def show?
     !user.blocked_by?(record.user)
   end
 
+  def index?
+    show?
+  end
+
+  def create?
+    record.user_id == user.id
+  end
+
   def update?
-    user.id == record.user.id
+    create?
   end
 
   def destroy?
-    update?
+    create?
   end
   
 end

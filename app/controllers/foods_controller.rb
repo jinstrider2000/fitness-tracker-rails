@@ -5,7 +5,8 @@ class FoodsController < ApplicationController
   def index
     @user = User.find_by(slug: params[:slug])
     if @user.present?
-      authorize @user
+      temp_food = @user.achievements.build(activity_attributes:{calories:0}).activity
+      authorize temp_food
       @foods = @user.collection_ordered_by(params[:controller], params[:filter], params[:order])
     else
       skip_authorization

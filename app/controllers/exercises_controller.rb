@@ -5,7 +5,8 @@ class ExercisesController < ApplicationController
   def index
     @user = User.find_by(slug: params[:slug])
     if @user.present?
-      authorize @user
+      temp_exercise = @user.achievements.build(activity_attributes:{calories_burned:0}).activity
+      authorize temp_exercise
       @exercises = @user.collection_ordered_by(params[:controller], params[:filter], params[:order])
     else
       skip_authorization

@@ -4,13 +4,10 @@ class AchievementsController < ApplicationController
   after_action :verify_authorized, except: :new
 
   def new
-
-    if params[:activity_type].try(:downcase) == "exercise"
-      @achievement = Achievement.new(user: current_user, activity: Exercise.new)
-    elsif params[:activity_type].try(:downcase) == "food"
-      @achievement = Achievement.new(user: current_user, activity: Food.new)
+    if Achievement.valid_activities.any? {|activity| params[:activity_type].try(:capitalize) == activity }
+      @achievement = Achievement.new(activity: params[:activity_type].capitalize.constantize.new)
     else
-      @achievement = Achievement.new(user: current_user)
+      @achievement = Achievement.new
     end
   end
 
@@ -38,7 +35,8 @@ class AchievementsController < ApplicationController
   def index
     @user = User.find_by(slug: params[:slug])
     if @user.present?
-      authorize @user
+      temp_achievement = @user.achievements.build
+      authorize temp_achievement
       @achievements = @user.collection_ordered_by(params[:controller], params[:filter], params[:order])
     else
       skip_authorization
@@ -94,12 +92,18 @@ class AchievementsController < ApplicationController
   end
 
   def achievement_params
-    if params[:activity_type].try(:downcase) == "exercise"
-      params.require(:achievement).permit(:name, :user_id, :completed_on, :comment, activity_attributes: [:name, :calories_burned])
-    elsif params[:activity_type].try(:downcase) == "food"
-      params.require(:achievement).permit(:name, :user_id, :completed_on, :comment, activity_attributes: [:name, :calories])
+    if params[:action] == "create"
+      if params[:activity_type].try(:downcase) == "exercise"
+        params.require(:achievement).permit(:name, :completed_on, :comment, activity_attributes: [:name, :calories_burned])
+      elsif params[:activity_type].try(:downcase) == "food"
+        params.require(:achievement).permit(:name, :completed_on, :comment, activity_attributes: [:name, :calories])
+      end
     else
-      params.require(:achievement)
+      if @achievement.activity_type == "Exercise"
+        params.require(:achievement).permit(:name, :completed_on, :comment, activity_attributes: [:name, :calories_burned])
+      elsif @achievement.activity_type == "Food"
+        params.require(:achievement).permit(:name, :completed_on, :comment, activity_attributes: [:name, :calories])
+      end
     end
   end
 
