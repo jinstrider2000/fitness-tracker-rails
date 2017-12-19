@@ -11,38 +11,38 @@ class Achievement < ApplicationRecord
   belongs_to :activity, polymorphic: true, dependent: :destroy
   belongs_to :user
   belongs_to :daily_total
-  validates_presence_of :activity, :user, :completed_on, :daily_total
+  validates_presence_of :activity, :completed_on
 
   before_validation :find_or_create_daily_total, on: :create
-  # before_update :update_daily_total, on: :update
-  after_create :add_to_daily_total
+  before_create :add_to_daily_total
+  before_update :update_daily_total, on: :update
 
   def activity_attributes=(values)
     klass = VALID_ACTIVITY_PARAMS[values.keys.sort].try(:constantize)
     self.activity = klass.try(:new, values)
-    self.activity.achievement = self
+    self.activity.try(:achievement=, self)
   end
 
   def self.valid_activity?(activity_name)
     VALID_ACTIVITIES.any? {|activity| activity == activity_name.try(:capitalize)}
   end
 
-  extend FitnessTracker::SortableActivity
-
   private
-
-  # include FitnessTracker::DailyTotalUpdatable
 
   def find_or_create_daily_total
     self.daily_total = DailyTotal.find_or_create_daily_total_for(self)
   end
 
   def add_to_daily_total
-    if self.activity_type == "Food"
-      self.daily_total.update(total_calories_in: self.daily_total.total_calories_in += self.activity.calories, net_calories: self.daily_total.net_calories += self.activity.calories)
-    else
-      self.daily_total.update(total_calories_out: self.daily_total.total_calories_out += self.activity.calories_burned, net_calories: self.daily_total.net_calories -= self.activity.calories_burned)
-    end
+    DailyTotal::VALID_TOTAL_FORMULAS[__callee__][self.activity.class.to_s].each {|formula| eval formula}
+  end
+
+  def update_daily_total
+    old_activity = self.activity.class.find_by(id: self.id)
+    old_daily_total = self.daily_total
+    self.daily_total = DailyTotal.find_or_create_daily_total_for(self)
+    new_daily_total = self.daily_total
+    DailyTotal::VALID_TOTAL_FORMULAS[__callee__][new_daily_total == old_daily_total][self.activity.class.to_s].each {|formula| eval formula}
   end
 
 end
