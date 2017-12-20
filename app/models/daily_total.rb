@@ -2,8 +2,8 @@ class DailyTotal < ApplicationRecord
 
   VALID_TOTAL_FORMULAS = { 
     :add_to_daily_total => {
-      'Food' => ['self.daily_total.total_calories_in = self.daily_total.total_calories_in += self.activity.calories; self.daily_total.net_calories = self.daily_total.net_calories += self.activity.calories'],
-      'Exercise' => ['self.daily_total.total_calories_out = self.daily_total.total_calories_out += self.activity.calories_burned; self.activity.net_calories= self.daily_total.net_calories -= self.activity.calories_burned']
+      'Food' => ['self.daily_total.update(total_calories_in: self.daily_total.total_calories_in += self.activity.calories, net_calories: self.daily_total.net_calories += self.activity.calories)'],
+      'Exercise' => ['self.daily_total.update(total_calories_out: self.daily_total.total_calories_out += self.activity.calories_burned, net_calories: self.daily_total.net_calories -= self.activity.calories_burned)']
     },
     :update_daily_total => {
         true => {

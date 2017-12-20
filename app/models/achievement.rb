@@ -11,11 +11,11 @@ class Achievement < ApplicationRecord
   belongs_to :activity, polymorphic: true, dependent: :destroy
   belongs_to :user
   belongs_to :daily_total
-  validates_presence_of :activity, :completed_on
+  validates_presence_of :activity, :completed_on, :user, :daily_total
 
   before_validation :find_or_create_daily_total, on: :create
-  before_create :add_to_daily_total
-  before_update :update_daily_total, on: :update
+  after_create :add_to_daily_total
+  before_update :update_daily_total
 
   def activity_attributes=(values)
     klass = VALID_ACTIVITY_PARAMS[values.keys.sort].try(:constantize)
