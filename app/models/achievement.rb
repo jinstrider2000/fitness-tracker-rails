@@ -38,8 +38,8 @@ class Achievement < ApplicationRecord
   extend FitnessTracker::SortableActivity
 
   def activity_attributes=(values)
-    klass = VALID_ACTIVITY_PARAMS[values.keys.sort].try(:constantize)
-    self.activity = klass.try(:new, values)
+    klass = VALID_ACTIVITY_PARAMS[values.keys.sort].constantize
+    self.activity = klass.new(values)
   end
 
   def self.valid_activity?(activity_name)

@@ -14,8 +14,8 @@ class User < ApplicationRecord
   has_many :muted_relationships, class_name: "Mute", dependent: :destroy
   has_many :muted_users, through: :muted_relationships
   has_many :achievements, dependent: :destroy
-  has_many :exercises, through: :achievements, source: :activity, source_type: "Exercise"
-  has_many :foods, through: :achievements, source: :activity, source_type: "Food"
+  has_many :exercises, -> {where(activity_type: "Exercise")}, class_name: "Achievement"
+  has_many :foods, -> {where(activity_type: "Food")}, class_name: "Achievement"
   has_many :daily_totals, dependent: :destroy
 
   validates_presence_of :name, :daily_calorie_intake_goal, :email
@@ -29,12 +29,12 @@ class User < ApplicationRecord
     self.name.split(" ")[0]
   end
 
-  def recent_exercises
-    self.exercises.order(id: :desc).limit(6)
-  end
-
-  def recent_foods
-    self.foods.order(id: :desc).limit(6)
+  def recent_achievements(activity_type = nil)
+    if activity_type.present? && Achievement.valid_activity?(activity_type.capitalize)
+      self.send(activity_type.downcase.pluralize).order(id: :desc).limit(6)
+    else
+      self.achievement.order(id: :desc).limit(6)
+    end
   end
 
   def collection_ordered_by(collection, filter = nil, order = nil)
