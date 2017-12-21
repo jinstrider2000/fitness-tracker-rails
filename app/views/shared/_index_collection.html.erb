@@ -1,8 +1,8 @@
 <%= render partial: 'shared/index_heading_achievement_items' %>
 
-<%= render partial: 'shared/index_sort', locals: {path: index_path, filter_options_array: params[:controller].capitalize.singularize.constantize.valid_filter_options, order_options_array: params[:controller].capitalize.singularize.constantize.valid_order_options} %>
+<%= render partial: 'shared/index_sort', locals: {path: index_path, filter_options_array: params[:activity_type].capitalize.constantize.valid_filter_options, order_options_array: params[:activity_type].capitalize.constantize.valid_order_options} %>
 
-<% if params[:controller].capitalize.singularize.constantize.valid_filter_options.any? { |filter_name| params[:filter].try(:downcase) == filter_name.downcase && filter_name.downcase != 'date' } %>
+<% if params[:activity_type].capitalize.constantize.valid_filter_options.any? { |filter_name| params[:filter].try(:downcase) == filter_name.downcase && filter_name.downcase != 'date' } %>
   <%= render obj_collection %>
 <% else %>
     <%= render collection: obj_collection, partial: 'shared/index_by_date_row' %>

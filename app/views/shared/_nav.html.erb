@@ -21,9 +21,9 @@
 							<li role="separator" class="divider"></li>
 							<li><a href="<%=user_achievements_path(current_user.slug)%>"><%= t ".my_achievements.achievements" %></a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="<%=user_exercises_path(current_user.slug)%>"><%= t ".my_achievements.exercises" %></a></li>
+							<li><a href="<%=user_achievements_path(current_user.slug, activity_type: "exercise")%>"><%= t ".my_achievements.exercises" %></a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="<%=user_foods_path(current_user.slug)%>"><%= t ".my_achievements.foods" %></a></li>
+							<li><a href="<%=user_achievements_path(current_user.slug, activity_type: "food")%>"><%= t ".my_achievements.foods" %></a></li>
 						</ul>
 					</li>
 					<li class="dropdown <%=link_status("following", "followers", "blocked", "muted")%>">

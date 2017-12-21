@@ -37,7 +37,7 @@ class AchievementsController < ApplicationController
     if @user.present?
       temp_achievement = @user.achievements.build
       authorize temp_achievement
-      @achievements = @user.collection_ordered_by(params[:controller], params[:filter], params[:order])
+      @achievements = @user.collection_ordered_by(params[:activity_type], params[:filter], params[:order])
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist."}

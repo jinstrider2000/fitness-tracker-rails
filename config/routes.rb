@@ -20,8 +20,6 @@ Rails.application.routes.draw do
 
   scope 'users/:slug', as: 'user' do
     resources :achievements, only: [:index]
-    resources :foods, only: [:index]
-    resources :exercises, only: [:index]
   end
 
   resources :achievements, except: [:index]

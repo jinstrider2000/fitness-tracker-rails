@@ -1,16 +1,16 @@
 <%= tag.div class: %w[row text-center] do %>
-  <%= image_tag "#{params[:controller].singularize}_icon", class: %w[img-responsive index-icon], alt: "#{params[:controller].capitalize.singularize} Icon" %>
+  <%= image_tag "#{params[:activity_type]}_icon", class: %w[img-responsive index-icon], alt: "#{params[:activity_type].capitalize} Icon" %>
   <% if viewing_own_profile_while_logged_in? %>
-    <%= tag.h2 t ".my_heading", items: params[:controller].capitalize %>
+    <%= tag.h2 t ".my_heading", items: params[:activity_type].capitalize %>
   <% else %>
-    <%= tag.h2 t ".other_user_heading", user_name: @user.first_name, items: params[:controller].capitalize %>
+    <%= tag.h2 t ".other_user_heading", user_name: @user.first_name, items: params[:activity_type].capitalize %>
   <% end %>
 <% end %>
 
 <%= tag.div class: %w[row text-center], style: "margin-bottom:25px;" do %>
   <% if viewing_own_profile_while_logged_in? %>
     <%= tag.span do %>
-      <%= link_to t(".new_link"), new_achievement_path(activity_type: "#{params[:controller].singularize}"), class: %w[btn btn-primary btn-lg], role: "button" %>
+      <%= link_to t(".new_link"), new_achievement_path(activity_type: "#{params[:activity_type]}"), class: %w[btn btn-primary btn-lg], role: "button" %>
     <% end %>
   <% end %>
 <% end %>

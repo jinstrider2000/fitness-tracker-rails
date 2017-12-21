@@ -35,14 +35,18 @@ class User < ApplicationRecord
     end
   end
 
-  def collection_ordered_by(collection, filter = nil, order = nil)
-    valid_filters = collection.capitalize.singularize.constantize.valid_filter_options
+  def collection_ordered_by(collection = nil, filter = nil, order = nil)
+    if Achievement.valid_activity?(collection)
+      valid_filters = collection.capitalize.constantize.valid_filter_options
+    else
+      valid_filters = Achievement.valid_filter_options
+    end
 
-    if collection != "achievements" && valid_filters.any? {|valid_filter| valid_filter.downcase == filter.try(:downcase) && filter.try(:downcase) != "date"}
-      order.try(:downcase) == "ascending" ? self.send(collection).order(filter.downcase.gsub(" ","_").to_sym => :asc) : self.send(collection).order(filter.downcase.gsub(" ","_").to_sym => :desc)
+    if Achievement.valid_activity?(collection) && valid_filters.any? {|valid_filter| valid_filter.downcase == filter.try(:downcase) && filter.try(:downcase) != "date"}
+      order.try(:downcase) == "ascending" ? self.send(collection.downcase.pluralize).order(filter.downcase.gsub(" ","_").to_sym => :asc) : self.send(collection.downcase.pluralize).order(filter.downcase.gsub(" ","_").to_sym => :desc)
     else
       dates_array = (order.try(:downcase) == "ascending" ? self.daily_totals.order(completed_on: :asc).pluck(:completed_on) : self.daily_totals.order(completed_on: :desc).pluck(:completed_on))
-      if collection == "achievement"
+      if !Achievement.valid_activity?(collection)
         [].tap do |array|
           dates_array.each_slice(3) do |date_array|
             date_row = []
@@ -58,7 +62,7 @@ class User < ApplicationRecord
           dates_array.each_slice(3) do |date_array|
             date_row = []
             date_array.each do |date|
-              date_row << self.send(collection).where(achievements_table[:completed_on].eq(date))
+              date_row << self.send(collection.downcase.pluralize).where(achievements_table[:completed_on].eq(date))
             end
             array << date_row
           end
