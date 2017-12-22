@@ -1,4 +1,4 @@
 <%= tag.div class: %w[row text-center] do %>
   <%= image_tag "achievement_icon", class: %w[img-responsive index-icon], alt: "Achievement Icon" %><%= tag.h2 t ".heading" %>
 <% end %>
-<%= render partial: 'form', locals: {html_method: :post, path: achievements_path, achievement: @achievement} %>
+<%= render partial: 'form', locals: {html_method: :post, path: new_user_achievement_path(@achievement.user.slug), achievement: @achievement} %>

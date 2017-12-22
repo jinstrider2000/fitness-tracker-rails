@@ -1,12 +1,13 @@
 <%= tag.div class: %w[form-block center-block] do %>  
   <%= form_for achievement, method: html_method, url: path do |form| %>
+    <%= form.hidden_field :user_id %>
     <%= tag.div class: 'form-group' do %>
       <%= label_tag 'activity_type', "Activity Type", class: "center-block" %>
       <%= render partial: 'activity_type_selection', locals: {html_method: html_method, achievement: achievement} %>
     <% end %>
     <% if activity_type_param_valid? %>
       <%= tag.div class: 'form-group' do %>
-        <%= render partial: "#{achievement.activity_type.pluralize.downcase}/activity_fields", locals: {form: form,activity: achievement.activity} %>
+        <%= render partial: "#{achievement.activity_type.downcase}_activity_fields", locals: {form: form, activity: achievement.activity} %>
       <% end %>
       <%= tag.div class: 'form-group' do %>
         <%= form.label :completed_on %>

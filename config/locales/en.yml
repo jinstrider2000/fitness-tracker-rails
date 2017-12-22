@@ -34,25 +34,20 @@ en:
   pundit:
     default_msg: "You are unauthorized perform this action"
     achievement_policy:
+      new?: "You can't add achievements to another user's profile"
       create?: "You can't add achievements to another user's profile"
+      index?: "You can't view this user's achievement indices"
+      show?: "You can't view this user's achievement stats"
+      edit?: "You can't edit this user's achievement stats"
+      update?: "You can't update this user's achievement stats"
+      destroy?: "You can't delete this user's achievement stats"
     user_policy:
-      index?: "You can't view this user's stat indices"
       followers?: "You can't view this user's followers"
       following?: "You can't view who this user is following"
       blocked?: "You can't view another user's blocked list"
       muted?: "You can't view another user's muted list"
       follow?: "You can't follow this user"
       unfollow?: "You aren't following this user"
-    exercise_policy:
-      show?: "You can't view this user's exercise stats"
-      edit?: "You can't edit this user's exercise stats"
-      update?: "You can't update this user's exercise stats"
-      destroy?: "You can't delete this user's exercise stats"
-    food_policy:
-      show?: "You can't view this user's food stats"
-      edit?: "You can't edit this user's food stats"
-      update?: "You can't update this user's food stats"
-      destroy?: "You can't delete this user's food stats"
   shared:
     nav:
       login: "Log In"

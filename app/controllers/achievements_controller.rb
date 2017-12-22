@@ -4,11 +4,13 @@ class AchievementsController < ApplicationController
   after_action :verify_authorized
 
   def new
-    if Achievement.valid_activity?(params[:activity_type])
-      @achievement = Achievement.new(activity: params[:activity_type].capitalize.constantize.new)
+    user = User.find_by(slug: params[:slug])
+    if user.present? && Achievement.valid_activity?(params[:activity_type])
+      @achievement = Achievement.new(user: user, activity: params[:activity_type].capitalize.constantize.new)
     else
-      @achievement = Achievement.new
+      @achievement = Achievement.new(user: user)
     end
+    authorize @achievement
   end
 
   def create
@@ -93,15 +95,15 @@ class AchievementsController < ApplicationController
   def achievement_params
     if params[:action] == "create"
       if params[:activity_type].try(:downcase) == "exercise"
-        params.require(:achievement).permit(:name, :completed_on, :comment, activity_attributes: [:name, :calories_burned])
+        params.require(:achievement).permit(:name, :user_id, :completed_on, :comment, activity_attributes: [:name, :calories_burned])
       elsif params[:activity_type].try(:downcase) == "food"
-        params.require(:achievement).permit(:name, :completed_on, :comment, activity_attributes: [:name, :calories])
+        params.require(:achievement).permit(:name, :user_id, :completed_on, :comment, activity_attributes: [:name, :calories])
       end
     else
       if @achievement.activity_type == "Exercise"
-        params.require(:achievement).permit(:name, :completed_on, :comment, activity_attributes: [:name, :calories_burned])
+        params.require(:achievement).permit(:name, :user_id, :completed_on, :comment, activity_attributes: [:name, :calories_burned])
       elsif @achievement.activity_type == "Food"
-        params.require(:achievement).permit(:name, :completed_on, :comment, activity_attributes: [:name, :calories])
+        params.require(:achievement).permit(:name, :user_id, :completed_on, :comment, activity_attributes: [:name, :calories])
       end
     end
   end
