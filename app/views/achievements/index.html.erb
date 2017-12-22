@@ -1,1 +1,28 @@
-<%= render partial: 'shared/index_collection', locals: {obj_collection: @achievements, index_path: user_achievements_path(@user.slug, activity_type: params[:activity_type])} %>
+<%= content_for :title do %>
+  <%= render partial: "shared/title", locals: {user_name: @user.first_name, record_name: @activity_type.capitalize.pluralize} %>
+<% end %>
+
+<%= tag.div class: %w[row text-center] do %>
+  <%= image_tag "#{@activity_type.downcase}_icon", class: %w[img-responsive index-icon], alt: "#{@activity_type.capitalize} Icon" %>
+  <% if viewing_own_profile_while_logged_in? %>
+    <%= tag.h2 t ".my_heading", items: @activity_type.capitalize.pluralize %>
+  <% else %>
+    <%= tag.h2 t ".other_user_heading", user_name: @user.first_name, items: @activity.capitalize.pluralize %>
+  <% end %>
+<% end %>
+
+<%= tag.div class: %w[row text-center], style: "margin-bottom:25px;" do %>
+  <% if viewing_own_profile_while_logged_in? %>
+    <%= tag.span do %>
+      <%= link_to t(".new_link"), new_user_achievement_path(activity_type: @activity_type.downcase), class: %w[btn btn-primary btn-lg], role: "button" %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= render partial: 'index_by_date/index_sort', locals: {filter_options_array: @activity_type.capitalize.constantize.valid_filter_options, order_options_array: @activity_type.capitalize.constantize.valid_order_options} %>
+
+<% if @activity_type.capitalize.constantize.valid_filter_options.any? { |filter_name| params[:filter].try(:downcase) == filter_name.downcase && filter_name.downcase != 'date' } %>
+  <%= render @achievements %>
+<% else %>
+    <%= render collection: @achievements, partial: 'index_by_date/index_by_date_row' %>
+<% end %>

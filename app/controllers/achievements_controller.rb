@@ -1,7 +1,7 @@
 class AchievementsController < ApplicationController
   
   before_action :load_achievement_and_user_resource, except: [:index, :new]
-  after_action :verify_authorized, except: :new
+  after_action :verify_authorized
 
   def new
     if Achievement.valid_activity?(params[:activity_type])
@@ -25,7 +25,6 @@ class AchievementsController < ApplicationController
   def show
     if @achievement.present?
       authorize @achievement
-      @activity = @achievement.activity
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: "Sorry, that achievement couldn't be found"}
@@ -34,20 +33,25 @@ class AchievementsController < ApplicationController
 
   def index
     @user = User.find_by(slug: params[:slug])
-    if @user.present?
+    if @user.present? && (params[:activity_type].empty? || Achievement.valid_activity?(params[:activity_type]))
       temp_achievement = @user.achievements.build
       authorize temp_achievement
+      @activity_type = params[:activity_type].empty? ? "achievement" : params[:activity_type]
       @achievements = @user.collection_ordered_by(params[:activity_type], params[:filter], params[:order])
     else
       skip_authorization
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist."}
+      if @user.empty?
+        flash[:warnings] << "Sorry, that user doesn't exist" 
+      elsif Achievement.valid_activity?(params[:activity_type])
+        flash[:warnings] << "Invalid activity type"
+      end
+      redirect_to request.referrer || root_path
     end
   end
 
   def edit
     if @achievement.present?
       authorize @achievement
-      @activity = @achievement
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: "Sorry, that achievement couldn't be found"}
