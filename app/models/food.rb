@@ -1,6 +1,6 @@
 class Food < ApplicationRecord
 
-  VALID_FILTER_OPTIONS = ["Date", "Name", "Calories"]
+  VALID_FILTER_OPTIONS = ["Completed On", "Name", "Calories"]
   VALID_ORDER_OPTIONS = ["Descending", "Ascending"]
 
   has_one :achievement, as: :activity

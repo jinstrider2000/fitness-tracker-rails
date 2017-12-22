@@ -1,0 +1,2 @@
+<%= render collection: food_index_by_date_col, partial: "food" %>
+<%= tag.p "<strong>Total Calories In</strong>: <em>#{food_index_by_date_col.first.daily_total.total_calories_in}</em>".html_safe, class: %w[text-center index-style], style: "padding-top:10px;" %>

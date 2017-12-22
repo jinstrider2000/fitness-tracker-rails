@@ -1,5 +1,6 @@
 <%= tag.div class: %w[row text-center], style: "margin-bottom:25px;" do %>
-  <%= form_tag user_achievements_path(@user.slug, activity_type: @activity_type), method: :get do %>
+  <%= form_tag user_achievements_path(@user.slug), method: :get do %>
+    <%= hidden_field_tag 'activity_type', @activity_type %>
     <%= label_tag 'filter', 'Sort by:' %>
     <%= tag.select name: 'filter', id: 'filter' do %>
       <%= render collection: filter_options_array, partial: 'index_sort_option' ,locals: {selection_name: :filter} %>

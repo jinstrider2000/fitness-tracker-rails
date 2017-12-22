@@ -8,4 +8,8 @@ module FitnessTracker::SortableActivity
     self::VALID_ORDER_OPTIONS
   end
 
+  def valid_filter?(filter)
+    valid_filter_options.any? {|valid_filter| valid_filter.downcase == filter.try(:downcase)}
+  end
+
 end

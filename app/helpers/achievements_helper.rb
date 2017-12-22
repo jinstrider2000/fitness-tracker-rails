@@ -12,4 +12,8 @@ module AchievementsHelper
     Achievement.valid_activity?(params[:activity_type])
   end
 
+  def filter_param_valid_and_other_than_completed_on?
+    params[:filter] != nil && params[:filter].downcase != "completed on" && params[:activity_type].capitalize.constantize.valid_filter?(params[:filter])
+  end
+
 end

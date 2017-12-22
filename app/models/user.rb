@@ -35,18 +35,22 @@ class User < ApplicationRecord
     end
   end
 
-  def collection_ordered_by(collection = nil, filter = nil, order = nil)
-    if Achievement.valid_activity?(collection)
-      valid_filters = collection.capitalize.constantize.valid_filter_options
+  def achievements_ordered_by(activity_type = nil, filter = nil, order = nil)
+    if Achievement.valid_activity?(activity_type)
+      valid_filters = activity_type.capitalize.constantize.valid_filter_options
     else
       valid_filters = Achievement.valid_filter_options
     end
-
-    if Achievement.valid_activity?(collection) && valid_filters.any? {|valid_filter| valid_filter.downcase == filter.try(:downcase) && filter.try(:downcase) != "date"}
-      order.try(:downcase) == "ascending" ? self.send(collection.downcase.pluralize).order(filter.downcase.gsub(" ","_").to_sym => :asc) : self.send(collection.downcase.pluralize).order(filter.downcase.gsub(" ","_").to_sym => :desc)
+    if filter.try(:downcase) != "completed on" && Achievement.valid_activity?(activity_type) && valid_filters.any? {|valid_filter| valid_filter.downcase == filter.try(:downcase)}
+      valid_filter = filter.downcase.gsub(" ", "_").to_sym
+      achievement = Achievement.arel_table
+      user = User.arel_table
+      activity = activity_type.capitalize.constantize.arel_table
+      query = achievement.join(activity).on(achievement[:activity_id].eq(activity[:id])).where(achievement[:activity_type].eq(activity_type.capitalize).and(achievement[:user_id].eq(self.id))).project(Arel.sql('*'))
+      order.try(:downcase) == "ascending" ? Achievement.find_by_sql(query.order(activity[valid_filter].asc)) : Achievement.find_by_sql(query.order(activity[valid_filter].desc))
     else
       dates_array = (order.try(:downcase) == "ascending" ? self.daily_totals.order(completed_on: :asc).pluck(:completed_on) : self.daily_totals.order(completed_on: :desc).pluck(:completed_on))
-      if !Achievement.valid_activity?(collection)
+      if !Achievement.valid_activity?(activity_type)
         [].tap do |array|
           dates_array.each_slice(3) do |date_array|
             date_row = []
@@ -57,12 +61,12 @@ class User < ApplicationRecord
           end
         end
       else
-        achievements_table = Achievement.arel_table
+        achievement = Achievement.arel_table
         [].tap do |array|
           dates_array.each_slice(3) do |date_array|
             date_row = []
             date_array.each do |date|
-              date_row << self.send(collection.downcase.pluralize).where(achievements_table[:completed_on].eq(date))
+              date_row << self.send(activity_type.downcase.pluralize).where(achievement[:completed_on].eq(date))
             end
             array << date_row
           end

@@ -1,17 +1,17 @@
 <%= tag.div class: %w[row text-center] do %>
   <% if policy(@achievement).update? %>
-    <%= tag.h2 t ".my_heading", item: @achievement.activity_type %>
+    <%= tag.h2 t ".my_heading", record_name: @achievement.activity_type %>
   <% else %>
-    <%= tag.h2 t ".other_user_heading", user_name: @user.first_name, item: @achievement.activity_type %>
+    <%= tag.h2 t ".other_user_heading", user_name: @user.first_name, record_name: @achievement.activity_type %>
   <% end %>
 <% end %>
 
 <div class="row text-center">
   <div class="activity-block center-block card-style">
     <a href="<%=user_path(@achievement.user.slug)%>"><img class="index-icon-mini img-circle" src="<%=profile_pic_path(@achievement.user)%>" alt="Profile Pic" title="<%=@achievement.user.name%>"></a>
-    <a href="<%=user_achievement_path(@achievement.user.slug)%>"><img class="index-icon-mini" src="<%=asset_path "#{@achievement.activity.class.to_s.downcase}_icon", type: :image %>" alt="<%="#{@achievement.activity.class} Icon"%>" title="<%=@achievement.user.first_name%>'s Meals"></a>
+    <a href="<%=user_achievements_path(@achievement.user.slug)%>"><img class="index-icon-mini" src="<%=asset_path "#{@achievement.activity.class.to_s.downcase}_icon", type: :image %>" alt="<%="#{@achievement.activity.class} Icon"%>" title="<%=@achievement.user.first_name%>'s Meals"></a>
     <h3><%=print_date(@achievement.completed_on)%></h3>
-    <h4><%= render partial: "#{@achievement.activity.class.to_s.pluralize.downcase}/#{@achievement.activity.class.to_s.downcase}", locals: {@achievement.activity.class.to_s.downcase.to_sym => @achievement.activity} %></h4>
+    <h4><%= render partial: "#{@achievement.activity.class.to_s.downcase}", locals: {@achievement.activity.class.to_s.downcase.to_sym => @achievement} %></h4>
     <div>
       <p class="center-block" style="width:75%;"><%= @achievement.comment %></p>
     </div>

@@ -1,6 +1,6 @@
 class Exercise < ApplicationRecord
 
-  VALID_FILTER_OPTIONS = ["Date", "Name", "Calories Burned"]
+  VALID_FILTER_OPTIONS = ["Completed On", "Name", "Calories Burned"]
   VALID_ORDER_OPTIONS = ["Descending", "Ascending"]
 
   has_one :achievement, as: :activity

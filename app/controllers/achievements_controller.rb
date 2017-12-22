@@ -33,19 +33,14 @@ class AchievementsController < ApplicationController
 
   def index
     @user = User.find_by(slug: params[:slug])
-    if @user.present? && (!params[:activity_type].present? || Achievement.valid_activity?(params[:activity_type]))
+    if @user.present?
       temp_achievement = @user.achievements.build
       authorize temp_achievement
-      @activity_type = params[:activity_type].present? ? params[:activity_type]: "achievement" 
-      @achievements = @user.collection_ordered_by(params[:activity_type], params[:filter], params[:order])
+      @activity_type = Achievement.valid_activity?(params[:activity_type]) ? params[:activity_type].downcase : "achievement"
+      @achievements = @user.achievements_ordered_by(params[:activity_type], params[:filter], params[:order])
     else
       skip_authorization
-      if !@user.present?
-        flash[:warnings] << "Sorry, that user doesn't exist" 
-      elsif Achievement.valid_activity?(params[:activity_type])
-        flash[:warnings] << "Invalid activity type"
-      end
-      redirect_to request.referrer || root_path
+      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
     end
   end
 

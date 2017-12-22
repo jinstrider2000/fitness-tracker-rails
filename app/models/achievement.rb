@@ -1,6 +1,6 @@
 class Achievement < ApplicationRecord
 
-  VALID_FILTER_OPTIONS = ["Date"].freeze
+  VALID_FILTER_OPTIONS = ["Completed On"].freeze
   VALID_ORDER_OPTIONS = ["Descending", "Ascending"].freeze
   VALID_ACTIVITIES = ["Food", "Exercise"].freeze
   VALID_ACTIVITY_PARAMS = {

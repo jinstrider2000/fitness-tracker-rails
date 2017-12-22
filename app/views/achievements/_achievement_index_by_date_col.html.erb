@@ -1,0 +1,2 @@
+<%= render collection: achievement_index_by_date_col, partial: 'achievement' %>
+<%= tag.p "Net Calories: #{achievement_index_by_date_col.first.daily_total.net_calories}", class: %w[text-center index-style], style: "padding-top:10px;" %>
