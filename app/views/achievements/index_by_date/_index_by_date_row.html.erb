@@ -1,7 +1,3 @@
 <%= tag.div class: %w[row clearfix] do %>
-  <% if Achievement.valid_activity? params[:activity_type] %>
-    <%= render collection: index_by_date_row, partial: "achievements/#{index_by_date_row.first.first.activity_type.pluralize.downcase}/index_by_date_col", layout: 'shared/index_by_date_col_layout' %>
-  <% else %>
-    <%= render collection: index_by_date_row, partial: "index_by_date_col", layout: 'shared/index_by_date_col_layout' %>
-  <% end %>
+    <%= render collection: index_by_date_row, partial: "achievements/#{index_by_date_row.first.first.activity_type.downcase}_data/index_by_date_col", layout: 'achievements/index_by_date/index_by_date_col_layout' %>
 <% end %>

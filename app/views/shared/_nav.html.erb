@@ -17,7 +17,7 @@
 					<li class="dropdown <%=link_status("achievements", "exercises", "foods")%>">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= t ".my_achievements.heading" %><span class="caret vis-sm-inline"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="<%=new_achievement_path%>"><%= t ".my_achievements.new" %></a></li>
+							<li><a href="<%=new_user_achievement_path(current_user.slug)%>"><%= t ".my_achievements.new" %></a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="<%=user_achievements_path(current_user.slug)%>"><%= t ".my_achievements.achievements" %></a></li>
 							<li role="separator" class="divider"></li>

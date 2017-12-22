@@ -79,6 +79,7 @@ en:
       title: "Fitness Tracker - %{user_name}'s %{record_name}"
       my_heading: "My %{record_name}"
       other_user_heading: "%{user_name}'s %{record_name}"
+      new_link: "Add New"
     new:
       title: "Fitness Tracker - New Achievement"
       heading: "New Achievement"
@@ -86,26 +87,22 @@ en:
       title: "Fitness Tracker - Edit Achievement"
     show:
       title: "Fitness Tracker - %{user_name}'s Achievement: %{record_name}"
-      my_heading: "My %{item}"
-      other_user_heading: "%{user_name}'s %{item}"
-    index_heading:
-      my_heading: "My %{items}"
-      other_user_heading: "%{user_name}'s %{items}"
-      new_link: "Add New"
-  exercises:
-    index:
-      title: "Fitness Tracker - %{user_name}'s Exercises"
-  foods:
-    index:
-      title: "Fitness Tracker - %{user_name}'s Foods"
+      my_heading: "My %{record_name}"
+      other_user_heading: "%{user_name}'s %{record_name}"
   users:
     user_actions:
       blocked:
+        title: "Fitness Tracker - %{user_name}'s Blocked Users"
       followers:
+        title: "Fitness Tracker - %{user_name}: Followers"
       following:
+        title: "Fitness Tracker - %{user_name}: Following"
       index:
+        title: "Fitness Tracker - User Index"
       muted:
+        title: "Fitness Tracker - %{user_name}'s Muted Users"
       show:
+        title: "Fitness Tracker - %{user_name}'s Profile"
         my_heading: "Welcome %{first_name}"
         other_user_heading: "%{full_name}"
         edit: "Edit"
@@ -114,16 +111,3 @@ en:
         recent_foods: "Recent Added Foods"
         no_activity: "No Recent Activity"
         more_link: "more"
-  users_user_actions:
-    blocked:
-      title: "Fitness Tracker - %{user_name}'s Blocked Users"
-    followers:
-      title: "Fitness Tracker - %{user_name}: Followers"
-    following:
-      title: "Fitness Tracker - %{user_name}: Following"
-    index:
-      title: "Fitness Tracker - User Index"
-    muted:
-      title: "Fitness Tracker - %{user_name}'s Muted Users"
-    show:
-      title: "Fitness Tracker - %{user_name}'s Profile"

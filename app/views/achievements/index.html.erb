@@ -1,13 +1,13 @@
 <%= content_for :title do %>
-  <%= render partial: "shared/title", locals: {user_name: @user.first_name, record_name: @activity_type.capitalize.pluralize} %>
+  <%= tag.title t(".title", user_name: @user.first_name, record_name: @activity_type.capitalize.pluralize) %>
 <% end %>
 
 <%= tag.div class: %w[row text-center] do %>
   <%= image_tag "#{@activity_type.downcase}_icon", class: %w[img-responsive index-icon], alt: "#{@activity_type.capitalize} Icon" %>
   <% if viewing_own_profile_while_logged_in? %>
-    <%= tag.h2 t ".my_heading", items: @activity_type.capitalize.pluralize %>
+    <%= tag.h2 t ".my_heading", record_name: @activity_type.capitalize.pluralize %>
   <% else %>
-    <%= tag.h2 t ".other_user_heading", user_name: @user.first_name, items: @activity.capitalize.pluralize %>
+    <%= tag.h2 t ".other_user_heading", user_name: @user.first_name, record_name: @activity.capitalize.pluralize %>
   <% end %>
 <% end %>
 
@@ -19,10 +19,10 @@
   <% end %>
 <% end %>
 
-<%= render partial: 'index_by_date/index_sort', locals: {filter_options_array: @activity_type.capitalize.constantize.valid_filter_options, order_options_array: @activity_type.capitalize.constantize.valid_order_options} %>
+<%= render partial: 'index_sort', locals: {filter_options_array: @activity_type.capitalize.constantize.valid_filter_options, order_options_array: @activity_type.capitalize.constantize.valid_order_options} %>
 
 <% if @activity_type.capitalize.constantize.valid_filter_options.any? { |filter_name| params[:filter].try(:downcase) == filter_name.downcase && filter_name.downcase != 'date' } %>
-  <%= render @achievements %>
+  <%= render collection: @achievements, partial: "achievements/#{@activity_type.downcase}_data/#{@activity_type.downcase}" %>
 <% else %>
-    <%= render collection: @achievements, partial: 'index_by_date/index_by_date_row' %>
+    <%= render collection: @achievements, partial: 'achievements/index_by_date/index_by_date_row' %>
 <% end %>
