@@ -80,6 +80,7 @@ en:
       heading: "New Achievement"
     edit:
       title: "Fitness Tracker - Edit Achievement"
+      heading: "Edit %{record_name}"
     show:
       title: "Fitness Tracker - %{user_name}'s Achievement: %{record_name}"
       my_heading: "My %{record_name}"

@@ -18,11 +18,11 @@
 		<% else %>
 			<ul>
 			<% @user.recent_achievements("exercise").each do |achievement| %>
-				<li class="index-style"><%=print_date(achievement.completed_on)%> - <%=render partial: 'exercises/exercise', locals: {exercise: achievement.activity}%></li>
+				<li class="index-style"><%=print_date(achievement.completed_on)%> - <%=render partial: 'achievements/exercise', locals: {exercise: achievement}%></li>
 			<% end %>
 			</ul>
 		<% end %>
-		<a class="more-link" href="<%=user_exercises_path(@user.slug)%>"><%= t ".more_link" %></a>
+		<a class="more-link" href="<%=user_achievements_path(@user.slug, activity_type: "exercise")%>"><%= t ".more_link" %></a>
 	</div>
 	<div class="col-sm-5 col-sm-offset-2 card-style clearfix">
 		<h3><%= t ".recent_foods" %></h3>
@@ -31,10 +31,10 @@
 		<% else %>
 			<ul>
 			<% @user.recent_achievements("food").each do |achievement| %>
-				<li class="index-style"><%=print_date(achievement.completed_on)%> - <%=render partial: 'foods/food', locals: {food: achievement.activity}%></li>
+				<li class="index-style"><%=print_date(achievement.completed_on)%> - <%=render partial: 'achievements/food', locals: {food: achievement}%></li>
 			<% end %>
 			</ul>
 		<% end %>
-		<a class="more-link" href="<%=user_foods_path(@user.slug)%>"><%= t ".more_link" %></a>
+		<a class="more-link" href="<%=user_achievements_path(@user.slug, activity_type: "food")%>"><%= t ".more_link" %></a>
 	</div>
 </div>

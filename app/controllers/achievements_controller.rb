@@ -4,11 +4,11 @@ class AchievementsController < ApplicationController
   after_action :verify_authorized
 
   def new
-    user = User.find_by(slug: params[:slug])
-    if user.present? && Achievement.valid_activity?(params[:activity_type])
-      @achievement = Achievement.new(user: user, activity: params[:activity_type].capitalize.constantize.new)
+    @user = User.find_by(slug: params[:slug])
+    if @user.present? && Achievement.valid_activity?(params[:activity_type])
+      @achievement = Achievement.new(user: @user, activity: params[:activity_type].capitalize.constantize.new)
     else
-      @achievement = Achievement.new(user: user)
+      @achievement = Achievement.new(user: @user)
     end
     authorize @achievement
   end

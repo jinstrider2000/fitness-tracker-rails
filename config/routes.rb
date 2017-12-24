@@ -19,10 +19,10 @@ Rails.application.routes.draw do
   end
 
   scope 'users/:slug', as: 'user' do
-    resources :achievements, only: [:new, :create, :index]
+    resources :achievements, only: [:new, :index]
   end
   
-  resources :achievements, except: [:new, :create, :index]
+  resources :achievements, except: [:new, :index]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

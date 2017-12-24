@@ -1,1 +1,6 @@
+<%= tag.div class: %w[row text-center] do %>
+  <%= image_tag "#{@achievement.activity_type.downcase}_icon", class: %w[img-responsive index-icon], alt: "#{@achievement.activity_type.capitalize} Icon" %>
+  <%= tag.h2 t ".heading", record_name: @achievement.activity_type %>
+<% end %>
+
 <%= render partial: 'form', locals: {html_method: :patch, path: achievement_path(@achievement), achievement: @achievement} %>
