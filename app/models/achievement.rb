@@ -4,8 +4,8 @@ class Achievement < ApplicationRecord
   VALID_ORDER_OPTIONS = ["Descending", "Ascending"].freeze
   VALID_ACTIVITIES = ["Food", "Exercise"].freeze
   VALID_ACTIVITY_PARAMS = {
-    [:name, :calories_burned].sort => "Exercise",
-    [:name, :calories ].sort => "Food"
+    %w[name calories_burned].sort => "Exercise",
+    %w[name calories].sort => "Food"
   }.freeze
   VALID_DAILY_TOTAL_INSTRUCTIONS = {
     :add_to_daily_total => {
@@ -53,6 +53,7 @@ class Achievement < ApplicationRecord
   end
 
   def add_to_daily_total
+    
     VALID_DAILY_TOTAL_INSTRUCTIONS[__callee__][self.activity.class.to_s].each {|formula| eval formula}
   end
 
