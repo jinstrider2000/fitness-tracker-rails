@@ -47,7 +47,7 @@ class Achievement < ApplicationRecord
   end
 
   def update_daily_total_and_activity
-    old_activity = self.activity.class.find_by(id: self.id)
+    old_activity = self.activity.class.find_by(id: self.activity.id)
     old_daily_total = self.daily_total
     self.daily_total = DailyTotal.find_or_create_daily_total_for(self)
     new_daily_total = self.daily_total
@@ -65,6 +65,7 @@ class Achievement < ApplicationRecord
         old_daily_total.update(total_calories_out: old_daily_total.total_calories_out - old_activity.calories_burned, net_calories: old_daily_total.net_calories + old_activity.calories_burned)
         new_daily_total.update(total_calories_out: new_daily_total.total_calories_out + self.activity.calories_burned, net_calories: new_daily_total.net_calories - self.activity.calories_burned)
       end
+      old_daily_total.destroy if old_daily_total.achievements.count == 1
     end
     self.activity.save
   end
