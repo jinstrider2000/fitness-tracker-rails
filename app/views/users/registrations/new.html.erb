@@ -4,6 +4,16 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= image_tag profile_pic_path, class: %w[profile-pic-select] %>
+    <%= file_field_tag 'profile_img', accept: 'image/*', class: %w[img-upload-btn] %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
@@ -19,6 +29,11 @@
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :daily_calorie_intake_goal %><br />
+    <%= f.text_field :daily_calorie_intake_goal, autofocus: true %>
   </div>
 
   <div class="actions">

@@ -21,8 +21,12 @@ module ApplicationHelper
     !!(request.path_info =~ /activity-feed/)
   end
 
-  def profile_pic_path(user)
-    asset_path("users/#{user.id}/profile_pic", type: :image)
+  def profile_pic_path(user = nil)
+    if user.present?
+      asset_path("users/#{user.id}/profile_pic", type: :image)
+    else
+      asset_path("users/generic/profile_pic", type: :image)
+    end
   end
 
   def referred_by_activity_feed?
