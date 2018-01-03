@@ -1,44 +1,44 @@
 <h2>Sign up</h2>
+<%= tag.div class: %w[form-block center-block] do %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
+  <%= tag.div class: 'form-group' %>  
     <%= image_tag profile_pic_path, class: %w[profile-pic-select] %>
     <%= file_field_tag 'profile_img', accept: 'image/*', class: %w[img-upload-btn] %>
-  </div>
+  <% end %>
+  
 
-  <div class="field">
+  
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true %>
-  </div>
+  
 
-  <div class="field">
+  
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
-  </div>
+  
 
-  <div class="field">
+  
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+  
 
-  <div class="field">
+  
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+  
 
-  <div class="field">
+  
     <%= f.label :daily_calorie_intake_goal %><br />
     <%= f.text_field :daily_calorie_intake_goal, autofocus: true %>
-  </div>
-
-  <div class="actions">
+  
     <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+    
+  <% end %>
 
-<%= render "users/shared/links" %>
+  <%= render "users/shared/links" %>
+<% end %>
