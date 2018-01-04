@@ -1,10 +1,10 @@
 <%= form.fields_for :activity, activity do |activity_field| %>
   <%= tag.div class: 'form-group' do %>
-    <%= activity_field.label :name %>
+    <%= activity_field.label :name, activity.class.human_attribute_name(:name) %>
     <%= activity_field.text_field :name, class: 'form-control' %>
   <% end %>
   <%= tag.div class: 'form-group' do %>
-    <%= activity_field.label :calories_burned, 'Calories Burned' %>
+    <%= activity_field.label :calories_burned, activity.class.human_attribute_name(:calories_burned) %>
     <%= activity_field.text_field :calories_burned, class: 'form-control' %>
   <% end %>
 <% end %>
