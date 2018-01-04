@@ -31,7 +31,32 @@
 
 en:
   default: "Fitness Tracker"
+  filter:
+    achievement:
+      completed on: "Completed On"
+    exercise:
+      name: "Name"
+      calories burned: "Calories Burned"
+      completed on: "Completed On"
+    food:
+      name: "Name"
+      calories: "Calories"
+      completed on: "Completed On"
+  order:
+    achievement:
+      ascending: "Ascending"
+      descending: "Descending"
+    food:
+      ascending: "Ascending"
+      descending: "Descending"
+    exercise:
+      ascending: "Ascending"
+      descending: "Descending"
   activerecord:
+    models:
+      achievement: "Achievement"
+      exercise: "Exercise"
+      food: "Food"
     attributes:
       achievement:
         comment: "Comment"
@@ -96,6 +121,12 @@ en:
       title: "Fitness Tracker - %{user_name}'s Achievement: %{record_name}"
       my_heading: "My %{record_name}"
       other_user_heading: "%{user_name}'s %{record_name}"
+    form:
+      activity_type: "Activity Type"
+    index_sort:
+      filter: "Sort by:"
+      order: "Order:"
+      submit: "Sort"
   users:
     user_actions:
       blocked:

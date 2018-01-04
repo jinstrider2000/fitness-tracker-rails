@@ -2,7 +2,7 @@
   <%= form_for achievement, method: html_method, url: path do |form| %>
     <%= form.hidden_field :user_id %>
     <%= tag.div class: 'form-group' do %>
-      <%= label_tag 'activity_type', "Activity Type", class: "center-block" %>
+      <%= label_tag 'activity_type', t(".activity_type"), class: "center-block" %>
       <%= render partial: 'activity_type_selection', locals: {html_method: html_method, achievement: achievement} %>
     <% end %>
     <% if activity_type_param_valid? || html_method == :patch %>
@@ -10,11 +10,11 @@
         <%= render partial: "#{achievement.activity_type.downcase}_activity_fields", locals: {form: form, activity: achievement.activity} %>
       <% end %>
       <%= tag.div class: 'form-group' do %>
-        <%= form.label :completed_on, achievement.class.human_attribute_name(:completed_on) %>
+        <%= form.label :completed_on %>
         <%= form.date_select :completed_on, default: Date.today, order: [:month, :day, :year], date_separator: "/ ", start_year: Date.today.year - 20, end_year: Date.today.year %>
       <% end %>
       <%= tag.div class: 'form-group' do %>
-        <%= form.label :comment, achievement.class.human_attribute_name(:comment) %>
+        <%= form.label :comment %>
         <%= form.text_area :comment, class: 'form-control' %>
       <% end %>
       <%= tag.div class: %w[form-group text-center] do %>

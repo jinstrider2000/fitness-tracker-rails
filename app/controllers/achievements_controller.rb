@@ -38,7 +38,7 @@ class AchievementsController < ApplicationController
     if @user.present?
       temp_achievement = @user.achievements.build
       authorize temp_achievement
-      @activity_type = Achievement.valid_activity?(params[:activity_type]) ? params[:activity_type].downcase : "achievement"
+      @activity_type = Achievement.valid_activity?(params[:activity_type]) ? t("activerecord.models.#{params[:activity_type].downcase}").downcase : t("activerecord.models.achievement").downcase
       @achievements = @user.achievements_ordered_by(params[:activity_type], params[:filter], params[:order])
     else
       skip_authorization
