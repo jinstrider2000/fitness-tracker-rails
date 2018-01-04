@@ -107,3 +107,23 @@ en:
         recent_foods: "Recent Added Foods"
         no_activity: "No Recent Activity"
         more_link: "more"
+    registrations:
+      new:
+        title: "Fitness Tracker - Sign Up"
+        heading: "Sign Up"
+        password_minimum: "(%{minimum_length} characters minimum)"
+        submit: "Sign Up"
+      edit:
+        title: "Fitness Tracker - Edit Profile"
+        heading: "Edit My Profile"
+        password_minimum: "(%{minimum_length} characters minimum)"
+        submit: "Save Changes"
+    sessions:
+    shared:
+      links:
+        login: "Already Registered? Login"
+        register: "Need to Register? Sign Up"
+        forgot_password: "Forgot your password?"
+        confirmation_instructions: "Didn't receive confirmation instructions?"
+        unlock_instructions: "Didn't receive unlock instructions?"
+        omniauth: "Sign in with %{provider}"
