@@ -49,24 +49,25 @@ class User < ApplicationRecord
       query = achievement.join(activity).on(achievement[:activity_id].eq(activity[:id])).where(achievement[:activity_type].eq(activity_type.capitalize).and(achievement[:user_id].eq(self.id))).project(Arel.sql('*'))
       order.try(:downcase) == "ascending" ? Achievement.find_by_sql(query.order(activity[valid_filter].asc)) : Achievement.find_by_sql(query.order(activity[valid_filter].desc))
     else
-      dates_array = (order.try(:downcase) == "ascending" ? self.daily_totals.order(completed_on: :asc).pluck(:completed_on) : self.daily_totals.order(completed_on: :desc).pluck(:completed_on))
-      if !Achievement.valid_activity?(activity_type)
-        [].tap do |array|
-          dates_array.each_slice(3) do |date_array|
-            date_row = []
-            date_array.each do |date|
-              date_row << self.achievements.where(completed_on: date)
-            end
-            array << date_row
-          end
-        end
-      else
+      if Achievement.valid_activity?(activity_type)
+        dates_array = (order.try(:downcase) == "ascending" ? self.send(activity_type.pluralize.downcase).distinct.order(completed_on: :asc).pluck(:completed_on) : self.send(activity_type.pluralize.downcase).distinct.order(completed_on: :desc).pluck(:completed_on))
         achievement = Achievement.arel_table
         [].tap do |array|
           dates_array.each_slice(3) do |date_array|
             date_row = []
             date_array.each do |date|
               date_row << self.send(activity_type.downcase.pluralize).where(achievement[:completed_on].eq(date))
+            end
+            array << date_row
+          end
+        end
+      else
+        dates_array = (order.try(:downcase) == "ascending" ? self.daily_totals.order(completed_on: :asc).pluck(:completed_on) : self.daily_totals.order(completed_on: :desc).pluck(:completed_on))
+        [].tap do |array|
+          dates_array.each_slice(3) do |date_array|
+            date_row = []
+            date_array.each do |date|
+              date_row << self.achievements.where(completed_on: date)
             end
             array << date_row
           end
