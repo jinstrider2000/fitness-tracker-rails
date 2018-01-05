@@ -77,7 +77,7 @@ class AchievementsController < ApplicationController
       if referred_by_activity_feed?
         redirect_to request.referrer, notice: "Achievement successfully deleted"
       else
-        redirect_to user_achievements_path, notice: "Achievement successfully deleted"
+        redirect_to user_achievements_path(@achievement.user.slug), notice: "Achievement successfully deleted"
       end
     else
       skip_authorization

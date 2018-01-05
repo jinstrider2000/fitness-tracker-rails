@@ -50,7 +50,7 @@ class User < ApplicationRecord
       order.try(:downcase) == "ascending" ? Achievement.find_by_sql(query.order(activity[valid_filter].asc)) : Achievement.find_by_sql(query.order(activity[valid_filter].desc))
     else
       if Achievement.valid_activity?(activity_type)
-        dates_array = (order.try(:downcase) == "ascending" ? self.send(activity_type.pluralize.downcase).distinct.order(completed_on: :asc).pluck(:completed_on) : self.send(activity_type.pluralize.downcase).distinct.order(completed_on: :desc).pluck(:completed_on))
+        dates_array = (order.try(:downcase) == "ascending" ? self.send(activity_type.pluralize.downcase).group(:completed_on).order(completed_on: :asc).pluck(:completed_on) : self.send(activity_type.pluralize.downcase).group(:completed_on).order(completed_on: :desc).pluck(:completed_on))
         achievement = Achievement.arel_table
         [].tap do |array|
           dates_array.each_slice(3) do |date_array|
