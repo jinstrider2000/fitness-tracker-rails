@@ -123,6 +123,7 @@ en:
       other_user_heading: "%{user_name}'s %{record_name}"
     form:
       activity_type: "Activity Type"
+      activity_selection: "Select an Activity"
     index_sort:
       filter: "Sort by:"
       order: "Order:"
