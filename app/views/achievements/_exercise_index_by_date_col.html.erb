@@ -1,2 +1,2 @@
 <%= render collection: exercise_index_by_date_col, partial: "exercise" %>
-<%= tag.p "<strong>Total Calories Out</strong>: <em>#{exercise_index_by_date_col.first.daily_total.total_calories_out}</em>".html_safe, class: %w[text-center index-style], style: "padding-top:10px;" %>
+<%= tag.p "<strong>#{DailyTotal.human_attribute_name("total_calories_out")}</strong>: <em>#{exercise_index_by_date_col.first.daily_total.total_calories_out}</em>".html_safe, class: %w[text-center index-style], style: "padding-top:10px;" %>

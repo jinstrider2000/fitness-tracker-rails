@@ -29,7 +29,7 @@ class AchievementsController < ApplicationController
       authorize @achievement
     else
       skip_authorization
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that achievement couldn't be found"}
+      redirect_to request.referrer || root_path, flash: {error: t("achievements.not_found_error")}
     end
   end
 
@@ -42,7 +42,7 @@ class AchievementsController < ApplicationController
       @achievements = @user.achievements_ordered_by(params[:activity_type], params[:filter], params[:order])
     else
       skip_authorization
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
+      redirect_to request.referrer || root_path, flash: {error: t("achievements.not_found_error")}
     end
   end
 
@@ -51,7 +51,7 @@ class AchievementsController < ApplicationController
       authorize @achievement
     else
       skip_authorization
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that achievement couldn't be found"}
+      redirect_to request.referrer || root_path, flash: {error: t("achievements.not_found_error")}
     end
   end
 
@@ -59,14 +59,14 @@ class AchievementsController < ApplicationController
     if @achievement.present?
       authorize @achievement
       if @achievement.update(achievement_params)
-        redirect_to achievement_path(@achievement), notice: "Achievement successfully updated"
+        redirect_to achievement_path(@achievement), notice: t(".success_msg")
       else
         flash[:warnings] = @achievement.errors.full_messages
         render :edit
       end
     else
       skip_authorization
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that achievement couldn't be found"}
+      redirect_to request.referrer || root_path, flash: {error: t("achievements.not_found_error")}
     end
   end
 
@@ -75,13 +75,13 @@ class AchievementsController < ApplicationController
       authorize @achievement
       @achievement.destroy
       if referred_by_activity_feed?
-        redirect_to request.referrer, notice: "Achievement successfully deleted"
+        redirect_to request.referrer, notice: t(".success_msg")
       else
-        redirect_to user_achievements_path(@achievement.user.slug), notice: "Achievement successfully deleted"
+        redirect_to user_achievements_path(@achievement.user.slug), notice: t(".success_msg")
       end
     else
       skip_authorization
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that Achievement couldn't be found"}
+      redirect_to request.referrer || root_path, flash: {error: t("achievements.not_found_error")}
     end
   end
 
@@ -89,7 +89,7 @@ class AchievementsController < ApplicationController
 
   def load_achievement_and_user_resource
     @achievement = Achievement.find_by(id: params[:id])
-    @user = @achievement.user
+    @user = @achievement.try(:user)
   end
 
   def achievement_params

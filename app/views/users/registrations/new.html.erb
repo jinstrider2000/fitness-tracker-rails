@@ -1,37 +1,10 @@
+<%= content_for :title do %>
+  <%= tag.title t(".title") %>
+<% end %>
+
 <%= tag.h2 t(".heading"), class: 'text-center' %>
+
 <%= tag.div class: %w[form-block center-block] do %>
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {enctype: 'multipart/form-data'}) do |f| %>
-    <%= devise_error_messages! %>
-    <%= tag.div class: 'form-group' do %>  
-      <%= image_tag profile_pic_path, class: 'profile-pic-select' %>
-      <%= file_field_tag 'profile_img', accept: 'image/*' %>
-    <% end %>
-    <%= tag.div class: 'form-group' do %>
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control', autofocus: true %>
-    <% end %>
-    <%= tag.div class: 'form-group' do %>
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control', autofocus: true %>
-    <% end %>
-    <%= tag.div class: 'form-group' do %>
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-      <em><%= t ".password_minimum", minimum_length: @minimum_password_length %></em>
-      <% end %>
-      <%= f.password_field :password, class: 'form-control', autocomplete: "off" %>
-    <% end %>
-    <%= tag.div class: 'form-group' do %>
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "off" %>
-    <% end %>
-    <%= tag.div class: 'form-group' do %>
-      <%= f.label :daily_calorie_intake_goal %>
-      <%= f.text_field :daily_calorie_intake_goal, class: 'form-control', autofocus: true %>
-    <% end %>
-    <%= tag.div class: 'form-group' do %>
-      <%= f.submit t(".submit"), class: %w[btn btn-default] %>
-    <% end %>
-    <%= render "users/shared/links" %>
-  <% end %>
+  <%= render partial: "form", locals: {resource: resource, resource_name: resource_name, registration_path: registration_path(resource_name), html_method: :post} %>
+  <%= render "users/shared/links" %>
 <% end %>

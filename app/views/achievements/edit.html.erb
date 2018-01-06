@@ -1,3 +1,7 @@
+<%= content_for :title do %>
+  <%= tag.title t(".title") %>
+<% end %>
+
 <%= tag.div class: %w[row text-center] do %>
   <%= image_tag "#{@achievement.activity_type.downcase}_icon", class: %w[img-responsive index-icon], alt: "#{@achievement.activity_type.capitalize} Icon" %>
   <%= tag.h2 t ".heading", record_name: @achievement.activity.model_name.human %>

@@ -57,6 +57,7 @@ en:
       achievement: "Achievement"
       exercise: "Exercise"
       food: "Food"
+      user: "User"
     attributes:
       achievement:
         comment: "Comment"
@@ -67,6 +68,16 @@ en:
       food:
         name: "Name"
         calories: "Calories"
+      user:
+        name: "Name"
+        email: "E-mail"
+        daily_calorie_intake_goal: "Daily Calorie Intake Goal"
+        password: "Password"
+        password_confirmation: "Password Confirmation"
+      daily_total:
+        total_calories_in: "Total Calories In"
+        total_calories_out: "Total Calories Out"
+        net_calories: "Net Calories"
   pundit:
     default_msg: "You are unauthorized perform this action"
     achievement_policy:
@@ -106,7 +117,9 @@ en:
     show:
       title: "Fitness Tracker - Activity Feed"
   achievements:
+    not_found_error: "Sorry, that achievement couldn't be found"
     index:
+      not_found_error: "Sorry, that user doesn't exist"
       title: "Fitness Tracker - %{user_name}'s %{record_name}"
       my_heading: "My %{record_name}"
       other_user_heading: "%{user_name}'s %{record_name}"
@@ -117,10 +130,14 @@ en:
     edit:
       title: "Fitness Tracker - Edit Achievement"
       heading: "Edit %{record_name}"
+    update:
+      success_msg: "Achievement successfully updated"
     show:
       title: "Fitness Tracker - %{user_name}'s Achievement: %{record_name}"
       my_heading: "My %{record_name}"
       other_user_heading: "%{user_name}'s %{record_name}"
+    destroy:
+      success_msg: "Achievement successfully deleted"
     form:
       activity_type: "Activity Type"
       activity_selection: "Select an Activity"
@@ -153,15 +170,24 @@ en:
     registrations:
       new:
         title: "Fitness Tracker - Sign Up"
-        heading: "Sign Up"
-        password_minimum: "(%{minimum_length} characters minimum)"
-        submit: "Sign Up"
+        heading: "Account Registration"
+        submit: "Register"
       edit:
         title: "Fitness Tracker - Edit Profile"
         heading: "Edit My Profile"
-        password_minimum: "(%{minimum_length} characters minimum)"
+        password_placeholder: "To keep current password, leave blank"
         submit: "Save Changes"
+        cancel_message: "Cancel my account?"
+        cancel_submit: "Cancel"
+        cancel_confirm: "Are you sure?"
+        back: "Back"
+      form:
+        password_minimum: "(%{minimum_length} characters minimum)"
     sessions:
+      new:
+        title: "Fitness Tracker - Login"
+        heading: "Account Login"
+        submit: "Login"
     shared:
       links:
         login: "Already Registered? Login"

@@ -8,11 +8,7 @@
     <!-- Icon Link -->
     <%= favicon_link_tag %>
     <!-- Title Tag -->
-    <% if user_signed_in? %>
-      <%= yield :title %>
-    <% else %>
-      <%= tag.title t "default"%>
-    <% end %>
+    <%= yield :title %>
     <!-- Stylesheets and Javascript Links -->
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>

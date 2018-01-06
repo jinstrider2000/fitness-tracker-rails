@@ -1,3 +1,7 @@
+<%= content_for :title do %>
+  <%= tag.title t(".title", user_name: @user.first_name, record_name: @achievement.activity.name) %>
+<% end %>
+
 <%= tag.div class: %w[row text-center] do %>
   <% if policy(@achievement).update? %>
     <%= tag.h2 t ".my_heading", record_name: @achievement.activity_type %>

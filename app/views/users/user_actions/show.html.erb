@@ -1,3 +1,7 @@
+<%= content_for :title do %>
+  <%= tag.title t(".title", user_name: @user.first_name) %>
+<% end %>
+
 <div class="row" style="margin-bottom:20px;">
 	<div class="col-sm-12">
 		<img class="profile-pic-display img-circle" src="<%=profile_pic_path(@user)%>" alt="<%=@user.first_name%>'s Profile Pic">
@@ -12,7 +16,7 @@
 </div>
 <div class="row">
 	<div class="col-sm-5 card-style clearfix">
-		<h3><%= t ".recent_exercises" %></h3>
+		<h3 class="text-center"><%= t ".recent_exercises" %></h3>
 		<% if @user.recent_achievements("exercise").count < 1 %>
 			<p><%= t ".no_activity" %></p>
 		<% else %>
@@ -25,7 +29,7 @@
 		<a class="more-link" href="<%=user_achievements_path(@user.slug, activity_type: "exercise")%>"><%= t ".more_link" %></a>
 	</div>
 	<div class="col-sm-5 col-sm-offset-2 card-style clearfix">
-		<h3><%= t ".recent_foods" %></h3>
+		<h3 class="text-center"><%= t ".recent_foods" %></h3>
 		<% if @user.recent_achievements("food").count < 1 %>
 			<p><%= t ".no_activity" %></p>
 		<% else %>
