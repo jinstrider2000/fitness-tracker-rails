@@ -8,7 +8,7 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       @blocked = current_user.blocked_by?(@user)
     else
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
+      redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
 
@@ -20,7 +20,7 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       @users = @user.followers
     else
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
+      redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
 
@@ -28,7 +28,7 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       @users = @user.following
     else
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
+      redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
 
@@ -36,7 +36,7 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       @users = @user.blocked_users
     else
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
+      redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
 
@@ -44,61 +44,61 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       @users = @user.muted_users
     else
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
+      redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
 
   def follow
     if @user.present?
       current_user.follow(@user)
-      redirect_to request.referrer || root_path, notice: "You're following #{@user.name}"
+      redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
     else
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
+      redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
 
   def unfollow
     if @user.present?
       current_user.unfollow(@user)
-      redirect_to request.referrer || root_path, notice: "You've unfollowed #{@user.name}"
+      redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
     else
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
+      redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
 
   def block
     if @user.present?
       current_user.block(@user)
-      redirect_to request.referrer || root_path, notice: "You've blocked #{@user.name}"
+      redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
     else
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
+      redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
 
   def unblock
     if @user.present?
       current_user.unblock(@user)
-      redirect_to request.referrer || root_path, notice: "You've unblocked #{@user.name}"
+      redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
     else
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
+      redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
 
   def mute
     if @user.present?
       current_user.mute(@user)
-      redirect_to request.referrer || root_path, notice: "You've muted #{@user.name}"
+      redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
     else
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
+      redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
 
   def unmute
     if @user.present?
       current_user.unmute(@user)
-      redirect_to request.referrer || root_path, notice: "You've unmuted #{@user.name}"
+      redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
     else
-      redirect_to request.referrer || root_path, flash: {error: "Sorry, that user doesn't exist"}
+      redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
 

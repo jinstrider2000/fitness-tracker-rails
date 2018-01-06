@@ -147,6 +147,7 @@ en:
       submit: "Sort"
   users:
     user_actions:
+      not_found_error: "Sorry, that user doesn't exist"
       blocked:
         title: "Fitness Tracker - %{user_name}'s Blocked Users"
       followers:
@@ -167,6 +168,18 @@ en:
         recent_foods: "Recent Added Foods"
         no_activity: "No Recent Activity"
         more_link: "more"
+      follow:
+        success_msg: "You've followed %{first_name}"
+      unfollow:
+        success_msg: "You've unfollowed %{first_name}"
+      block:
+        success_msg: "You've blocked %{first_name}"
+      unblock:
+        success_msg: "You've unblocked %{first_name}"
+      mute:
+        success_msg: "You've muted %{first_name}"
+      unmute:
+        success_msg: "You've unmuted %{first_name}"
     registrations:
       new:
         title: "Fitness Tracker - Sign Up"
