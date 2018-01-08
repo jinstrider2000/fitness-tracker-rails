@@ -25,12 +25,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     super do |user|
-      if user.valid?
+      if resource_updated
         profile_pic_saver = ImageService.new(user)
         flash[:warnings] << [t("users.registrations.type_error_msg")] unless profile_pic_saver.update_profile_pic(params)
-      # else !resource_updated
-      #   clean_up_passwords resource
-      #   set_minimum_password_length
+      else
+        clean_up_passwords resource
+        set_minimum_password_length
+        respond_with resource, location: after_update_failure_for(user)
       end
     end
   end
@@ -70,6 +71,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(resource)
     user_path(resource.slug)
+  end
+
+  def after_update_failure_for(resource)
+    
   end
 
   # The path used after sign up for inactive accounts.

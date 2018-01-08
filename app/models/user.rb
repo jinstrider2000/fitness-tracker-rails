@@ -138,7 +138,7 @@ class User < ApplicationRecord
   end
 
   def get_proper_slug
-    "#{self.id}-#{CGI.escape(self.name.downcase).gsub("+","-")}"
+    "#{self.id}-#{CGI.escape(self.name.downcase.gsub(/[^\w ]/,"")).gsub("+","-")}"
   end
 
   def update_slug_column
