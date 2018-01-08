@@ -22,7 +22,7 @@ class Achievement < ApplicationRecord
 
   def activity_attributes=(values)
     if activity.present?
-      values.each {|attr, value| self.activity.send("#{attr}=", value)}
+      activity.assign_attributes(values)
     else
       klass = VALID_ACTIVITY_PARAMS[values.keys.sort].constantize
       self.activity = klass.new(values)

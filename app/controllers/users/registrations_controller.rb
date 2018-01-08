@@ -9,7 +9,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
+    super do |user|
+      if user.persisted?
+        profile_pic_saver = ImageService.new(user)
+        flash[:warnings] << [t("users.registrations.type_error_msg")] unless profile_pic_saver.save_profile_pic(params)
+      end
+    end
   end
 
   # GET /resource/edit
@@ -20,14 +25,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     super do |user|
-      flash[:warnings] = ["File uploaded must be an image"] if !ImageService.update_profile_pic(user.id, params) && params[:profile_pic].present?
+      if user.valid?
+        profile_pic_saver = ImageService.new(user)
+        flash[:warnings] << [t("users.registrations.type_error_msg")] unless profile_pic_saver.update_profile_pic(params)
+      # else !resource_updated
+      #   clean_up_passwords resource
+      #   set_minimum_password_length
+      end
     end
   end
 
   # DELETE /resource
   def destroy
     super do |user|
-      ImageService.delete_image_folder(user.id)
+      ImageService.new(user).delete_user_image_dir
     end
   end
 
@@ -44,18 +55,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :daily_calorie_goal])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :daily_calorie_intake_goal, :quote])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :daily_calorie_goal])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :daily_calorie_intake_goal, :quote, :current_password])
   end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_sign_up_path_for(resource)
+    user_path(resource.slug)
+  end
+
+  def after_update_path_for(resource)
+    user_path(resource.slug)
+  end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)

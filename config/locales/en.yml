@@ -72,6 +72,7 @@ en:
         name: "Name"
         email: "E-mail"
         daily_calorie_intake_goal: "Daily Calorie Intake Goal"
+        quote: "Personal Quote"
         password: "Password"
         password_confirmation: "Password Confirmation"
       daily_total:
@@ -181,9 +182,12 @@ en:
       unmute:
         success_msg: "You've unmuted %{first_name}"
     registrations:
+      type_error_msg: "File uploaded must be an image"
       new:
         title: "Fitness Tracker - Sign Up"
         heading: "Account Registration"
+        submit: "Register"
+      create:
         submit: "Register"
       edit:
         title: "Fitness Tracker - Edit Profile"
@@ -194,6 +198,9 @@ en:
         cancel_submit: "Cancel"
         cancel_confirm: "Are you sure?"
         back: "Back"
+      update:
+        password_placeholder: "To keep current password, leave blank"
+        submit: "Save Changes"
       form:
         password_minimum: "(%{minimum_length} characters minimum)"
     sessions:

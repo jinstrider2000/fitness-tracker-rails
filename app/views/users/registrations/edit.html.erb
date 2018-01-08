@@ -5,7 +5,7 @@
 <%= tag.h2 t(".heading"), class: 'text-center' %>
 
 <%= tag.div class: %w[form-block center-block] do %>
-  <%= render partial: "form", locals: {resource: resource, resource_name: resource_name, registration_path: registration_path(resource_name), html_method: :post} %>
+  <%= render partial: "form", locals: {resource: resource, resource_name: resource_name, registration_path: registration_path(resource_name), html_method: :patch} %>
   <h3><%= t(".cancel_message") %></h3>
-  <%= button_to t(".cancel_submit"), registration_path(resource_name), data: { confirm: t(".cancel_confirm") }, method: :delete %>
+  <%= button_to t(".cancel_submit"), registration_path(resource_name), data: { confirm: t(".cancel_confirm") }, method: :delete, class: %w[btn btn-default] %>
 <% end %>

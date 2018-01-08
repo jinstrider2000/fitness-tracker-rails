@@ -1,7 +1,7 @@
 <%= form_for(resource, as: resource_name, url: registration_path, method: html_method, html: {enctype: 'multipart/form-data'}) do |f| %>
   <%= devise_error_messages! %>
   <%= tag.div class: 'form-group' do %>  
-    <%= image_tag profile_pic_path, class: 'profile-pic-select' %>
+    <%= image_tag profile_pic_path(resource), class: 'profile-pic-select img-circle' %>
     <%= file_field_tag 'profile_img', accept: 'image/*' %>
   <% end %>
   <%= tag.div class: 'form-group' do %>
@@ -12,7 +12,7 @@
     <%= f.label :email %>
     <%= f.email_field :email, class: 'form-control', autofocus: true %>
   <% end %>
-  <% if params[:action] == "edit" && devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+  <% if (params[:action] == "edit" || params[:action] == "update") && devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
   <%= tag.div class: 'form-group' do %>
@@ -29,6 +29,16 @@
   <%= tag.div class: 'form-group' do %>
     <%= f.label :daily_calorie_intake_goal %>
     <%= f.text_field :daily_calorie_intake_goal, class: 'form-control', autofocus: true %>
+  <% end %>
+  <%= tag.div class: 'form-group' do %>
+    <%= f.label :quote %>
+    <%= f.text_field :quote, class: 'form-control', autofocus: true %>
+  <% end %>
+  <% if params[:action] == 'edit' || params[:action] == 'update' %>
+    <%= tag.div class: 'form-group' do %>
+      <%= f.label :current_password %>
+      <%= f.password_field :current_password, class: 'form-control', autocomplete: "off", placeholder: "Must be filled out to update" %>
+    <% end %>
   <% end %>
   <%= tag.div class: 'form-group' do %>
     <%= f.submit t("users.registrations.#{params[:action]}.submit"), class: %w[btn btn-default] %>
