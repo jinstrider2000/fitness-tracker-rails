@@ -1,8 +1,8 @@
-<%= form_for(resource, as: resource_name, url: registration_path, method: html_method, html: {enctype: 'multipart/form-data'}) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path, method: html_method) do |f| %>
   <%= devise_error_messages! %>
   <%= tag.div class: 'form-group' do %>  
     <%= image_tag profile_pic_path(resource), class: 'profile-pic-select img-circle' %>
-    <%= file_field_tag 'profile_img', accept: 'image/*' %>
+    <%= f.file_field :profile_pic, accept: 'image/*' %>
   <% end %>
   <%= tag.div class: 'form-group' do %>
     <%= f.label :name %>

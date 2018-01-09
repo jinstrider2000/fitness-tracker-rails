@@ -53,6 +53,15 @@ en:
       ascending: "Ascending"
       descending: "Descending"
   activerecord:
+    errors:
+      models:
+        achievement:
+        exercise:
+        food:
+        user:
+          attributes:
+            profile_pic:
+              invalid_file_type: "The uploaded file must be an image"
     models:
       achievement: "Achievement"
       exercise: "Exercise"

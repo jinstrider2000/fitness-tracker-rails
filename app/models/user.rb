@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  attr_accessor :profile_pic
+
   devise :database_authenticatable, :registerable, :rememberable, :trackable, :validatable, :omniauthable
 
   has_many :following_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
@@ -19,6 +21,7 @@ class User < ApplicationRecord
   validates_presence_of :name, :daily_calorie_intake_goal, :email
   validates :email, uniqueness: true
   validates :daily_calorie_intake_goal, numericality: {greater_than_or_equal_to: 1}
+  validate :profile_pic_is_valid_if_present
   
   after_create :update_slug_column
   before_save :set_slug, on: :update, unless: :slug_set_properly? 
@@ -163,6 +166,12 @@ class User < ApplicationRecord
 
   def find_muted_relationship_with(user)
     self.muted_relationships.find_by(muted_user: user)
+  end
+
+  def profile_pic_is_valid_if_present
+    if self.profile_pic.present? && !(self.profile_pic.content_type =~ /image/)
+      self.errors.add :profile_pic, :invalid_file_type
+    end
   end
 
 end

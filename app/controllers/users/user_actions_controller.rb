@@ -1,11 +1,12 @@
 class Users::UserActionsController < ApplicationController
   
-  before_action :load_and_authorize_user_resource, except: [:index]
+  before_action :load_user_resource, except: [:index]
   after_action :verify_authorized, except: [:show, :index]
   
 
   def show
     if @user.present?
+      authorize @user
       @blocked = current_user.blocked_by?(@user)
     else
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
@@ -18,6 +19,7 @@ class Users::UserActionsController < ApplicationController
 
   def followers
     if @user.present?
+      authorize @user
       @users = @user.followers
     else
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
@@ -26,6 +28,7 @@ class Users::UserActionsController < ApplicationController
 
   def following
     if @user.present?
+      authorize @user
       @users = @user.following
     else
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
@@ -34,6 +37,7 @@ class Users::UserActionsController < ApplicationController
 
   def blocked
     if @user.present?
+      authorize @user
       @users = @user.blocked_users
     else
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
@@ -42,6 +46,7 @@ class Users::UserActionsController < ApplicationController
 
   def muted
     if @user.present?
+      authorize @user
       @users = @user.muted_users
     else
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
@@ -50,6 +55,7 @@ class Users::UserActionsController < ApplicationController
 
   def follow
     if @user.present?
+      authorize @user
       current_user.follow(@user)
       redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
     else
@@ -59,6 +65,7 @@ class Users::UserActionsController < ApplicationController
 
   def unfollow
     if @user.present?
+      authorize @user
       current_user.unfollow(@user)
       redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
     else
@@ -68,6 +75,7 @@ class Users::UserActionsController < ApplicationController
 
   def block
     if @user.present?
+      authorize @user
       current_user.block(@user)
       redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
     else
@@ -77,6 +85,7 @@ class Users::UserActionsController < ApplicationController
 
   def unblock
     if @user.present?
+      authorize @user
       current_user.unblock(@user)
       redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
     else
@@ -86,6 +95,7 @@ class Users::UserActionsController < ApplicationController
 
   def mute
     if @user.present?
+      authorize @user
       current_user.mute(@user)
       redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
     else
@@ -95,6 +105,7 @@ class Users::UserActionsController < ApplicationController
 
   def unmute
     if @user.present?
+      authorize @user
       current_user.unmute(@user)
       redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
     else
@@ -104,9 +115,8 @@ class Users::UserActionsController < ApplicationController
 
   private
 
-  def load_and_authorize_user_resource
+  def load_user_resource
     @user = User.find_by(slug: params[:slug])
-    authorize @user
   end
   
 end
