@@ -22,7 +22,7 @@ module ApplicationHelper
   end
 
   def profile_pic_path(user = nil)
-    if user.try(:persisted)
+    if user.try(:persisted?)
       asset_path(File.join("users","#{user.id}","profile_pic"), type: :image)
     else
       asset_path(File.join("users","generic","profile_pic"), type: :image)
