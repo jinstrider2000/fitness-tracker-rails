@@ -21,3 +21,7 @@
 /yarn-error.log
 
 .byebug_history
+
+# Ignore the user images folders, except for the generic folder
+/app/assets/images/users/*
+!/app/assets/images/users/generic
