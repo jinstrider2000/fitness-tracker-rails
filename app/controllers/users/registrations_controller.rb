@@ -1,6 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :configure_sign_up_params, only: [:create]
-  before_action :configure_account_update_params, only: [:update]
+  before_action :configure_params, only: [:create, :update]
 
   # GET /resource/sign_up
   # def new
@@ -8,14 +7,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  def create
-    super do |user|
-      if user.persisted?
-        profile_pic_saver = ImageService.new(user)
-        flash[:warnings] << [t("users.registrations.type_error_msg")] unless profile_pic_saver.save_profile_pic(params)
-      end
-    end
-  end
+  # def create
+  #   super
+  # end
 
   # GET /resource/edit
   # def edit
@@ -23,25 +17,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  def update
-    super do |user|
-      if resource_updated
-        profile_pic_saver = ImageService.new(user)
-        flash[:warnings] << [t("users.registrations.type_error_msg")] unless profile_pic_saver.update_profile_pic(params)
-      else
-        clean_up_passwords resource
-        set_minimum_password_length
-        respond_with resource, location: after_update_failure_for(user)
-      end
-    end
-  end
+  # def update
+  #   super
+  # end
 
   # DELETE /resource
-  def destroy
-    super do |user|
-      ImageService.new(user).delete_user_image_dir
-    end
-  end
+  # def destroy
+  #   super
+  # end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -55,13 +38,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :daily_calorie_intake_goal, :quote])
-  end
-
-  # If you have extra params to permit, append them to the sanitizer.
-  def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :daily_calorie_intake_goal, :quote, :current_password])
+  def configure_params
+    if params[:action] == "create"
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :daily_calorie_intake_goal, :quote])
+    else
+      # devise_parameter_sanitizer.permit(:account_update, keys: [:name, :daily_calorie_intake_goal, :quote, :current_password])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:name, :daily_calorie_intake_goal, :quote])
+    end
   end
 
   # The path used after sign up.
@@ -69,12 +52,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     user_path(resource.slug)
   end
 
+  # The path used after update
   def after_update_path_for(resource)
     user_path(resource.slug)
-  end
-
-  def after_update_failure_for(resource)
-    
   end
 
   # The path used after sign up for inactive accounts.

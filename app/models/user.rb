@@ -23,8 +23,10 @@ class User < ApplicationRecord
   validates :daily_calorie_intake_goal, numericality: {greater_than_or_equal_to: 1}
   validate :profile_pic_is_valid_if_present
   
-  after_create :update_slug_column
-  before_save :set_slug, on: :update, unless: :slug_set_properly? 
+  after_create :update_slug_column, :save_profile_pic
+  before_update :set_slug, unless: :slug_set_properly?
+  after_update :update_profile_pic, if: :new_profile_pic_present?
+  after_destroy :delete_image_dir
 
   def first_name
     self.name.split(" ")[0]
@@ -172,6 +174,22 @@ class User < ApplicationRecord
     if self.profile_pic.present? && !(self.profile_pic.content_type =~ /image/)
       self.errors.add :profile_pic, :invalid_file_type
     end
+  end
+
+  def save_profile_pic
+    FitnessTracker::ImageSaver.new(self).save_profile_pic(self.profile_pic)
+  end
+
+  def update_profile_pic
+    FitnessTracker::ImageSaver.new(self).update_profile_pic(self.profile_pic)
+  end
+
+  def delete_image_dir
+    FitnessTracker::ImageSaver.new(self).delete_user_image_dir
+  end
+
+  def new_profile_pic_present?
+    self.profile_pic.present?
   end
 
 end

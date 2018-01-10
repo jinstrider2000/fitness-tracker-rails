@@ -1,12 +1,10 @@
 class Users::UserActionsController < ApplicationController
   
   before_action :load_user_resource, except: [:index]
-  after_action :verify_authorized, except: [:show, :index]
-  
+  after_action :verify_authorized, except: [:index]
 
   def show
     if @user.present?
-      authorize @user
       @blocked = current_user.blocked_by?(@user)
     else
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}

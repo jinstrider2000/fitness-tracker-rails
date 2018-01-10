@@ -52,21 +52,33 @@ en:
     exercise:
       ascending: "Ascending"
       descending: "Descending"
+  errors:
+    messages:
+      blank: "must be filled in"
+      required: "is required"
   activerecord:
     errors:
       models:
         achievement:
-        exercise:
-        food:
+          attributes:
+            activity:
+              blank: "fields must be filled in"
+            completed_on:
+              required: "date is required"
+              blank: "date must be provided"
+            user:
+              required: "info is required"
+              blank: "- Please sign in to add this %{model} to your account"
         user:
           attributes:
             profile_pic:
-              invalid_file_type: "The uploaded file must be an image"
+              invalid_file_type: "must be an image"
     models:
       achievement: "Achievement"
       exercise: "Exercise"
       food: "Food"
       user: "User"
+      daily_total: "Daily Total"
     attributes:
       achievement:
         comment: "Comment"
@@ -84,6 +96,8 @@ en:
         quote: "Personal Quote"
         password: "Password"
         password_confirmation: "Password Confirmation"
+        current_password: "Current Passwords"
+        profile_pic: "Profile Picture"
       daily_total:
         total_calories_in: "Total Calories In"
         total_calories_out: "Total Calories Out"
@@ -93,7 +107,7 @@ en:
     achievement_policy:
       new?: "You can't add achievements to another user's profile"
       create?: "You can't add achievements to another user's profile"
-      index?: "You can't view this user's achievement indices"
+      index?: "You can't view this user's achievement index"
       show?: "You can't view this user's achievement stats"
       edit?: "You can't edit this user's achievement stats"
       update?: "You can't update this user's achievement stats"
@@ -191,7 +205,6 @@ en:
       unmute:
         success_msg: "You've unmuted %{first_name}"
     registrations:
-      type_error_msg: "File uploaded must be an image"
       new:
         title: "Fitness Tracker - Sign Up"
         heading: "Account Registration"

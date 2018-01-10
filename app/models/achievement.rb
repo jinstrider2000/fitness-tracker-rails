@@ -10,10 +10,10 @@ class Achievement < ApplicationRecord
 
   belongs_to :activity, polymorphic: true, dependent: :destroy
   belongs_to :user
-  belongs_to :daily_total
-  validates_presence_of :activity, :completed_on, :user, :daily_total
+  belongs_to :daily_total, optional: true
+  validates_presence_of :activity, :completed_on, :user
 
-  before_validation :find_or_create_daily_total, on: :create
+  after_validation :find_or_create_daily_total, on: :create
   after_create :add_to_daily_total
   before_update :update_daily_total_and_activity
   before_destroy :subtract_from_daily_total
