@@ -40,10 +40,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # If you have extra params to permit, append them to the sanitizer.
   def configure_params
     if params[:action] == "create"
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :daily_calorie_intake_goal, :quote])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :daily_calorie_intake_goal, :quote, :profile_pic])
     else
-      # devise_parameter_sanitizer.permit(:account_update, keys: [:name, :daily_calorie_intake_goal, :quote, :current_password])
-      devise_parameter_sanitizer.permit(:account_update, keys: [:name, :daily_calorie_intake_goal, :quote])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:name, :daily_calorie_intake_goal, :quote, :profile_pic])
     end
   end
 

@@ -1,7 +1,7 @@
 class Users::UserActionsController < ApplicationController
   
   before_action :load_user_resource, except: [:index]
-  after_action :verify_authorized, except: [:index]
+  after_action :verify_authorized, except: [:index, :show]
 
   def show
     if @user.present?

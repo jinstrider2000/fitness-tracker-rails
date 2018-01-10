@@ -181,11 +181,6 @@
    color: red;
  }
  
- #error-pic
- {
-   width: 50%;
- }
- 
  .index-style, a.index-style:active
  {
    font: 16px "Open Sans", sans-serif;
@@ -219,6 +214,16 @@
  .activity-row
  {
    margin-bottom: 4px;
+ }
+
+ #error_explanation > h2
+ {
+   font: bold 1.2em sans-serif;
+ }
+
+ #error_explanation li
+ {
+   color: red;
  }
  
  @media (max-width: 768px)
