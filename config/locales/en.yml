@@ -181,6 +181,7 @@ en:
         title: "Fitness Tracker - %{user_name}: Following"
       index:
         title: "Fitness Tracker - User Index"
+        heading: "All Users"
       muted:
         title: "Fitness Tracker - %{user_name}'s Muted Users"
       show:

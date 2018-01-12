@@ -1,4 +1,6 @@
-<h1>Users#index</h1>
-<%= tag.div class: %w[row] do %>
-  <%= render collection: @users, partial: 'user' %>
+<%= content_for :title do %>
+  <%= tag.title t(".title") %>
 <% end %>
+
+<%= tag.h2 t(".heading"), class: %w[text-center] %>
+<%= render collection: @users, partial: 'user' %>
