@@ -148,6 +148,7 @@ en:
       my_heading: "My %{record_name}"
       other_user_heading: "%{user_name}'s %{record_name}"
       new_link: "Add New"
+      no_items: "No %{items}"
     new:
       title: "Fitness Tracker - New Achievement"
       heading: "New Achievement"
@@ -186,7 +187,7 @@ en:
         title: "Fitness Tracker - %{user_name}'s Profile"
         my_heading: "Welcome %{first_name}"
         other_user_heading: "%{full_name}"
-        edit: "Edit"
+        edit: "edit"
         daily_calorie_goal: "Daily Calorie Goal: "
         recent_exercises: "Recently Added Exercises"
         recent_foods: "Recent Added Foods"

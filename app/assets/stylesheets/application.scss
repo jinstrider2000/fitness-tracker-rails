@@ -116,9 +116,9 @@
    width: 140px;
  }
  
- .profile-pic-select + input[type="file"]
+ img.profile-pic-select + input[type="file"], img.profile-pic-select + div.field_with_errors
  {
-   display: inline;
+   display: inline-block;
  }
  
  .mini-pic-display
@@ -140,6 +140,15 @@
    position: absolute;
    left: 170px;
    top: 50px;
+ }
+
+ #quote-display
+ {
+   width: 400px;
+   position: absolute;
+   left: 170px;
+   top: 80px;
+   font-style: italic;
  }
  
  .profile-pic-display + h2, .index-icon + h2
@@ -216,7 +225,7 @@
    margin-bottom: 4px;
  }
 
- #error_explanation > h2
+ #error_explanation > h2, .no-items-style
  {
    font: bold 1.2em sans-serif;
  }
@@ -225,9 +234,24 @@
  {
    color: red;
  }
+
+ div.field_with_errors > input
+ {
+   border: 2px solid red;
+ }
+
+ #flash-notice-container
+ {
+   margin-bottom: 30px;
+ }
  
  @media (max-width: 768px)
  {
+   #quote-display
+   {
+     display: none;
+   }
+
    .vis-sm-inline
    {
      display: inline-block;

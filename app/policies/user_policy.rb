@@ -1,11 +1,11 @@
 class UserPolicy < ApplicationPolicy
 
     def followers?
-      index?
+      !user.blocked_by?(record)
     end
   
     def following?
-      index?
+      followers?
     end
   
     def blocked?

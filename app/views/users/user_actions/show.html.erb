@@ -2,9 +2,9 @@
   <%= tag.title t(".title", user_name: @user.first_name) %>
 <% end %>
 
-<div class="row" style="margin-bottom:20px;">
+<div class="row" style="margin-bottom:40px;">
 	<div class="col-sm-12">
-		<img class="profile-pic-display img-circle" src="<%=profile_pic_path(@user)%>" alt="<%=@user.first_name%>'s Profile Pic">
+		<img class="profile-pic-display img-thumbnail" src="<%=profile_pic_path(@user)%>" alt="<%=@user.first_name%>'s Profile Pic">
     <% if viewing_own_profile_while_logged_in? %>
       <%= tag.h2 t(".my_heading", first_name: @user.first_name), id: "profile-heading" %>
       <%= tag.a t(".edit"), href: edit_user_registration_path %>
@@ -12,13 +12,14 @@
       <%= tag.h2 t(".other_user_heading", full_name: @user.name), id: "profile-heading" %>
     <% end %>
 		<h4 id="calorie-goal-display"><%=t ".daily_calorie_goal"%> <%=@user.daily_calorie_intake_goal%></h4>
+		<h5 id="quote-display"><%= @user.quote %></h5>
 	</div>
 </div>
 <div class="row">
 	<div class="col-sm-5 card-style clearfix">
 		<h3 class="text-center"><%= t ".recent_exercises" %></h3>
 		<% if @user.recent_achievements("exercise").count < 1 %>
-			<p><%= t ".no_activity" %></p>
+			<p class="text-center no-items-style"><%= t ".no_activity" %></p>
 		<% else %>
 			<ul>
 			<% @user.recent_achievements("exercise").each do |achievement| %>
@@ -31,7 +32,7 @@
 	<div class="col-sm-5 col-sm-offset-2 card-style clearfix">
 		<h3 class="text-center"><%= t ".recent_foods" %></h3>
 		<% if @user.recent_achievements("food").count < 1 %>
-			<p><%= t ".no_activity" %></p>
+			<p class="text-center no-items-style"><%= t ".no_activity" %></p>
 		<% else %>
 			<ul>
 			<% @user.recent_achievements("food").each do |achievement| %>

@@ -39,7 +39,7 @@ gem 'pundit', '~> 1.1'
 # gem 'capistrano-rails', group: :development
 gem 'bootstrap-sass', '3.3.7'
 gem 'omniauth', '>= 1.0.0'
-
+gem 'dynamic_form'
 
 
 group :development, :test do

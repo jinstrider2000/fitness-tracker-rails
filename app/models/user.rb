@@ -21,6 +21,7 @@ class User < ApplicationRecord
   validates_presence_of :name, :daily_calorie_intake_goal, :email
   validates :email, uniqueness: true
   validates :daily_calorie_intake_goal, numericality: {greater_than_or_equal_to: 1}
+  validates :quote, length: {maximum: 145}
   validate :profile_pic_is_valid_if_present
   
   after_create :update_slug_column, :save_profile_pic

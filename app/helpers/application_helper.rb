@@ -18,7 +18,7 @@ module ApplicationHelper
   end
 
   def on_activity_feed?
-    !!(request.path_info =~ /activity-feed/)
+    !!(request.path_info == activity_feed_path || request.path_info == root_path)
   end
 
   def profile_pic_path(user = nil)
@@ -30,11 +30,7 @@ module ApplicationHelper
   end
 
   def referred_by_activity_feed?
-    !!(request.referrer =~ /activity-feed/)
-  end
-
-  def route_helpers
-    Rails.application.routes.url_helpers
+    !!(request.referrer == activity_feed_path || request.referrer == root_path)
   end
   
 end

@@ -19,7 +19,7 @@ class AchievementsController < ApplicationController
     if @achievement.save
       redirect_to user_achievements_path(slug: current_user.slug)
     else
-      flash[:warnings] = @achievement.errors.full_messages
+      @user = current_user
       render :new
     end
   end
@@ -61,7 +61,7 @@ class AchievementsController < ApplicationController
       if @achievement.update(achievement_params)
         redirect_to achievement_path(@achievement), notice: t(".success_msg")
       else
-        flash[:warnings] = @achievement.errors.full_messages
+        @user = current_user
         render :edit
       end
     else

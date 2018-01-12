@@ -13,7 +13,11 @@
 		<div class="collapse navbar-collapse" id="main_nav">
 			<ul class="nav navbar-nav navbar-left">
 				<% if user_signed_in? %>
-					<li class="<%=link_status("activity-feed")%>"><a href="<%=activity_feed_path%>"><%= t ".activity_feed" %></a></li>
+					<% if request.path_info == root_path %>
+						<li class="active"><a href="<%=activity_feed_path%>"><%= t ".activity_feed" %></a></li>
+					<% else %>
+						<li class="<%=link_status("activity-feed")%>"><a href="<%=activity_feed_path%>"><%= t ".activity_feed" %></a></li>
+					<% end %>
 					<li class="dropdown <%=link_status("achievements", "exercises", "foods")%>">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= t ".my_achievements.heading" %><span class="caret vis-sm-inline"></span></a>
 						<ul class="dropdown-menu">

@@ -19,10 +19,13 @@
   <% end %>
 <% end %>
 
-<%= render partial: 'index_sort', locals: {filter_options_array: @activity_type.capitalize.constantize.valid_filter_options, order_options_array: @activity_type.capitalize.constantize.valid_order_options} %>
-
-<% if @activity_type != "achievement" && filter_param_valid_and_other_than_completed_on? %>
-  <%= render collection: @achievements, partial: "#{@activity_type}" %>
+<% if @achievements.count > 0 %>
+  <%= render partial: 'index_sort', locals: {filter_options_array: @activity_type.capitalize.constantize.valid_filter_options, order_options_array: @activity_type.capitalize.constantize.valid_order_options} %>
+  <% if @activity_type != "achievement" && filter_param_valid_and_other_than_completed_on? %>
+    <%= render collection: @achievements, partial: "#{@activity_type}" %>
+  <% else %>
+      <%= render collection: @achievements, partial: 'index_by_date_row' %>
+  <% end %>
 <% else %>
-    <%= render collection: @achievements, partial: 'index_by_date_row' %>
+  <%= tag.p t(".no_items", items: @activity_type.capitalize.pluralize), class: %w[text-center no-items-style] %>
 <% end %>
