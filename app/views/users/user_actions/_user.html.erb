@@ -1,0 +1,7 @@
+<%= tag.div class: %w[user-index card-style col-sm-4] do %>
+  <%= image_tag profile_pic_path(user), class: %w[img-circle index-icon] %>
+  <%= tag.div class: %w[index-name] do %>
+    <%= tag.h3 user.name %>
+  <% end %>
+  <%= tag.p truncate(user.quote, length: 60, separator: " "), class: %w[index-quote] %>
+<% end %>

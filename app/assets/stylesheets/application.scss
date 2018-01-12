@@ -244,6 +244,33 @@
  {
    margin-bottom: 30px;
  }
+
+ .user-index
+ {
+   height: 200px;
+   width: 32%;
+   border: 1px dotted black;
+   padding: 10px 5px;
+   margin-left: 1%;
+   margin-bottom: 5px;
+   float: left;
+ }
+
+ .index-name
+ {
+   display: inline-block;
+ }
+
+ .index-name > h3
+ {
+   margin: 2px 0;
+ }
+
+ .index-quote
+ {
+   font: italic 1.2em sans-serif;
+   margin-top: 7px;
+ }
  
  @media (max-width: 768px)
  {
@@ -318,6 +345,11 @@
  @media (max-width: 650px)
  {
   .form-block
+  {
+    width: 100%;
+  }
+
+  .user-index
   {
     width: 100%;
   }
