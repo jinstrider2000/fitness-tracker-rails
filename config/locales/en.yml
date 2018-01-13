@@ -98,6 +98,12 @@ en:
         password_confirmation: "Password Confirmation"
         current_password: "Current Password"
         profile_pic: "Profile Picture"
+        follow: "Follow"
+        unfollow: "Unfollow"
+        block: "Block"
+        unblock: "Unblock"
+        mute: "Mute"
+        unmute: "Unmute"
       daily_total:
         total_calories_in: "Total Calories In"
         total_calories_out: "Total Calories Out"

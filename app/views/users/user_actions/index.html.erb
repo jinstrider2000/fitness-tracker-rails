@@ -4,3 +4,5 @@
 
 <%= tag.h2 t(".heading"), class: %w[text-center] %>
 <%= render collection: @users, partial: 'user' %>
+
+<%= action_button(current_user) %>

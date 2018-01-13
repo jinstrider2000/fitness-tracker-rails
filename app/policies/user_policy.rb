@@ -33,11 +33,11 @@ class UserPolicy < ApplicationPolicy
     end
   
     def mute?
-      user.id != record.id && !user.muted?(record)
+      user.id != record.id && !user.muted?(record) && !user.blocked?(record) && !user.blocked_by?(record)
     end
   
     def unmute?
-      user.id != record.id && user.muted?(record)
+      user.id != record.id && user.muted?(record) && !user.blocked?(record) && !user.blocked_by?(record)
     end
     
   end
