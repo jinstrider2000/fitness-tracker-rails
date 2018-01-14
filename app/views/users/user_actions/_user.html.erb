@@ -2,9 +2,11 @@
   <%= link_to user_path(user.slug) do %>
     <%= image_tag profile_pic_path(user), class: %w[img-circle index-icon] %>
   <% end %>
-  <%= tag.div class: %w[user-actions-btn text-center] do %>
-    <%= tag.p 'Action Button Here' %>
+  <% unless current_user.blocked_by?(user) %>
+    <%= tag.div class: %w[user-actions-btn text-center] do %>
+      <%= action_button(user) %>
+    <% end %>
   <% end %>
-  <%= tag.h3 user.name, class: %w[index-name] %>
+  <%= tag.h3 truncate(user.name, length: 16, separator: " "), class: %w[index-name] %>
   <%= tag.p truncate(user.quote, length: 60, separator: " "), class: %w[index-quote] %>
 <% end %>

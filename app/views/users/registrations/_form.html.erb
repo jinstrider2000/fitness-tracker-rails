@@ -6,14 +6,14 @@
   <% end %>
   <%= tag.div class: 'form-group' do %>
     <%= f.label :name %>
-    <%= f.text_field :name, class: 'form-control', autofocus: true %>
+    <%= f.text_field :name, class: 'form-control', autofocus: true, placeholder: t(".name_placeholder", maximum: resource.get_length_validation_options_for(:name)[:maximum]) %>
   <% end %>
   <%= tag.div class: 'form-group' do %>
     <%= f.label :email %>
     <%= f.email_field :email, class: 'form-control', autofocus: true %>
   <% end %>
   <% if (params[:action] == "edit" || params[:action] == "update") && devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <div><%= t ".awaiting_confirmation" %> <%= resource.unconfirmed_email %></div>
   <% end %>
   <%= tag.div class: 'form-group' do %>
     <%= f.label :password %>
@@ -32,12 +32,12 @@
   <% end %>
   <%= tag.div class: 'form-group' do %>
     <%= f.label :quote %>
-    <%= f.text_field :quote, class: 'form-control', autofocus: true %>
+    <%= f.text_field :quote, class: 'form-control', autofocus: true, placeholder: t(".quote_placeholder", maximum: resource.get_length_validation_options_for(:quote)[:maximum]) %>
   <% end %>
   <% if params[:action] == 'edit' || params[:action] == 'update' %>
     <%= tag.div class: 'form-group' do %>
       <%= f.label :current_password %>
-      <%= f.password_field :current_password, class: 'form-control', autocomplete: "off", placeholder: "Must be filled out to update" %>
+      <%= f.password_field :current_password, class: 'form-control', autocomplete: "off", placeholder: t(".current_password_placeholder") %>
     <% end %>
   <% end %>
   <%= tag.div class: 'form-group' do %>

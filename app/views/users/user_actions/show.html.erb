@@ -15,6 +15,11 @@
 		<h5 id="quote-display"><%= @user.quote %></h5>
 	</div>
 </div>
+<% unless viewing_own_profile_while_logged_in? %>
+	<div class="row text-center">
+		<%= action_button(@user) %>
+	</div>
+<% end %>
 <div class="row">
 	<div class="col-sm-5 card-style clearfix">
 		<h3 class="text-center"><%= t ".recent_exercises" %></h3>

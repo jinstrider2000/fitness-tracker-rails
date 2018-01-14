@@ -232,6 +232,10 @@ en:
         password_placeholder: "To keep current password, leave blank"
         submit: "Save Changes"
       form:
+        awaiting_confirmation: "Currently waiting confirmation for:"
+        name_placeholder: "Maximum length is %{maximum}"
+        quote_placeholder: "Maximum length is %{maximum}"
+        current_password_placeholder: "Must be filled out to update"
         password_minimum: "(%{minimum_length} characters minimum)"
     sessions:
       new:

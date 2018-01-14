@@ -19,6 +19,7 @@ class User < ApplicationRecord
   has_many :daily_totals, dependent: :destroy
 
   validates_presence_of :name, :daily_calorie_intake_goal, :email
+  validates :name, length: {maximum: 20}
   validates :email, uniqueness: true
   validates :daily_calorie_intake_goal, numericality: {greater_than_or_equal_to: 1}
   validates :quote, length: {maximum: 145}
@@ -135,6 +136,10 @@ class User < ApplicationRecord
 
   def unfollow(user)
     find_following_relationship_with(user).destroy
+  end
+
+  def get_length_validation_options_for(attr)
+    self._validators[attr.to_sym].find {|validator| validator.kind == :length}.options
   end
 
   private
