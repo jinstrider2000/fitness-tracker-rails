@@ -177,6 +177,10 @@ en:
       order: "Order:"
       submit: "Sort"
   users:
+    users_helper:
+      follow_status:
+        following_each_other: "You are following each other"
+        follows_you: "Follows you"
     user_actions:
       not_found_error: "Sorry, that user doesn't exist"
       blocked:

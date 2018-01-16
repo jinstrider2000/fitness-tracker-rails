@@ -139,15 +139,15 @@
  {
    position: absolute;
    left: 170px;
-   top: 50px;
+   top: 30px;
  }
 
  #quote-display
  {
-   width: 400px;
+   width: 350px;
    position: absolute;
    left: 170px;
-   top: 80px;
+   top: 60px;
    font-style: italic;
  }
  
@@ -255,6 +255,11 @@
    float: left;
  }
 
+ .user-index > a
+ {
+   text-decoration: none;
+ }
+
  .user-actions-btn
  {
    display: inline-block;
@@ -270,9 +275,40 @@
    font: italic 1.2em sans-serif;
    margin-top: 7px;
  }
+
+ .follow-status-msg
+ {
+   border-radius: 4px;
+   background-color: gray;
+   color: whitesmoke;
+ }
+
+ .follow-status-msg-index
+ {
+   font-size: 11px;
+   position: absolute;
+   top: 0;
+   right: 0;
+ }
+
+ .follow-status-msg-show-container
+ {
+   display: inline;
+ }
+
+ .follow-status-msg-show
+ {
+   font-size: 16px;
+ }
  
  @media (max-width: 768px)
  {
+   .follow-status-msg-show-container
+   {
+     display: block;
+     text-align: center;
+   }
+
    #quote-display
    {
      display: none;
@@ -352,6 +388,11 @@
   {
     width: 100%;
   }
+
+  .follow-status-msg-index
+   {
+     font-size: 16px;
+   }
  }
  
  @media (max-width: 500px)

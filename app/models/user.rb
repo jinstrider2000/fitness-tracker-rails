@@ -97,14 +97,15 @@ class User < ApplicationRecord
   end
 
   def block(user)
-    self.unfollow(user) if self.following?(user)
-    find_follower_relationship_with(user).destroy if self.follower?(user)
+    self.unfollow(user)
+    find_follower_relationship_with(user).try(:destroy)
+    self.unmute(user)
     self.blocked_relationships.build(blocked_user: user)
     self.save
   end
 
   def unblock(user)
-    find_blocked_relationship_with(user).destroy
+    find_blocked_relationship_with(user).try(:destroy)
   end
 
   def muted?(user)
@@ -117,8 +118,11 @@ class User < ApplicationRecord
   end
 
   def unmute(user)
-    find_muted_relationship_with(user).destroy
-    self.save
+    find_muted_relationship_with(user).try(:destroy)
+  end
+
+  def following_each_other?(user)
+    !!find_following_relationship_with(user).try(:following_each_other)
   end
 
   def following?(user)
@@ -135,7 +139,7 @@ class User < ApplicationRecord
   end
 
   def unfollow(user)
-    find_following_relationship_with(user).destroy
+    find_following_relationship_with(user).try(:destroy)
   end
 
   def get_length_validation_options_for(attr)
