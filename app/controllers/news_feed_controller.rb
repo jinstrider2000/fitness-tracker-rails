@@ -1,8 +1,8 @@
-class ActivityFeedController < ApplicationController
+class NewsFeedController < ApplicationController
 
   skip_before_action :authenticate_user!
 
-  def show
+  def index
     if user_signed_in?
       @feed = current_user.achievement_following_timeline
     else

@@ -142,10 +142,10 @@ en:
         followers: "Followers"
         blocked: "Blocked"
         muted: "Muted"
-      activity_feed: "Activity Feed"
-  activity_feed:
-    show:
-      title: "Fitness Tracker - Activity Feed"
+      news_feed: "News Feed"
+  news_feed:
+    index:
+      title: "Fitness Tracker - News Feed"
   achievements:
     not_found_error: "Sorry, that achievement couldn't be found"
     index:

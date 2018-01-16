@@ -16,4 +16,10 @@ module AchievementsHelper
     params[:filter] != nil && params[:filter].downcase != "completed on" && params[:activity_type].capitalize.constantize.valid_filter?(params[:filter])
   end
 
+  def new_achievement_button
+    tag.span do
+      link_to t(".new_link"), new_user_achievement_path(@user.slug, activity_type: @activity_type), class: %w[btn btn-primary btn-lg], role: "button" 
+    end
+  end
+
 end

@@ -25,6 +25,14 @@
 <% end %>
 <div class="row">
 	<div class="col-sm-5 card-style clearfix">
+		
+	</div>
+	<div class="col-sm-5 card-style clearfix">
+	
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-5 card-style clearfix">
 		<h3 class="text-center"><%= t ".recent_exercises" %></h3>
 		<% if @user.recent_achievements("exercise").count < 1 %>
 			<p class="text-center no-items-style"><%= t ".no_activity" %></p>

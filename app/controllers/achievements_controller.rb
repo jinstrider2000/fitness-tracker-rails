@@ -74,7 +74,7 @@ class AchievementsController < ApplicationController
     if @achievement.present?
       authorize @achievement
       @achievement.destroy
-      if referred_by_activity_feed?
+      if referred_by_news_feed?
         redirect_to request.referrer, notice: t(".success_msg")
       else
         redirect_to user_achievements_path(@achievement.user.slug), notice: t(".success_msg")

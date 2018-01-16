@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root 'activity_feed#show'
-  get '/activity-feed' => 'activity_feed#show'
+  root 'news_feed#index'
+  get '/news-feed' => 'news_feed#index'
   devise_for :users, controllers: {registrations: 'users/registrations'}, skip: [:passwords]
   
   resources :users, param: :slug, only: [:index, :show], module: "users", controller: "user_actions" do
@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get 'muted'
       get 'followers'
       get 'following'
+      get 'activity-feed', action: 'activity_feed'
     end
   end
 

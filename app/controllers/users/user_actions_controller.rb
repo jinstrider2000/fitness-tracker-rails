@@ -111,6 +111,10 @@ class Users::UserActionsController < ApplicationController
     end
   end
 
+  def activity_feed
+    
+  end
+
   private
 
   def load_user_resource
