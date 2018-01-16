@@ -1,2 +1,10 @@
-<h1>Users#following</h1>
-<p>Find me in app/views/users/following.html.erb</p>
+<%= content_for :title do %>
+  <%= tag.title t(".title") %>
+<% end %>
+<% if viewing_own_profile_while_logged_in? %>
+  <%= tag.h2 t(".my_heading"), class: %w[text-center] %>
+<% else %>
+  <%= tag.h2 t(".other_user_heading", user_name: @user.first_name), class: %w[text-center] %>
+<% end %>
+
+<%= render collection: @users, partial: 'user' %>

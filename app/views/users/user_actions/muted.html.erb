@@ -1,2 +1,6 @@
-<h1>Users#muted</h1>
-<p>Find me in app/views/users/muted.html.erb</p>
+<%= content_for :title do %>
+  <%= tag.title t(".title") %>
+<% end %>
+
+<%= tag.h2 t(".heading"), class: %w[text-center] %>
+<%= render collection: @users, partial: 'user' %>

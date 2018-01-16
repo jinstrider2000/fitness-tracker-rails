@@ -184,16 +184,22 @@ en:
     user_actions:
       not_found_error: "Sorry, that user doesn't exist"
       blocked:
-        title: "Fitness Tracker - %{user_name}'s Blocked Users"
+        title: "Fitness Tracker - My Blocked Users"
+        heading: "My Blocked Users"
       followers:
         title: "Fitness Tracker - %{user_name}: Followers"
+        my_heading: "My Followers"
+        other_user_heading: "%{user_name}'s Followers"
       following:
-        title: "Fitness Tracker - %{user_name}: Following"
+        title: "Fitness Tracker - Who %{user_name}'s Following"
+        my_heading: "Who I'm Following"
+        other_user_heading: "Who %{user_name}'s Following"
       index:
         title: "Fitness Tracker - User Index"
         heading: "All Users"
       muted:
-        title: "Fitness Tracker - %{user_name}'s Muted Users"
+        title: "Fitness Tracker - %{user_name}'s Blocked Users"
+        heading: "My Muted Users"
       show:
         title: "Fitness Tracker - %{user_name}'s Profile"
         my_heading: "Welcome %{first_name}"

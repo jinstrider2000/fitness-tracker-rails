@@ -2,9 +2,11 @@
   <%= link_to user_path(user.slug) do %>
     <%= image_tag profile_pic_path(user), class: %w[img-circle index-icon] %>
   <% end %>
-  <%= follow_status(user, class: %w[follow-status-msg follow-status-msg-index]) %>
-  <%= tag.div class: %w[user-actions-btn text-center] do %>
-    <%= action_button(user) %>
+  <% unless current_user.id == user.id %>
+    <%= follow_status(user, class: %w[follow-status-msg follow-status-msg-index]) %>
+    <%= tag.div class: %w[user-actions-btn text-center] do %>
+      <%= action_button(user) %>
+    <% end %>
   <% end %>
   <%= tag.h3 truncate(user.name, length: 16, separator: " "), class: %w[index-name] %>
   <%= tag.p truncate(user.quote, length: 60, separator: " "), class: %w[index-quote] %>
