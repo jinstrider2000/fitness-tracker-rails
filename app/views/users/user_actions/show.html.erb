@@ -23,28 +23,24 @@
 		<%= action_button(@user) %>
 	</div>
 <% end %>
-<div class="row">
-	<div class="text-center center-block">
-		<%= link_to user_achievements_path(@user.slug), class: 'plain-style' do %>
-			<%= tag.h3 t(".all_achievements") %>
-		<% end %>
-	</div>
+<div class="row text-center">
+	<%= link_to t(".all_achievements"), user_achievements_path(@user.slug), class: 'heading-link plain-style' %>
 </div>
 <div class="row">
-	<div class="relationship-index col-sm-5 card-style">
-		<%= link_to following_user_path(@user.slug), class: 'plain-style' do %>
-			<h3 class="text-center"><%= t ".following", count: @user.following.count %></h3>
-		<% end %>
+	<div class="relationship-index text-center col-sm-5 card-style">
+		<div class="row">
+			<%= link_to t(".following", count: @user.following.count), following_user_path(@user.slug), class: 'heading-link plain-style' %>
+		</div>
 		<% @user.following.first(6).each do |user| %>
 			<%= link_to user_path(user.slug) do %>
 				<%= image_tag profile_pic_path(user), class: %w[img-circle mini-pic-display], title: user.name %>
 			<% end %>
 		<% end %>
 	</div>
-	<div class="relationship-index col-sm-5 col-sm-offset-2 card-style">
-		<%= link_to followers_user_path(@user.slug), class: 'plain-style' do %>
-			<h3 class="text-center"><%= t ".followers", count: @user.followers.count %></h3>
-		<% end %>
+	<div class="relationship-index text-center col-sm-5 col-sm-offset-2 card-style">
+		<div class="row">
+			<%= link_to t(".followers", count: @user.followers.count), followers_user_path(@user.slug), class: 'heading-link plain-style' %>
+		</div>
 		<% @user.followers.first(6).each do |user| %>
 			<%= link_to user_path(user.slug) do %>
 				<%= image_tag profile_pic_path(user), class: %w[img-circle mini-pic-display], title: user.name %>

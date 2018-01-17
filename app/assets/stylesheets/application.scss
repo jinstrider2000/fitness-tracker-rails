@@ -55,6 +55,13 @@
    line-height: 1.25em;
    margin-bottom: 15px;
  }
+
+ a.heading-link
+ {
+   font-family: "Montserrat", sans-serif;
+   line-height: 1.25em;
+   font-size: 24px;
+ }
  
  .navbar-default
  {
@@ -260,7 +267,7 @@
    float: left;
  }
 
- .user-index > a
+ .user-index > a, .relationship-index > a
  {
    text-decoration: none;
  }
