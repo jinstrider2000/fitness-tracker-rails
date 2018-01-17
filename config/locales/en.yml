@@ -155,6 +155,10 @@ en:
       other_user_heading: "%{user_name}'s %{record_name}"
       new_link: "Add New"
       no_items: "No %{items}"
+    food_index_by_date_col:
+      reached: "Calorie Goal Reached!"
+      over: "%{dif} calories over goal"
+      under: "%{dif} calories under goal"
     new:
       title: "Fitness Tracker - New Achievement"
       heading: "New Achievement"
@@ -209,9 +213,14 @@ en:
         recent_exercises: "Recently Added Exercises"
         recent_foods: "Recent Added Foods"
         no_activity: "No Recent Activity"
+        all_achievements: "View All Achievements"
         more_link: "more"
-        following: "Following: %{num} Users"
-        followers: "Followers: %{num} Users"
+        following:
+          one: "Following: %{count} User"
+          other: "Following: %{count} Users"
+        followers:
+          one: "Followers: %{count} User"
+          other: "Followers: %{count} Users"
       follow:
         success_msg: "You've followed %{first_name}"
       unfollow:

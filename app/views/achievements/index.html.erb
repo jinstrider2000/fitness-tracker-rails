@@ -17,6 +17,10 @@
   <% end %>
 <% end %>
 
+<%= tag.div class: %w[row text-center] do %>
+  <%= render partial: 'activity_type_selection', locals: {html_method: nil, achievement: nil} %>
+<% end %>
+
 <% if @achievements.count > 0 %>
   <%= render partial: 'index_sort', locals: {filter_options_array: @activity_type.capitalize.constantize.valid_filter_options, order_options_array: @activity_type.capitalize.constantize.valid_order_options} %>
   <% if @activity_type != "achievement" && filter_param_valid_and_other_than_completed_on? %>

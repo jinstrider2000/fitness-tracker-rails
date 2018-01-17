@@ -1,2 +1,9 @@
 <%= render collection: food_index_by_date_col, partial: "food" %>
 <%= tag.p "<strong>#{DailyTotal.human_attribute_name("total_calories_in")}</strong>: <em>#{food_index_by_date_col.first.daily_total.total_calories_in}</em>".html_safe, class: %w[text-center index-style], style: "padding-top:10px;" %>
+<% if food_index_by_date_col.first.daily_total.total_calories_in > @user.daily_calorie_intake_goal %>
+  <%= tag.p t(".over", dif: food_index_by_date_col.first.daily_total.total_calories_in - @user.daily_calorie_intake_goal), class: 'text-center', style: "color:red;" %>
+<% elsif food_index_by_date_col.first.daily_total.total_calories_in == @user.daily_calorie_intake_goal %>
+  <%= tag.p t(".reached"), class: 'text-center', style: "font-weight:bold;" %>
+<% else %>
+  <%= tag.p t(".under", dif: @user.daily_calorie_intake_goal - food_index_by_date_col.first.daily_total.total_calories_in), class: 'text-center', style: "color:green;" %>
+<% end %>

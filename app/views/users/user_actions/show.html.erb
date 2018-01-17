@@ -24,16 +24,31 @@
 	</div>
 <% end %>
 <div class="row">
-	<div class="col-sm-5 card-style clearfix">
-		<h3 class="text-center"><%= t ".following", num: @user.following.count %></h3>
-		<% @user.following.first(6).each do |user| %>
-			<%= image_tag profile_pic_path(user), class: %w[img-circle mini-pic-display], title: user.name %>
+	<div class="text-center center-block clearfix">
+		<%= link_to user_achievements_path(@user.slug), class: 'plain-style' do %>
+			<%= tag.h3 t(".all_achievements") %>
 		<% end %>
 	</div>
-	<div class="col-sm-5 col-sm-offset-2 card-style clearfix">
-		<h3 class="text-center"><%= t ".followers", num: @user.followers.count %></h3>
+</div>
+<div class="row">
+	<div class="relationship-index col-sm-5 card-style clearfix">
+		<%= link_to following_user_path(@user.slug), class: 'plain-style' do %>
+			<h3 class="text-center"><%= t ".following", count: @user.following.count %></h3>
+		<% end %>
+		<% @user.following.first(6).each do |user| %>
+			<%= link_to user_path(user.slug) do %>
+				<%= image_tag profile_pic_path(user), class: %w[img-circle mini-pic-display], title: user.name %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="relationship-index col-sm-5 col-sm-offset-2 card-style clearfix">
+		<%= link_to followers_user_path(@user.slug), class: 'plain-style' do %>
+			<h3 class="text-center"><%= t ".followers", count: @user.followers.count %></h3>
+		<% end %>
 		<% @user.followers.first(6).each do |user| %>
-			<%= image_tag profile_pic_path(user), class: %w[img-circle mini-pic-display], title: user.name %>
+			<%= link_to user_path(user.slug) do %>
+				<%= image_tag profile_pic_path(user), class: %w[img-circle mini-pic-display], title: user.name %>
+			<% end %>
 		<% end %>
 	</div>
 </div>

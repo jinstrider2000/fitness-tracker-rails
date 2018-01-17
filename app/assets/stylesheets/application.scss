@@ -189,6 +189,11 @@
  {
    color: red;
  }
+
+ a.plain-style, a.plain-style:active
+ {
+   color: black
+ }
  
  .index-style, a.index-style:active
  {
@@ -202,7 +207,7 @@
    text-align: left;
  }
  
- a.index-style:hover
+ a.index-style:hover, a.plain-style:hover
  {
    text-decoration: none;
    color: grey;
@@ -300,6 +305,11 @@
  {
    font-size: 16px;
  }
+
+ .relationship-index
+ {
+   padding-bottom: 4px;
+ }
  
  @media (max-width: 768px)
  {
@@ -337,6 +347,11 @@
    .mini-pic-display
    {
      display: none;
+   }
+
+   .relationship-index > a > .mini-pic-display
+   {
+     display: inline
    }
  
    .profile-pic-display

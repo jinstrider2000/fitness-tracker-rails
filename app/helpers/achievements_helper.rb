@@ -1,10 +1,18 @@
 module AchievementsHelper
 
   def activity_selected?(activity_name, html_method, achievement)
-    if html_method == :post 
+    if html_method == :post || params[:action] == 'index'
       params[:activity_type].try(:capitalize) == activity_name
     else
       achievement.activity_type == activity_name
+    end
+  end
+
+  def activity_selection_destination_path(activity_type)
+    if params[:action] == 'index'
+      user_achievements_path @user.slug, activity_type: activity_type
+    else
+      new_user_achievement_path @user.slug, activity_type: activity_type
     end
   end
 
