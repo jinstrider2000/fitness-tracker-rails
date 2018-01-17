@@ -7,10 +7,6 @@ class UserPolicy < ApplicationPolicy
     def following?
       followers?
     end
-
-    def activity_feed?
-      followers?
-    end
   
     def blocked?
       user.id == record.id

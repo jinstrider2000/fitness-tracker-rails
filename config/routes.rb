@@ -15,7 +15,6 @@ Rails.application.routes.draw do
       get 'muted'
       get 'followers'
       get 'following'
-      get 'activity-feed', action: 'activity_feed'
     end
   end
 

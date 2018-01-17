@@ -210,6 +210,8 @@ en:
         recent_foods: "Recent Added Foods"
         no_activity: "No Recent Activity"
         more_link: "more"
+        following: "Following: %{num} Users"
+        followers: "Followers: %{num} Users"
       follow:
         success_msg: "You've followed %{first_name}"
       unfollow:

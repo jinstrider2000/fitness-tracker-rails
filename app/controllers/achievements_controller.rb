@@ -47,6 +47,7 @@ class AchievementsController < ApplicationController
   end
 
   def edit
+    session[:edit_request_from_a_feed] = 
     if @achievement.present?
       authorize @achievement
     else
@@ -61,7 +62,6 @@ class AchievementsController < ApplicationController
       if @achievement.update(achievement_params)
         redirect_to achievement_path(@achievement), notice: t(".success_msg")
       else
-        @user = current_user
         render :edit
       end
     else
@@ -74,7 +74,7 @@ class AchievementsController < ApplicationController
     if @achievement.present?
       authorize @achievement
       @achievement.destroy
-      if referred_by_news_feed?
+      if referred_by_a_feed?
         redirect_to request.referrer, notice: t(".success_msg")
       else
         redirect_to user_achievements_path(@achievement.user.slug), notice: t(".success_msg")

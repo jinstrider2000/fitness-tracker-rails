@@ -4,8 +4,8 @@ class Achievement < ApplicationRecord
   VALID_ORDER_OPTIONS = ["Descending", "Ascending"].freeze
   VALID_ACTIVITIES = ["Food", "Exercise"].freeze
   VALID_ACTIVITY_PARAMS = {
-    %w[name calories_burned].sort => "Exercise",
-    %w[name calories].sort => "Food"
+    %w[name calories_burned].sort => Exercise,
+    %w[name calories].sort => Food
   }.freeze
 
   belongs_to :activity, polymorphic: true, dependent: :destroy, validate: true
@@ -25,7 +25,7 @@ class Achievement < ApplicationRecord
     if activity.present?
       activity.assign_attributes(values)
     else
-      klass = VALID_ACTIVITY_PARAMS[values.keys.sort].constantize
+      klass = VALID_ACTIVITY_PARAMS[values.keys.sort]
       self.activity = klass.new(values)
     end 
   end

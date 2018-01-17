@@ -25,10 +25,16 @@
 <% end %>
 <div class="row">
 	<div class="col-sm-5 card-style clearfix">
-		
+		<h3 class="text-center"><%= t ".following", num: @user.following.count %></h3>
+		<% @user.following.first(6).each do |user| %>
+			<%= image_tag profile_pic_path(user), class: %w[img-circle mini-pic-display], title: user.name %>
+		<% end %>
 	</div>
-	<div class="col-sm-5 card-style clearfix">
-	
+	<div class="col-sm-5 col-sm-offset-2 card-style clearfix">
+		<h3 class="text-center"><%= t ".followers", num: @user.followers.count %></h3>
+		<% @user.followers.first(6).each do |user| %>
+			<%= image_tag profile_pic_path(user), class: %w[img-circle mini-pic-display], title: user.name %>
+		<% end %>
 	</div>
 </div>
 <div class="row">
