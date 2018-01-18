@@ -104,6 +104,8 @@ en:
         unblock: "Unblock"
         mute: "Mute"
         unmute: "Unmute"
+        following: "Following"
+        followers: "Followers"
       daily_total:
         total_calories_in: "Total Calories In"
         total_calories_out: "Total Calories Out"
@@ -144,8 +146,28 @@ en:
         muted: "Muted"
       news_feed: "News Feed"
   news_feed:
+    news_feed_helper:
+      time_since_update:
+        now: "Just Now"
+        sec: "%{count} seconds ago"
+        min:
+          one: "%{count} minute ago"
+          other: "%{count} minutes ago"
+        hour:
+          one: "%{count} hour ago"
+          other: "%{count} hours ago"
+        day:
+          one: "%{count} day ago"
+          other: "%{count} days ago"
+        month:
+          one: "%{count} month ago"
+          other: "%{count} months ago"
+        year:
+          one: "%{count} year ago"
+          other: "%{count} years ago"
     index:
       title: "Fitness Tracker - News Feed"
+      user_index: "Find people on Fitness Tracker"
   achievements:
     not_found_error: "Sorry, that achievement couldn't be found"
     index:

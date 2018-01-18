@@ -24,9 +24,6 @@ module UsersHelper
   end
 
   def follow_status(user, options={})
-    # classes = %w[follow-status-msg]
-    # classes << options[:additional_classes]
-    # classes.flatten!
     if current_user.following_each_other?(user) 
      tag.span t("users.users_helper.follow_status.following_each_other"), options 
     elsif user.following?(current_user) 

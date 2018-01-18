@@ -83,9 +83,9 @@ class User < ApplicationRecord
     end
   end
 
-  def achievement_following_timeline
-    timeline_user_ids = [self.id, self.following.distinct.pluck(:id)].flatten
-    Achievement.where(user_id: timeline_user_ids).order(updated_at: :desc)
+  def news_feed_items
+    news_feed_user_ids = [self.id, self.following.distinct.pluck(:id)].flatten
+    Achievement.where(user_id: news_feed_user_ids).order(updated_at: :desc)
   end
 
   def blocked?(user)

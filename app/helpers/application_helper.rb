@@ -29,10 +29,6 @@ module ApplicationHelper
     end
   end
 
-  def referred_by_news_feed?
-    !!(request.referrer == news_feed_path || request.referrer == root_path)
-  end
-
   def route_helpers
     Rails.application.routes.url_helpers
   end

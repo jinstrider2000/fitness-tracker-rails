@@ -4,7 +4,7 @@ class NewsFeedController < ApplicationController
 
   def index
     if user_signed_in?
-      @feed = current_user.achievement_following_timeline
+      @feed = current_user.news_feed_items
     else
       render 'application/landing'
     end

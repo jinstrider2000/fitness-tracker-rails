@@ -2,5 +2,25 @@
   <%= tag.title t(".title") %>
 <% end %>
 
-<h1>NewsFeed#index</h1>
-<p>Find me in app/views/news_feed/index.html.erb</p>
+<%= link_to t(".user_index"), users_path, style: 'float:right;' %>
+
+<%= tag.div id: 'news-feed-profile' do %>
+  <%= link_to user_path(current_user.slug) do %>
+    <%= image_tag profile_pic_path(current_user), class: %w[index-icon img-circle] %>
+  <% end %>
+  <%= tag.h3 current_user.name %>
+  <%= tag.p current_user.quote, class: %w[index-quote] %>
+  <%= tag.div class: %w[row] do %>
+    <%= tag.div class: %w[col-xs-6 text-center] do %>
+      <%= tag.h4 User.human_attribute_name(:following) %>
+      <%= link_to current_user.following.count, following_user_path(current_user.slug), class: %w[plain-style] %>
+    <% end %>
+    <%= tag.div class: %w[col-xs-6 text-center] do %>
+    <%= tag.h4 User.human_attribute_name(:followers) %>
+      <%= link_to current_user.followers.count, followers_user_path(current_user.slug), class: %w[plain-style] %>
+    <% end %>
+  <% end %>
+<% end %>
+<%= tag.div id: 'news-feed-items-container' do %>
+  <%= render collection: @feed, partial: 'feed_item' %>
+<% end %>
