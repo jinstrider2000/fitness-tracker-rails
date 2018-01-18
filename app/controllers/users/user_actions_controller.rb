@@ -1,12 +1,13 @@
 class Users::UserActionsController < ApplicationController
   
   before_action :load_user_resource, except: [:index]
-  after_action :verify_authorized, except: [:index, :show]
+  after_action :verify_authorized, except: [:index]
 
   def show
     if @user.present?
-      @blocked = current_user.blocked_by?(@user)
+      authorize @user
     else
+      skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
@@ -20,6 +21,7 @@ class Users::UserActionsController < ApplicationController
       authorize @user
       @users = @user.followers
     else
+      skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
@@ -29,6 +31,7 @@ class Users::UserActionsController < ApplicationController
       authorize @user
       @users = @user.following
     else
+      skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
@@ -38,6 +41,7 @@ class Users::UserActionsController < ApplicationController
       authorize @user
       @users = @user.blocked_users
     else
+      skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
@@ -47,6 +51,7 @@ class Users::UserActionsController < ApplicationController
       authorize @user
       @users = @user.muted_users
     else
+      skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
@@ -57,6 +62,7 @@ class Users::UserActionsController < ApplicationController
       current_user.follow(@user)
       redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
     else
+      skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
@@ -67,6 +73,7 @@ class Users::UserActionsController < ApplicationController
       current_user.unfollow(@user)
       redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
     else
+      skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
@@ -75,8 +82,14 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       authorize @user
       current_user.block(@user)
-      redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
+      if request.referrer == user_url(@user.slug)
+        redirect_to root_path, notice: t(".success_msg", first_name: @user.first_name)
+      else
+        binding.pry
+        redirect_to request.referrer, notice: t(".success_msg", first_name: @user.first_name)
+      end
     else
+      skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
@@ -87,6 +100,7 @@ class Users::UserActionsController < ApplicationController
       current_user.unblock(@user)
       redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
     else
+      skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
@@ -97,6 +111,7 @@ class Users::UserActionsController < ApplicationController
       current_user.mute(@user)
       redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
     else
+      skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end
@@ -107,6 +122,7 @@ class Users::UserActionsController < ApplicationController
       current_user.unmute(@user)
       redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
     else
+      skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
   end

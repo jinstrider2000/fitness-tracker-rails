@@ -121,6 +121,7 @@ en:
       update?: "You can't update this user's achievement stats"
       destroy?: "You can't delete this user's achievement stats"
     user_policy:
+      show?: "You can't see this users profile, they've blocked you or you blocked them."
       followers?: "You can't view this user's followers"
       following?: "You can't view who this user is following"
       blocked?: "You can't view another user's blocked list"
