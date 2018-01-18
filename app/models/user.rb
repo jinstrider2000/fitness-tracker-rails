@@ -84,7 +84,7 @@ class User < ApplicationRecord
   end
 
   def news_feed_items
-    news_feed_user_ids = [self.id, self.following.distinct.pluck(:id)].flatten
+    news_feed_user_ids = [self.id, self.following.pluck(:id)].flatten - self.muted_users.pluck(:id)
     Achievement.where(user_id: news_feed_user_ids).order(updated_at: :desc)
   end
 
