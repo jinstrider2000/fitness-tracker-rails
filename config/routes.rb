@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'news_feed#index'
   get '/news-feed' => 'news_feed#index'
-  devise_for :users, controllers: {registrations: 'users/registrations'}, skip: [:passwords]
+  devise_for :users, controllers: {registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks'}, skip: [:passwords]
   
   resources :users, param: :slug, only: [:index, :show], module: "users", controller: "user_actions" do
     member do

@@ -40,6 +40,7 @@ gem 'pundit', '~> 1.1'
 gem 'bootstrap-sass', '3.3.7'
 gem 'omniauth', '>= 1.0.0'
 gem 'dynamic_form'
+gem 'omniauth-facebook'
 
 
 group :development, :test do
