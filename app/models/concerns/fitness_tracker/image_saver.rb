@@ -1,3 +1,5 @@
+require 'fileutils'
+
 class FitnessTracker::ImageSaver
 
   def initialize(user)
@@ -21,11 +23,7 @@ class FitnessTracker::ImageSaver
   end
 
   def delete_user_image_dir
-    files = Dir.entries(@image_dir)
-    files = files - ["*","**"]
-    files.each 
-    File.delete(files.join())
-    Dir.rmdir(@image_dir)
+    FileUtils.rm_r(@image_dir)
   end
 
 end
