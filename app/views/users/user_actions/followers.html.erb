@@ -1,5 +1,5 @@
 <%= content_for :title do %>
-  <%= tag.title t(".title") %>
+  <%= tag.title t(".title", user_name: @user.first_name) %>
 <% end %>
 <% if viewing_own_profile_while_logged_in? %>
   <%= tag.h2 t(".my_heading"), class: %w[text-center] %>
