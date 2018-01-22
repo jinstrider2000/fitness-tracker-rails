@@ -42,7 +42,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if params[:action] == "create"
       devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :daily_calorie_intake_goal, :quote, :profile_pic])
     else
-      devise_parameter_sanitizer.permit(:account_update, keys: [:name, :daily_calorie_intake_goal, :quote, :profile_pic])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:name, :daily_calorie_intake_goal, :quote, :profile_pic, :remote_profile_pic])
     end
   end
 

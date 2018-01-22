@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180118201021) do
+ActiveRecord::Schema.define(version: 20180122175414) do
 
   create_table "achievements", force: :cascade do |t|
     t.string "activity_type"
@@ -95,6 +95,8 @@ ActiveRecord::Schema.define(version: 20180118201021) do
     t.datetime "updated_at", null: false
     t.string "provider"
     t.string "uid"
+    t.string "profile_pic_url"
+    t.boolean "remote_profile_pic", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end

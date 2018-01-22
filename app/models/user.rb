@@ -4,6 +4,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   attr_accessor :profile_pic
+  attr_readonly :profile_pic_url
 
   devise :database_authenticatable, :registerable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: %i[facebook]
@@ -25,6 +26,7 @@ class User < ApplicationRecord
   validates :name, length: {maximum: 20}
   validates :email, uniqueness: true
   validates :daily_calorie_intake_goal, numericality: {greater_than_or_equal_to: 1}
+  validates :profile_pic_location, inclusion: {in: %w[local remote]}
   validates :quote, length: {maximum: 145}
   validate :profile_pic_is_valid_if_present
   
@@ -154,8 +156,8 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.name = auth.info.name   # assuming the user model has a name
-      tempfile = open(auth.info.image)
-      user.profile_pic = ActionDispatch::Http::UploadedFile.new(tempfile: tempfile, type: tempfile.content_type)
+      user.profile_pic_url = auth.info.image
+      user.remote_profile_pic = true
       user.daily_calorie_intake_goal = 2000
       user.quote = "Have a great day!"
       # If you are using confirmable and the provider(s) you use validate emails, 

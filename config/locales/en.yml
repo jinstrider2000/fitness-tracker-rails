@@ -106,6 +106,7 @@ en:
         unmute: "Unmute"
         following: "Following"
         followers: "Followers"
+        remote_profile_pic: "%{provider} Profile Pic"
       daily_total:
         total_calories_in: "Total Calories In"
         total_calories_out: "Total Calories Out"

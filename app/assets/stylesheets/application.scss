@@ -276,6 +276,7 @@
  {
    width: 64%;
    float: left;
+   padding: 0;
  }
 
  .news-feed-item
@@ -286,8 +287,14 @@
  .news-feed-item > span
  {
    float: right;
+   margin-right: 10px;
  }
 
+ .news-feed-item img.index-icon.img-circle
+ {
+   margin-left: 10px;
+ }
+ 
  .news-feed-item > .row
  {
   clear: right;

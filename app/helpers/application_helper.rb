@@ -24,6 +24,8 @@ module ApplicationHelper
   def profile_pic_path(user = nil)
     if user.try(:persisted?)
       asset_path(File.join("users","#{user.id}","profile_pic"), type: :image)
+    elsif user.try(:profile_pic_url) && user.remote_profile_pic == true
+      user.profile_pic_url
     else
       asset_path(File.join("users","generic","profile_pic"), type: :image)
     end
