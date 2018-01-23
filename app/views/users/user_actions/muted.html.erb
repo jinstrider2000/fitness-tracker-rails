@@ -3,4 +3,10 @@
 <% end %>
 
 <%= tag.h2 t(".heading"), class: %w[text-center] %>
-<%= render collection: @users, partial: 'user' %>
+<% if @users.size == 0 %>
+  <%= tag.div class: %w[row text-center no-items-style] do %>
+    <%= tag.p t ".no_items" %>
+  <% end %>
+<% else %>
+  <%= render collection: @users, partial: 'user' %>
+<% end %>

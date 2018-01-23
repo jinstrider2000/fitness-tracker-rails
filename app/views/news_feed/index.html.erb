@@ -1,9 +1,9 @@
 <%= content_for :title do %>
   <%= tag.title t(".title") %>
 <% end %>
-
-<%= link_to t(".user_index"), users_path, style: 'float:right;' %>
-
+<%= tag.div class: %w[row text-center] do %>
+  <%= link_to t(".user_index"), users_path %>
+<% end %>
 <%= tag.div id: 'news-feed-profile' do %>
   <%= link_to user_path(current_user.slug) do %>
     <%= image_tag profile_pic_path(current_user), class: %w[index-icon img-circle] %>
@@ -22,5 +22,11 @@
   <% end %>
 <% end %>
 <%= tag.div id: 'news-feed-items-container' do %>
-  <%= render collection: @feed, partial: 'feed_item' %>
+  <% if @feed.size == 0 %>
+    <%= tag.div class: %w[row text-center no-items-style] do %>
+      <%= tag.p t ".no_items" %>
+    <% end %>
+  <% else %>
+    <%= render collection: @feed, partial: 'feed_item' %>
+  <% end %>
 <% end %>

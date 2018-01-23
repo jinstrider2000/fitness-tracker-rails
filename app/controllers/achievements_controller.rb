@@ -74,11 +74,7 @@ class AchievementsController < ApplicationController
     if @achievement.present?
       authorize @achievement
       @achievement.destroy
-      if referred_by_a_feed?
-        redirect_to request.referrer, notice: t(".success_msg")
-      else
-        redirect_to user_achievements_path(@achievement.user.slug), notice: t(".success_msg")
-      end
+      redirect_to user_achievements_path(@achievement.user.slug), notice: t(".success_msg")
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("achievements.not_found_error")}

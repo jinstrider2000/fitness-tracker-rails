@@ -33,8 +33,8 @@ class User < ApplicationRecord
   after_create_commit :save_profile_pic
   before_update :set_slug, unless: :slug_set_properly?
   before_update :override_profile_pic_change, if: [:new_profile_pic_present?, :remote_pic_chosen?]
-  after_update :update_profile_pic, if: :new_profile_pic_present?
-  after_destroy_commit :delete_image_dir, on: :destroy
+  after_update_commit :update_profile_pic, if: :new_profile_pic_present?
+  after_destroy_commit :delete_image_dir
 
   def first_name
     self.name.split(" ")[0]
@@ -155,7 +155,7 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
+      user.password = "password123"
       user.name = auth.info.name   # assuming the user model has a name
       user.profile_pic_url = auth.info.image
       user.remote_profile_pic = true

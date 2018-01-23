@@ -1,7 +1,7 @@
 class AchievementPolicy < ApplicationPolicy
 
   def show?
-    !user.blocked_by?(record.user)
+    !user.blocked_by?(record.user) && !user.blocked?(record.user)
   end
 
   def index?

@@ -170,6 +170,7 @@ en:
     index:
       title: "Fitness Tracker - News Feed"
       user_index: "Find people on Fitness Tracker"
+      no_items: "No news today. To see some activity, please log an achievement, or follow someone who has logged achievements."
   achievements:
     not_found_error: "Sorry, that achievement couldn't be found"
     index:
@@ -214,20 +215,24 @@ en:
       blocked:
         title: "Fitness Tracker - My Blocked Users"
         heading: "My Blocked Users"
+        no_items: "You haven't blocked anyone"
       followers:
         title: "Fitness Tracker - %{user_name}: Followers"
         my_heading: "My Followers"
         other_user_heading: "%{user_name}'s Followers"
+        no_items: "You have no followers"
       following:
         title: "Fitness Tracker - Who %{user_name}'s Following"
         my_heading: "Who I'm Following"
         other_user_heading: "Who %{user_name}'s Following"
+        no_items: "You haven't followed anyone"
       index:
         title: "Fitness Tracker - User Index"
         heading: "All Users"
       muted:
-        title: "Fitness Tracker - %{user_name}'s Blocked Users"
+        title: "Fitness Tracker - My Blocked Users"
         heading: "My Muted Users"
+        no_items: "You haven't muted anyone"
       show:
         title: "Fitness Tracker - %{user_name}'s Profile"
         my_heading: "Welcome %{first_name}"
@@ -297,3 +302,4 @@ en:
         confirmation_instructions: "Didn't receive confirmation instructions?"
         unlock_instructions: "Didn't receive unlock instructions?"
         omniauth: "Sign in with %{provider}"
+        omniauth_confirm: "You are being directed to %{provider} for registration. Upon completion, you will be redirected to Fitness Tracker, and your temporary password will be \"password123\". Please update this password immediately. Do you understand?"
