@@ -26,7 +26,6 @@ class User < ApplicationRecord
   validates :name, length: {maximum: 20}
   validates :email, uniqueness: true
   validates :daily_calorie_intake_goal, numericality: {greater_than_or_equal_to: 1}
-  validates :profile_pic_location, inclusion: {in: %w[local remote]}
   validates :quote, length: {maximum: 145}
   validate :profile_pic_is_valid_if_present
   
