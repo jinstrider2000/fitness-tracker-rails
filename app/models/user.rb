@@ -4,7 +4,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   attr_accessor :profile_pic
-  attr_readonly :profile_pic_url
+  attr_readonly :profile_pic_url, :provider, :uid
 
   devise :database_authenticatable, :registerable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: %i[facebook]
@@ -29,10 +29,12 @@ class User < ApplicationRecord
   validates :quote, length: {maximum: 145}
   validate :profile_pic_is_valid_if_present
   
-  after_create :update_slug_column, :save_profile_pic
+  after_create :update_slug_column
+  after_create_commit :save_profile_pic
   before_update :set_slug, unless: :slug_set_properly?
+  before_update :override_profile_pic_change, if: [:new_profile_pic_present?, :remote_pic_chosen?]
   after_update :update_profile_pic, if: :new_profile_pic_present?
-  after_destroy :delete_image_dir
+  after_destroy_commit :delete_image_dir, on: :destroy
 
   def first_name
     self.name.split(" ")[0]
@@ -219,6 +221,14 @@ class User < ApplicationRecord
 
   def new_profile_pic_present?
     self.profile_pic.present?
+  end
+
+  def remote_pic_chosen?
+    self.provider.present? && self.remote_profile_pic
+  end
+
+  def override_profile_pic_change
+    self.profile_pic = nil
   end
 
 end

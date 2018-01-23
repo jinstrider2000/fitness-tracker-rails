@@ -1,11 +1,17 @@
 <%= form_for(resource, as: resource_name, url: registration_path, method: html_method) do |f| %>
   <%= devise_error_messages! %>
   <%= tag.div class: 'form-group' do %>  
-    <%= image_tag profile_pic_path(resource), class: 'profile-pic-select img-thumbnail' %>
-    <%= f.file_field :profile_pic, accept: 'image/*' %>
+    <%= image_tag profile_pic_path(current_user), class: 'profile-pic-select img-thumbnail' %>
+    <%= f.file_field(:profile_pic, accept: 'image/*') unless current_user.try(:remote_profile_pic) %>
   <% end %>
-  <%= tag.div class: 'form-group' do %>
-    <%= f.checkbox :remote_profile_pic %>
+  <% if resource.profile_pic_url.present? %>
+    <%= tag.div class: 'form-group' do %>
+      <%= f.check_box :remote_profile_pic %>
+      <%= f.label :remote_profile_pic, t(".remote_profile_pic_label", remote_profile_pic: User.human_attribute_name(:remote_profile_pic, provider: resource.provider.capitalize)) %>
+      <% unless current_user.remote_profile_pic %>
+        <em> <%= t ".remote_profile_pic_msg" %> </em>
+      <% end %>
+    <% end %>
   <% end %>
   <%= tag.div class: 'form-group' do %>
     <%= f.label :name %>

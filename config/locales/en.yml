@@ -282,6 +282,8 @@ en:
         quote_placeholder: "Maximum length is %{maximum}"
         current_password_placeholder: "Must be filled out to update"
         password_minimum: "(%{minimum_length} characters minimum)"
+        remote_profile_pic_label: "Use your %{remote_profile_pic}?"
+        remote_profile_pic_msg: "(overrides all other changes if selected)"
     sessions:
       new:
         title: "Fitness Tracker - Login"
