@@ -2,14 +2,29 @@
   <%= tag.title t("default") %>
 <% end %>
 
-<div class="jumbotron">
-	<h1>Welcome to Fitness Tracker!</h1>
+<div id="landing-container" class="jumbotron">
+	<%= image_tag 'people_exercising', class: %w[img-responsive center-block] %>
+	<h1 class="text-center"><%= t ".heading" %></h1>
 	<div class="row">
-		<p>New to the site?</p>
-		<a class= "btn btn-large btn-primary" role="button" href="<%=new_user_registration_path%>">Register</a>
+		<div class="col-sm-4 landing-feature text-center">
+			<%= image_tag "achievement_icon", class: %w[index-icon] %>
+			<%= tag.h4 t ".achievement_msg" %>
+		</div>
+		<div class="col-sm-4 landing-feature text-center">
+			<%= image_tag "handshake_icon", class: %w[index-icon] %>
+			<%= tag.h4 t ".share_msg" %>
+		</div>
+		<div class="col-sm-4 landing-feature text-center">
+			<%= image_tag "celebrate_icon", class: %w[index-icon] %>
+			<%= tag.h4 t ".celebrate_msg" %>
+		</div>
+	</div>	
+	<div class="row text-center">
+		<h4><%= t ".new?" %></h4>
+		<a class= "btn btn-large btn-primary" role="button" href="<%=new_user_registration_path%>"><%= t ".register" %></a>
 	</div>
-	<div class="row">
-		<p>Already have an account?</p>
-		<a class= "btn btn-large btn-primary" role="button" href="<%=new_user_session_path%>">Log In</a>
+	<div class="row text-center">
+		<h4><%= t ".signed_up?" %></h4>
+		<a class= "btn btn-large btn-primary" role="button" href="<%=new_user_session_path%>"><%= t ".login" %></a>
 	</div>
 </div>

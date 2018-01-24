@@ -372,6 +372,27 @@
  {
    padding-bottom: 4px;
  }
+
+ #landing-container
+ {
+   background-color: inherit;
+ }
+
+ #landing-container > .row:nth-of-type(1)
+ {
+   margin-bottom: 30px;
+ }
+
+ #landing-container > .row > .landing-feature
+ {
+   border-right: 1px solid black;
+   height: 160px;
+ }
+
+ #landing-container > .row > .landing-feature:nth-last-of-type(1)
+ {
+   border-right: none;
+ }
  
  @media (max-width: 768px)
  {
@@ -458,6 +479,21 @@
    .index-style
    {
      font-size: 20px;
+   }
+
+   #landing-container > .row > .landing-feature
+   {
+     width: 80%;
+     margin-left: auto;
+     margin-right: auto;
+     height: auto;
+     border-right: none;
+     border-bottom: 1px solid black;
+   }
+
+   #landing-container > .row > .landing-feature:nth-last-of-type(1)
+   {
+    padding-top: 10px;
    }
  }
 

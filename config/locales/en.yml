@@ -129,6 +129,16 @@ en:
       muted?: "You can't view another user's muted list"
       follow?: "You can't follow this user"
       unfollow?: "You aren't following this user"
+  application:
+    landing:
+      heading: "Welcome to Fitness Tracker"
+      achievement_msg: "Log you fitness achievements!"
+      share_msg: "Find friends and share your progress!"
+      celebrate_msg: "Celebrate your healthy lifestyle!"
+      new?: "New to the site?"
+      register: "Register"
+      signed_up?: "Already have an account?"
+      login: "Log in"
   shared:
     nav:
       login: "Log In"
