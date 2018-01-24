@@ -1,6 +1,6 @@
 # Fitness Tracker (Rails)
 
-A simple fitness tracker web app made in Rails (now with Friend Requests!), by Efrain Perez Jr.
+A simple fitness web app made in Rails (now with Twitter-style following!), by Efrain Perez Jr.
 
 
 ## Installation
@@ -13,9 +13,13 @@ Once in the repository, type the following to ensure you have all the prerequist
 
     $ bundle install
 
+Finally, set up the application database
+
+    $ rails db:setup
+
 ## Usage
 
-In the repository, with your BASH console, type the following to run the local server
+In your BASH console, type the following to run the local server
 
     $ rails s
 
