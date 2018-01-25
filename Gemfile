@@ -41,6 +41,7 @@ gem 'bootstrap-sass', '3.3.7'
 gem 'omniauth', '>= 1.0.0'
 gem 'dynamic_form'
 gem 'omniauth-facebook'
+gem 'rails-i18n', '~> 5.0.0'
 
 
 group :development, :test do
