@@ -4,9 +4,9 @@
 
 <%= tag.div class: %w[row text-center] do %>
   <% if policy(@achievement).update? %>
-    <%= tag.h2 t ".my_heading", record_name: @achievement.activity_type %>
+    <%= tag.h2 t ".my_heading", record_name: @achievement.activity.model_name.human %>
   <% else %>
-    <%= tag.h2 t ".other_user_heading", user_name: @user.first_name, record_name: @achievement.activity_type %>
+    <%= tag.h2 t ".other_user_heading", user_name: @user.first_name, record_name: @achievement.activity.model_name.human %>
   <% end %>
 <% end %>
 

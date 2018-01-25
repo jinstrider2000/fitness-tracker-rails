@@ -31,6 +31,13 @@
 
 en:
   default: "Fitness Tracker"
+  date:
+    formats:
+      default: "%-m/%-d/%Y"
+    order:
+    - :month
+    - :day
+    - :year
   filter:
     achievement:
       completed on: "Completed On"
@@ -106,6 +113,7 @@ en:
         unmute: "Unmute"
         following: "Following"
         followers: "Followers"
+        remember_me: "Remember me"
         remote_profile_pic: "%{provider} Profile Pic"
       daily_total:
         total_calories_in: "Total Calories In"
@@ -122,7 +130,7 @@ en:
       update?: "You can't update this user's achievement stats"
       destroy?: "You can't delete this user's achievement stats"
     user_policy:
-      show?: "You can't see this users profile, they've blocked you or you blocked them."
+      show?: "You can't see this users profile, they've blocked you or you blocked them"
       followers?: "You can't view this user's followers"
       following?: "You can't view who this user is following"
       blocked?: "You can't view another user's blocked list"
@@ -132,7 +140,7 @@ en:
   application:
     landing:
       heading: "Welcome to Fitness Tracker"
-      achievement_msg: "Log you fitness achievements!"
+      achievement_msg: "Log your fitness achievements!"
       share_msg: "Find friends and share your progress!"
       celebrate_msg: "Celebrate your healthy lifestyle!"
       new?: "New to the site?"
@@ -140,6 +148,12 @@ en:
       signed_up?: "Already have an account?"
       login: "Log in"
   shared:
+    lang_selection:
+      language: "Language"
+      available_langs:
+        en: "English"
+        es: "Spanish"
+      submit: "Switch"
     nav:
       login: "Log In"
       logout: "Log Out"
@@ -215,6 +229,8 @@ en:
       filter: "Sort by:"
       order: "Order:"
       submit: "Sort"
+    activity_type_selection:
+      all: "All"
   users:
     users_helper:
       follow_status:

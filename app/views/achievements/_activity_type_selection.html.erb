@@ -1,11 +1,16 @@
 <% if params[:action] == 'index' %>
-  <% ["All", Achievement::VALID_ACTIVITIES].flatten.each do |activity_name| %>
+  <% [t(".all"), Achievement::VALID_ACTIVITIES].flatten.each do |activity_name| %>
     <%= radio_button_tag 'activity_type', activity_name, activity_selected?(activity_name, html_method, achievement), disabled: html_method == :patch, onclick: "window.location=\"#{activity_selection_destination_path(activity_name)}\"" %>
-    <%= label_tag "activity_type_#{activity_name}", activity_name %>
+    <% if activity_name == t(".all") %>
+      <%= label_tag "activity_type_#{activity_name}", activity_name %>
+    <% else %>
+      <%= label_tag "activity_type_#{activity_name}", activity_name.constantize.model_name.human %>
+    <% end %>
+    
   <% end %>
 <% else %>
   <% Achievement::VALID_ACTIVITIES.each do |activity_name| %>
     <%= radio_button_tag 'activity_type', activity_name, activity_selected?(activity_name, html_method, achievement), disabled: html_method == :patch, onclick: "window.location=\"#{activity_selection_destination_path(activity_name)}\"" %>
-    <%= label_tag "activity_type_#{activity_name}", activity_name %>
+    <%= label_tag "activity_type_#{activity_name}", activity_name.constantize.model_name.human %>
   <% end %>
 <% end %>

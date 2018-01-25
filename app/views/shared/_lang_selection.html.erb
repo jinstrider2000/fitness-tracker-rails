@@ -1,0 +1,11 @@
+<%= tag.div style: 'float:left;' do %>
+  <%= form_tag root_path, method: :get do %>
+    <%= label_tag 'locale-selector', t(".language") %>
+    <%= tag.select name: 'locale', id: 'locale-selector' do %>
+      <% I18n.available_locales.each do |locale| %>
+        <option value="<%=locale.to_s%>" <%= "selected" if locale.to_s == params[:locale] %>><%= t(".available_langs.#{locale}") %></option>
+      <% end %>
+    <% end %>
+    <%= submit_tag t(".submit"), class: %w[btn btn-default btn-xs] %>
+  <% end %>
+<% end %>

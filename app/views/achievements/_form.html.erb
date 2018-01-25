@@ -12,7 +12,7 @@
       <% end %>
       <%= tag.div class: 'form-group' do %>
         <%= form.label :completed_on %>
-        <%= form.date_select :completed_on, default: Date.today, order: [:month, :day, :year], date_separator: "/ ", start_year: Date.today.year - 20, end_year: Date.today.year %>
+        <%= form.date_select :completed_on, default: Date.today, date_separator: "/ ", start_year: Date.today.year - 20, end_year: Date.today.year %>
       <% end %>
       <%= tag.div class: 'form-group' do %>
         <%= form.label :comment %>

@@ -5,12 +5,11 @@ module ApplicationHelper
   end
 
   def print_date(date)
-    ordinal_suffix = date.day.ordinal
-    date.strftime("%b. %-d<sup>#{ordinal_suffix}</sup>, %Y").html_safe
+    l(date, format: :long)
   end
 
   def print_date_index_style(date)
-    date.strftime("%-m/%-d/%y")
+    l(date)
   end
 
   def link_status(*links)

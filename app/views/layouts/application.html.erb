@@ -21,6 +21,7 @@
     <main>
       <div class="container">
         <%= tag.div id: 'flash-notice-container' do %>
+          <%= render partial: 'shared/lang_selection' %>
           <%= tag.p flash[:error], class: %w[error-msg text-center flash-msg] if flash[:error].present? %>
           <%= tag.p flash[:alert], class: %w[error-msg text-center flash-msg] if flash[:alert].present? %>
           <%= tag.p flash[:notice], class: %w[text-center flash-msg] if flash[:notice].present? %>

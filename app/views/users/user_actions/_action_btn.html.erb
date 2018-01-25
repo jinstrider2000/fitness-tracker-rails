@@ -1,6 +1,6 @@
 <!-- Split button, taken from https://getbootstrap.com/docs/3.3/components/#btn-dropdowns -->
 <div class="btn-group">
-  <%= link_to User.human_attribute_name(primary_action[0]), route_helpers.send("#{primary_action[0]}_user_path", user.slug), method: primary_action[1], class: primary_btn_classes, role: 'button' %>
+  <%= link_to User.human_attribute_name(primary_action[0]), route_helpers.send("#{primary_action[0]}_user_path", {slug: user.slug, locale: I18n.locale}), method: primary_action[1], class: primary_btn_classes, role: 'button' %>
   <% unless secondary_actions.empty? %>
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <span class="caret"></span>

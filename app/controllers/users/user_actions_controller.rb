@@ -85,7 +85,6 @@ class Users::UserActionsController < ApplicationController
       if request.referrer == user_url(@user.slug)
         redirect_to root_path, notice: t(".success_msg", first_name: @user.first_name)
       else
-        binding.pry
         redirect_to request.referrer, notice: t(".success_msg", first_name: @user.first_name)
       end
     else

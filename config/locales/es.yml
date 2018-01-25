@@ -1,0 +1,343 @@
+es:
+  default: "Fitness Tracker"
+  date:
+    abbr_day_names:
+    - Dom
+    - Lun
+    - Mar
+    - Mié
+    - Jue
+    - Vie
+    - Sáb
+    abbr_month_names:
+    -
+    - Ene
+    - Feb
+    - Mar
+    - Abr
+    - May
+    - Jun
+    - Jul
+    - Ago
+    - Sep
+    - Oct
+    - Nov
+    - Dic
+    day_names:
+    - Domingo
+    - Lunes
+    - Martes
+    - Miércoles
+    - Jueves
+    - Viernes
+    - Sábado
+    month_names:
+    -
+    - Enero
+    - Febrero
+    - Marzo
+    - Abril
+    - Mayo
+    - Junio
+    - Julio
+    - Agosto
+    - Septiembre
+    - Octubre
+    - Noviembre
+    - Diciembre
+  filter:
+    achievement:
+      completed on: "Completado En"
+    exercise:
+      name: "Nombre"
+      calories burned: "Calorías Quemadas"
+      completed on: "Completado En"
+    food:
+      name: "Nombre"
+      calories: "Calorías"
+      completed on: "Completado En"
+  order:
+    achievement:
+      ascending: "Ascendiendo"
+      descending: "Descendiendo"
+    food:
+      ascending: "Ascendiendo"
+      descending: "Descendiendo"
+    exercise:
+      ascending: "Ascendiendo"
+      descending: "Descendiendo"
+  errors:
+    messages:
+      blank: "debe ser completado"
+      required: "es requerido"
+  activerecord:
+    errors:
+      template:
+        body: "Hubo problemas con los siguientes campos:"
+        header:
+          one: "1 error prohibió que este %{model} se guarde"
+          other: "%{count} errores prohibieron que este %{model} se guarde"
+      models:
+        achievement:
+          attributes:
+            activity:
+              invalid: "campos deben de ser completados"
+            completed_on:
+              required: "fecha es requerido"
+              blank: "la fecha debe ser provista"
+            user:
+              required: "datos son requeridos"
+              blank: "- Inicie sesión para agregar este %{model} a tu cuenta"
+        user:
+          attributes:
+            profile_pic:
+              invalid_file_type: "debe ser una imagen"
+    models:
+      achievement: "Logro"
+      exercise: "Ejercicio"
+      food: "Comida"
+      user: "Usuario"
+      daily_total: "Total Diario"
+    attributes:
+      achievement:
+        comment: "Comentario"
+        completed_on: "Completado En"
+      exercise:
+        name: "Nombre"
+        calories_burned: "Calorías Quemadas"
+      food:
+        name: "Nombre"
+        calories: "Calorías"
+      user:
+        name: "Nombre"
+        email: "E-mail"
+        daily_calorie_intake_goal: "Meta Diaria de Calorías"
+        quote: "Cita Personal"
+        password: "Contraseña"
+        password_confirmation: "Confirmación de Contraseña"
+        current_password: "Contraseña Actual"
+        profile_pic: "Foto de Perfil"
+        follow: "Seguir"
+        unfollow: "Dejar"
+        block: "Bloquear"
+        unblock: "Desbloquear"
+        mute: "Silenciar"
+        unmute: "Dejar de Silenciar"
+        following: "Siguiendo"
+        followers: "Seguidores"
+        remember_me: "Recuérdame"
+        remote_profile_pic: "%{provider} Foto de Perfil"
+      daily_total:
+        total_calories_in: "Total Calorías Consumidas"
+        total_calories_out: "Total Calorías Quemadas"
+        net_calories: "Calorías Netas"
+  pundit:
+    default_msg: "Usted no está autorizado a realizar esta acción"
+    achievement_policy:
+      new?: "No puede agregar logros al perfil de otro usuario"
+      create?: "No puede agregar logros al perfil de otro usuario"
+      index?: "No puedes ver el índice de logros de este usuario"
+      show?: "No puedes ver las estadísticas de logros de este usuario"
+      edit?: "No puedes editar las estadísticas de logros de este usuario"
+      update?: "No puedes actualizar las estadísticas de logros de este usuario"
+      destroy?: "No puedes borrar las estadísticas de logros de este usuario"
+    user_policy:
+      show?: "No puedes ver el perfil del usuario, te han bloqueado o los has bloqueado"
+      followers?: "No puedes ver los seguidores de este usuario"
+      following?: "No puedes ver quién está siguiendo este usuario"
+      blocked?: "No puedes ver la lista bloqueada de otro usuario"
+      muted?: "No puedes ver la lista silenciada de otro usuario"
+      follow?: "No puedes seguir a este usuario"
+      unfollow?: "No estás siguiendo a este usuario"
+  application:
+    landing:
+      heading: "Bienvenido a Fitness Tracker"
+      achievement_msg: "¡Registra tus logros!"
+      share_msg: "¡Encuentra amigos y comparte tu progreso!"
+      celebrate_msg: "¡Celebra tu estilo de vida saludable!"
+      new?: "Nuevo en el sitio?"
+      register: "Registrar"
+      signed_up?: "¿Ya tienes una cuenta?"
+      login: "Iniciar sesión"
+  shared:
+    lang_selection:
+      language: "Idioma"
+      available_langs:
+        en: "Inglés"
+        es: "Español"
+      submit: "Cambiar"
+    nav:
+      login: "Iniciar sesión"
+      logout: "Cerrar sesión"
+      profile: "Mi Perfil"
+      my_achievements:
+        heading: "Logros"
+        new: "Nuevo Logro"
+        achievements: "Logros Completos"
+        foods: "Solo Comidas"
+        exercises: "Solo Ejercicios"
+      my_relationships:
+        heading: "Relaciones"
+        following: "Siguiendo"
+        followers: "Seguidores"
+        blocked: "Bloqueado"
+        muted: "Silenciado"
+      news_feed: "Noticias"
+  news_feed:
+    news_feed_helper:
+      time_since_update:
+        now: "Justo ahora"
+        sec: "%{count} segundos"
+        min:
+          one: "%{count} minuto"
+          other: "%{count} minutos"
+        hour:
+          one: "%{count} hora"
+          other: "%{count} horas"
+        day:
+          one: "%{count} dia"
+          other: "%{count} dias"
+        month:
+          one: "%{count} mes"
+          other: "%{count} meses"
+        year:
+          one: "%{count} año"
+          other: "%{count} años"
+    index:
+      title: "Fitness Tracker - Noticias"
+      user_index: "Encuentra gente en Fitness Tracker"
+      no_items: "No hay noticias hoy. Para ver alguna actividad, registre un logro o siga a alguien que haya registrado logros."
+  achievements:
+    not_found_error: "Lo sentimos, ese logro no pudo ser encontrado"
+    index:
+      not_found_error: "Lo siento, ese usuario no existe"
+      title: "Fitness Tracker - %{user_name}'s %{record_name}"
+      my_heading: "Mis %{record_name}"
+      other_user_heading: "%{record_name} de %{user_name}"
+      new_link: "Agregar"
+      no_items: "No hay %{items}"
+    food_index_by_date_col:
+      reached: "¡Meta de calorías alcanzada!"
+      over: "%{dif} calorías sobre la meta"
+      under: "%{dif} calorías bajo la meta"
+    new:
+      title: "Fitness Tracker - Nuevo Logro"
+      heading: "Nuevo Logro"
+    edit:
+      title: "Fitness Tracker - Editar Logro"
+      heading: "Editar %{record_name}"
+    update:
+      success_msg: "Logro actualizado con éxito"
+    show:
+      title: "Fitness Tracker - Logro de %{user_name}: %{record_name}"
+      my_heading: "Mi %{record_name}"
+      other_user_heading: "%{record_name} de %{user_name}"
+    destroy:
+      success_msg: "Logro eliminado exitosamente"
+    form:
+      activity_type: "Tipo de Actividad"
+      activity_selection: "Selecciona una Actividad"
+    index_sort:
+      filter: "Filtrar:"
+      order: "Por:"
+      submit: "Ordena"
+    activity_type_selection:
+      all: "Todos"
+  users:
+    users_helper:
+      follow_status:
+        following_each_other: "Ustedes se están siguiendo"
+        follows_you: "Te sigue"
+    user_actions:
+      not_found_error: "Lo siento, ese usuario no existe"
+      blocked:
+        title: "Fitness Tracker - Mis Usuarios Bloqueados"
+        heading: "Mis Usuarios Bloqueados"
+        no_items: "No has bloqueado a nadie"
+      followers:
+        title: "Fitness Tracker - %{user_name}: Seguidores"
+        my_heading: "Mis Seguidores"
+        other_user_heading: "Seguidores de %{user_name}"
+        no_items: "No tienes seguidores"
+      following:
+        title: "Fitness Tracker - Quien %{user_name} esta siguiendo"
+        my_heading: "Quién Estoy Siguiendo"
+        other_user_heading: "Quien %{user_name} Esta Siguiendo"
+        no_items: "No has seguido a nadie"
+      index:
+        title: "Fitness Tracker - Indice de Usuario"
+        heading: "Indice de Usuario"
+      muted:
+        title: "Fitness Tracker - Mis Usuarios Bloqueados"
+        heading: "Mis Usuarios Silenciados"
+        no_items: "No has silenciado a nadie"
+      show:
+        title: "Fitness Tracker - Perfil de %{user_name}"
+        my_heading: "Bienvenido %{first_name}"
+        other_user_heading: "%{full_name}"
+        edit: "editar"
+        daily_calorie_goal: "Meta Diaria de Calorías: "
+        recent_exercises: "Ejercicios Recientemente Agregados"
+        recent_foods: "Comidas Recientemente Agregadas"
+        no_activity: "No hay actividad reciente"
+        all_achievements: "Ver todos los Logros"
+        more_link: "más"
+        following:
+          one: "Siguiendo: %{count} Usuario"
+          other: "Siguiendo: %{count} Usuarios"
+        followers:
+          one: "Seguidores: %{count} Usuario"
+          other: "Seguidores: %{count} Usuarios"
+      follow:
+        success_msg: "Seguiste a %{first_name}"
+      unfollow:
+        success_msg: "Dejaste de seguir a %{first_name}"
+      block:
+        success_msg: "Bloqueaste %{first_name}"
+      unblock:
+        success_msg: "Desbloqueaste a %{first_name}"
+      mute:
+        success_msg: "Silenciaste a %{first_name}"
+      unmute:
+        success_msg: "Dejaste de silenciar a %{first_name}"
+    registrations:
+      new:
+        title: "Fitness Tracker - Regístrate"
+        heading: "Registro de Cuenta"
+        submit: "Registrar"
+      create:
+        submit: "Registrar"
+      edit:
+        title: "Fitness Tracker - Editar Perfil"
+        heading: "Editar Mi Perfil"
+        password_placeholder: "Déja en blanco para mantener tú contraseña actual"
+        submit: "Guardar Cambios"
+        cancel_message: "Cancelar mi cuenta?"
+        cancel_submit: "Cancelar"
+        cancel_confirm: "¿Estás seguro?"
+        back: "Atrás"
+      update:
+        password_placeholder: "Déja en blanco para mantener tú contraseña actual"
+        submit: "Guardar Cambios"
+      form:
+        awaiting_confirmation: "Esperando la confirmación de:"
+        name_placeholder: "La longitud máxima es %{maximum}"
+        quote_placeholder: "La longitud máxima es %{maximum}"
+        current_password_placeholder: "Debe completarse para actualizar"
+        password_minimum: "(%{minimum_length} caracteres mínimo)"
+        remote_profile_pic_label: "Usa tu %{remote_profile_pic}?"
+        remote_profile_pic_msg: "(anula otros cambios si está seleccionado)"
+    sessions:
+      new:
+        title: "Fitness Tracker - Iniciar sesión"
+        heading: "Iniciar sesión"
+        submit: "Iniciar sesión"
+    shared:
+      links:
+        login: "¿Ya registrado? Inicia su sesión"
+        register: "¿No has registrado? Registrar"
+        forgot_password: "¿Olvidaste tu contraseña?"
+        confirmation_instructions: "¿No recibió las instrucciones de confirmación?"
+        unlock_instructions: "¿No recibió instrucciones de desbloqueo?"
+        omniauth: "Registrar con %{provider}"
+        omniauth_confirm: "Usted está siendo dirigido a %{provider} para registro. Al finalizar, será redirigido a Fitness Tracker, y su contraseña temporal será \"password123\". Por favor, actualice esta contraseña de inmediato. ¿Lo entiendes?"

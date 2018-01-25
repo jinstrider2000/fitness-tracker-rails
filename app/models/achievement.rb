@@ -27,11 +27,11 @@ class Achievement < ApplicationRecord
     else
       klass = VALID_ACTIVITY_PARAMS[values.keys.sort]
       self.activity = klass.new(values)
-    end 
+    end
   end
 
   def self.valid_activity?(activity_name)
-    VALID_ACTIVITIES.any? {|activity| activity == activity_name.try(:capitalize)}
+    VALID_ACTIVITIES.any? {|activity| activity.downcase == activity_name.try(:downcase)}
   end
 
   private

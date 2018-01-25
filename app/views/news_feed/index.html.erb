@@ -23,8 +23,8 @@
 <% end %>
 <%= tag.div id: 'news-feed-items-container' do %>
   <% if @feed.size == 0 %>
-    <%= tag.div class: %w[row text-center no-items-style] do %>
-      <%= tag.p t ".no_items" %>
+    <%= tag.div class: %w[row text-center] do %>
+      <%= tag.p t(".no_items"), class: %w[no-items-style col-xs-12] %>
     <% end %>
   <% else %>
     <%= render collection: @feed, partial: 'feed_item' %>
