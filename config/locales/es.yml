@@ -1,50 +1,5 @@
 es:
   default: "Fitness Tracker"
-  date:
-    abbr_day_names:
-    - Dom
-    - Lun
-    - Mar
-    - Mié
-    - Jue
-    - Vie
-    - Sáb
-    abbr_month_names:
-    -
-    - Ene
-    - Feb
-    - Mar
-    - Abr
-    - May
-    - Jun
-    - Jul
-    - Ago
-    - Sep
-    - Oct
-    - Nov
-    - Dic
-    day_names:
-    - Domingo
-    - Lunes
-    - Martes
-    - Miércoles
-    - Jueves
-    - Viernes
-    - Sábado
-    month_names:
-    -
-    - Enero
-    - Febrero
-    - Marzo
-    - Abril
-    - Mayo
-    - Junio
-    - Julio
-    - Agosto
-    - Septiembre
-    - Octubre
-    - Noviembre
-    - Diciembre
   filter:
     achievement:
       completed on: "Completado En"
@@ -155,7 +110,7 @@ es:
       achievement_msg: "¡Registra tus logros!"
       share_msg: "¡Encuentra amigos y comparte tu progreso!"
       celebrate_msg: "¡Celebra tu estilo de vida saludable!"
-      new?: "Nuevo en el sitio?"
+      new?: "¿Nuevo al sitio?"
       register: "Registrar"
       signed_up?: "¿Ya tienes una cuenta?"
       login: "Iniciar sesión"
