@@ -4,7 +4,7 @@
 
 <div class="row" style="margin-bottom:40px;">
 	<div class="col-sm-12">
-		<img class="profile-pic-display img-thumbnail" src="<%=profile_pic_path(@user)%>" alt="<%=@user.first_name%>'s Profile Pic">
+		<img class="profile-pic-display img-thumbnail" src="<%=profile_pic_path(@user)%>">
     <% if viewing_own_profile_while_logged_in? %>
       <%= tag.h2 t(".my_heading", first_name: @user.first_name), id: "profile-heading" %>
       <%= tag.a t(".edit"), href: edit_user_registration_path %>

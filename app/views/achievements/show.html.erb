@@ -12,8 +12,8 @@
 
 <div class="row text-center">
   <div class="activity-block center-block card-style">
-    <a href="<%=user_path(@achievement.user.slug)%>"><img class="index-icon-mini img-circle" src="<%=profile_pic_path(@achievement.user)%>" alt="Profile Pic" title="<%=@achievement.user.name%>"></a>
-    <a href="<%=user_achievements_path(@achievement.user.slug)%>"><img class="index-icon-mini" src="<%=asset_path "#{@achievement.activity_type.downcase}_icon", type: :image %>" alt="<%="#{@achievement.activity.class} Icon"%>" title="<%=@achievement.user.first_name%>'s Meals"></a>
+    <a href="<%=user_path(@achievement.user.slug)%>"><img class="index-icon-mini img-circle" src="<%=profile_pic_path(@achievement.user)%>"></a>
+    <a href="<%=user_achievements_path(@achievement.user.slug)%>"><img class="index-icon-mini" src="<%=asset_path "#{@achievement.activity_type.downcase}_icon", type: :image %>"></a>
     <h3><%=print_date(@achievement.completed_on)%></h3>
     <h4><%= render partial: "#{@achievement.activity_type.downcase}", locals: {@achievement.activity_type.downcase.to_sym => @achievement} %></h4>
     <div>

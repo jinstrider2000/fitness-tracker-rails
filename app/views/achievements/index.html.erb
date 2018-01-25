@@ -1,13 +1,13 @@
 <%= content_for :title do %>
-  <%= tag.title t(".title", user_name: @user.first_name, record_name: @activity_type.capitalize.pluralize) %>
+  <%= tag.title t(".title", user_name: @user.first_name, record_name: t("activerecord.models.#{@activity_type}").pluralize) %>
 <% end %>
 
 <%= tag.div class: %w[row text-center] do %>
-  <%= image_tag "#{@activity_type}_icon", class: %w[img-responsive index-icon], alt: "#{@activity_type.capitalize} Icon" %>
+  <%= image_tag "#{@activity_type}_icon", class: %w[img-responsive index-icon], alt: "#{t("activerecord.models.#{@activity_type}")} Icon" %>
   <% if viewing_own_profile_while_logged_in? %>
-    <%= tag.h2 t ".my_heading", record_name: @activity_type.capitalize.pluralize %>
+    <%= tag.h2 t ".my_heading", record_name: t("activerecord.models.#{@activity_type}").pluralize %>
   <% else %>
-    <%= tag.h2 t ".other_user_heading", user_name: @user.first_name, record_name: @activity_type.capitalize.pluralize %>
+    <%= tag.h2 t ".other_user_heading", user_name: @user.first_name, record_name: t("activerecord.models.#{@activity_type}").pluralize %>
   <% end %>
 <% end %>
 
@@ -29,5 +29,5 @@
       <%= render collection: @achievements, partial: 'index_by_date_row' %>
   <% end %>
 <% else %>
-  <%= tag.p t(".no_items", items: @activity_type.capitalize.pluralize), class: %w[text-center no-items-style] %>
+  <%= tag.p t(".no_items", items: t("activerecord.models.#{@activity_type}").pluralize), class: %w[text-center no-items-style] %>
 <% end %>
