@@ -88,6 +88,7 @@ en:
       daily_total: "Daily Total"
     attributes:
       achievement:
+        activity: "Activity"
         comment: "Comment"
         completed_on: "Completed On"
       exercise:

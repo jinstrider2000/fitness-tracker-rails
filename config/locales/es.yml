@@ -55,6 +55,7 @@ es:
       daily_total: "Total Diario"
     attributes:
       achievement:
+        activity: "Actividad"
         comment: "Comentario"
         completed_on: "Completado En"
       exercise:
