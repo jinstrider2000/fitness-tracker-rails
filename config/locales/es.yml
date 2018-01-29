@@ -108,7 +108,7 @@ es:
   application:
     landing:
       heading: "Bienvenido a Fitness Tracker"
-      achievement_msg: "¡Registra tus logros!"
+      achievement_msg: "¡Registra tus logros! (Ejercicio y Comida)"
       share_msg: "¡Encuentra amigos y comparte tu progreso!"
       celebrate_msg: "¡Celebra tu estilo de vida saludable!"
       new?: "¿Nuevo al sitio?"
