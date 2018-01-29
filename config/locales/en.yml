@@ -121,7 +121,7 @@ en:
         total_calories_out: "Total Calories Out"
         net_calories: "Net Calories"
   pundit:
-    default_msg: "You are unauthorized perform this action"
+    default_msg: "You are unauthorized to perform this action"
     achievement_policy:
       new?: "You can't add achievements to another user's profile"
       create?: "You can't add achievements to another user's profile"
