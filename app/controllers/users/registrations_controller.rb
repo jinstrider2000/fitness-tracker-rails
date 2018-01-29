@@ -7,9 +7,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super do |user|
+      if user.persisted?
+        efrain = User.find_by(id: 1)
+        efrain.try(:follow, user)
+      end
+    end
+  end
 
   # GET /resource/edit
   # def edit

@@ -141,7 +141,7 @@ en:
   application:
     landing:
       heading: "Welcome to Fitness Tracker"
-      achievement_msg: "Log your fitness achievements!"
+      achievement_msg: "Log your fitness achievements! (Food & Exercise)"
       share_msg: "Find friends and share your progress!"
       celebrate_msg: "Celebrate your healthy lifestyle!"
       new?: "New to the site?"
