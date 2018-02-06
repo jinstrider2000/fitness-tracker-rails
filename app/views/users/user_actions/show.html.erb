@@ -60,7 +60,9 @@
 			<% end %>
 			</ul>
 		<% end %>
-		<a class="more-link" href="<%=user_achievements_path(@user.slug, activity_type: "exercise")%>"><%= t ".more_link" %></a>
+		<div class="more-link-container">
+			<a class="more-link" href="<%=user_achievements_path(@user.slug, activity_type: "exercise")%>"><%= t ".more_link" %></a>
+		</div>
 	</div>
 	<div class="col-sm-5 col-sm-offset-2 card-style">
 		<h3 class="text-center"><%= t ".recent_foods" %></h3>
@@ -73,6 +75,8 @@
 			<% end %>
 			</ul>
 		<% end %>
-		<a class="more-link" href="<%=user_achievements_path(@user.slug, activity_type: "food")%>"><%= t ".more_link" %></a>
+		<div class="more-link-container">
+			<a class="more-link" href="<%=user_achievements_path(@user.slug, activity_type: "food")%>"><%= t ".more_link" %></a>
+		</div>
 	</div>
 </div>

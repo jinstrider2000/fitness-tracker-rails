@@ -1,7 +1,7 @@
 class Users::UserActionsController < ApplicationController
   
   before_action :load_user_resource, except: [:index]
-  after_action :verify_authorized, except: [:index]
+  after_action :verify_authorized, except: [:index, :most_active_today]
 
   def show
     if @user.present?
@@ -124,6 +124,12 @@ class Users::UserActionsController < ApplicationController
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
     end
+  end
+
+  def most_active_today
+    user_and_amt = User.most_active_today
+    @user = user_and_amt[0]
+    @amount = user_and_amt[1]
   end
 
   private

@@ -165,6 +165,16 @@ class User < ApplicationRecord
     end
   end
 
+  def self.most_active_today
+    achievement = Achievement.arel_table
+    stats = User.joins(:achievements).where(achievement[:created_at].gteq(DateTime.now.beginning_of_day).and(achievement[:created_at].lteq(DateTime.now.end_of_day))).group(:id).count.sort_by{|key,value| -value}.first
+    if stats.present?
+      user_and_achievement_amt = [User.find_by(id: stats[0]), stats[1]]
+    else
+      []
+    end
+  end
+
   private
 
   def slug_set_properly?

@@ -1,0 +1,25 @@
+<%= content_for :title do %>
+  <%= tag.title t(".title") %>
+<% end %>
+
+<% if @user.present? %>
+  <div class="row">
+    <%= image_tag profile_pic_path(@user), class: %[center-block big-pic img-circle] %>
+  </div>
+<% end %>
+
+<div class="row text-center">
+  <% if @user == current_user %>
+    <%= tag.h1 t(".my_heading.congrats") %>
+    <%= tag.h2 t(".my_heading", count: @amount) %>
+    <%= tag.h3 t(".my_heading.motivation_msg") %>
+  <% elsif @user != nil %>
+    <%= tag.h2 t(".other_user_heading", count: @amount, name: @user.first_name) %>
+    <%= tag.h3 t(".other_user_heading.motivation_msg") %>
+  <% else %>
+    <%= tag.p t(".no_items"), class: %w[no-items-style col-xs-12] %>
+  <% end %>
+</div>
+<div class="row text-center">
+  <%= new_achievement_button %>
+</div>

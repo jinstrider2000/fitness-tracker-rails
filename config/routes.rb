@@ -26,6 +26,9 @@ Rails.application.routes.draw do
         get 'followers'
         get 'following'
       end
+      collection do
+        get 'most-active-today' => 'user_actions#most_active_today'
+      end
     end
   end
 

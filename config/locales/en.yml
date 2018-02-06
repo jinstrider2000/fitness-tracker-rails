@@ -255,6 +255,7 @@ en:
         no_items: "You haven't followed anyone"
       index:
         title: "Fitness Tracker - User Index"
+        most_active: "Get motivated! Find out who is today's most active user"
         heading: "All Users"
       muted:
         title: "Fitness Tracker - My Blocked Users"
@@ -289,6 +290,19 @@ en:
         success_msg: "You've muted %{first_name}"
       unmute:
         success_msg: "You've unmuted %{first_name}"
+      most_active_today:
+        title: "Fitness Tracker - Today's Most Active User"
+        my_heading:
+          congrats: "Congratulations!"
+          one: "You are the most active today with %{count} achievement!"
+          other: "You are the most active today with %{count} achievements!"
+          motivation_msg: "Keep going!"
+        other_user_heading:
+          one: "%{name} is the most active today with %{count} achievement!"
+          other: "%{name} is the most active today with %{count} achievements!"
+          motivation_msg: "Can you beat that amount?"
+        no_items: "No one has logged an achievement today. Be the first!"
+        new_link: "Add New"
     registrations:
       new:
         title: "Fitness Tracker - Sign Up"

@@ -123,6 +123,12 @@
    height: 140px;
    width: 140px;
  }
+
+ .big-pic
+ {
+   height: 250px;
+   width: 250px;
+ }
  
  img.profile-pic-select + input[type="file"], img.profile-pic-select + div.field_with_errors
  {
@@ -180,9 +186,9 @@
    margin-right: 10px;
  }
  
- .more-link
+ .more-link-container
  {
-   float: right;
+   text-align: right;
  }
  
  .card-style

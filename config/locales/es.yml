@@ -222,6 +222,7 @@ es:
         no_items: "No has seguido a nadie"
       index:
         title: "Fitness Tracker - Indice de Usuario"
+        most_active: "¡Motívate! Descubra quién es el usuario más activo de hoy"
         heading: "Indice de Usuario"
       muted:
         title: "Fitness Tracker - Mis Usuarios Bloqueados"
@@ -256,6 +257,19 @@ es:
         success_msg: "Silenciaste a %{first_name}"
       unmute:
         success_msg: "Dejaste de silenciar a %{first_name}"
+      most_active_today:
+        title: "Fitness Tracker - El Usuario más activo de hoy"
+        my_heading:
+          congrats: "¡Felicitaciones!"
+          one: "¡Eres la persona más activa hoy con %{count} logro!"
+          other: "¡Eres la persona más activa hoy con %{count} logros!"
+          motivation_msg: "¡Sigue adelante!"
+        other_user_heading:
+          one: "%{name} es la persona más activa hoy con %{count} logro!"
+          other: "%{name} es la persona más activa hoy con %{count} logros!"
+          motivation_msg: "¿Puedes superar esa cantidad?"
+        no_items: "Nadie ha registrado un logro hoy. ¡Sé el primero!"
+        new_link: "Agregar"
     registrations:
       new:
         title: "Fitness Tracker - Regístrate"
