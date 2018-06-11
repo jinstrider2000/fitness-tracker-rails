@@ -42,6 +42,7 @@ gem 'omniauth', '>= 1.0.0'
 gem 'dynamic_form'
 gem 'omniauth-facebook'
 gem 'rails-i18n', '~> 5.0.0'
+gem 'active_model_serializers'
 
 
 group :development, :test do
