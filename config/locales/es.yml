@@ -310,4 +310,4 @@ es:
         confirmation_instructions: "¿No recibió las instrucciones de confirmación?"
         unlock_instructions: "¿No recibió instrucciones de desbloqueo?"
         omniauth: "Registrar con %{provider}"
-        omniauth_confirm: "Usted está siendo dirigido a %{provider} para registro. Al finalizar, será redirigido a Fitness Tracker, y su contraseña temporal será \"password123\". Por favor, actualice esta contraseña de inmediato. ¿Lo entiendes?"
+        omniauth_confirm: "Usted está siendo dirigido a %{provider} para registro o para iniciar sesión. ¿Lo entiendes?"

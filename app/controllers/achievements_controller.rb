@@ -47,7 +47,6 @@ class AchievementsController < ApplicationController
   end
 
   def edit
-    session[:edit_request_from_a_feed] = 
     if @achievement.present?
       authorize @achievement
     else

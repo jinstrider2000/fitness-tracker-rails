@@ -25,3 +25,4 @@
 # Ignore the user images folders, except for the generic folder
 /app/assets/images/users/*
 !/app/assets/images/users/generic
+Gemfile.lock

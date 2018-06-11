@@ -343,4 +343,4 @@ en:
         confirmation_instructions: "Didn't receive confirmation instructions?"
         unlock_instructions: "Didn't receive unlock instructions?"
         omniauth: "Sign in with %{provider}"
-        omniauth_confirm: "You are being directed to %{provider} for registration. Upon completion, you will be redirected to Fitness Tracker, and your temporary password will be \"password123\". Please update this password immediately. Do you understand?"
+        omniauth_confirm: "You are being directed to %{provider} for registration/login. Do you understand?"
