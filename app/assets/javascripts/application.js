@@ -14,4 +14,5 @@
 //= require rails-ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require handlebars/dist/handlebars.min
 //= require_tree .
