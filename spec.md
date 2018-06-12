@@ -4,10 +4,10 @@ Specs:
 - [ ] Use jQuery for implementing new requirements
 - [ ] Include a show resource rendered using jQuery and an Active Model Serialization JSON backend.
 
-[//]: # (achievements#show)
+[//]: # (users#show)
 - [ ] Include an index resource rendered using jQuery and an Active Model Serialization JSON backend.
 
-[//]: # (users#index)
+[//]: # (achievements#index)
 - [ ] Include at least one has_many relationship in information rendered via JSON and appended to the DOM.
 
 [//]: # (news_feed#index)
