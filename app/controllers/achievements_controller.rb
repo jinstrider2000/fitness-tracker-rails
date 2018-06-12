@@ -17,7 +17,10 @@ class AchievementsController < ApplicationController
     @achievement = Achievement.new(achievement_params)
     authorize @achievement
     if @achievement.save
-      redirect_to user_achievements_path(slug: current_user.slug)
+      respond_to do |format|
+        format.html {user_achievements_path(slug: current_user.slug)}
+        format.json {render json: @achievement}
+      end
     else
       @user = current_user
       render :new

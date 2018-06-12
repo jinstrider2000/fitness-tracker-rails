@@ -1,6 +1,6 @@
 # Fitness Tracker (Rails)
 
-A simple fitness web app made in Rails (now with Twitter-style following!), by Efrain Perez Jr.
+A simple fitness web app made in Rails (now with Twitter-style following AND JQuery front-end!), by Efrain Perez Jr.
 
 
 ## Installation
@@ -44,7 +44,5 @@ None
 ## License
 
 This app is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-Find me on Twitter: [@Efrain_P_Jr](https://twitter.com/@Efrain_P_Jr)
 
 Also, my blog: [One line (of code) at a time](http://www.one-line-at-a-time.com/)
