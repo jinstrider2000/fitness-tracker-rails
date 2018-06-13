@@ -46,6 +46,10 @@ class User < ApplicationRecord
     end
   end
 
+  def truncated_quote(size: 60, sep: " ")
+    self.quote.truncate(size, separator: sep)
+  end
+
   def achievements_ordered_by(activity_type = nil, filter = nil, order = nil)
     if Achievement.valid_activity?(activity_type)
       valid_filters = activity_type.capitalize.constantize.valid_filter_options
@@ -87,9 +91,14 @@ class User < ApplicationRecord
     end
   end
 
-  def news_feed_items
+  def news_feed_items(latest_post_created = nil)
     news_feed_user_ids = [self.id, self.following.pluck(:id)].flatten - self.muted_users.pluck(:id)
-    Achievement.where(user_id: news_feed_user_ids).order(updated_at: :desc)
+    if latest_post_created != nil
+      Achievement.where(user_id: news_feed_user_ids).order(created_at: :desc)
+    else
+      
+      Achievement.where(user_id: news_feed_user_ids).order(created_at: :desc)
+    end
   end
 
   def blocked?(user)

@@ -30,9 +30,17 @@ class AchievementsController < ApplicationController
   def show
     if @achievement.present?
       authorize @achievement
+      respond_to do |format|
+        format.html
+        format.json {render json: @achievement}
+      end
     else
       skip_authorization
-      redirect_to request.referrer || root_path, flash: {error: t("achievements.not_found_error")}
+      respond_to do |format|
+        format.html {redirect_to request.referrer || root_path, flash: {error: t("achievements.not_found_error")}}
+        format.json {render json: {error_message: t("achievements.not_found_error")}, status: 404}
+      end
+      
     end
   end
 

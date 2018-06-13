@@ -4,10 +4,14 @@ class NewsFeedController < ApplicationController
 
   def index
     if user_signed_in?
-      @feed = current_user.news_feed_items
       respond_to do |format|
-        format.html
-        format.json {render json: @feed}
+        format.html do
+          @feed = current_user.news_feed_items
+        end
+        format.json do
+          @feed = current_user.news_feed_items(params[:latest_post_created_at])
+          render json: @feed
+        end
       end
     else
       render 'application/landing'
