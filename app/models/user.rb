@@ -96,8 +96,8 @@ class User < ApplicationRecord
     if latest_post_created != nil
       Achievement.where(user_id: news_feed_user_ids).order(created_at: :desc)
     else
-      
-      Achievement.where(user_id: news_feed_user_ids).order(created_at: :desc)
+      achievements = Achievement.arel_table
+      Achievement.where(achievements[:user_id].in(news_feed_user_ids).and(achievements[:created_at].gt(latest_post_created)))
     end
   end
 
