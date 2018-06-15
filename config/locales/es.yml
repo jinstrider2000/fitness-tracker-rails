@@ -141,7 +141,7 @@ es:
       news_feed: "Noticias"
   news_feed:
     news_feed_helper:
-      time_since_update:
+      time_since_created:
         now: "Justo ahora"
         sec: "%{count} segundos"
         min:

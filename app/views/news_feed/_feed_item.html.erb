@@ -1,5 +1,5 @@
 <%= tag.div class: %w[news-feed-item] do %>
-  <%= tag.span time_since_update(feed_item) %>
+  <%= tag.span time_since_created(feed_item) %>
   <%= tag.div class: %[row] do %>
     <%= tag.div class: %[col-xs-4] do %>
       <%= link_to user_path(feed_item.user.slug) do %>

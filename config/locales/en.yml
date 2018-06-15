@@ -174,7 +174,7 @@ en:
       news_feed: "News Feed"
   news_feed:
     news_feed_helper:
-      time_since_update:
+      time_since_created:
         now: "Just Now"
         sec: "%{count} seconds ago"
         min:
