@@ -40,7 +40,6 @@ class AchievementsController < ApplicationController
         format.html {redirect_to request.referrer || root_path, flash: {error: t("achievements.not_found_error")}}
         format.json {render json: {error_message: t("achievements.not_found_error")}, status: 404}
       end
-      
     end
   end
 

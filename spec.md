@@ -4,7 +4,7 @@ Specs:
 - [ ] Use jQuery for implementing new requirements
 - [ ] Include a show resource rendered using jQuery and an Active Model Serialization JSON backend.
 
-[//]: # (users#show)
+[//]: # (achievements#show)
 - [ ] Include an index resource rendered using jQuery and an Active Model Serialization JSON backend.
 
 [//]: # (achievements#index)
