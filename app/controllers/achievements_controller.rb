@@ -18,7 +18,7 @@ class AchievementsController < ApplicationController
     authorize @achievement
     if @achievement.save
       respond_to do |format|
-        format.html {user_achievements_path(slug: current_user.slug)}
+        format.html {redirect user_achievements_path(slug: current_user.slug)}
         format.json {render json: @achievement}
       end
     else
