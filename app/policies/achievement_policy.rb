@@ -1,11 +1,19 @@
 class AchievementPolicy < ApplicationPolicy
 
   def show?
-    !user.blocked_by?(record.user) && !user.blocked?(record.user)
+    create? || !user.blocked_by?(record.user) && !user.blocked?(record.user)
   end
 
   def index?
     show?
+  end
+
+  def next?
+    create?
+  end
+
+  def prev?
+    create?
   end
 
   def create?

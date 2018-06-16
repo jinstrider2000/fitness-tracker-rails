@@ -43,6 +43,14 @@ class AchievementsController < ApplicationController
     end
   end
 
+  def next
+    next_achievement = @user.next_achievement(@achievement)
+  end
+
+  def prev
+    prev_achievement = @user.prev_achievement(@achievement)
+  end
+
   def index
     @user = User.find_by(slug: params[:slug])
     if @user.present?
