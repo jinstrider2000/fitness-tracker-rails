@@ -9,11 +9,11 @@ class AchievementPolicy < ApplicationPolicy
   end
 
   def next?
-    create?
+    show?
   end
 
   def prev?
-    create?
+    show?
   end
 
   def create?
