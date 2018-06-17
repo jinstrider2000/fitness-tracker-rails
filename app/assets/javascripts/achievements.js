@@ -1,13 +1,13 @@
 function showNext(link) {
-  $.get(`/achievements/${link.datalist.ach_id}/next`).done().always();
+  $.get(`/${link.dataset.locale}/users/${link.dataset.slug}/achievements/${link.dataset.id}/next`).done(loadAchievement).always();
 }
 
 function showPrevious(link) {
-  $.get(`/achievements/${link.datalist.ach_id}/prev`).done().always();
+  $.get(`/${link.dataset.locale}/users/${link.dataset.slug}/achievements/${link.dataset.id}/previous`).done(loadAchievement).always();
 }
 
 function loadAchievement(response) {
-  $.get()
+  console.log(response);
 }
 
 function toggleLink(response) {

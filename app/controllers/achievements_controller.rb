@@ -44,11 +44,25 @@ class AchievementsController < ApplicationController
   end
 
   def next
-    next_achievement = @user.next_achievement(@achievement)
+    if @achievement.present?
+      authorize @achievement
+      next_achievement = @user.next_achievement(@achievement)
+      render json: next_achievement[0]
+    else
+      skip_authorization
+      render json: {error_message: t("achievements.not_found_error")}, status: 404
+    end
   end
 
-  def prev
-    prev_achievement = @user.prev_achievement(@achievement)
+  def previous
+    if @achievement.present?
+      authorize @achievement
+      next_achievement = @user.prev_achievement(@achievement)
+      render json: prev_achievement[0]
+    else
+      skip_authorization
+      render json: {error_message: t("achievements.not_found_error")}, status: 404
+    end
   end
 
   def index

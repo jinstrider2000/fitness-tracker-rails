@@ -35,16 +35,13 @@ Rails.application.routes.draw do
   scope ':locale', constraints: {locale: /en|es/} do
     scope 'users/:slug', as: 'user' do
       resources :achievements, only: [:new, :index]
+      get '/achievements/:id/previous' => 'achievements#previous', as: 'achievement_previous'
+      get '/achievements/:id/next' => 'achievements#next', as: 'achievement_next'
     end
   end
 
   scope ':locale', constraints: {locale: /en|es/} do
-    resources :achievements, except: [:new, :index] do
-      member do
-        get 'next'
-        get 'prev'
-      end
-    end
+    resources :achievements, except: [:new, :index]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -26,8 +26,8 @@
   </div>
   <div class="row">
     <div class="activity-block center-block">
-      <%= link_to "<<<", "#", id: "prev", onclick: "showPrevious(this);", data: {ach_id: @achievement.id}, style: "float:left;" %>
-      <%= link_to ">>>", "#", id: "next", onclick: "showNext(this);", data: {ach_id: @achievement.id}, style: "float:right;" %>
+      <%= link_to "<<<", "#", id: "prev", onclick: "event.preventDefault();showPrevious(this);", data: {id: @achievement.id, slug: @user.slug, locale: params[:locale]}, style: "float:left;" %>
+      <%= link_to ">>>", "#", id: "next", onclick: "event.preventDefault();showNext(this);", data: {id: @achievement.id, slug: @user.slug, locale: params[:locale]}, style: "float:right;" %>
     </div>
   </div>
 </div>
