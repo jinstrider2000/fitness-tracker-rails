@@ -12,7 +12,7 @@ class AchievementPolicy < ApplicationPolicy
     show?
   end
 
-  def prev?
+  def previous?
     show?
   end
 

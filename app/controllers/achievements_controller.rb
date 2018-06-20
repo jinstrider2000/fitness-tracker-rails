@@ -57,7 +57,7 @@ class AchievementsController < ApplicationController
   def previous
     if @achievement.present?
       authorize @achievement
-      next_achievement = @user.prev_achievement(@achievement)
+      prev_achievement = @user.prev_achievement(@achievement)
       render json: prev_achievement[0]
     else
       skip_authorization

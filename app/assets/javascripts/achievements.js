@@ -11,5 +11,5 @@ function loadAchievement(response) {
 }
 
 function toggleLink(response) {
-  
+  console.log(response);
 }
