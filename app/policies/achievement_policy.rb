@@ -8,11 +8,11 @@ class AchievementPolicy < ApplicationPolicy
     show?
   end
 
-  def next?
+  def next_id?
     show?
   end
 
-  def previous?
+  def previous_id?
     show?
   end
 
