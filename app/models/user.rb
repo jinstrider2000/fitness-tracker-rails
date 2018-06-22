@@ -103,14 +103,14 @@ class User < ApplicationRecord
 
   def next_achievement_id(achievement)
     ach = Achievement.arel_table
-    next_ones = self.achievements.where(ach[:id].gt(achievement.id)).limit(1)
-    next_ones.first.try(:id)
+    next_one = self.achievements.where(ach[:id].gt(achievement.id)).limit(1)
+    next_one.first.try(:id)
   end
 
   def prev_achievement_id(achievement)
     ach = Achievement.arel_table
-    prev_ones = self.achievements.where(ach[:id].lt(achievement.id)).limit(1).order(id: :desc)
-    prev_ones.first.try(:id)
+    prev_one = self.achievements.where(ach[:id].lt(achievement.id)).limit(1).order(id: :desc)
+    prev_one.first.try(:id)
   end
 
   def blocked?(user)

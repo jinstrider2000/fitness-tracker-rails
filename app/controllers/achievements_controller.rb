@@ -32,7 +32,7 @@ class AchievementsController < ApplicationController
       authorize @achievement
       respond_to do |format|
         format.html
-        format.json {render json: @achievement}
+        format.json {render json: @achievement, serializer: AchievementShowSerializer}
       end
     else
       skip_authorization

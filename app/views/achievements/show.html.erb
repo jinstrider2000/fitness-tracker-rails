@@ -3,12 +3,10 @@
 <% end %>
 <%= content_for :page_specific_script do %>
   <%= javascript_tag type: "text/javascript" do %>
-    let current_id = parseInt(window.location.pathname.match(/\d+$/)[0]);
-    let memo = {};
-
     $(function() {
       $("#next").on("click", showNext);
       $("#prev").on("click", showPrevious);
+      initializeLinks();
     });
   <% end %>
 <% end %>
@@ -37,8 +35,8 @@
   </div>
   <div class="row">
     <div class="activity-block center-block">
-      <%= link_to "<<<", "/#", id: "prev", data: {id: @user.prev_achievement_id(@achievement), slug: @user.slug, locale: params[:locale]}, style: "display:inline;float:left;" %>
-      <%= link_to ">>>", "/#", id: "next", data: {id: @user.next_achievement_id(@achievement), slug: @user.slug, locale: params[:locale]}, style: "display:inline;float:right;" %>
+      <%= link_to "<<<", "/#", id: "prev", data: {id: @user.prev_achievement_id(@achievement), slug: @user.slug, locale: params[:locale], current: params[:id]}, style: "display:none;float:left;" %>
+      <%= link_to ">>>", "/#", id: "next", data: {id: @user.next_achievement_id(@achievement), slug: @user.slug, locale: params[:locale], current: params[:id]}, style: "display:none;float:right;" %>
     </div>
   </div>
 </div>
