@@ -1,3 +1,11 @@
+function showInit() {
+  $(function() {
+    $("#next").on("click", showNext);
+    $("#prev").on("click", showPrevious);
+    initializeLinks();
+  });
+}
+
 function showNext(event) {
   event.preventDefault();
   const nextLink = $(this);

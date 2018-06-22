@@ -1,13 +1,9 @@
 <%= content_for :title do %>
   <%= tag.title t(".title", user_name: @user.first_name, record_name: @achievement.activity.name) %>
 <% end %>
-<%= content_for :page_specific_script do %>
+<%= content_for :doc_ready_script do %>
   <%= javascript_tag type: "text/javascript" do %>
-    $(function() {
-      $("#next").on("click", showNext);
-      $("#prev").on("click", showPrevious);
-      initializeLinks();
-    });
+    showInit();
   <% end %>
 <% end %>
 
