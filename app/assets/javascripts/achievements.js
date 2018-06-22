@@ -11,6 +11,8 @@ function showPrevious(event) {
 }
 
 function displayAchievement(achievement) {
+  console.log(achievement);
+  
   const heading = $("#ach-show-heading");
   const activityIcon = $("#ach-show-activity-pic");
   const dateCompleted = $("#ach-show-date-completed");
@@ -35,41 +37,49 @@ function updateLinksData(linkName, currentId) {
   const nextLink = $("#next");
   const prevLink = $("#prev");
 
-  if (linkName === "next") {
-    prevLink.attr("data-id", nextLink.data("id"));
-    prevLink.attr("data-current", currentId);
-    if (prevLink.css("display") === "none") {
-      prevLink.css("display", "inline");
+  $.get(`/${nextLink.data("locale")}/users/${nextLink.data("slug")}/achievements/${currentId}/next-id`, id => {
+    if (id === null) {
+      nextLink.css("display", "none");
     }
-    $.get(`/${nextLink.data("locale")}/users/${nextLink.data("slug")}/achievements/${currentId}/next-id`, id => {
-      if (id === null) {
-        nextLink.css("display", "none");
-      }
-      nextLink.attr("data-id", id);
-      nextLink.attr("data-current", currentId);
-    });
-  } else {
-    nextLink.attr("data-id", prevLink.data("id"));
+    nextLink.attr("data-id", id);
     nextLink.attr("data-current", currentId);
-    if (nextLink.css("display") === "none") {
-      nextLink.css("display", "inline");
-    }
-    $.get(`/${prevLink.data("locale")}/users/${prevLink.data("slug")}/achievements/${currentId}/previous-id`, id => {
-      if (id === null) {
-        prevLink.css("display", "none");
-      }
-      prevLink.attr("data-id", id);
-      prevLink.attr("data-current", currentId);
-    });
-  }
+  });
 
- 
-  $.get(`/${prevLink.data("locale")}/users/${prevLink.data("slug")}/achievements/${prevLink.data("current")}/previous-id`).done( id => {
+  $.get(`/${prevLink.data("locale")}/users/${prevLink.data("slug")}/achievements/${currentId}/previous-id`, id => {
     if (id === null) {
       prevLink.css("display", "none");
     }
     prevLink.attr("data-id", id);
+    prevLink.attr("data-current", currentId);
   });
+
+  // if (linkName === "next") {
+  //   prevLink.attr("data-id", nextLink.data("id"));
+  //   prevLink.attr("data-current", currentId);
+  //   if (prevLink.css("display") === "none") {
+  //     prevLink.css("display", "inline");
+  //   }
+  //   $.get(`/${nextLink.data("locale")}/users/${nextLink.data("slug")}/achievements/${currentId}/next-id`, id => {
+  //     if (id === null) {
+  //       nextLink.css("display", "none");
+  //     }
+  //     nextLink.attr("data-id", id);
+  //     nextLink.attr("data-current", currentId);
+  //   });
+  // } else {
+  //   nextLink.attr("data-id", prevLink.data("id"));
+  //   nextLink.attr("data-current", currentId);
+  //   if (nextLink.css("display") === "none") {
+  //     nextLink.css("display", "inline");
+  //   }
+  //   $.get(`/${prevLink.data("locale")}/users/${prevLink.data("slug")}/achievements/${currentId}/previous-id`, id => {
+  //     if (id === null) {
+  //       prevLink.css("display", "none");
+  //     }
+  //     prevLink.attr("data-id", id);
+  //     prevLink.attr("data-current", currentId);
+  //   });
+  // }
 }
 
 function initializeLinks() {
