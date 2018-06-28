@@ -16,10 +16,6 @@ class AchievementPolicy < ApplicationPolicy
     show?
   end
 
-  def user_slug?
-    show?
-  end
-
   def create?
     record.user_id == user.id
   end

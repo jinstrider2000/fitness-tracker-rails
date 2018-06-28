@@ -31,8 +31,8 @@
   </div>
   <div class="row">
     <div class="activity-block center-block">
-      <%= link_to "<<<", "/#", id: "prev", data: {id: @user.prev_achievement_id(@achievement), locale: params[:locale], current: params[:id]}, style: "display:none;float:left;" %>
-      <%= link_to ">>>", "/#", id: "next", data: {id: @user.next_achievement_id(@achievement), locale: params[:locale], current: params[:id]}, style: "display:none;float:right;" %>
+      <%= link_to "<<<", "/#", id: "prev", data: {id: @user.prev_achievement_id(@achievement), locale: params[:locale], slug: @user.slug, current: params[:id]}, style: "display:none;float:left;" %>
+      <%= link_to ">>>", "/#", id: "next", data: {id: @user.next_achievement_id(@achievement), locale: params[:locale], slug: @user.slug, current: params[:id]}, style: "display:none;float:right;" %>
     </div>
   </div>
 </div>

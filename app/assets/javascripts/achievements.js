@@ -6,22 +6,20 @@ function showInit() {
 }
 
 function setShowListeners() {
-  $.get(`${window.location.pathname}/user-slug`, slug => {
-    $("#next").on("click", showNext.bind("null",slug));
-    $("#prev").on("click", showPrevious.bind("null",slug));
-  });
+  $("#next").on("click", showNext);
+  $("#prev").on("click", showPrevious);
 }
 
-function showNext(slug) {
+function showNext() {
   event.preventDefault();
-  const nextLink = $("#next");
-  $.get(`/${nextLink.data("locale")}/achievements/${nextLink.data("id")}.json`, displayAchievement).done(achievement => updateLinksData("next", achievement.id, slug));
+  const nextLink = $(this);
+  $.get(`/${nextLink.data("locale")}/achievements/${nextLink.data("id")}.json`, displayAchievement).done(achievement => updateLinksData("next", achievement.id));
 }
 
-function showPrevious(slug) {
+function showPrevious() {
   event.preventDefault();
-  const prevLink = $("#prev");
-  $.get(`/${prevLink.data("locale")}/achievements/${prevLink.data("id")}.json`, displayAchievement).done(achievement => updateLinksData("prev", achievement.id, slug));
+  const prevLink = $(this);
+  $.get(`/${prevLink.data("locale")}/achievements/${prevLink.data("id")}.json`, displayAchievement).done(achievement => updateLinksData("prev", achievement.id));
 }
 
 function displayAchievement(achievement) {
@@ -45,7 +43,7 @@ function displayAchievement(achievement) {
   title.html(achievement.view.title)
 }
 
-function updateLinksData(linkName, currentId, slug) {
+function updateLinksData(linkName, currentId) {
   const nextLink = $("#next");
   const prevLink = $("#prev");
 
@@ -55,7 +53,7 @@ function updateLinksData(linkName, currentId, slug) {
     if (prevLink.css("display") === "none") {
       prevLink.css("display", "inline");
     }
-    $.get(`/${nextLink.data("locale")}/users/${slug}/achievements/${currentId}/next-id`, id => {
+    $.get(`/${nextLink.data("locale")}/users/${nextLink.data("slug")}/achievements/${currentId}/next-id`, id => {
       if (id === null) {
         nextLink.css("display", "none");
       }
@@ -68,7 +66,7 @@ function updateLinksData(linkName, currentId, slug) {
     if (nextLink.css("display") === "none") {
       nextLink.css("display", "inline");
     }
-    $.get(`/${prevLink.data("locale")}/users/${slug}/achievements/${currentId}/previous-id`, id => {
+    $.get(`/${prevLink.data("locale")}/users/${prevLink.data("slug")}/achievements/${currentId}/previous-id`, id => {
       if (id === null) {
         prevLink.css("display", "none");
       }
