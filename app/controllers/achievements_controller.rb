@@ -37,7 +37,7 @@ class AchievementsController < ApplicationController
     else
       skip_authorization
       respond_to do |format|
-        format.html {redirect_to request.referrer || root_path, flash: {error: t("achievements.not_found_error")}}
+        format.html {redirect_to(request.referrer || root_path, flash: {error: t("achievements.not_found_error")})}
         format.json {render json: {error_message: t("achievements.not_found_error")}, status: 404}
       end
     end
@@ -46,8 +46,7 @@ class AchievementsController < ApplicationController
   def next_id
     if @achievement.present?
       authorize @achievement
-      next_id = @user.next_achievement_id(@achievement)
-      render json: next_id
+      render json: @user.next_achievement_id(@achievement)
     else
       skip_authorization
       render json: {error_message: t("achievements.not_found_error")}, status: 404
@@ -57,8 +56,17 @@ class AchievementsController < ApplicationController
   def previous_id
     if @achievement.present?
       authorize @achievement
-      prev_id = @user.prev_achievement_id(@achievement)
-      render json: prev_id
+      render json: @user.prev_achievement_id(@achievement)
+    else
+      skip_authorization
+      render json: {error_message: t("achievements.not_found_error")}, status: 404
+    end
+  end
+
+  def user_slug
+    if @achievement.present?
+      authorize @achievement
+      render json: @achievement.user.slug
     else
       skip_authorization
       render json: {error_message: t("achievements.not_found_error")}, status: 404

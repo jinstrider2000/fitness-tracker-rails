@@ -13,13 +13,29 @@ class Users::UserActionsController < ApplicationController
   end
 
   def index
-    @users = User.where.not(id: current_user.id)
+    respond_to do |format|
+      format.html
+      format.json do
+        @users = User.where.not(id: current_user.id)
+        render json: @users
+      end
+    end
+    
   end
 
   def followers
     if @user.present?
       authorize @user
-      @users = @user.followers
+      respond_to do |format|
+        format.html do
+          @users = @user.followers
+          # render :index
+        end
+        format.json do
+          render json: @user.followers
+        end
+      end
+      
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
@@ -29,7 +45,15 @@ class Users::UserActionsController < ApplicationController
   def following
     if @user.present?
       authorize @user
-      @users = @user.following
+      respond_to do |format|
+        format.html do
+          @users = @user.followers
+          # render :index
+        end
+        format.json do
+          render json: @user.following
+        end
+      end
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}

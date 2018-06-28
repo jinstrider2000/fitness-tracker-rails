@@ -41,7 +41,11 @@ Rails.application.routes.draw do
   end
 
   scope ':locale', constraints: {locale: /en|es/} do
-    resources :achievements, except: [:new, :index]
+    resources :achievements, except: [:new, :index] do
+      member do
+        get "user-slug"
+      end
+    end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -8,8 +8,16 @@ class ApplicationController < ActionController::Base
 
   def user_not_authorized(exception)
     policy_name = exception.policy.class.to_s.underscore
-    flash[:error] = t "#{policy_name}.#{exception.query}", scope: :pundit, default: :default_msg
-    redirect_to(request.referrer || root_path)
+    respond_to do |format|
+      format.html do
+        flash[:error] = t "#{policy_name}.#{exception.query}", scope: :pundit, default: :default_msg
+        redirect_to(request.referrer || root_path)
+      end
+      format.json do
+        render json: {error_message: t("#{policy_name}.#{exception.query}", scope: :pundit, default: :default_msg)}, status: 403
+      end
+    end
+    
   end
   # Got these methods from Rails Guides
   # http://guides.rubyonrails.org/i18n.html#managing-the-locale-across-requests

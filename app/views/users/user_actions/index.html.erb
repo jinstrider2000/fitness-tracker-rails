@@ -1,9 +1,9 @@
 <%= content_for :title do %>
-  <%= tag.title t(".title") %>
+  <%= tag.title t("default") %>
 <% end %>
 
-<%= tag.h2 t(".heading"), class: %w[text-center] %>
+<%= tag.h2 "", id: "user-index-heading", class: %w[text-center] %>
 <%= tag.div class: %[row text-center] do %>
   <%= link_to t(".most_active"), most_active_today_users_path %>
 <% end %>
-<%= render collection: @users, partial: 'user' %>
+<%= tag.div "", id: "user-index-items" %>
