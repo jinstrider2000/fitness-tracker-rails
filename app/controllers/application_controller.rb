@@ -17,7 +17,6 @@ class ApplicationController < ActionController::Base
         render json: {error_message: t("#{policy_name}.#{exception.query}", scope: :pundit, default: :default_msg)}, status: 403
       end
     end
-    
   end
   # Got these methods from Rails Guides
   # http://guides.rubyonrails.org/i18n.html#managing-the-locale-across-requests

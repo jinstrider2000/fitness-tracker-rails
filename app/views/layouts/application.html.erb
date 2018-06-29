@@ -22,9 +22,9 @@
       <div class="container">
         <%= tag.div id: 'flash-notice-container' do %>
           <%= render partial: 'shared/lang_selection' %>
-          <%= tag.p flash[:error], class: %w[error-msg text-center flash-msg] %>
-          <%= tag.p flash[:alert], class: %w[error-msg text-center flash-msg] %>
-          <%= tag.p flash[:notice], class: %w[text-center flash-msg] %>
+          <%= tag.p flash[:error], id: "error-flash-msg", class: %w[error-msg text-center flash-msg] %>
+          <%= tag.p flash[:alert], id: "alert-flash-msg", class: %w[error-msg text-center flash-msg] %>
+          <%= tag.p flash[:notice], id: "notice-flash-msg", class: %w[text-center flash-msg] %>
           <% if flash[:warnings].present? %>
             <% flash[:warnings].each do |warning| %>
               <%= tag.p warning, class: %w[error-msg text-center flash-msg] %>
