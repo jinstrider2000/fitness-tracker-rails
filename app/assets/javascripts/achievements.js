@@ -13,13 +13,17 @@ function setShowListeners() {
 function showNext() {
   event.preventDefault();
   const nextLink = $(this);
-  $.get(`/${nextLink.data("locale")}/achievements/${nextLink.data("id")}.json`, displayAchievement).done(achievement => updateLinksData("next", achievement.id));
+  $.get(`/${nextLink.data("locale")}/achievements/${nextLink.data("id")}.json`, displayAchievement).done(achievement => updateLinksData("next", achievement.id)).fail(errorMessage);
 }
 
 function showPrevious() {
   event.preventDefault();
   const prevLink = $(this);
-  $.get(`/${prevLink.data("locale")}/achievements/${prevLink.data("id")}.json`, displayAchievement).done(achievement => updateLinksData("prev", achievement.id));
+  $.get(`/${prevLink.data("locale")}/achievements/${prevLink.data("id")}.json`, displayAchievement).done(achievement => updateLinksData("prev", achievement.id)).fail(errorMessage);
+}
+
+function errorMessage(response) {
+  console.log(response);
 }
 
 function displayAchievement(achievement) {
