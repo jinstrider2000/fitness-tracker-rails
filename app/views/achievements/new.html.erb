@@ -2,6 +2,14 @@
   <%= tag.title t(".title") %>
 <% end %>
 
+<%= content_for :doc_ready_script do %>
+  <%= javascript_tag type: "text/javascript" do %>
+    $(function() {
+      flashToggle();
+    });
+  <% end %>
+<% end %>
+
 <%= tag.div class: %w[row text-center] do %>
   <%= image_tag "achievement_icon", class: %w[img-responsive index-icon], alt: "Achievement Icon" %>
   <%= tag.h2 t ".heading" %>

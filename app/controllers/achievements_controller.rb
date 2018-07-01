@@ -44,7 +44,8 @@ class AchievementsController < ApplicationController
   end
 
   def next_id
-    if @achievement.present?
+    user_given_by_slug = User.find_by(slug: params[:slug])
+    if @achievement.present? && @user == user_given_by_slug
       authorize @achievement
       render json: @user.next_achievement_id(@achievement)
     else
@@ -54,19 +55,10 @@ class AchievementsController < ApplicationController
   end
 
   def previous_id
-    if @achievement.present?
+    user_given_by_slug = User.find_by(slug: params[:slug])
+    if @achievement.present? && @user == user_given_by_slug
       authorize @achievement
       render json: @user.prev_achievement_id(@achievement)
-    else
-      skip_authorization
-      render json: {error_message: t("achievements.not_found_error")}, status: 404
-    end
-  end
-
-  def user_slug
-    if @achievement.present?
-      authorize @achievement
-      render json: @achievement.user.slug
     else
       skip_authorization
       render json: {error_message: t("achievements.not_found_error")}, status: 404

@@ -2,6 +2,14 @@
   <%= tag.title t("default") %>
 <% end %>
 
+<%= content_for :doc_ready_script do %>
+  <%= javascript_tag type: "text/javascript" do %>
+    $(function() {
+      flashToggle();
+    });
+  <% end %>
+<% end %>
+
 <%= tag.h2 "", id: "user-index-heading", class: %w[text-center] %>
 <%= tag.div class: %[row text-center] do %>
   <%= link_to t(".most_active"), most_active_today_users_path %>

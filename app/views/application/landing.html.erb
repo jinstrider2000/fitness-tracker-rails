@@ -2,6 +2,15 @@
   <%= tag.title t("default") %>
 <% end %>
 
+<%= content_for :doc_ready_script do %>
+  <%= javascript_tag type: "text/javascript" do %>
+    $(function() {
+      showInit();
+      flashToggle();
+    });
+  <% end %>
+<% end %>
+
 <div id="landing-container" class="jumbotron">
 	<%= image_tag 'people_exercising', class: %w[img-responsive center-block] %>
 	<h1 class="text-center"><%= t ".heading" %></h1>

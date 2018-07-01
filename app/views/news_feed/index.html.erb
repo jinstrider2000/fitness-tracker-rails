@@ -1,6 +1,15 @@
 <%= content_for :title do %>
   <%= tag.title t(".title") %>
 <% end %>
+
+<%= content_for :doc_ready_script do %>
+  <%= javascript_tag type: "text/javascript" do %>
+    $(function() {
+      flashToggle();
+    });
+  <% end %>
+<% end %>
+
 <%= tag.div class: %w[row text-center] do %>
   <%= link_to t(".user_index"), users_path %>
 <% end %>

@@ -1,6 +1,15 @@
 <%= content_for :title do %>
   <%= tag.title t(".title", user_name: @user.first_name) %>
 <% end %>
+
+<%= content_for :doc_ready_script do %>
+  <%= javascript_tag type: "text/javascript" do %>
+    $(function() {
+      flashToggle();
+    });
+  <% end %>
+<% end %>
+
 <% if viewing_own_profile_while_logged_in? %>
   <%= tag.h2 t(".my_heading"), class: %w[text-center] %>
 <% else %>

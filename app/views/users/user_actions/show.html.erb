@@ -2,6 +2,14 @@
   <%= tag.title t(".title", user_name: @user.first_name) %>
 <% end %>
 
+<%= content_for :doc_ready_script do %>
+  <%= javascript_tag type: "text/javascript" do %>
+    $(function() {
+      flashToggle();
+    });
+  <% end %>
+<% end %>
+
 <div class="row" style="margin-bottom:40px;">
 	<div class="col-sm-12">
 		<img class="profile-pic-display img-thumbnail" src="<%=profile_pic_path(@user)%>">

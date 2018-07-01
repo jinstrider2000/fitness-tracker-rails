@@ -1,8 +1,6 @@
 function showInit() {
-  $(function() {
-    initializeShowLinks();
-    setShowListeners();
-  });
+  initializeShowLinks();
+  setShowListeners();
 }
 
 function setShowListeners() {
@@ -13,17 +11,21 @@ function setShowListeners() {
 function showNext() {
   event.preventDefault();
   const nextLink = $(this);
-  $.get(`/${nextLink.data("locale")}/achievements/${nextLink.data("id")}.json`, displayAchievement).done(achievement => updateLinksData("next", achievement.id)).fail(errorMessage);
+  $.get(`/${nextLink.data("locale")}/achievements/${nextLink.data("id")}.json`, displayAchievement).done(achievement => updateLinksData("next", achievement.id)).fail(ajaxErrorMessage);
 }
 
 function showPrevious() {
   event.preventDefault();
   const prevLink = $(this);
-  $.get(`/${prevLink.data("locale")}/achievements/${prevLink.data("id")}.json`, displayAchievement).done(achievement => updateLinksData("prev", achievement.id)).fail(errorMessage);
+  $.get(`/${prevLink.data("locale")}/achievements/${prevLink.data("id")}.json`, displayAchievement).done(achievement => updateLinksData("prev", achievement.id)).fail(ajaxErrorMessage);
 }
 
-function errorMessage(response) {
-  console.log(response);
+function ajaxErrorMessage(response) {
+  const msg = $("#error-flash-msg");
+  msg.html(response.responseJSON.error_message);
+  setTimeout(() => {
+    msg.html("");
+  }, 3000);
 }
 
 function displayAchievement(achievement) {
@@ -63,7 +65,7 @@ function updateLinksData(linkName, currentId) {
       }
       nextLink.data("id", id);
       nextLink.data("current", currentId);
-    });
+    }).fail(ajaxErrorMessage);
   } else {
     nextLink.data("id", prevLink.data("current"));
     nextLink.data("current", currentId);
@@ -76,7 +78,7 @@ function updateLinksData(linkName, currentId) {
       }
       prevLink.data("id", id);
       prevLink.data("current", currentId);
-    });
+    }).fail(ajaxErrorMessage);
   }
 }
 

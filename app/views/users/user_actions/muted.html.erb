@@ -2,6 +2,14 @@
   <%= tag.title t(".title") %>
 <% end %>
 
+<%= content_for :doc_ready_script do %>
+  <%= javascript_tag type: "text/javascript" do %>
+    $(function() {
+      flashToggle();
+    });
+  <% end %>
+<% end %>
+
 <%= tag.h2 t(".heading"), class: %w[text-center] %>
 <% if @users.size == 0 %>
   <%= tag.div class: %w[row text-center no-items-style] do %>

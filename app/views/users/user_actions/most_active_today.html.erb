@@ -2,6 +2,14 @@
   <%= tag.title t(".title") %>
 <% end %>
 
+<%= content_for :doc_ready_script do %>
+  <%= javascript_tag type: "text/javascript" do %>
+    $(function() {
+      flashToggle();
+    });
+  <% end %>
+<% end %>
+
 <% if @user.present? %>
   <div class="row">
     <%= image_tag profile_pic_path(@user), class: %[center-block big-pic img-circle] %>

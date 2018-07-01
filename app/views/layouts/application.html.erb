@@ -13,7 +13,6 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <header>
       <%= render partial: 'shared/nav' %>
@@ -25,11 +24,6 @@
           <%= tag.p flash[:error], id: "error-flash-msg", class: %w[error-msg text-center flash-msg] %>
           <%= tag.p flash[:alert], id: "alert-flash-msg", class: %w[error-msg text-center flash-msg] %>
           <%= tag.p flash[:notice], id: "notice-flash-msg", class: %w[text-center flash-msg] %>
-          <% if flash[:warnings].present? %>
-            <% flash[:warnings].each do |warning| %>
-              <%= tag.p warning, class: %w[error-msg text-center flash-msg] %>
-            <% end %>
-          <% end %>
         <% end %>
         <%= yield %>
       </div>

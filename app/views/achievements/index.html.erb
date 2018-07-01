@@ -2,6 +2,14 @@
   <%= tag.title t(".title", user_name: @user.first_name, record_name: t("activerecord.models.#{@activity_type}").pluralize) %>
 <% end %>
 
+<%= content_for :doc_ready_script do %>
+  <%= javascript_tag type: "text/javascript" do %>
+    $(function() {
+      flashToggle();
+    });
+  <% end %>
+<% end %>
+
 <%= tag.div class: %w[row text-center] do %>
   <%= image_tag "#{@activity_type}_icon", class: %w[img-responsive index-icon], alt: "#{t("activerecord.models.#{@activity_type}")} Icon" %>
   <% if viewing_own_profile_while_logged_in? %>
