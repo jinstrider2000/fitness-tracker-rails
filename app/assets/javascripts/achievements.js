@@ -1,4 +1,4 @@
-function showInit() {
+function achievementShowInit() {
   initializeShowLinks();
   setShowListeners();
 }
@@ -18,14 +18,6 @@ function showPrevious() {
   event.preventDefault();
   const prevLink = $(this);
   $.get(`/${prevLink.data("locale")}/achievements/${prevLink.data("id")}.json`, displayAchievement).done(achievement => updateLinksData("prev", achievement.id)).fail(ajaxErrorMessage);
-}
-
-function ajaxErrorMessage(response) {
-  const msg = $("#error-flash-msg");
-  msg.html(response.responseJSON.error_message);
-  setTimeout(() => {
-    msg.html("");
-  }, 3000);
 }
 
 function displayAchievement(achievement) {

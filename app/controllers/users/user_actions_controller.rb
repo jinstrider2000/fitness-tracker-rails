@@ -15,30 +15,23 @@ class Users::UserActionsController < ApplicationController
   def index
     respond_to do |format|
       format.html
-      format.json do
-        @users = User.where.not(id: current_user.id)
-        render json: @users
-      end
+      format.json {render json: User.where.not(id: current_user.id)}
     end
-    
   end
 
   def followers
     if @user.present?
       authorize @user
       respond_to do |format|
-        format.html do
-          @users = @user.followers
-          # render :index
-        end
-        format.json do
-          render json: @user.followers
-        end
+        format.html {render :index}
+        format.json {render json: @user.followers}
       end
-      
     else
       skip_authorization
-      redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
+      respond_to do |format|
+        format.html {redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}}
+        format.json {render json: {error_message: t("users.user_actions.not_found_error")}, status: 404}
+      end
     end
   end
 
@@ -46,37 +39,47 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       authorize @user
       respond_to do |format|
-        format.html do
-          @users = @user.followers
-          # render :index
-        end
-        format.json do
-          render json: @user.following
-        end
+        format.html {render :index}
+        format.json {render json: @user.following}
       end
     else
       skip_authorization
-      redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
+      respond_to do |format|
+        format.html {redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}}
+        format.json {render json: {error_message: t("users.user_actions.not_found_error")}, status: 404}
+      end
     end
   end
 
   def blocked
     if @user.present?
       authorize @user
-      @users = @user.blocked_users
+      respond_to do |format|
+        format.html {render :index}
+        format.json {render json: @user.blocked_users}
+      end
     else
       skip_authorization
-      redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
+      respond_to do |format|
+        format.html {redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}}
+        format.json {render json: {error_message: t("users.user_actions.not_found_error")}, status: 404}
+      end
     end
   end
 
   def muted
     if @user.present?
       authorize @user
-      @users = @user.muted_users
+      respond_to do |format|
+        format.html {render :index}
+        format.json {render json: @user.muted_users}
+      end
     else
       skip_authorization
-      redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
+      respond_to do |format|
+        format.html {redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}}
+        format.json {render json: {error_message: t("users.user_actions.not_found_error")}, status: 404}
+      end
     end
   end
 

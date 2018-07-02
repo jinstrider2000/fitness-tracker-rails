@@ -5,6 +5,7 @@
 <%= content_for :doc_ready_script do %>
   <%= javascript_tag type: "text/javascript" do %>
     $(function() {
+      setCurrentUser();
       flashToggle();
     });
   <% end %>
@@ -15,3 +16,28 @@
   <%= link_to t(".most_active"), most_active_today_users_path %>
 <% end %>
 <%= tag.div "", id: "user-index-items" %>
+
+<%= javascript_tag type: "text/x-handlebars-template", id: "user-index-template" do %>
+  <div class="user-index card-style col-sm-4">
+    <a href="{{view.show_link}}"><img src="{{view.profile_pic}}" alt="" class="img-circle index-icon"></a>
+  </div>
+  <% unless current_user.id == user.id %>
+    <%= follow_status(user, class: %w[follow-status-msg follow-status-msg-index]) %>
+    <%= tag.div class: %w[user-actions-btn text-center] do %>
+      <%= action_button(user) %>
+    <% end %>
+  <% end %>
+  <!-- <%= tag.div class: %w[user-index card-style col-sm-4] do %>
+    <%= link_to user_path(user.slug) do %>
+      <%= image_tag profile_pic_path(user), class: %w[img-circle index-icon] %>
+    <% end %>
+    <% unless current_user.id == user.id %>
+      <%= follow_status(user, class: %w[follow-status-msg follow-status-msg-index]) %>
+      <%= tag.div class: %w[user-actions-btn text-center] do %>
+        <%= action_button(user) %>
+      <% end %>
+    <% end %>
+    <%= tag.h3 truncate(user.name, length: 16, separator: " "), class: %w[index-name] %>
+    <%= tag.p truncate(user.quote, length: 60, separator: " "), class: %w[index-quote] %>
+  <% end %> -->
+<% end %>

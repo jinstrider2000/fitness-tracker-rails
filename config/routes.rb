@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   root 'news_feed#index'
   get '/:locale' => 'news_feed#index'
+  get '/:locale/current-user' => 'application#get_current_user'
 
   scope ':locale', constraints: {locale: /en|es/} do
     get '/news-feed' => 'news_feed#index'
