@@ -50,6 +50,10 @@ class User < ApplicationRecord
     self.quote.truncate(size, separator: sep)
   end
 
+  def truncated_name(size: 16, sep: " ")
+    self.name.truncate(size, separator: sep)
+  end
+
   def achievements_ordered_by(activity_type = nil, filter = nil, order = nil)
     if Achievement.valid_activity?(activity_type)
       valid_filters = activity_type.capitalize.constantize.valid_filter_options
