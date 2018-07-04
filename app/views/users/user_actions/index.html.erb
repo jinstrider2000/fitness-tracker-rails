@@ -5,7 +5,6 @@
 <%= content_for :doc_ready_script do %>
   <%= javascript_tag type: "text/javascript" do %>
     $(function() {
-      setCurrentUser();
       flashToggle();
     });
   <% end %>
@@ -31,11 +30,16 @@
 
 <%= javascript_tag type: "text/x-handlebars-template", id: "user-action-button-template" do %>
   <div class="btn-group">
-    <a href="/#" class="{{view.primary_action_class}}" onclick="event.preventDefault();primaryActionButton(this)">{{view.primary_action}}</a>
+    <a href="/#" class="{{view.primary_action.classes}}" data-slug="{{slug}}" data-action="{{view.primary_action.name}}" onclick="event.preventDefault();primaryActionButton(this)">{{view.primary_action.locale_name}}</a>
     {{#if secondary_action}}
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="caret"></span>
       </button>
+      <ul class="dropdown-menu">
+        {{#each view.secondary_action}}
+          <li><a href="/#" data-slug="{{../../slug}}" data-action="{{name}}" onclick="event.preventDefault();secondaryActionButton(this)">{{locale_name}}</a></li>
+        {{/each}}
+      </ul>
     {{/if}}
   </div>
 <% end %>
