@@ -1,5 +1,5 @@
 <%= content_for :title do %>
-  <%= tag.title t("default") %>
+  <%= tag.title t("users.user_actions.#{params[:action]}.title", user_name: @user.try(:first_name)) %>
 <% end %>
 
 <%= content_for :doc_ready_script do %>
@@ -10,10 +10,21 @@
   <% end %>
 <% end %>
 
-<%= tag.h2 "", id: "user-index-heading", class: %w[text-center] %>
-<%= tag.div class: %[row text-center] do %>
-  <%= link_to t(".most_active"), most_active_today_users_path %>
+<% if params[:action] == "index" || params[:action] == "muted" || params[:action] == "blocked" %>
+  <%= tag.h2 t("users.user_actions.#{params[:action]}.heading"), id: "user-index-heading", class: %w[text-center] %>
+  <% if params[:action] == "index" %>
+    <%= tag.div class: %[row text-center] do %>
+      <%= link_to t(".most_active"), most_active_today_users_path %>
+    <% end %>
+  <% end %>
+<% else %>
+  <% if viewing_own_profile_while_logged_in? %>
+    <%= tag.h2 t("users.user_actions.#{params[:action]}.my_heading"), class: %w[text-center] %>
+  <% else %>
+    <%= tag.h2 t("users.user_actions.#{params[:action]}.other_user_heading", user_name: @user.first_name), class: %w[text-center] %>
+  <% end %>
 <% end %>
+
 <%= tag.div "", id: "user-index-items" %>
 
 <%= javascript_tag type: "text/x-handlebars-template", id: "user-index-template" do %>
