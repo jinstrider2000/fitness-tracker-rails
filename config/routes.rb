@@ -34,9 +34,12 @@ Rails.application.routes.draw do
 
   scope ':locale', constraints: {locale: /en|es/} do
     scope 'users/:slug', as: 'user' do
-      resources :achievements, only: [:new, :index]
-      get '/achievements/:id/previous-id' => 'achievements#previous_id', as: 'achievement_previous_id'
-      get '/achievements/:id/next-id' => 'achievements#next_id', as: 'achievement_next_id'
+      resources :achievements, param: :id, only: [:new, :index] do
+        member do
+          get 'previous-id'
+          get 'next-id'
+        end
+      end
     end
   end
 
