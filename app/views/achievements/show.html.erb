@@ -29,8 +29,8 @@
       <p id="ach-show-comment" class="center-block" style="width:75%;"><%= @achievement.comment %></p>
     </div>
     <% if policy(@achievement).update? %>
-      <a href="<%= edit_achievement_path @achievement%>" class="btn btn-default btn-xs" role="button">  Edit  </a>
-      <%= link_to "Delete", achievement_path(@achievement), class: %w[btn btn-danger btn-xs], role: "button", method: :delete %>
+      <a id="ach-show-edit-link" href="<%= edit_achievement_path @achievement%>" class="btn btn-default btn-xs" role="button">  Edit  </a>
+      <%= link_to "Delete", achievement_path(@achievement), id: "ach-show-delete-link", class: %w[btn btn-danger btn-xs], role: "button", method: :delete %>
     <% end %>
   </div>
   <div class="row">

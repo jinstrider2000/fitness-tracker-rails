@@ -1,6 +1,7 @@
 function achievementShowInit() {
   initializeShowLinks();
   setShowListeners();
+  setCurrentUser();
 }
 
 function setShowListeners() {
@@ -57,6 +58,10 @@ function updateLinksData(linkName, currentId) {
       }
       nextLink.data("id", id);
       nextLink.data("current", currentId);
+      if (window.currentUser.slug === nextLink.data("slug")) {
+        $("#ach-show-edit-link").attr("href", `/${nextLink.data("locale")}/achievements/${currentId}/edit`);
+        $("#ach-show-delete-link").attr("href", `/${nextLink.data("locale")}/achievements/${currentId}`);
+      }
     }).fail(ajaxErrorMessage);
   } else {
     nextLink.data("id", prevLink.data("current"));
@@ -70,6 +75,10 @@ function updateLinksData(linkName, currentId) {
       }
       prevLink.data("id", id);
       prevLink.data("current", currentId);
+      if (window.currentUser.slug === prevLink.data("slug")) {
+        $("#ach-show-edit-link").attr("href", `/${prevLink.data("locale")}/achievements/${currentId}/edit`);
+        $("#ach-show-delete-link").attr("href", `/${prevLink.data("locale")}/achievements/${currentId}`);
+      }
     }).fail(ajaxErrorMessage);
   }
 }
