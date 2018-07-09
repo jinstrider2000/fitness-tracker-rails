@@ -28,7 +28,7 @@ class Users::UserActionsController < ApplicationController
       authorize @user
       respond_to do |format|
         format.html {render :index}
-        format.json {render json: @user.followers}
+        format.json {render json: @user.followers, serializer: UserIndexSerializer}
       end
     else
       skip_authorization
@@ -44,7 +44,7 @@ class Users::UserActionsController < ApplicationController
       authorize @user
       respond_to do |format|
         format.html {render :index}
-        format.json {render json: @user.following}
+        format.json {render json: @user.following, serializer: UserIndexSerializer}
       end
     else
       skip_authorization
@@ -60,7 +60,7 @@ class Users::UserActionsController < ApplicationController
       authorize @user
       respond_to do |format|
         format.html {render :index}
-        format.json {render json: @user.blocked_users}
+        format.json {render json: @user.blocked_users, serializer: UserIndexSerializer}
       end
     else
       skip_authorization
@@ -76,7 +76,7 @@ class Users::UserActionsController < ApplicationController
       authorize @user
       respond_to do |format|
         format.html {render :index}
-        format.json {render json: @user.muted_users}
+        format.json {render json: @user.muted_users, serializer: UserIndexSerializer}
       end
     else
       skip_authorization
