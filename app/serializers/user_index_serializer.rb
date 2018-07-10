@@ -2,20 +2,6 @@ class UserIndexSerializer < ActiveModel::Serializer
   attributes :id, :slug, :truncated_quote, :truncated_name, :view
 
   def view
-    # fields:
-    # view : {
-    #   follow_status, show_link, profile_pic_path
-    #   primary_action: {
-    #     name:
-    #     locale_name:
-    #     method:
-    #   }
-    #   secondary_action: {
-    #     name:
-    #     locale_name:
-    #     method:
-    #   }
-    # }
     view_object = {}
     if current_user.following_each_other?(object) 
       view_object[:follow_status] = I18n.t "users.users_helper.follow_status.following_each_other"
@@ -54,23 +40,11 @@ class UserIndexSerializer < ActiveModel::Serializer
     view_object[:secondary_action] = []
 
     if view_object[:primary_action][:name] == :follow || view_object[:primary_action][:name] == :unfollow
-      view_object[:secondary_action] << {
-        :name => :block
-        :locale_name => User.human_attribute_name(:block)
-        :method => :post
-      }
+      view_object[:secondary_action] << {:name => :block, :locale_name => User.human_attribute_name(:block), :method => :post}
       if current_user.muted?(object)
-        view_object[:secondary_action] << {
-          :name => :unmute
-          :locale_name => User.human_attribute_name(:unmute)
-          :method => :delete
-        }
+        view_object[:secondary_action] << {:name => :unmute, :locale_name => User.human_attribute_name(:unmute), :method => :delete}
       else
-        view_object[:secondary_action] << {
-          :name => :mute
-          :locale_name => User.human_attribute_name(:mute)
-          :method => :post
-        }
+        view_object[:secondary_action] << {:name => :mute, :locale_name => User.human_attribute_name(:mute),:method => :post}
       end
     end
     view_object
