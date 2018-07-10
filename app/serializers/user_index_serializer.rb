@@ -11,8 +11,8 @@ class UserIndexSerializer < ActiveModel::Serializer
       view_object[:follow_status] = ""
     end 
     
-    view_object[:show_link] = ApplicationHelper.route_helpers.user_path(locale: I18n.locale, slug: object.slug)
-    view_object[:profile_pic_path] = ApplicationHelper.profile_pic_path(object)
+    view_object[:show_link] = ApplicationController.helpers.route_helpers.user_path(locale: I18n.locale, slug: object.slug)
+    view_object[:profile_pic_path] = ApplicationController.helpers.profile_pic_path(object)
     view_object[:primary_action] = {}
 
     if current_user.blocked?(object)
