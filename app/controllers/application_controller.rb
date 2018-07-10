@@ -4,10 +4,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, :set_locale
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  def current_user_json
-    render json: current_user
-  end
-
   protected
 
   def user_not_authorized(exception)
