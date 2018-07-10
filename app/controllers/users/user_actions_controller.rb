@@ -1,11 +1,7 @@
 class Users::UserActionsController < ApplicationController
   
   before_action :load_user_resource, except: [:index]
-  after_action :verify_authorized, except: [:index, :most_active_today, :current_user_json]
-
-  def current_user_json
-    render json: current_user
-  end
+  after_action :verify_authorized, except: [:index, :most_active_today]
 
   def show
     if @user.present?
