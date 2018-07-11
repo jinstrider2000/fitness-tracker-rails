@@ -5,6 +5,7 @@
 <%= content_for :doc_ready_script do %>
   <%= javascript_tag type: "text/javascript" do %>
     $(function() {
+      userIndexInit();
       flashToggle();
     });
   <% end %>
@@ -27,7 +28,13 @@
 
 <%= tag.div "", id: "user-index-items" %>
 
-<%= javascript_tag type: "text/x-handlebars-template", id: "user-index-template" do %>
+<script type="text/x-handlebars-template" id="index-template">
+  {{#each this}}
+    {{> userIndex}}
+  {{/each}}
+</script>
+
+<script type="text/x-handlebars-template" id="user-index-partial">
   <div id="{{id}}" class="user-index card-style col-sm-4">
     <a href="{{view.show_link}}"><img src="{{view.profile_pic_path}}" alt="" class="img-circle index-icon"></a>
     <span class="follow-status-msg follow-status-msg-index">{{view.follow_status}}</span>
@@ -37,20 +44,20 @@
     <h3 class="index-name">{{truncated_name}}</h3>
     <p class="index-quote">{{truncated_quote}}</p>
   </div>
-<% end %>
+</script>
 
-<%= javascript_tag type: "text/x-handlebars-template", id: "user-action-button-template" do %>
+<script type="text/x-handlebars-template" id="user-action-button-partial">
   <div class="btn-group">
     <a href="/#" class="{{view.primary_action.classes}}" data-slug="{{slug}}" data-action="{{view.primary_action.name}}" data-method="{{view.primary_action.method}}" onclick="event.preventDefault();primaryActionButton(this)">{{view.primary_action.locale_name}}</a>
-    {{#if secondary_action}}
+    {{#if view.secondary_action}}
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
         {{#each view.secondary_action}}
-          <li><a href="/#" data-slug="{{../../slug}}" data-action="{{name}}" data-method="{{method}}" onclick="event.preventDefault();secondaryActionButton(this)">{{locale_name}}</a></li>
+          <li><a href="/#" data-slug="{{../slug}}" data-action="{{name}}" data-method="{{method}}" onclick="event.preventDefault();secondaryActionButton(this)">{{locale_name}}</a></li>
         {{/each}}
       </ul>
     {{/if}}
   </div>
-<% end %>
+</script>

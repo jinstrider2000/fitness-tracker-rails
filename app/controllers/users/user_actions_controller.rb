@@ -10,6 +10,10 @@ class Users::UserActionsController < ApplicationController
   def show
     if @user.present?
       authorize @user
+      respond_to do |format|
+        format.html
+        format.json {params[:return_type].try(:downcase) == "index" ? render(json: @user, serializer: UserIndexSerializer) : render(json: @user)}
+      end
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
@@ -19,7 +23,14 @@ class Users::UserActionsController < ApplicationController
   def index
     respond_to do |format|
       format.html
-      format.json {render json: User.where.not(id: current_user.id), each_serializer: UserIndexSerializer}
+      format.json do
+        users = User.where.not(id: current_user.id)
+        if users.count > 0
+          render json: users, each_serializer: UserIndexSerializer
+        else
+          render json: {message: t(".no_items")}
+        end
+      end
     end
   end
 
@@ -28,7 +39,14 @@ class Users::UserActionsController < ApplicationController
       authorize @user
       respond_to do |format|
         format.html {render :index}
-        format.json {render json: @user.followers, each_serializer: UserIndexSerializer}
+        format.json do
+          users = @user.followers
+          if users.count > 0
+            render json: users, each_serializer: UserIndexSerializer
+          else
+            render json: {message:t(".no_items")}
+          end
+        end
       end
     else
       skip_authorization
@@ -44,7 +62,14 @@ class Users::UserActionsController < ApplicationController
       authorize @user
       respond_to do |format|
         format.html {render :index}
-        format.json {render json: @user.following, each_serializer: UserIndexSerializer}
+        format.json do
+          users = @user.following
+          if users.count > 0
+            render json: users, each_serializer: UserIndexSerializer
+          else
+            render json: {message: t(".no_items")}
+          end
+        end
       end
     else
       skip_authorization
@@ -60,7 +85,14 @@ class Users::UserActionsController < ApplicationController
       authorize @user
       respond_to do |format|
         format.html {render :index}
-        format.json {render json: @user.blocked_users, each_serializer: UserIndexSerializer}
+        format.json do
+          users = @user.blocked_users
+          if users.count > 0
+            render json: users, each_serializer: UserIndexSerializer
+          else
+            render json: {message: t(".no_items")}
+          end
+        end
       end
     else
       skip_authorization
@@ -76,7 +108,14 @@ class Users::UserActionsController < ApplicationController
       authorize @user
       respond_to do |format|
         format.html {render :index}
-        format.json {render json: @user.muted_users, each_serializer: UserIndexSerializer}
+        format.json do
+          users = @user.muted_users
+          if users.count > 0
+            render json: users, each_serializer: UserIndexSerializer
+          else
+            render json: {message: t(".no_items")}
+          end
+        end
       end
     else
       skip_authorization

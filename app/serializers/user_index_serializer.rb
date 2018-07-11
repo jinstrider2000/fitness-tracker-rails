@@ -40,11 +40,11 @@ class UserIndexSerializer < ActiveModel::Serializer
     view_object[:secondary_action] = []
 
     if view_object[:primary_action][:name] == :follow || view_object[:primary_action][:name] == :unfollow
-      view_object[:secondary_action] << {:name => :block, :locale_name => User.human_attribute_name(:block), :method => :post}
+      view_object[:secondary_action] << {:name => :block, :locale_name => "#{User.human_attribute_name(:block)} #{object.first_name}", :method => :post}
       if current_user.muted?(object)
-        view_object[:secondary_action] << {:name => :unmute, :locale_name => User.human_attribute_name(:unmute), :method => :delete}
+        view_object[:secondary_action] << {:name => :unmute, :locale_name => "#{User.human_attribute_name(:unmute)} #{object.first_name}", :method => :delete}
       else
-        view_object[:secondary_action] << {:name => :mute, :locale_name => User.human_attribute_name(:mute),:method => :post}
+        view_object[:secondary_action] << {:name => :mute, :locale_name => "#{User.human_attribute_name(:mute)} #{object.first_name}",:method => :post}
       end
     end
     view_object
