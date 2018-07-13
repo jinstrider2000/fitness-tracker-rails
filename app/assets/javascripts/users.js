@@ -25,16 +25,28 @@ function handlebarsUserIndexInit() {
 }
 
 function displayUserIndex() {
-  $.get(`${window.location.pathname}.json`, function (users) {
-    const indexDiv = $("#user-index-items");
-    indexDiv.html(window.indexTemplate(users));
-  });
+  setTimeout(() => {
+    $.get(`${window.location.pathname}.json`, function (users) {
+      const indexDiv = $("#user-index-items");
+      if (users.hasOwnProperty("message")) {
+        indexDiv.html($('<p class="text-center no-items-style"></p>').html(users.message));
+      } else {
+        indexDiv.html(window.indexTemplate(users));
+      }
+    });
+  }, 500);
 }
 
 function primaryActionButton(button) {
-  
+  const btn = $(button);
+  $.ajax({
+    method: btn.data("method"),
+    
+  });
+  return btn;
 }
 
 function secondaryActionButton(button) {
-  
+  const btn = $(button);
+  return btn;
 }

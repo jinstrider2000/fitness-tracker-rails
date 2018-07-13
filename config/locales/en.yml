@@ -247,14 +247,15 @@ en:
         title: "Fitness Tracker - %{user_name}: Followers"
         my_heading: "My Followers"
         other_user_heading: "%{user_name}'s Followers"
-        no_items: "You have no followers"
+        no_items: "No followers"
       following:
         title: "Fitness Tracker - Who %{user_name}'s Following"
         my_heading: "Who I'm Following"
         other_user_heading: "Who %{user_name}'s Following"
-        no_items: "You haven't followed anyone"
+        no_items: "No one is following"
       index:
         title: "Fitness Tracker - User Index"
+        loading: "Loading..."
         most_active: "Get motivated! Find out who is today's most active user"
         heading: "All Users"
       muted:

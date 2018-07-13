@@ -26,7 +26,11 @@
   <% end %>
 <% end %>
 
-<%= tag.div "", id: "user-index-items" %>
+<%= tag.div id: "user-index-items", class: "row" do %>
+  <%= tag.div class: %w[text-center no-items-style] do %>
+    <%= tag.p t ".loading" %>
+  <% end %>
+<% end %>
 
 <script type="text/x-handlebars-template" id="index-template">
   {{#each this}}

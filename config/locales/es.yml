@@ -214,14 +214,15 @@ es:
         title: "Fitness Tracker - %{user_name}: Seguidores"
         my_heading: "Mis Seguidores"
         other_user_heading: "Seguidores de %{user_name}"
-        no_items: "No tienes seguidores"
+        no_items: "No hay seguidores"
       following:
         title: "Fitness Tracker - Quien %{user_name} esta siguiendo"
         my_heading: "Quién Estoy Siguiendo"
         other_user_heading: "Quien %{user_name} Esta Siguiendo"
-        no_items: "No has seguido a nadie"
+        no_items: "Nadie esta seguido"
       index:
         title: "Fitness Tracker - Indice de Usuario"
+        loading: "Actualizando..."
         most_active: "¡Motívate! Descubra quién es el usuario más activo de hoy"
         heading: "Indice de Usuario"
       muted:
