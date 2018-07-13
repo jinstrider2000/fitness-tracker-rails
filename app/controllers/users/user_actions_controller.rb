@@ -130,7 +130,10 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       authorize @user
       current_user.follow(@user)
-      redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
+      respond_to do |format|
+        format.html {redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)}
+        format.json {render json: {message: t(".success_msg")}}
+      end
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
@@ -141,7 +144,10 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       authorize @user
       current_user.unfollow(@user)
-      redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
+      respond_to do |format|
+        format.html {redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)}
+        format.json {render json: {message: t(".success_msg")}}
+      end
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
@@ -152,10 +158,15 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       authorize @user
       current_user.block(@user)
-      if request.referrer == user_url(@user.slug)
-        redirect_to root_path, notice: t(".success_msg", first_name: @user.first_name)
-      else
-        redirect_to request.referrer, notice: t(".success_msg", first_name: @user.first_name)
+      respond_to do |format|
+        format.html do
+          if request.referrer == user_url(@user.slug)
+            redirect_to root_path, notice: t(".success_msg", first_name: @user.first_name)
+          else
+            redirect_to request.referrer, notice: t(".success_msg", first_name: @user.first_name)
+          end
+        end
+        format.json {render json: {message: t(".success_msg")}}
       end
     else
       skip_authorization
@@ -167,7 +178,10 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       authorize @user
       current_user.unblock(@user)
-      redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
+      respond_to do |format|
+        format.html {redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)}
+        format.json {render json: {message: t(".success_msg")}}
+      end
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
@@ -178,7 +192,10 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       authorize @user
       current_user.mute(@user)
-      redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
+      respond_to do |format|
+        format.html {redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)}
+        format.json {render json: {message: t(".success_msg")}}
+      end
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}
@@ -189,7 +206,10 @@ class Users::UserActionsController < ApplicationController
     if @user.present?
       authorize @user
       current_user.unmute(@user)
-      redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)
+      respond_to do |format|
+        format.html {redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)}
+        format.json {render json: {message: t(".success_msg")}}
+      end
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("users.user_actions.not_found_error")}

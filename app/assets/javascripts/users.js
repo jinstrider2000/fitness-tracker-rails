@@ -37,16 +37,12 @@ function displayUserIndex() {
   }, 500);
 }
 
-function primaryActionButton(button) {
+function actionButton(button) {
   const btn = $(button);
   $.ajax({
     method: btn.data("method"),
-    
+    url: `/${getLocale()}/users/${btn.data("slug")}/${btn.data("action")}.json`,
+    success: ajaxNoticeMessage,
+    error: ajaxErrorMessage
   });
-  return btn;
-}
-
-function secondaryActionButton(button) {
-  const btn = $(button);
-  return btn;
 }

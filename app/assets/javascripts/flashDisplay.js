@@ -16,7 +16,7 @@ function ajaxErrorMessage(response) {
 
 function ajaxNoticeMessage(response) {
   const msg = $("#notice-flash-msg");
-  msg.html(response.responseJSON.error_message);
+  msg.html(response.responseJSON.message);
   setTimeout(() => {
     msg.html("");
   }, 3000);
