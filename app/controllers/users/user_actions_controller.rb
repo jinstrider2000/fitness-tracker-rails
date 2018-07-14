@@ -132,7 +132,7 @@ class Users::UserActionsController < ApplicationController
       current_user.follow(@user)
       respond_to do |format|
         format.html {redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)}
-        format.json {render json: {message: t(".success_msg")}}
+        format.json {render json: {message: t(".success_msg", first_name: @user.first_name), id: @user.id, slug: @user.slug}}
       end
     else
       skip_authorization
@@ -146,7 +146,7 @@ class Users::UserActionsController < ApplicationController
       current_user.unfollow(@user)
       respond_to do |format|
         format.html {redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)}
-        format.json {render json: {message: t(".success_msg")}}
+        format.json {render json: {message: t(".success_msg", first_name: @user.first_name), id: @user.id, slug: @user.slug}}
       end
     else
       skip_authorization
@@ -166,7 +166,7 @@ class Users::UserActionsController < ApplicationController
             redirect_to request.referrer, notice: t(".success_msg", first_name: @user.first_name)
           end
         end
-        format.json {render json: {message: t(".success_msg")}}
+        format.json {render json: {message: t(".success_msg", first_name: @user.first_name), id: @user.id, slug: @user.slug}}
       end
     else
       skip_authorization
@@ -180,7 +180,7 @@ class Users::UserActionsController < ApplicationController
       current_user.unblock(@user)
       respond_to do |format|
         format.html {redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)}
-        format.json {render json: {message: t(".success_msg")}}
+        format.json {render json: {message: t(".success_msg", first_name: @user.first_name), id: @user.id, slug: @user.slug}}
       end
     else
       skip_authorization
@@ -194,7 +194,7 @@ class Users::UserActionsController < ApplicationController
       current_user.mute(@user)
       respond_to do |format|
         format.html {redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)}
-        format.json {render json: {message: t(".success_msg")}}
+        format.json {render json: {message: t(".success_msg", first_name: @user.first_name), id: @user.id, slug: @user.slug}}
       end
     else
       skip_authorization
@@ -208,7 +208,7 @@ class Users::UserActionsController < ApplicationController
       current_user.unmute(@user)
       respond_to do |format|
         format.html {redirect_to request.referrer || root_path, notice: t(".success_msg", first_name: @user.first_name)}
-        format.json {render json: {message: t(".success_msg")}}
+        format.json {render json: {message: t(".success_msg", first_name: @user.first_name), id: @user.id, slug: @user.slug}}
       end
     else
       skip_authorization

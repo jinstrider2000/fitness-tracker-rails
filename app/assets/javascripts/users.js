@@ -40,9 +40,16 @@ function displayUserIndex() {
 function actionButton(button) {
   const btn = $(button);
   $.ajax({
-    method: btn.data("method"),
-    url: `/${getLocale()}/users/${btn.data("slug")}/${btn.data("action")}.json`,
+    method: btn.data("submitmethod"),
+    url: `/${getLocale()}/users/${btn.data("slug")}/${btn.data("useraction")}.json`,
     success: ajaxNoticeMessage,
     error: ajaxErrorMessage
+  }).done(updateUserIndex);
+}
+
+function updateUserIndex(response) {
+  const userDiv = $(`#${response.id}`);
+  $.get(`/${getLocale()}/users/${response.slug}.json?return_type=index`, function (user) {
+    userDiv.html(window.userIndexPartial(user));
   });
 }

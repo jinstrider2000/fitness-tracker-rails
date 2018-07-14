@@ -9,7 +9,7 @@ class UserIndexSerializer < ActiveModel::Serializer
       view_object[:follow_status] = I18n.t "users.users_helper.follow_status.follows_you"
     else
       view_object[:follow_status] = ""
-    end 
+    end
     
     view_object[:show_link] = ApplicationController.helpers.route_helpers.user_path(locale: I18n.locale, slug: object.slug)
     view_object[:profile_pic_path] = ApplicationController.helpers.profile_pic_path(object)
