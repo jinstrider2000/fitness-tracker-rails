@@ -8,7 +8,7 @@ function flashToggle() {
 
 function ajaxErrorMessage(response) {
   const msg = $("#error-flash-msg");
-  msg.html(response.error_message);
+  msg.html(response.responseJSON.error_message);
   setTimeout(() => {
     msg.html("");
   }, 3000);

@@ -42,26 +42,27 @@
 
 <script type="text/x-handlebars-template" id="user-index-partial">
   <a href="{{view.show_link}}"><img src="{{view.profile_pic_path}}" alt="" class="img-circle index-icon"></a>
-  <span class="follow-status-msg follow-status-msg-index">{{view.follow_status}}</span>
-  <div class="user-actions-btn text-center">
+  {{#unless (ownProfile) }}
     {{> actionButton }}
-  </div>
+  {{/unless}}
   <h3 class="index-name">{{truncated_name}}</h3>
   <p class="index-quote">{{truncated_quote}}</p>
 </script>
 
 <script type="text/x-handlebars-template" id="user-action-button-partial">
-  <div class="btn-group">
-    <a href="/#" class="{{view.primary_action.classes}}" data-slug="{{slug}}" data-useraction="{{view.primary_action.name}}" data-submitmethod="{{view.primary_action.method}}" onclick="event.preventDefault();actionButton(this)">{{view.primary_action.locale_name}}</a>
-    {{#if view.secondary_action}}
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-        {{#each view.secondary_action}}
-          <li><a href="/#" data-slug="{{../slug}}" data-useraction="{{name}}" data-submitmethod="{{method}}" onclick="event.preventDefault();actionButton(this)">{{locale_name}}</a></li>
-        {{/each}}
-      </ul>
-    {{/if}}
+  <div class="user-actions-btn text-center">
+    <div class="btn-group">
+      <a href="/#" class="{{view.primary_action.classes}}" data-slug="{{slug}}" data-useraction="{{view.primary_action.name}}" data-submitmethod="{{view.primary_action.method}}" onclick="event.preventDefault();actionButton(this)">{{view.primary_action.locale_name}}</a>
+      {{#if view.secondary_action}}
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          {{#each view.secondary_action}}
+            <li><a href="/#" data-slug="{{../slug}}" data-useraction="{{name}}" data-submitmethod="{{method}}" onclick="event.preventDefault();actionButton(this)">{{locale_name}}</a></li>
+          {{/each}}
+        </ul>
+      {{/if}}
+    </div>
   </div>
 </script>
