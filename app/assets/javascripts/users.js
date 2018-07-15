@@ -48,8 +48,8 @@ function actionButton(button) {
   let refresh = false;
   const slugPattern = new RegExp(window.currentUser.slug);
   const myPathMatch = window.location.pathname.match(slugPattern)
-  const pathActionMatch = window.location.pathname.match(/\/(following|blocked|muted)$/);
-  if (!!myPathMatch && !!pathActionMatch && ((pathActionMatch[1] === "following" && ((btn.data("useraction") === "unfollow") || (btn.data("useraction") === "block"))||(pathActionMatch[1] === "blocked" && btn.data("useraction") === "unblock")||(pathActionMatch[1] === "muted" && btn.data("useraction") === "unmute")))) {
+  const pathActionMatch = window.location.pathname.match(/\/(following|followers|blocked|muted)$/);
+  if (!!myPathMatch && !!pathActionMatch && ((pathActionMatch[1] === "following" && ((btn.data("useraction") === "unfollow") || (btn.data("useraction") === "block"))|| (pathActionMatch[1] === "followers" && btn.data("useraction") === "block") || (pathActionMatch[1] === "blocked" && btn.data("useraction") === "unblock")||(pathActionMatch[1] === "muted" && btn.data("useraction") === "unmute")))) {
     refresh = true;
   }
   $.ajax({
