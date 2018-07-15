@@ -9,10 +9,10 @@ class Users::UserActionsController < ApplicationController
 
   def show
     if @user.present?
-      authorize @user
+      params[:return_type].try(:downcase) == "index" ? skip_authorization : authorize(@user)
       respond_to do |format|
         format.html
-        format.json {params[:return_type].try(:downcase) == "index" ? render(json: @user, serializer: UserIndexSerializer) : render(json: @user)}
+        format.json {params[:return_type].downcase == "index" ? render(json: @user, serializer: UserIndexSerializer) : render(json: @user)}
       end
     else
       skip_authorization
