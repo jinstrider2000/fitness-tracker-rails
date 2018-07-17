@@ -1,3 +1,7 @@
 class AchievementNewSerializerSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :name, :activity_type, :view
+
+  def view
+    
+  end
 end

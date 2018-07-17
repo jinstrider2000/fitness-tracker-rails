@@ -1,5 +1,6 @@
 class AchievementsController < ApplicationController
   
+  serialization_scope :view_context
   before_action :load_achievement_and_user_resource, except: [:index, :new, :create]
   after_action :verify_authorized
 

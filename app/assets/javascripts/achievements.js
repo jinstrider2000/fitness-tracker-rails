@@ -4,6 +4,17 @@ function achievementShowInit() {
   setCurrentUser();
 }
 
+function achievementNewEditInit() {
+  setFormListener();
+}
+
+function setFormListener() {
+  $("form").on("submit", function(event) {
+    event.preventDefault();
+    console.log($(this).serialize());
+  });
+}
+
 function setShowListeners() {
   $("#next").on("click", showNext);
   $("#prev").on("click", showPrevious);

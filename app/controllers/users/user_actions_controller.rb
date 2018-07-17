@@ -1,5 +1,6 @@
 class Users::UserActionsController < ApplicationController
   
+  serialization_scope :view_context
   before_action :load_user_resource, except: [:index]
   after_action :verify_authorized, except: [:index, :most_active_today, :current_user_json]
 
