@@ -15,4 +15,6 @@
   <%= tag.h2 t ".heading", record_name: @achievement.activity.model_name.human %>
 <% end %>
 
-<%= render partial: 'form', locals: {html_method: :patch, path: achievement_path(@achievement), achievement: @achievement} %>
+<%= tag.div id: "achievement-form" do %>
+  <%= render partial: 'form', locals: {html_method: :patch, path: achievement_path(@achievement), achievement: @achievement} %>
+<% end %>
