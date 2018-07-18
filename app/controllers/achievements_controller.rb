@@ -19,12 +19,14 @@ class AchievementsController < ApplicationController
     authorize @achievement
     if @achievement.save
       respond_to do |format|
-        format.html {redirect user_achievements_path(slug: current_user.slug)}
-        format.json {render json: @achievement}
+        format.html {redirect_to user_achievements_path(slug: current_user.slug)}
+        format.json {render json: {message: t(".ajax_success"), name: @achievement.name, activity_type: @achievement.activity_type}}
       end
     else
-      @user = current_user
-      render :new
+      respond_to do |format|
+        format.html {render :new}
+        format.json {render partial: 'form', locals: {html_method: :post, path: "#{achievements_path}.json", achievement: @achievement}}
+      end
     end
   end
 
@@ -92,9 +94,15 @@ class AchievementsController < ApplicationController
     if @achievement.present?
       authorize @achievement
       if @achievement.update(achievement_params)
-        redirect_to achievement_path(@achievement), notice: t(".success_msg")
+        respond_to do |format|
+          format.html {redirect_to achievement_path(@achievement), notice: t(".success_msg")}
+          format.json {render json: {message: t(".ajax_success"), name: @achievement.name, activity_type: @achievement.activity_type}}
+        end
       else
-        render :edit
+        respond_to do |format|
+          format.html {render :edit}
+          format.json {render partial: 'form', locals: {html_method: :patch, path: achievement_path(@achievement), achievement: @achievement}}
+        end
       end
     else
       skip_authorization
