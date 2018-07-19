@@ -9,7 +9,7 @@ function achievementNewInit() {
 }
 
 function achievementEditInit() {
-  
+  setEditFormListener();
 }
 
 function setNewFormListener() {
@@ -18,6 +18,7 @@ function setNewFormListener() {
     const submitBtn = $('#achievement-form input[type="submit"]');
     submitBtn.attr("disabled", true);
     $.post(`/${getLocale()}/achievements`, $(this).serialize(), function (response) {
+      clearForm();
       steadyAjaxNoticeMessage(response);
       submitBtn.attr("disabled", false);
     });
@@ -26,6 +27,11 @@ function setNewFormListener() {
 
 function setEditFormListener() {
   
+}
+
+function clearForm() {
+  $('#achievement-form input[type="text"]').attr("value","");
+  $('#achievement-form textarea').html("");
 }
 
 function setShowListeners() {
