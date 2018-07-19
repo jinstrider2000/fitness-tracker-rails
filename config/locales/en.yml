@@ -234,6 +234,8 @@ en:
       submit: "Sort"
     activity_type_selection:
       all: "All"
+    new_form_fields:
+      not_found_error: "Fields not found"
   users:
     users_helper:
       follow_status:

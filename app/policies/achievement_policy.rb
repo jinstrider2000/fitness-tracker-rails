@@ -8,14 +8,6 @@ class AchievementPolicy < ApplicationPolicy
     show?
   end
 
-  def next_id?
-    show?
-  end
-
-  def previous_id?
-    show?
-  end
-
   def create?
     record.user_id == user.id
   end
@@ -25,6 +17,18 @@ class AchievementPolicy < ApplicationPolicy
   end
 
   def destroy?
+    create?
+  end
+
+  def next_id?
+    show?
+  end
+
+  def previous_id?
+    show?
+  end
+
+  def new_form_fields?
     create?
   end
   

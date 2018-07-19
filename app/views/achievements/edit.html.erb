@@ -5,6 +5,7 @@
 <%= content_for :doc_ready_script do %>
   <%= javascript_tag type: "text/javascript" do %>
     $(function() {
+      achievementNewEditInit()
       flashToggle();
     });
   <% end %>

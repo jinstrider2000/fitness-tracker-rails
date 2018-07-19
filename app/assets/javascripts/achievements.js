@@ -4,34 +4,51 @@ function achievementShowInit() {
   setCurrentUser();
 }
 
-function achievementNewInit() {
-  setNewFormListener();
+function achievementNewEditInit() {
+  setFormListener();
+  setActivityRadioListener();
 }
 
-function achievementEditInit() {
-  setEditFormListener();
-}
-
-function setNewFormListener() {
+function setFormListener() {
   $("#achievement-form form").on("submit", function(event) {
     event.preventDefault();
+    const form = $(this);
     const submitBtn = $('#achievement-form input[type="submit"]');
     submitBtn.attr("disabled", true);
-    $.post(`/${getLocale()}/achievements`, $(this).serialize(), function (response) {
-      clearForm();
-      steadyAjaxNoticeMessage(response);
-      submitBtn.attr("disabled", false);
+    $.ajax({
+      method: form.attr("method"),
+      url: form.attr("action"),
+      data: form.serialize(),
+      success: function (response, textStatus, responseObject) {
+        if (!!responseObject.getResponseHeader("content-type").match(/json/)) {
+          steadyAjaxNoticeMessage(response);
+          clearForm();
+          submitBtn.attr("disabled", false);
+        } else {
+          $("#achievement-form").html(response);
+        }
+      }
     });
   });
 }
 
-function setEditFormListener() {
-  
+function setActivityRadioListener() {
+  $('#achievement-form input[type="radio"]').on("click", function (event) {
+    const radioBtn = $(this);
+    const slug = window.location.pathname.match(/\/users\/(\w+)\//)
+    $.get(`/${getLocale()}/users/${slug[1]}/achievements/${radioBtn.attr('value').toLowerCase()}/new-form-fields`, function (response) {
+      $("#achievement-form").html(response);
+    }).fail(ajaxErrorMessage);
+  });
 }
 
 function clearForm() {
-  $('#achievement-form input[type="text"]').attr("value","");
-  $('#achievement-form textarea').html("");
+  for (const textInput of $('#achievement-form input[type="text"]')) {
+    textInput.value = "";
+  }
+  for (const textAreaInput of $('#achievement-form textarea')) {
+    textAreaInput.value = "";
+  }
 }
 
 function setShowListeners() {

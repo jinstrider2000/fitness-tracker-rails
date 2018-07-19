@@ -41,14 +41,14 @@ Rails.application.routes.draw do
           get 'next-id'
         end
       end
+      scope 'achievements/:activity_type', as: 'achievement' do
+        get 'new-form-fields' => 'achievements#new_form_fields'
+      end
     end
   end
 
   scope ':locale', constraints: {locale: /en|es/} do
     resources :achievements, except: [:new, :index]
-    scope 'achievements/:activity_type', as: 'achievement' do
-      get 'form-fields' => 'achievements#form_fields'
-    end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

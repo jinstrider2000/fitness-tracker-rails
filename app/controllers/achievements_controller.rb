@@ -1,7 +1,7 @@
 class AchievementsController < ApplicationController
   
   serialization_scope :view_context
-  before_action :load_achievement_and_user_resource, except: [:index, :new, :create]
+  before_action :load_achievement_and_user_resource, except: [:index, :new, :create, :new_form_fields]
   after_action :verify_authorized
 
   def new
@@ -15,12 +15,12 @@ class AchievementsController < ApplicationController
   end
 
   def create
-    @achievement = Achievement.new(achievement_params)
-    authorize @achievement
-    if @achievement.save
-      render json: {message: t(".success_msg", name: @achievement.activity.name, activity_type: @achievement.activity_type, path: achievement_path(@achievement))}
+    achievement = Achievement.new(achievement_params)
+    authorize achievement
+    if achievement.save
+      render json: {message: t(".success_msg", name: achievement.activity.name, activity_type: achievement.activity_type, path: achievement_path(achievement))}
     else
-      render partial: 'form', locals: {html_method: :post, path: achievements_path, achievement: @achievement}
+      render partial: 'form', locals: {html_method: :post, path: achievements_path, achievement: achievement}
     end
   end
 
@@ -106,6 +106,17 @@ class AchievementsController < ApplicationController
     else
       skip_authorization
       render json: {error_message: t("achievements.not_found_error")}, status: 404
+    end
+  end
+
+  def new_form_fields
+    user = User.find_by(slug: params[:slug])
+    if user.present? && Achievement.valid_activity?(params[:activity_type])
+      achievement = Achievement.new(user: user, activity: params[:activity_type].capitalize.constantize.new)
+      authorize achievement
+      render partial: "form", locals: {html_method: :post, path: achievements_path, achievement: achievement}
+    else
+      render json: {error_message: t(".not_found_error")}, status: 404
     end
   end
 

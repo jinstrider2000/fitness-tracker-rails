@@ -201,6 +201,8 @@ es:
       submit: "Ordena"
     activity_type_selection:
       all: "Todos"
+    new_form_fields:
+      not_found_error: "No encontramos los campos"
   users:
     users_helper:
       follow_status:
