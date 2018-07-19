@@ -12,7 +12,7 @@ module AchievementsHelper
     if params[:action] == 'index'
       user_achievements_path @user.slug, activity_type: activity_type
     else
-      new_user_achievement_path @user.slug, activity_type: activity_type
+      new_user_achievement_path current_user.slug, activity_type: activity_type
     end
   end
 

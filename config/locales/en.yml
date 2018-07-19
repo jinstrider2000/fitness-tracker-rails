@@ -212,11 +212,13 @@ en:
     new:
       title: "Fitness Tracker - New Achievement"
       heading: "New Achievement"
+    create:
+      success_msg: "Added the %{activity_type}: <a href=\"%{path}\">%{name}</a>"
     edit:
       title: "Fitness Tracker - Edit Achievement"
       heading: "Edit %{record_name}"
     update:
-      success_msg: "Achievement successfully updated"
+      success_msg: "Successfully updated the %{activity_type}: <a href=\"%{path}\">%{name}</a>"
     show:
       title: "Fitness Tracker - %{user_name}'s Achievement: %{record_name}"
       my_heading: "My %{record_name}"

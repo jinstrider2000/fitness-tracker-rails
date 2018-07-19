@@ -179,11 +179,13 @@ es:
     new:
       title: "Fitness Tracker - Nuevo Logro"
       heading: "Nuevo Logro"
+    create:
+      success_msg: "Agregaste el logro: <a href=\"%{path}\">%{name}</a>"
     edit:
       title: "Fitness Tracker - Editar Logro"
       heading: "Editar %{record_name}"
     update:
-      success_msg: "Logro actualizado con éxito"
+      success_msg: "Logro actualizado con éxito: <a href=\"%{path}\">%{name}</a>"
     show:
       title: "Fitness Tracker - Logro de %{user_name}: %{record_name}"
       my_heading: "Mi %{record_name}"

@@ -4,15 +4,28 @@ function achievementShowInit() {
   setCurrentUser();
 }
 
-function achievementNewEditInit() {
-  setFormListener();
+function achievementNewInit() {
+  setNewFormListener();
 }
 
-function setFormListener() {
-  $("form").on("submit", function(event) {
+function achievementEditInit() {
+  
+}
+
+function setNewFormListener() {
+  $("#achievement-form form").on("submit", function(event) {
     event.preventDefault();
-    console.log($(this).serialize());
+    const submitBtn = $('#achievement-form input[type="submit"]');
+    submitBtn.attr("disabled", true);
+    $.post(`/${getLocale()}/achievements`, $(this).serialize(), function (response) {
+      steadyAjaxNoticeMessage(response);
+      submitBtn.attr("disabled", false);
+    });
   });
+}
+
+function setEditFormListener() {
+  
 }
 
 function setShowListeners() {

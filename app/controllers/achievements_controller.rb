@@ -18,15 +18,9 @@ class AchievementsController < ApplicationController
     @achievement = Achievement.new(achievement_params)
     authorize @achievement
     if @achievement.save
-      respond_to do |format|
-        format.html {redirect_to user_achievements_path(slug: current_user.slug)}
-        format.json {render json: {message: t(".ajax_success"), name: @achievement.name, activity_type: @achievement.activity_type}}
-      end
+      render json: {message: t(".success_msg", name: @achievement.activity.name, activity_type: @achievement.activity_type, path: achievement_path(@achievement))}
     else
-      respond_to do |format|
-        format.html {render :new}
-        format.json {render partial: 'form', locals: {html_method: :post, path: "#{achievements_path}.json", achievement: @achievement}}
-      end
+      render partial: 'form', locals: {html_method: :post, path: achievements_path, achievement: @achievement}
     end
   end
 
@@ -43,28 +37,6 @@ class AchievementsController < ApplicationController
         format.html {redirect_to(request.referrer || root_path, flash: {error: t("achievements.not_found_error")})}
         format.json {render json: {error_message: t("achievements.not_found_error")}, status: 404}
       end
-    end
-  end
-
-  def next_id
-    user_given_by_slug = User.find_by(slug: params[:slug])
-    if @achievement.present? && @user == user_given_by_slug
-      authorize @achievement
-      render json: @user.next_achievement_id(@achievement)
-    else
-      skip_authorization
-      render json: {error_message: t("achievements.not_found_error")}, status: 404
-    end
-  end
-
-  def previous_id
-    user_given_by_slug = User.find_by(slug: params[:slug])
-    if @achievement.present? && @user == user_given_by_slug
-      authorize @achievement
-      render json: @user.prev_achievement_id(@achievement)
-    else
-      skip_authorization
-      render json: {error_message: t("achievements.not_found_error")}, status: 404
     end
   end
 
@@ -94,19 +66,13 @@ class AchievementsController < ApplicationController
     if @achievement.present?
       authorize @achievement
       if @achievement.update(achievement_params)
-        respond_to do |format|
-          format.html {redirect_to achievement_path(@achievement), notice: t(".success_msg")}
-          format.json {render json: {message: t(".ajax_success"), name: @achievement.name, activity_type: @achievement.activity_type}}
-        end
+          render json: {message: t(".success_msg", name: @achievement.name, activity_type: @achievement.activity_type, path: achievement_path(@achievement))}
       else
-        respond_to do |format|
-          format.html {render :edit}
-          format.json {render partial: 'form', locals: {html_method: :patch, path: achievement_path(@achievement), achievement: @achievement}}
-        end
+          render partial: 'form', locals: {html_method: :patch, path: achievement_path(@achievement), achievement: @achievement}
       end
     else
       skip_authorization
-      redirect_to request.referrer || root_path, flash: {error: t("achievements.not_found_error")}
+      render json: {error_message: t("achievements.not_found_error")}
     end
   end
 
@@ -118,6 +84,28 @@ class AchievementsController < ApplicationController
     else
       skip_authorization
       redirect_to request.referrer || root_path, flash: {error: t("achievements.not_found_error")}
+    end
+  end
+
+  def next_id
+    user_given_by_slug = User.find_by(slug: params[:slug])
+    if @achievement.present? && @user == user_given_by_slug
+      authorize @achievement
+      render json: @user.next_achievement_id(@achievement)
+    else
+      skip_authorization
+      render json: {error_message: t("achievements.not_found_error")}, status: 404
+    end
+  end
+
+  def previous_id
+    user_given_by_slug = User.find_by(slug: params[:slug])
+    if @achievement.present? && @user == user_given_by_slug
+      authorize @achievement
+      render json: @user.prev_achievement_id(@achievement)
+    else
+      skip_authorization
+      render json: {error_message: t("achievements.not_found_error")}, status: 404
     end
   end
 
