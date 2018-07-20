@@ -69,7 +69,7 @@ en:
         achievement:
           attributes:
             activity:
-              invalid: "fields must be filled in"
+              invalid: "fields must be filled in correctly"
             completed_on:
               required: "date is required"
               blank: "date must be provided"

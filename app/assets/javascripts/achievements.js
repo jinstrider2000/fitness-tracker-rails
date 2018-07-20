@@ -33,13 +33,27 @@ function setActivityFields(radio) {
 }
 
 function clearForm() {
-  if (window.location.pathname.match(/new/)) {
+  const currentForm = window.location.pathname.match(/new|edit/)
+  if (currentForm && currentForm[0] === "new") {
     for (const textInput of $('#achievement-form input[type="text"]')) {
       textInput.value = "";
     }
     for (const textAreaInput of $('#achievement-form textarea')) {
       textAreaInput.value = "";
     } 
+  }
+  $("#error_explanation").remove()
+  for (const errorDiv of $(".field_with_errors")) {
+    const parent = $(errorDiv);
+    const child = $(errorDiv.innerHTML);
+    const currentValue = errorDiv.children[0].value;
+    if (currentForm === "new" && currentValue !== undefined) {
+      currentValue = "";
+    }
+    if (currentValue !== undefined) {
+      child.attr("value", currentValue);
+    }
+    parent.replaceWith(child);
   }
 }
 

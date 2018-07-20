@@ -36,7 +36,7 @@ es:
         achievement:
           attributes:
             activity:
-              invalid: "campos deben de ser completados"
+              invalid: "campos deben de ser completados correctamente"
             completed_on:
               required: "fecha es requerido"
               blank: "la fecha debe ser provista"
