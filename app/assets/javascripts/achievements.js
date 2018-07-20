@@ -4,50 +4,42 @@ function achievementShowInit() {
   setCurrentUser();
 }
 
-function achievementNewEditInit() {
-  setFormListener();
-  setActivityRadioListener();
-}
-
-function setFormListener() {
-  $("#achievement-form form").on("submit", function(event) {
-    event.preventDefault();
-    const form = $(this);
-    const submitBtn = $('#achievement-form input[type="submit"]');
-    submitBtn.attr("disabled", true);
-    $.ajax({
-      method: form.attr("method"),
-      url: form.attr("action"),
-      data: form.serialize(),
-      success: function (response, textStatus, responseObject) {
-        if (!!responseObject.getResponseHeader("content-type").match(/json/)) {
-          steadyAjaxNoticeMessage(response);
-          clearForm();
-          submitBtn.attr("disabled", false);
-        } else {
-          $("#achievement-form").html(response);
-        }
+function submitAchievementForm(frm) {
+  const form = $(frm);
+  const submitBtn = $('#achievement-form input[type="submit"]');
+  submitBtn.attr("disabled", true);
+  $.ajax({
+    method: form.attr("method"),
+    url: form.attr("action"),
+    data: form.serialize(),
+    success: function (response, textStatus, responseObject) {
+      if (!!responseObject.getResponseHeader("content-type").match(/json/)) {
+        steadyAjaxNoticeMessage(response);
+        clearForm();
+        submitBtn.attr("disabled", false);
+      } else {
+        $("#achievement-form").html(response);
       }
-    });
+    }
   });
 }
 
-function setActivityRadioListener() {
-  $('#achievement-form input[type="radio"]').on("click", function (event) {
-    const radioBtn = $(this);
-    const slug = window.location.pathname.match(/\/users\/([A-Za-z0-9_\-]+)\//)
-    $.get(`/${getLocale()}/users/${slug[1]}/achievements/${radioBtn.attr('value').toLowerCase()}/new-form-fields`, function (response) {
-      $("#achievement-form").html(response);
-    }).fail(ajaxErrorMessage);
-  });
+function setActivityFields(radio) {
+  const radioBtn = $(radio);
+  const slug = window.location.pathname.match(/\/users\/([A-Za-z0-9_\-]+)\//)
+  $.get(`/${getLocale()}/users/${slug[1]}/achievements/${radioBtn.attr('value').toLowerCase()}/new-form-fields`, function (response) {
+    $("#achievement-form").html(response);
+  }).fail(ajaxErrorMessage);
 }
 
 function clearForm() {
-  for (const textInput of $('#achievement-form input[type="text"]')) {
-    textInput.value = "";
-  }
-  for (const textAreaInput of $('#achievement-form textarea')) {
-    textAreaInput.value = "";
+  if (window.location.pathname.match(/new/)) {
+    for (const textInput of $('#achievement-form input[type="text"]')) {
+      textInput.value = "";
+    }
+    for (const textAreaInput of $('#achievement-form textarea')) {
+      textAreaInput.value = "";
+    } 
   }
 }
 

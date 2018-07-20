@@ -66,7 +66,7 @@ class AchievementsController < ApplicationController
     if @achievement.present?
       authorize @achievement
       if @achievement.update(achievement_params)
-          render json: {message: t(".success_msg", name: @achievement.name, activity_type: @achievement.activity_type, path: achievement_path(@achievement))}
+          render json: {message: t(".success_msg", name: @achievement.activity.name, activity_type: @achievement.activity_type, path: achievement_path(@achievement))}
       else
           render partial: 'form', locals: {html_method: :patch, path: achievement_path(@achievement), achievement: @achievement}
       end
