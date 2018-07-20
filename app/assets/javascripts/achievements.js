@@ -35,7 +35,7 @@ function setFormListener() {
 function setActivityRadioListener() {
   $('#achievement-form input[type="radio"]').on("click", function (event) {
     const radioBtn = $(this);
-    const slug = window.location.pathname.match(/\/users\/(\w+)\//)
+    const slug = window.location.pathname.match(/\/users\/([A-Za-z0-9_\-]+)\//)
     $.get(`/${getLocale()}/users/${slug[1]}/achievements/${radioBtn.attr('value').toLowerCase()}/new-form-fields`, function (response) {
       $("#achievement-form").html(response);
     }).fail(ajaxErrorMessage);
