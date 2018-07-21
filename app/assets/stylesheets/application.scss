@@ -254,7 +254,7 @@
    color: red;
  }
 
- div.field_with_errors > input
+ div.field_with_errors > input, div.field_with_errors > textarea
  {
    border: 2px solid red;
  }
