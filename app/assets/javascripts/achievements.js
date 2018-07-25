@@ -27,7 +27,7 @@ function submitAchievementForm(achievementForm) {
 function setActivityFields(radio) {
   const radioBtn = $(radio);
   const slug = window.location.pathname.match(/\/users\/([A-Za-z0-9_\-]+)\//)
-  $.get(`/${getLocale()}/users/${slug[1]}/achievements/${radioBtn.attr('value').toLowerCase()}/new-form-fields`, function (response) {
+  $.get(`/${I18n.locale}/users/${slug[1]}/achievements/${radioBtn.attr('value').toLowerCase()}/new-form-fields`, function (response) {
     $("#achievement-form").html(response);
   }).fail(ajaxErrorMessage);
 }
@@ -63,20 +63,16 @@ function setShowListeners() {
   $("#prev").on("click", showPrevious);
 }
 
-function getLocale() {
-  return $("body").attr("lang");
-}
-
 function showNext() {
   event.preventDefault();
   const nextLink = $(this);
-  $.get(`/${getLocale()}/achievements/${nextLink.data("id")}.json`, displayAchievement).done(achievement => updateLinksData("next", achievement.id)).fail(ajaxErrorMessage);
+  $.get(`/${I18n.locale}/achievements/${nextLink.data("id")}.json`, displayAchievement).done(achievement => updateLinksData("next", achievement.id)).fail(ajaxErrorMessage);
 }
 
 function showPrevious() {
   event.preventDefault();
   const prevLink = $(this);
-  $.get(`/${getLocale()}/achievements/${prevLink.data("id")}.json`, displayAchievement).done(achievement => updateLinksData("prev", achievement.id)).fail(ajaxErrorMessage);
+  $.get(`/${I18n.locale}/achievements/${prevLink.data("id")}.json`, displayAchievement).done(achievement => updateLinksData("prev", achievement.id)).fail(ajaxErrorMessage);
 }
 
 function displayAchievement(achievement) {
@@ -105,15 +101,15 @@ function updateLinksData(linkName, currentId) {
     if (prevLink.css("display") === "none") {
       prevLink.css("display", "inline");
     }
-    $.get(`/${getLocale()}/users/${nextLink.data("slug")}/achievements/${currentId}/next-id`, id => {
+    $.get(`/${I18n.locale}/users/${nextLink.data("slug")}/achievements/${currentId}/next-id`, id => {
       if (id === null) {
         nextLink.css("display", "none");
       }
       nextLink.data("id", id);
       nextLink.data("current", currentId);
       if (window.currentUser.slug === nextLink.data("slug")) {
-        $("#ach-show-edit-link").attr("href", `/${getLocale()}/achievements/${currentId}/edit`);
-        $("#ach-show-delete-link").attr("href", `/${getLocale()}/achievements/${currentId}`);
+        $("#ach-show-edit-link").attr("href", `/${I18n.locale}/achievements/${currentId}/edit`);
+        $("#ach-show-delete-link").attr("href", `/${I18n.locale}/achievements/${currentId}`);
       }
     }).fail(ajaxErrorMessage);
   } else {
@@ -122,15 +118,15 @@ function updateLinksData(linkName, currentId) {
     if (nextLink.css("display") === "none") {
       nextLink.css("display", "inline");
     }
-    $.get(`/${getLocale()}/users/${prevLink.data("slug")}/achievements/${currentId}/previous-id`, id => {
+    $.get(`/${I18n.locale}/users/${prevLink.data("slug")}/achievements/${currentId}/previous-id`, id => {
       if (id === null) {
         prevLink.css("display", "none");
       }
       prevLink.data("id", id);
       prevLink.data("current", currentId);
       if (window.currentUser.slug === prevLink.data("slug")) {
-        $("#ach-show-edit-link").attr("href", `/${getLocale()}/achievements/${currentId}/edit`);
-        $("#ach-show-delete-link").attr("href", `/${getLocale()}/achievements/${currentId}`);
+        $("#ach-show-edit-link").attr("href", `/${I18n.locale}/achievements/${currentId}/edit`);
+        $("#ach-show-delete-link").attr("href", `/${I18n.locale}/achievements/${currentId}`);
       }
     }).fail(ajaxErrorMessage);
   }

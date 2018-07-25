@@ -54,7 +54,7 @@ function actionButton(button) {
   }
   $.ajax({
     method: btn.data("submitmethod"),
-    url: `/${getLocale()}/users/${btn.data("slug")}/${btn.data("useraction")}.json`,
+    url: `/${I18n.locale}/users/${btn.data("slug")}/${btn.data("useraction")}.json`,
     success: ajaxNoticeMessage,
     error: ajaxErrorMessage
   }).done(function (response) {
@@ -68,7 +68,7 @@ function actionButton(button) {
 
 function updateUserPartial(response) {
   const userDiv = $(`#${response.id}`);
-  $.get(`/${getLocale()}/users/${response.slug}.json?return_type=index`, function (user) {
+  $.get(`/${I18n.locale}/users/${response.slug}.json?return_type=index`, function (user) {
     userDiv.html(window.userIndexPartial(user));
   });
 }

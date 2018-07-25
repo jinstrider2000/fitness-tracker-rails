@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require handlebars/dist/handlebars.min
+//= require i18n
+//= require i18n/translations
 //= require_tree .
