@@ -4,8 +4,8 @@ function achievementShowInit() {
   setCurrentUser();
 }
 
-function submitAchievementForm(frm) {
-  const form = $(frm);
+function submitAchievementForm(achievementForm) {
+  const form = $(achievementForm);
   const submitBtn = $('#achievement-form input[type="submit"]');
   submitBtn.attr("disabled", true);
   $.ajax({
@@ -64,8 +64,7 @@ function setShowListeners() {
 }
 
 function getLocale() {
-  const locale = window.location.pathname.match(/^\/(\w+)\//) || window.location.search.match(/locale=(\w+)&/)
-  return locale[1];
+  return $("body").attr("lang");
 }
 
 function showNext() {

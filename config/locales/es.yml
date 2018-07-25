@@ -143,22 +143,22 @@ es:
     news_feed_helper:
       time_since_created:
         now: "Justo ahora"
-        sec: "%{count} segundos"
+        sec: "%{count} segundos atrás"
         min:
-          one: "%{count} minuto"
-          other: "%{count} minutos"
+          one: "%{count} minuto atrás"
+          other: "%{count} minutos atrás"
         hour:
-          one: "%{count} hora"
-          other: "%{count} horas"
+          one: "%{count} hora atrás"
+          other: "%{count} horas atrás"
         day:
-          one: "%{count} dia"
-          other: "%{count} dias"
+          one: "%{count} dia atrás"
+          other: "%{count} dias atrás"
         month:
-          one: "%{count} mes"
-          other: "%{count} meses"
+          one: "%{count} mes atrás"
+          other: "%{count} meses atrás"
         year:
-          one: "%{count} año"
-          other: "%{count} años"
+          one: "%{count} año atrás"
+          other: "%{count} años atrás"
     index:
       title: "Fitness Tracker - Noticias"
       user_index: "Encuentra gente en Fitness Tracker"
