@@ -19,4 +19,8 @@ class NewsFeedController < ApplicationController
     end
   end
 
+  def update_created
+    
+  end
+
 end
