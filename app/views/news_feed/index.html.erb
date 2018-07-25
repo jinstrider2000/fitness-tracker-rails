@@ -39,3 +39,23 @@
     <%= render collection: @feed, partial: 'feed_item' %>
   <% end %>
 <% end %>
+
+<script id="news-feed-item-partial" type="text/x-handlebars-template">
+  <div id="{{id}}" class="news-feed-item", data-created-at="{{created_at}}", data-updated-at="{{updated_at}}">
+    <span class="time_since_created">{{view.time_since_created}}</span>
+    <div class="row">
+      <div class="col-xs-4">
+        <a class="user_show_link" href="{{view.user_show_link}}"><img src="{{view.user_profile_pic}}" class="index-icon img-circle user_profile_pic"></a>
+      </div>
+      <div class="col-xs-8">
+        <div class="row">
+          <img src="{{view.activity_icon_src}}" class="mini-pic-display">
+          {{view.ach_show_link}}
+        </div>
+        <div class="row">
+          <p class="comment" style="width:85%;">{{comment}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
