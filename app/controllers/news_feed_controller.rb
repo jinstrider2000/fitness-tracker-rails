@@ -1,5 +1,6 @@
 class NewsFeedController < ApplicationController
 
+  serialization_scope :view_context
   skip_before_action :authenticate_user!
 
   def index

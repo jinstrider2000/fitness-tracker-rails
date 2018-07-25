@@ -91,12 +91,7 @@ function displayAchievement(achievement) {
   heading.html(achievement.view.heading);
   dateCompleted.html(achievement.view.date_completed);
   activityIcon.attr("src",achievement.view.activity_icon_src);
-  if (achievement.activity_type === "Food") {
-    activityName.html(`${achievement.activity.name} <em>(Cals: +${achievement.activity.calories})</em>`);
-  }
-  else {
-    activityName.html(`${achievement.activity.name} <em>Cals: -${achievement.activity.calories_burned}</em>`);
-  }
+  activityName.replaceWith(achievement.view.ach_show_link);
   comment.html(achievement.comment);
   title.html(achievement.view.title)
 }
