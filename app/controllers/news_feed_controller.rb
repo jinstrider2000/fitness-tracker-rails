@@ -1,7 +1,7 @@
 class NewsFeedController < ApplicationController
 
   serialization_scope :view_context
-  skip_before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:index]
 
   def index
     if user_signed_in?
