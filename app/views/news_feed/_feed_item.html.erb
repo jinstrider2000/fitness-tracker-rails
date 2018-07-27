@@ -1,4 +1,4 @@
-<%= tag.div id: feed_item.id, class: %w[news-feed-item], data: {created_at: feed_item.created_at, updated_at: feed_item.updated_at} do %>
+<%= tag.div id: feed_item.id, class: %w[news-feed-item], data: {created_at: feed_item.created_at.iso8601, updated_at: feed_item.updated_at.iso8601} do %>
   <%= tag.span time_since_created(feed_item), class: "time_since_created" %>
   <%= tag.div class: %[row] do %>
     <%= tag.div class: %[col-xs-4] do %>
