@@ -16,7 +16,7 @@ function newsFeedUpdateInit() {
     window.newFeedUpdateInterval = setInterval(function () {
       if (window.location.pathname === "/" || window.location.pathname === `/${I18n.locale}/news-feed`) {
         $.get(`/${I18n.locale}/news-feed.json?latest_created_at=${encodeURI(window.lastFeedItemCreated)}`, function (newsFeedItems, status, responseObj) {
-          // console.log(newsFeedItems);
+          console.log(newsFeedItems);
         });
       } else {
         clearInterval(window.newFeedUpdateInterval);
