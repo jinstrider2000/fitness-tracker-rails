@@ -22,7 +22,7 @@ function newsFeedUpdateInit() {
         clearInterval(window.newFeedUpdateInterval);
         window.newFeedUpdateInterval = null;
       }
-    }, 30000)
+    }, 60000);
   }
   handlebarsNewsFeedIndexInit();
 }
