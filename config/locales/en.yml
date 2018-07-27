@@ -196,6 +196,8 @@ en:
       title: "Fitness Tracker - News Feed"
       user_index: "Find people on Fitness Tracker"
       no_items: "No news today. To see some activity, please log an achievement, or follow someone who has logged achievements."
+      update_error: "Sorry, an error occurred. Couldn't update the news feed"
+      update_pending: ""
   achievements:
     not_found_error: "Sorry, that achievement couldn't be found"
     index:

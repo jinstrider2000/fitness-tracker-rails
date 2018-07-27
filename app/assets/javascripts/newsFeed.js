@@ -14,9 +14,15 @@ function newsFeedUpdateInit() {
   }
   if (!window.newFeedUpdateInterval) {
     window.newFeedUpdateInterval = setInterval(function () {
-      window.newsFeedLastUpdate = new Date(Date.now());
-      console.log(window.newsFeedLastUpdate.toISOString());
-    }, 5000)
+      if (window.location.pathname === "/" || window.location.pathname === `/${I18n.locale}/news-feed`) {
+        $.get(`/${I18n.locale}/news-feed.json?latest_created_at=${encodeURI(window.lastFeedItemCreated)}`, function (newsFeedItems, status, responseObj) {
+          // console.log(newsFeedItems);
+        });
+      } else {
+        clearInterval(window.newFeedUpdateInterval);
+        window.newFeedUpdateInterval = null;
+      }
+    }, 30000)
   }
   handlebarsNewsFeedIndexInit();
 }

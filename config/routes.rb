@@ -6,7 +6,6 @@ Rails.application.routes.draw do
 
   scope ':locale', constraints: {locale: /en|es/} do
     get '/news-feed' => 'news_feed#index'
-    get '/news-feed/update/created' => 'news_feed#update_created'
     devise_for :users, controllers: {registrations: 'users/registrations'}, skip: [:passwords, :omniauth_callbacks]
   end
 

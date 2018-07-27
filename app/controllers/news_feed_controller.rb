@@ -1,26 +1,23 @@
 class NewsFeedController < ApplicationController
 
   serialization_scope :view_context
-  skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :authenticate_user!
 
   def index
     if user_signed_in?
       respond_to do |format|
-        format.html do
-          @feed = current_user.news_feed_items
-        end
+        format.html {@feed = current_user.news_feed_items}
         format.json do
-          @feed = current_user.news_feed_items(params[:latest_post_created_at])
-          render json: @feed
+          if params[:created_at].present?
+            render json: current_user.news_feed_items(params[:latest_created_at]), each_serializer: NewsFeedIndexSerializer
+          else
+            render json: {error_message: t(".update_error")}, status: 404
+          end
         end
       end
     else
       render 'application/landing'
     end
-  end
-
-  def update_created
-    
   end
 
 end
