@@ -56,19 +56,29 @@ function actionButton(button) {
     method: btn.data("submitmethod"),
     url: `/${I18n.locale}/users/${btn.data("slug")}/${btn.data("useraction")}.json`,
     success: ajaxNoticeMessage,
-    error: ajaxErrorMessage
-  }).done(function (response) {
+    error: function (response, statusText) {
+      ajaxErrorMessage(response);
+      updateUserPartial(response, statusText);
+    }
+  }).done(function (response, statusText) {
     if (refresh) {
       updateUserIndex();
     } else {
-      updateUserPartial(response);
+      updateUserPartial(response, statusText);
     }
   });
 }
 
-function updateUserPartial(response) {
-  const userDiv = $(`#${response.id}`);
-  $.get(`/${I18n.locale}/users/${response.slug}.json?return_type=index`, function (user) {
+function updateUserPartial(response, status) {
+  if (status === "error") {
+    const userDiv = $(`#${response.responseJSON.record.id}`);
+    $.get(`/${I18n.locale}/users/${response.responseJSON.record.slug}.json?return_type=index`, function (user) {
+      userDiv.html(window.userIndexPartial(user));
+    });
+  } else {
+    const userDiv = $(`#${response.id}`);
+    $.get(`/${I18n.locale}/users/${response.slug}.json?return_type=index`, function (user) {
     userDiv.html(window.userIndexPartial(user));
   });
+  }
 }

@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
         redirect_to(request.referrer || root_path)
       end
       format.json do
-        render json: {error_message: t("#{policy_name}.#{exception.query}", scope: :pundit, default: :default_msg)}, status: 403
+        render json: {error_message: t("#{policy_name}.#{exception.query}", scope: :pundit, default: :default_msg), record: exception.record}, status: 403
       end
     end
   end

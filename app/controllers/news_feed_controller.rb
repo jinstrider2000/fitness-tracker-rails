@@ -9,7 +9,7 @@ class NewsFeedController < ApplicationController
         format.html {@feed = current_user.news_feed_items}
         format.json do
           if params[:latest_created_at].present?
-            render json: current_user.news_feed_items(params[:latest_created_at].gsub!(/\A"|"\Z/, '')), each_serializer: NewsFeedIndexSerializer
+            render json: current_user.news_feed_items(params[:latest_created_at].gsub(/\A"|"\Z/, '')), each_serializer: NewsFeedIndexSerializer
           else
             render json: {error_message: t(".update_error")}, status: 404
           end
