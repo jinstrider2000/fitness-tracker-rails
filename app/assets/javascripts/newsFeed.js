@@ -22,8 +22,8 @@ function newsFeedUpdateInit() {
       if (window.location.pathname === "/" || window.location.pathname === `/${I18n.locale}/news-feed`) {
         window.lastTimeFeedUpdated = new Date(Date.now());
         $.get(`/${I18n.locale}/news-feed.json?latest_created_at=${encodeURI(window.lastFeedItemCreated)}`, function (newsFeedItems, status, responseObj) {
-          // console.log(newsFeedItems);
-        });
+          console.log(window.lastTimeFeedUpdated);
+        }).fail(ajaxErrorMessage);
       } else {
         clearInterval(window.newFeedUpdateInterval);
         window.newFeedUpdateInterval = null;

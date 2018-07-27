@@ -1,9 +1,6 @@
 class NewsFeedIndexSerializer < ActiveModel::Serializer
   attributes :id, :comment, :activity_type, :created_at, :updated_at, :view
 
-  belongs_to :user
-  belongs_to :activity, polymorphic: false
-
   def view
     view_object = {}
     view_object[:activity_icon_src] = view_context.asset_path "#{object.activity_type.downcase}_icon", type: :image
