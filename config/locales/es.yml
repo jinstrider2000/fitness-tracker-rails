@@ -225,7 +225,7 @@ es:
         title: "Fitness Tracker - Quien %{user_name} esta siguiendo"
         my_heading: "Quién Estoy Siguiendo"
         other_user_heading: "Quien %{user_name} Esta Siguiendo"
-        no_items: "Nadie esta seguido"
+        no_items: "No esta seguido a nadie"
       index:
         title: "Fitness Tracker - Indice de Usuario"
         loading: "Actualizando..."

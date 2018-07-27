@@ -258,7 +258,7 @@ en:
         title: "Fitness Tracker - Who %{user_name}'s Following"
         my_heading: "Who I'm Following"
         other_user_heading: "Who %{user_name}'s Following"
-        no_items: "No one is following"
+        no_items: "Not following anyone"
       index:
         title: "Fitness Tracker - User Index"
         loading: "Loading..."

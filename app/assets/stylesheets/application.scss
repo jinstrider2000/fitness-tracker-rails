@@ -403,6 +403,11 @@
  
  @media (max-width: 768px)
  {
+   .navbar-nav .open .dropdown-menu > li > a
+   {
+     line-height: 2px;
+   }
+
    #news-feed-profile, #news-feed-items-container
    {
      width: 100%;
