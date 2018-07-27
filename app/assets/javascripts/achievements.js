@@ -53,7 +53,7 @@ function clearForm() {
       textInput.value = "";
     }
     for (const textAreaInput of $('#achievement-form textarea')) {
-      textAreaInput.innerText = "";
+      textAreaInput.value = "";
     } 
   }
 }

@@ -14,23 +14,30 @@ class NewsFeedItem {
 }
 
 function newsFeedUpdateInit() {
-  if (!window.lastFeedItemCreated) {
-    window.lastFeedItemCreated = $("#news-feed-items-container > div:first-child").data("created-at");
+  if (!window.lastFeedItemID) {
+    window.lastFeedItemID = $("#news-feed-items-container > div.news-feed-item:first-child").attr("id");
   }
   if (!window.newFeedUpdateInterval) {
-    window.newFeedUpdateInterval = setInterval(function () {
-      if (window.location.pathname === "/" || window.location.pathname === `/${I18n.locale}/news-feed`) {
-        window.lastTimeFeedUpdated = new Date(Date.now());
-        $.get(`/${I18n.locale}/news-feed.json?latest_created_at=${encodeURI(window.lastFeedItemCreated)}`, function (newsFeedItems, status, responseObj) {
-          console.log(window.lastTimeFeedUpdated);
-        }).fail(ajaxErrorMessage);
-      } else {
-        clearInterval(window.newFeedUpdateInterval);
-        window.newFeedUpdateInterval = null;
-      }
-    }, 60000);
+    window.newFeedUpdateInterval = setInterval(updateNewsFeed, 60000);
+  }
+  if (!window.numOfFeedItemsPending) {
+    window.numOfFeedItemsPending = 0;
   }
   handlebarsNewsFeedIndexInit();
+}
+
+function updateNewsFeed() {
+  if (window.location.pathname === "/" || window.location.pathname === `/${I18n.locale}/news-feed`) {
+    window.lastTimeFeedUpdated = new Date(Date.now());
+    $.get(`/${I18n.locale}/news-feed.json?latest_id=${window.lastFeedItemID}`, function (newsFeedItems, status, responseObj) {
+      console.log(newsFeedItems);
+    }).fail(ajaxErrorMessage);
+  } else {
+    clearInterval(window.newFeedUpdateInterval);
+    window.newFeedUpdateInterval = null;
+    window.numOfFeedItemsPending = null;
+    window.lastFeedItemID = null;
+  }
 }
 
 function handlebarsNewsFeedIndexInit() {

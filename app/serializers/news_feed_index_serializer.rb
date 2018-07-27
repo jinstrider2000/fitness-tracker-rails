@@ -1,5 +1,13 @@
 class NewsFeedIndexSerializer < ActiveModel::Serializer
-  attributes :id, :comment, :activity_type, :created_at, :updated_at, :view
+  attributes :id, :comment, :created_at, :updated_at, :view
+
+  def created_at
+    object.created_at.to_s
+  end
+
+  def updated_at
+    object.updated_at.to_s
+  end
 
   def view
     view_object = {}

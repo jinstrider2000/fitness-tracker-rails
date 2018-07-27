@@ -95,13 +95,13 @@ class User < ApplicationRecord
     end
   end
 
-  def news_feed_items(latest_created_at = nil)
+  def news_feed_items(latest_id = nil)
     news_feed_user_ids = [self.id, self.following.pluck(:id)].flatten - self.muted_users.pluck(:id)
-    if latest_created_at == nil
-      Achievement.where(user_id: news_feed_user_ids).order(created_at: :desc)
+    if latest_id == nil
+      Achievement.where(user_id: news_feed_user_ids).order(id: :desc)
     else
       achievements = Achievement.arel_table
-      Achievement.where(achievements[:user_id].in(news_feed_user_ids).and(achievements[:created_at].gt(latest_created_at))).order(created_at: :desc)
+      Achievement.where(achievements[:user_id].in(news_feed_user_ids).and(achievements[:id].gt(latest_id))).order(id: :desc)
     end
   end
 
