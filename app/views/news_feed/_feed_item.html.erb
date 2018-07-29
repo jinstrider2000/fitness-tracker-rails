@@ -1,9 +1,9 @@
 <%= tag.div id: feed_item.id, class: %w[news-feed-item], data: {created_at: feed_item.created_at.to_s, updated_at: feed_item.updated_at.to_s} do %>
-  <%= tag.span time_since_created(feed_item), class: "time_since_created" %>
+  <%= tag.span time_since_created(feed_item), class: "time-since-created" %>
   <%= tag.div class: %[row] do %>
     <%= tag.div class: %[col-xs-4] do %>
-      <%= link_to user_path(feed_item.user.slug), class: "user_show_link" do %>
-        <%= image_tag profile_pic_path(feed_item.user), class: %[index-icon img-circle user_profile_pic] %>
+      <%= link_to user_path(feed_item.user.slug) do %>
+        <%= image_tag profile_pic_path(feed_item.user), class: %[index-icon img-circle] %>
       <% end %>
     <% end %>
     <%= tag.div class: %[col-xs-8] do %>
