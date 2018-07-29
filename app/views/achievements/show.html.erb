@@ -4,7 +4,7 @@
 
 <%= content_for :doc_ready_script do %>
   <%= javascript_tag type: "text/javascript" do %>
-    $(function() {
+    $(document).on('turbolinks:load', function() {
       setLocale();
       achievementShowInit();
       flashToggle();
