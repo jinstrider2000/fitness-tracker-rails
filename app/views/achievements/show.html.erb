@@ -5,9 +5,10 @@
 <%= content_for :doc_ready_script do %>
   <%= javascript_tag type: "text/javascript" do %>
     $(document).on('turbolinks:load', function() {
-      setLocale();
-      achievementShowInit();
-      flashToggle();
+      if (window.location.pathname.match(/\/achievements\/\d+/)) {
+        achievementShowInit();
+        console.log("achievement show init fired");
+      }
     });
   <% end %>
 <% end %>

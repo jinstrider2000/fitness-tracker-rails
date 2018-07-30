@@ -12,6 +12,17 @@
     <!-- Stylesheets and Javascript Links -->
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_tag type: "text/javascript" do %>
+      $(document).on('turbolinks:load', function() {
+        setLocale();
+        if ((window.location.pathname !== "/news-feed" || window.location.pathname !== "/") && window.feedVarsSet === true) {
+          resetFeedVars();
+          console.log("news feed reset fired")
+        }
+        flashToggle();
+      });
+    <% end %>
+    <%= yield :doc_ready_script %>
   </head>
   <body lang="<%= I18n.locale %>">
     <header>
@@ -31,6 +42,5 @@
     <footer>
       <p class="text-center">Designed by Efrain Perez Jr</p>
     </footer>
-    <%= yield :doc_ready_script %>
   </body>
 </html>

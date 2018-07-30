@@ -5,9 +5,10 @@
 <%= content_for :doc_ready_script do %>
   <%= javascript_tag type: "text/javascript" do %>
     $(document).on('turbolinks:load', function() {
-      setLocale();
-      userIndexInit();
-      flashToggle();
+      if (window.location.pathname.match(/users|following|followers|blocked|muted$/)){
+        userIndexInit();
+        console.log("user index init fired");
+      }
     });
   <% end %>
 <% end %>

@@ -44,12 +44,18 @@ function newsFeedUpdateInit() {
       const date = new Date(feedItem.dataset.createdAt);
       window.feedItemDates[feedItem.id] = date;
     }
+  } else {
+    for (const feedItem of $(".news-feed-item")) {
+      if (!window.feedItemDates[feedItem.id]) {
+        const date = new Date(feedItem.dataset.createdAt);
+        window.feedItemDates[feedItem.id] = date; 
+      }
+    }
   }
   if (!window.newFeedUpdateInterval) {
     window.newFeedUpdateInterval = setInterval(updateNewsFeed, 60000);
   }
-  $("a").on("click", resetFeedVars);
-  $("#lang-selection-form").on("submit", resetFeedVars);
+  window.feedVarsSet = true;
 }
 
 function updateNewsFeed() {
@@ -71,5 +77,5 @@ function resetFeedVars() {
   window.newFeedUpdateInterval = null;
   window.numOfFeedItemsPending = null;
   window.lastFeedItemID = null;
-  window.feedItemDates = null;
+  window.feedVarsSet = false;
 }

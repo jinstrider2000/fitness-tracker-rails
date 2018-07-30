@@ -2,15 +2,6 @@
   <%= tag.title t(".title") %>
 <% end %>
 
-<%= content_for :doc_ready_script do %>
-  <%= javascript_tag type: "text/javascript" do %>
-    $(document).on('turbolinks:load', function() {
-      setLocale();
-      flashToggle();
-    });
-  <% end %>
-<% end %>
-
 <%= tag.h2 t(".heading"), class: 'text-center' %>
 
 <%= tag.div class: %w[form-block center-block] do %>

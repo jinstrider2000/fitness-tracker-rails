@@ -2,15 +2,6 @@
   <%= tag.title t(".title") %>
 <% end %>
 
-<%= content_for :doc_ready_script do %>
-  <%= javascript_tag type: "text/javascript" do %>
-    $(document).on('turbolinks:load', function() {
-      setLocale();
-      flashToggle();
-    });
-  <% end %>
-<% end %>
-
 <%= tag.div class: %w[row text-center] do %>
   <%= image_tag "#{@achievement.activity_type.downcase}_icon", class: %w[img-responsive index-icon], alt: "#{@achievement.activity_type.capitalize} Icon" %>
   <%= tag.h2 t ".heading", record_name: @achievement.activity.model_name.human %>
