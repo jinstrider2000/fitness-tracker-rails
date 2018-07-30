@@ -1,0 +1,126 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+zh-CN:
+  default: "Fitness Tracker"
+  pundit:
+    default_msg: "你未被授权进行此操作"
+    achievement_policy:
+      create?: "你不能把成就添加到别的用户信息汇总中"
+      index?: "这个用户禁止你查看他/她的成就"
+    user_policy:
+      followers?: "你不能查看这个用户的追随者"
+      following?: "你不能查看这个用户追随着谁"
+      blocked?: "你不能查看其他用户的禁止列表"
+      muted?: "你不能查看其他用户的拉黑列表"
+      follow?: "你不能追随这个用户"
+      unfollow?: "你没有追随这个用户"
+    exercise_policy:
+      index?: "你不能查看这个用户的训练"
+      show?: "你不能查看这个用户的训练统计"
+      edit?: "你不能编辑这个用户的训练统计"
+      update?: "你不能更新这个用户的训练统计"
+      destroy?: "你不能删除这个用户的训练统计"
+    food_policy:
+      index?: "你不能查看这个用户的饮食"
+      show?: "你不能查看这个用户的饮食统计"
+      edit?: "你不能编辑这个用户的饮食统计"
+      update?: "你不能更新这个用户的饮食统计"
+      destroy?: "你不能删除这个用户的饮食统计"
+  shared:
+    nav:
+      login: "登录"
+      logout: "注销"
+      profile: "我的信息汇总"
+      my_achievements:
+        heading: "成就"
+        new: "新成就"
+        achievements: "所有成就"
+        foods: "只看饮食"
+        exercises: "只看训练"
+      my_relationships:
+        heading: "关系"
+        following: "追随"
+        followers: "追随者"
+        blocked: "禁止"
+        muted: "拉黑"
+      activity_feed: "动态订阅"
+  activity_feed:
+    show:
+      title: "Fitness Tracker - 动态订阅"
+  achievements:
+    index:
+      title: "Fitness Tracker - %{user_name}的成就"
+    new:
+      title: "Fitness Tracker - 新成就"
+  exercises:
+    edit:
+      title: "Fitness Tracker - 编辑训练项目"
+    index:
+      title: "Fitness Tracker - %{user_name} 的训练项目"
+    show:
+      title: "Fitness Tracker - %{user_name} 的训练项目： %{record_name}"
+  foods:
+    edit:
+      title: "Fitness Tracker - 编辑饮食"
+    index:
+      title: "Fitness Tracker - %{user_name} 的饮食"
+    show:
+      title: "Fitness Tracker - %{user_name} 的饮食： %{record_name}"
+  users:
+    user_actions:
+      blocked:
+      followers:
+      following:
+      index:
+      muted:
+      show:
+        my_heading: "欢迎 %{first_name}"
+        other_user_heading: "%{full_name}"
+        edit: "编辑"
+        daily_calorie_goal: "每日卡路里控制目标："
+        recent_exercises: "最近增加的训练项目"
+        recent_foods: "最近增加的饮食计划"
+        no_activity: "没有近期活动"
+        more_link: "更多"
+  users_user_actions:
+    blocked:
+      title: "Fitness Tracker - %{user_name}的禁止用户列表"
+    followers:
+      title: "Fitness Tracker - %{user_name} 的追随者"
+    following:
+      title: "Fitness Tracker - %{user_name} 在追随"
+    index:
+      title: "Fitness Tracker - 用户主页"
+    muted:
+      title: "Fitness Tracker - %{user_name} 的拉黑用户"
+    show:
+      title: "Fitness Tracker - %{user_name} 的信息汇总"
