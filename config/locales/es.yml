@@ -164,7 +164,9 @@ es:
       user_index: "Encuentra gente en Fitness Tracker"
       no_items: "No hay noticias hoy. Para ver alguna actividad, registre un logro o siga a alguien que haya registrado logros."
       update_error: "Disculpe, ocurrió un error. No se pudo actualizar el feed de noticias"
-      update_pending: ""
+      update_pending:
+        one: "%{count} nuevo logro"
+        other: "%{count} nuevos logros"
   achievements:
     not_found_error: "Lo sentimos, ese logro no pudo ser encontrado"
     index:

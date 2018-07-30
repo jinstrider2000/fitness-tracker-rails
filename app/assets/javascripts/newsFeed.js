@@ -24,7 +24,7 @@ class NewsFeedItem {
   }
 
   get timeSinceCreated() {
-    return sinceCreated(window.feedItemDates[this.id]);
+    return this.constructor.sinceCreated(window.feedItemDates[this.id]);
   }
 }
 
@@ -46,11 +46,12 @@ function newsFeedUpdateInit() {
       }
     }
   }
+  window.lastFeedItemID = $("#news-feed-pending + .news-feed-item").attr("id");
+  window.numOfFeedItemsPending = 0;
+  window.feedPendingDiv = $("#news-feed-pending").html(I18n.t("news_feed.index.update_pending",{count: window.numOfFeedItemsPending})).on("click", displayNewFeedItems);
   if (!window.newFeedUpdateInterval) {
     window.newFeedUpdateInterval = setInterval(updateNewsFeed, 60000);
   }
-  window.lastFeedItemID = $("#news-feed-items-container > div.news-feed-item:first-child").attr("id");
-  window.numOfFeedItemsPending = 0;
   window.feedIntervalSet = true;
 }
 
@@ -59,13 +60,30 @@ function updateNewsFeed() {
     for (const timeSpan of $(".time-since-created")) {
       timeSpan.innerHTML = NewsFeedItem.sinceCreated(window.feedItemDates[timeSpan.parentElement.id]);
     }
-    $.get(`/${I18n.locale}/news-feed.json?latest_id=${window.lastFeedItemID}`, function (newsFeedItems, status, responseObj) {
+    $.get(`/${I18n.locale}/news-feed.json?latest_id=${window.lastFeedItemID}`, function (newsFeedItems) {
       if (newsFeedItems.length > 0) {
+        window.numOfFeedItemsPending += newsFeedItems.length;
+        window.feedPendingDiv.html(I18n.t("news_feed.index.update_pending",{count: window.numOfFeedItemsPending}));
+        if (window.feedPendingDiv.css("display") === "none") {
+          window.feedPendingDiv.removeClass("hidden");
+        }
+        window.lastFeedItemID = `${newsFeedItems[0].id}`;
         
-      } else {
-        
+        itemsArray = []
+        newsFeedItems.forEach(item => {
+          itemsArray.push(new NewsFeedItem(item));
+        });
+        const newItems = $(window.newsFeedItemTemplate(itemsArray));
+        newItems.insertAfter(window.feedPendingDiv);
       }
     }).fail(ajaxErrorMessage);
+}
+
+function displayNewFeedItems() {
+  $(".hidden").removeClass("hidden");
+  window.feedPendingDiv.addClass("hidden");
+  window.numOfFeedItemsPending = 0;
+  window.feedPendingDiv.html(I18n.t("news_feed.index.update_pending",{count: window.numOfFeedItemsPending}));
 }
 
 function resetFeedInterval() {

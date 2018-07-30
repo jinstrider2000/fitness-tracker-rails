@@ -286,9 +286,24 @@
    padding: 0;
  }
 
- .news-feed-item
+ .news-feed-item, #news-feed-pending
  {
    border-bottom: 1px solid rgb(207,220,232);
+ }
+
+ .hidden
+ {
+   display: none;
+ }
+
+ #news-feed-pending:hover
+ {
+  background-color: rgb(200, 200, 200);
+ }
+
+ #news-feed-pending:active
+ {
+  background-color: darkgray;
  }
 
  .news-feed-item > span
@@ -311,7 +326,6 @@
  {
    display: inline;
    margin-left: 5px;
-  //  text-align: left;
  }
 
  .user-index

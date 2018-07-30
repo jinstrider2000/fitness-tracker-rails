@@ -39,26 +39,29 @@
       <%= tag.p t(".no_items"), class: %w[no-items-style col-xs-12] %>
     <% end %>
   <% else %>
+    <%= tag.div "", id: "news-feed-pending", class: %[text-center hidden] %>
     <%= render collection: @feed, partial: 'feed_item' %>
   <% end %>
 <% end %>
 
 <script id="news-feed-item-template" type="text/x-handlebars-template">
-  <div id="{{id}}" class="news-feed-item", data-created-at="{{created_at}}", data-updated-at="{{updated_at}}">
-    <span class="time-since-created">{{timeSinceCreated}}</span>
-    <div class="row">
-      <div class="col-xs-4">
-        <a href="{{view.user_show_link}}"><img src="{{view.user_profile_pic}}" class="index-icon img-circle"></a>
-      </div>
-      <div class="col-xs-8">
-        <div class="row">
-          <img src="{{view.activity_icon_src}}" class="mini-pic-display">
-          {{view.ach_show_link}}
+  {{#each this}}
+    <div id="{{id}}" class="news-feed-item hidden", data-created-at="{{created_at}}", data-updated-at="{{updated_at}}">
+      <span class="time-since-created">{{timeSinceCreated}}</span>
+      <div class="row">
+        <div class="col-xs-4">
+          <a href="{{view.user_show_link}}"><img src="{{view.user_profile_pic_path}}" class="index-icon img-circle"></a>
         </div>
-        <div class="row">
-          <p class="comment" style="width:85%;">{{comment}}</p>
+        <div class="col-xs-8">
+          <div class="row">
+            <img src="{{view.activity_icon_src}}" class="mini-pic-display">
+            {{{view.ach_show_link}}}
+          </div>
+          <div class="row">
+            <p class="comment" style="width:85%;">{{comment}}</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  {{/each}}
 </script>
