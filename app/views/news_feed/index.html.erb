@@ -5,7 +5,7 @@
 <%= content_for :doc_ready_script do %>
   <%= javascript_tag type: "text/javascript" do %>
     $(document).on('turbolinks:load', function() {
-      if (window.location.pathname === "/news-feed" || window.location.pathname === "/") {
+      if (window.location.pathname.match(/\/news-feed$/) || window.location.pathname === "/") {
         newsFeedUpdateInit();
         console.log("news feed init fired");
       }

@@ -15,8 +15,8 @@
     <%= javascript_tag type: "text/javascript" do %>
       $(document).on('turbolinks:load', function() {
         setLocale();
-        if ((window.location.pathname !== "/news-feed" || window.location.pathname !== "/") && window.feedVarsSet === true) {
-          resetFeedVars();
+        if ((window.location.pathname !== "/news-feed" || window.location.pathname !== "/") && window.feedIntervalSet === true) {
+          resetFeedInterval();
           console.log("news feed reset fired")
         }
         flashToggle();

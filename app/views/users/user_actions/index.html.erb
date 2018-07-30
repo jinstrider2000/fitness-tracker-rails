@@ -5,7 +5,7 @@
 <%= content_for :doc_ready_script do %>
   <%= javascript_tag type: "text/javascript" do %>
     $(document).on('turbolinks:load', function() {
-      if (window.location.pathname.match(/users|following|followers|blocked|muted$/)){
+      if (window.location.pathname.match(/(users|following|followers|blocked|muted)$/)) {
         userIndexInit();
         console.log("user index init fired");
       }
