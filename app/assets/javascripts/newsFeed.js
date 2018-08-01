@@ -56,27 +56,27 @@ function newsFeedUpdateInit() {
 }
 
 function updateNewsFeed() {
-    window.lastTimeFeedUpdated = new Date(Date.now());
-    for (const timeSpan of $(".time-since-created")) {
-      timeSpan.innerHTML = NewsFeedItem.sinceCreated(window.feedItemDates[timeSpan.parentElement.id]);
-    }
-    $.get(`/${I18n.locale}/news-feed.json?latest_id=${window.lastFeedItemID}`, function (newsFeedItems) {
-      if (newsFeedItems.length > 0) {
-        window.numOfFeedItemsPending += newsFeedItems.length;
-        window.feedPendingDiv.html(I18n.t("news_feed.index.update_pending",{count: window.numOfFeedItemsPending}));
-        if (window.feedPendingDiv.css("display") === "none") {
-          window.feedPendingDiv.removeClass("hidden");
-        }
-        window.lastFeedItemID = `${newsFeedItems[0].id}`;
-        
-        itemsArray = []
-        newsFeedItems.forEach(item => {
-          itemsArray.push(new NewsFeedItem(item));
-        });
-        const newItems = $(window.newsFeedItemTemplate(itemsArray));
-        newItems.insertAfter(window.feedPendingDiv);
+  window.lastTimeFeedUpdated = new Date(Date.now());
+  for (const timeSpan of $(".time-since-created")) {
+    timeSpan.innerHTML = NewsFeedItem.sinceCreated(window.feedItemDates[timeSpan.parentElement.id]);
+  }
+  $.get(`/${I18n.locale}/news-feed.json?latest_id=${window.lastFeedItemID}`, function (newsFeedItems) {
+    if (newsFeedItems.length > 0) {
+      window.numOfFeedItemsPending += newsFeedItems.length;
+      window.feedPendingDiv.html(I18n.t("news_feed.index.update_pending",{count: window.numOfFeedItemsPending}));
+      if (window.feedPendingDiv.css("display") === "none") {
+        window.feedPendingDiv.removeClass("hidden");
       }
-    }).fail(ajaxErrorMessage);
+      window.lastFeedItemID = `${newsFeedItems[0].id}`;
+      
+      itemsArray = []
+      newsFeedItems.forEach(item => {
+        itemsArray.push(new NewsFeedItem(item));
+      });
+      const newItems = $(window.newsFeedItemTemplate(itemsArray));
+      newItems.insertAfter(window.feedPendingDiv);
+    }
+  }).fail(ajaxErrorMessage);
 }
 
 function displayNewFeedItems() {
