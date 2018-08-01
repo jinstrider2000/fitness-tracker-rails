@@ -1,9 +1,70 @@
 <%= content_for :title do %>
-  <%= tag.title t(".title") %>
+  <%= tag.title t("users.user_actions.#{params[:action]}.title", user_name: @user.try(:first_name)) %>
 <% end %>
 
-<%= tag.h2 t(".heading"), class: %w[text-center] %>
-<%= tag.div class: %[row text-center] do %>
-  <%= link_to t(".most_active"), most_active_today_users_path %>
+<%= content_for :doc_ready_script do %>
+  <%= javascript_tag type: "text/javascript" do %>
+    $(document).on('turbolinks:load', function() {
+      if (window.location.pathname.match(/(users|following|followers|blocked|muted)$/)) {
+        userIndexInit();
+        console.log("user index init fired");
+      }
+    });
+  <% end %>
 <% end %>
-<%= render collection: @users, partial: 'user' %>
+
+<% if params[:action] == "index" || params[:action] == "muted" || params[:action] == "blocked" %>
+  <%= tag.h2 t("users.user_actions.#{params[:action]}.heading"), id: "user-index-heading", class: %w[text-center] %>
+  <% if params[:action] == "index" %>
+    <%= tag.div class: %[row text-center] do %>
+      <%= link_to t(".most_active"), most_active_today_users_path %>
+    <% end %>
+  <% end %>
+<% else %>
+  <% if viewing_own_profile_while_logged_in? %>
+    <%= tag.h2 t("users.user_actions.#{params[:action]}.my_heading"), class: %w[text-center] %>
+  <% else %>
+    <%= tag.h2 t("users.user_actions.#{params[:action]}.other_user_heading", user_name: @user.first_name), class: %w[text-center] %>
+  <% end %>
+<% end %>
+
+<%= tag.div id: "user-index-items", class: "row" do %>
+  <%= tag.div class: %w[text-center no-items-style] do %>
+    <%= tag.p t ".loading" %>
+  <% end %>
+<% end %>
+
+<script type="text/x-handlebars-template" id="index-template">
+  {{#each this}}
+    <div id="{{id}}" class="user-index card-style col-sm-4">
+      {{> userIndex}}
+    </div>
+  {{/each}}
+</script>
+
+<script type="text/x-handlebars-template" id="user-index-partial">
+  <a href="{{view.show_link}}"><img src="{{view.profile_pic_path}}" alt="" class="img-circle index-icon"></a>
+  {{#unless (ownProfile) }}
+    {{> actionButton }}
+  {{/unless}}
+  <h3 class="index-name">{{truncated_name}}</h3>
+  <p class="index-quote">{{truncated_quote}}</p>
+</script>
+
+<script type="text/x-handlebars-template" id="user-action-button-partial">
+  <div class="user-actions-btn text-center">
+    <div class="btn-group">
+      <a href="/#" class="{{view.primary_action.classes}}" data-slug="{{slug}}" data-useraction="{{view.primary_action.name}}" data-submitmethod="{{view.primary_action.method}}" onclick="event.preventDefault();actionButton(this)">{{view.primary_action.locale_name}}</a>
+      {{#if view.secondary_action}}
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          {{#each view.secondary_action}}
+            <li><a href="/#" data-slug="{{../slug}}" data-useraction="{{name}}" data-submitmethod="{{method}}" onclick="event.preventDefault();actionButton(this)">{{locale_name}}</a></li>
+          {{/each}}
+        </ul>
+      {{/if}}
+    </div>
+  </div>
+</script>

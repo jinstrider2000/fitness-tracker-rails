@@ -2,26 +2,43 @@
   <%= tag.title t(".title", user_name: @user.first_name, record_name: @achievement.activity.name) %>
 <% end %>
 
+<%= content_for :doc_ready_script do %>
+  <%= javascript_tag type: "text/javascript" do %>
+    $(document).on('turbolinks:load', function() {
+      if (window.location.pathname.match(/\/achievements\/\d+/)) {
+        achievementShowInit();
+        console.log("achievement show init fired");
+      }
+    });
+  <% end %>
+<% end %>
+
 <%= tag.div class: %w[row text-center] do %>
   <% if policy(@achievement).update? %>
-    <%= tag.h2 t ".my_heading", record_name: @achievement.activity.model_name.human %>
+    <%= tag.h2 t(".my_heading", record_name: @achievement.activity.model_name.human), id: "ach-show-heading" %>
   <% else %>
-    <%= tag.h2 t ".other_user_heading", user_name: @user.first_name, record_name: @achievement.activity.model_name.human %>
+    <%= tag.h2 t(".other_user_heading", user_name: @user.first_name, record_name: @achievement.activity.model_name.human), id: "ach-show-heading" %>
   <% end %>
 <% end %>
 
 <div class="row text-center">
   <div class="activity-block center-block card-style">
-    <a href="<%=user_path(@achievement.user.slug)%>"><img class="index-icon-mini img-circle" src="<%=profile_pic_path(@achievement.user)%>"></a>
-    <a href="<%=user_achievements_path(@achievement.user.slug)%>"><img class="index-icon-mini" src="<%=asset_path "#{@achievement.activity_type.downcase}_icon", type: :image %>"></a>
-    <h3><%=print_date(@achievement.completed_on)%></h3>
+    <a href="<%=user_path(@achievement.user.slug)%>"><img id="ach-show-user-pic" class="index-icon-mini img-circle" src="<%=profile_pic_path(@achievement.user)%>"></a>
+    <a href="<%=user_achievements_path(@achievement.user.slug)%>"><img id="ach-show-activity-pic" class="index-icon-mini" src="<%=asset_path "#{@achievement.activity_type.downcase}_icon", type: :image %>"></a>
+    <h3 id="ach-show-date-completed"><%=print_date(@achievement.completed_on)%></h3>
     <h4><%= render partial: "#{@achievement.activity_type.downcase}", locals: {@achievement.activity_type.downcase.to_sym => @achievement} %></h4>
     <div>
-      <p class="center-block" style="width:75%;"><%= @achievement.comment %></p>
+      <p id="ach-show-comment" class="center-block" style="width:75%;"><%= @achievement.comment %></p>
     </div>
     <% if policy(@achievement).update? %>
-      <a href="<%= edit_achievement_path @achievement%>" class="btn btn-default btn-xs" role="button">  Edit  </a>
-      <%= link_to "Delete", achievement_path(@achievement), class: %w[btn btn-danger btn-xs], role: "button", method: :delete %>
+      <a id="ach-show-edit-link" href="<%= edit_achievement_path @achievement%>" class="btn btn-default btn-xs" role="button">  Edit  </a>
+      <%= link_to "Delete", achievement_path(@achievement), id: "ach-show-delete-link", class: %w[btn btn-danger btn-xs], role: "button", method: :delete %>
     <% end %>
+  </div>
+  <div class="row">
+    <div class="activity-block center-block">
+      <%= link_to "<<<", "/#", id: "prev", data: {id: @user.prev_achievement_id(@achievement), slug: @user.slug, current: params[:id]}, style: "display:none;float:left;" %>
+      <%= link_to ">>>", "/#", id: "next", data: {id: @user.next_achievement_id(@achievement), slug: @user.slug, current: params[:id]}, style: "display:none;float:right;" %>
+    </div>
   </div>
 </div>

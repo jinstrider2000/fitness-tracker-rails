@@ -7,4 +7,6 @@
   <%= tag.h2 t ".heading" %>
 <% end %>
 
-<%= render partial: 'form', locals: {html_method: :post, path: achievements_path, achievement: @achievement} %>
+<%= tag.div id: "achievement-form" do %>
+  <%= render partial: 'form', locals: {html_method: :post, path: achievements_path, achievement: @achievement} %>
+<% end %>

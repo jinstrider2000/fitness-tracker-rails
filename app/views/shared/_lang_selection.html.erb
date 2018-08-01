@@ -1,5 +1,5 @@
 <%= tag.div style: 'float:left;margin-bottom:10px;' do %>
-  <%= form_tag root_path, method: :get do %>
+  <%= form_tag root_path, method: :get, id: "lang-selection-form" do %>
     <%= label_tag 'locale-selector', t(".language") %>
     <%= tag.select name: 'locale', id: 'locale-selector' do %>
       <% I18n.available_locales.each do |locale| %>

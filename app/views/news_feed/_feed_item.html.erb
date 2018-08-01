@@ -1,5 +1,5 @@
-<%= tag.div class: %w[news-feed-item] do %>
-  <%= tag.span time_since_update(feed_item) %>
+<%= tag.div id: feed_item.id, class: %w[news-feed-item], data: {created_at: feed_item.created_at.to_s, updated_at: feed_item.updated_at.to_s} do %>
+  <%= tag.span time_since_created(feed_item), class: "time-since-created" %>
   <%= tag.div class: %[row] do %>
     <%= tag.div class: %[col-xs-4] do %>
       <%= link_to user_path(feed_item.user.slug) do %>
@@ -12,7 +12,7 @@
         <%= render partial: File.join("achievements",feed_item.activity_type.downcase), locals: {feed_item.activity_type.downcase.to_sym => feed_item} %>
       <% end %>
       <%= tag.div class: %[row] do %>
-        <%= tag.p feed_item.comment, style: "width:85%;" %>
+        <%= tag.p feed_item.comment, class: "comment", style: "width:85%;" %>
       <% end %>
     <% end %>
   <% end %>

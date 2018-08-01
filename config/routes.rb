@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root 'news_feed#index'
+  get '/current-user' => Users::UserActionsController.action(:current_user_json), as: "current_user_json"
   get '/:locale' => 'news_feed#index'
 
   scope ':locale', constraints: {locale: /en|es/} do
@@ -34,7 +35,15 @@ Rails.application.routes.draw do
 
   scope ':locale', constraints: {locale: /en|es/} do
     scope 'users/:slug', as: 'user' do
-      resources :achievements, only: [:new, :index]
+      resources :achievements, param: :id, only: [:new, :index] do
+        member do
+          get 'previous-id'
+          get 'next-id'
+        end
+      end
+      scope 'achievements/:activity_type', as: 'achievement' do
+        get 'new-form-fields' => 'achievements#new_form_fields'
+      end
     end
   end
 

@@ -46,6 +46,14 @@ class User < ApplicationRecord
     end
   end
 
+  def truncated_quote(size: 60, sep: " ")
+    self.quote.truncate(size, separator: sep)
+  end
+
+  def truncated_name(size: 16, sep: " ")
+    self.name.truncate(size, separator: sep)
+  end
+
   def achievements_ordered_by(activity_type = nil, filter = nil, order = nil)
     if Achievement.valid_activity?(activity_type)
       valid_filters = activity_type.capitalize.constantize.valid_filter_options
@@ -87,9 +95,26 @@ class User < ApplicationRecord
     end
   end
 
-  def news_feed_items
+  def news_feed_items(latest_id = nil)
     news_feed_user_ids = [self.id, self.following.pluck(:id)].flatten - self.muted_users.pluck(:id)
-    Achievement.where(user_id: news_feed_user_ids).order(updated_at: :desc)
+    if latest_id == nil
+      Achievement.where(user_id: news_feed_user_ids).order(id: :desc)
+    else
+      achievements = Achievement.arel_table
+      Achievement.where(achievements[:user_id].in(news_feed_user_ids).and(achievements[:id].gt(latest_id))).order(id: :desc)
+    end
+  end
+
+  def next_achievement_id(achievement)
+    ach = Achievement.arel_table
+    next_one = self.achievements.where(ach[:id].gt(achievement.id)).limit(1)
+    next_one.first.try(:id)
+  end
+
+  def prev_achievement_id(achievement)
+    ach = Achievement.arel_table
+    prev_one = self.achievements.where(ach[:id].lt(achievement.id)).limit(1).order(id: :desc)
+    prev_one.first.try(:id)
   end
 
   def blocked?(user)

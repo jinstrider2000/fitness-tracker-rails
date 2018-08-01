@@ -1,7 +1,7 @@
 class AchievementPolicy < ApplicationPolicy
 
   def show?
-    !user.blocked_by?(record.user) && !user.blocked?(record.user)
+    create? || !user.blocked_by?(record.user) && !user.blocked?(record.user)
   end
 
   def index?
@@ -17,6 +17,18 @@ class AchievementPolicy < ApplicationPolicy
   end
 
   def destroy?
+    create?
+  end
+
+  def next_id?
+    show?
+  end
+
+  def previous_id?
+    show?
+  end
+
+  def new_form_fields?
     create?
   end
   

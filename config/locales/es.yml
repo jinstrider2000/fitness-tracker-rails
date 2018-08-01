@@ -36,7 +36,7 @@ es:
         achievement:
           attributes:
             activity:
-              invalid: "campos deben de ser completados"
+              invalid: "campos deben de ser completados correctamente"
             completed_on:
               required: "fecha es requerido"
               blank: "la fecha debe ser provista"
@@ -141,28 +141,32 @@ es:
       news_feed: "Noticias"
   news_feed:
     news_feed_helper:
-      time_since_update:
+      time_since_created:
         now: "Justo ahora"
-        sec: "%{count} segundos"
+        sec: "%{count} segundos atrás"
         min:
-          one: "%{count} minuto"
-          other: "%{count} minutos"
+          one: "%{count} minuto atrás"
+          other: "%{count} minutos atrás"
         hour:
-          one: "%{count} hora"
-          other: "%{count} horas"
+          one: "%{count} hora atrás"
+          other: "%{count} horas atrás"
         day:
-          one: "%{count} dia"
-          other: "%{count} dias"
+          one: "%{count} dia atrás"
+          other: "%{count} dias atrás"
         month:
-          one: "%{count} mes"
-          other: "%{count} meses"
+          one: "%{count} mes atrás"
+          other: "%{count} meses atrás"
         year:
-          one: "%{count} año"
-          other: "%{count} años"
+          one: "%{count} año atrás"
+          other: "%{count} años atrás"
     index:
       title: "Fitness Tracker - Noticias"
       user_index: "Encuentra gente en Fitness Tracker"
       no_items: "No hay noticias hoy. Para ver alguna actividad, registre un logro o siga a alguien que haya registrado logros."
+      update_error: "Disculpe, ocurrió un error. No se pudo actualizar el feed de noticias"
+      update_pending:
+        one: "%{count} nuevo logro"
+        other: "%{count} nuevos logros"
   achievements:
     not_found_error: "Lo sentimos, ese logro no pudo ser encontrado"
     index:
@@ -179,11 +183,13 @@ es:
     new:
       title: "Fitness Tracker - Nuevo Logro"
       heading: "Nuevo Logro"
+    create:
+      success_msg: "Agregaste el logro: <a href=\"%{path}\">%{name}</a>"
     edit:
       title: "Fitness Tracker - Editar Logro"
       heading: "Editar %{record_name}"
     update:
-      success_msg: "Logro actualizado con éxito"
+      success_msg: "Logro actualizado con éxito: <a href=\"%{path}\">%{name}</a>"
     show:
       title: "Fitness Tracker - Logro de %{user_name}: %{record_name}"
       my_heading: "Mi %{record_name}"
@@ -199,6 +205,8 @@ es:
       submit: "Ordena"
     activity_type_selection:
       all: "Todos"
+    new_form_fields:
+      not_found_error: "No encontramos los campos"
   users:
     users_helper:
       follow_status:
@@ -214,14 +222,15 @@ es:
         title: "Fitness Tracker - %{user_name}: Seguidores"
         my_heading: "Mis Seguidores"
         other_user_heading: "Seguidores de %{user_name}"
-        no_items: "No tienes seguidores"
+        no_items: "No hay seguidores"
       following:
         title: "Fitness Tracker - Quien %{user_name} esta siguiendo"
         my_heading: "Quién Estoy Siguiendo"
         other_user_heading: "Quien %{user_name} Esta Siguiendo"
-        no_items: "No has seguido a nadie"
+        no_items: "No esta seguido a nadie"
       index:
         title: "Fitness Tracker - Indice de Usuario"
+        loading: "Actualizando..."
         most_active: "¡Motívate! Descubra quién es el usuario más activo de hoy"
         heading: "Indice de Usuario"
       muted:

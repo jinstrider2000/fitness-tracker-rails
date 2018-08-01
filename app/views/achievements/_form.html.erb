@@ -1,5 +1,5 @@
 <%= tag.div class: %w[form-block center-block] do %>  
-  <%= form_for achievement, method: html_method, url: path do |form| %>
+  <%= form_for achievement, method: html_method, url: path, html: {onsubmit: "event.preventDefault();submitAchievementForm(this);"} do |form| %>
     <%= error_messages_for achievement, id: 'error_explanation' %>
     <%= form.hidden_field :user_id %>
     <%= tag.div class: 'form-group' do %>
@@ -19,7 +19,7 @@
         <%= form.text_area :comment, class: 'form-control' %>
       <% end %>
       <%= tag.div class: %w[form-group text-center] do %>
-        <%= form.submit class: %w[btn btn-default] %>
+        <%= form.submit class: %w[btn btn-default], data: {disable_with: false} %>
       <% end %>
     <% else %>
       <%= tag.h3 t(".activity_selection"), class: "text-center" %>

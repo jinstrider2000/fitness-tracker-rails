@@ -5,6 +5,7 @@ class Food < ApplicationRecord
 
   has_one :achievement, as: :activity
   validates_presence_of :name, :calories
+  validates :name, length: {maximum: 20}
   validates :calories, numericality: {greater_than_or_equal_to: 0}
 
   extend FitnessTracker::SortableActivity

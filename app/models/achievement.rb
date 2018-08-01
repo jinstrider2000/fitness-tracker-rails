@@ -13,6 +13,7 @@ class Achievement < ApplicationRecord
   belongs_to :daily_total, optional: true
   validates_presence_of :activity, :completed_on, :user
   validates_associated :activity
+  validates :comment, length: {maximum: 145}
 
   after_validation :find_or_create_daily_total, on: :create
   after_create :add_to_daily_total

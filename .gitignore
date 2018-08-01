@@ -26,3 +26,4 @@
 /app/assets/images/users/*
 !/app/assets/images/users/generic
 Gemfile.lock
+package-lock.json
