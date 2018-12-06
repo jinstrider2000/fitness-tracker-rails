@@ -3,5 +3,10 @@
   "private": true,
   "dependencies": {
     "handlebars": "^4.0.5"
+  },
+  "scripts": {
+    "build": "yarn install && yarn build",
+    "deploy": "cp -a build/. public/",
+    "heroku-postbuild": "yarn build && yarn deploy"
   }
 }
