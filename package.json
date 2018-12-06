@@ -9,7 +9,7 @@
     "yarn": "1.12.3"
   },
   "scripts": {
-    "build": "yarn install && yarn build",
+    "build": "yarn build",
     "deploy": "cp -a build/. public/",
     "heroku-postbuild": "yarn build && yarn deploy"
   }
