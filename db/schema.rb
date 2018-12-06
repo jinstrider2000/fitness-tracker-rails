@@ -12,10 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20180122175414) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "achievements", force: :cascade do |t|
     t.string "activity_type"
-    t.integer "activity_id"
-    t.integer "user_id"
+    t.bigint "activity_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "completed_on"
@@ -26,8 +29,8 @@ ActiveRecord::Schema.define(version: 20180122175414) do
   end
 
   create_table "blocks", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "blocked_user_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "blocked_user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["blocked_user_id"], name: "index_blocks_on_blocked_user_id"
@@ -38,7 +41,7 @@ ActiveRecord::Schema.define(version: 20180122175414) do
     t.integer "total_calories_in", default: 0, null: false
     t.integer "total_calories_out", default: 0, null: false
     t.integer "net_calories", default: 0, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "completed_on"
@@ -60,8 +63,8 @@ ActiveRecord::Schema.define(version: 20180122175414) do
   end
 
   create_table "mutes", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "muted_user_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "muted_user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["muted_user_id"], name: "index_mutes_on_muted_user_id"
@@ -69,8 +72,8 @@ ActiveRecord::Schema.define(version: 20180122175414) do
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "followee_id"
+    t.bigint "follower_id"
+    t.bigint "followee_id"
     t.boolean "following_each_other", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
