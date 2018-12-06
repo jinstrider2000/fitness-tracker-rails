@@ -7,10 +7,5 @@
   "engines": {
     "node": "8.11.3",
     "yarn": "1.12.3"
-  },
-  "scripts": {
-    "build": "yarn build",
-    "deploy": "cp -a build/. public/",
-    "heroku-postbuild": "yarn build && yarn deploy"
   }
 }
