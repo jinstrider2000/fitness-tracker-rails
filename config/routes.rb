@@ -2,9 +2,9 @@ Rails.application.routes.draw do
 
   root 'news_feed#index'
   get '/current-user' => Users::UserActionsController.action(:current_user_json), as: "current_user_json"
-  get '/:locale' => 'news_feed#index'
 
   scope ':locale', constraints: {locale: /en|es/} do
+    get '/' => 'news_feed#index'
     get '/news-feed' => 'news_feed#index'
     devise_for :users, controllers: {registrations: 'users/registrations'}, skip: [:passwords, :omniauth_callbacks]
   end

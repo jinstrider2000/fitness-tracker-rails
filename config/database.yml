@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: fitness-tracker-rails_production
-  username: fitness-tracker-rails
-  password: <%= ENV['FITNESS-TRACKER-RAILS_DATABASE_PASSWORD'] %>
+  #username: fitness-tracker-rails
+  #password: <%= ENV['FITNESS-TRACKER-RAILS_DATABASE_PASSWORD'] %>
