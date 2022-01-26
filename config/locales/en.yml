@@ -266,6 +266,7 @@ en:
         loading: "Loading..."
         most_active: "Get motivated! Find out who is today's most active user"
         heading: "All Users"
+        no_items: "There are no users"
       muted:
         title: "Fitness Tracker - My Blocked Users"
         heading: "My Muted Users"

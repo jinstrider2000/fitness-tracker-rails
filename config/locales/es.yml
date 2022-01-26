@@ -233,6 +233,7 @@ es:
         loading: "Actualizando..."
         most_active: "¡Motívate! Descubra quién es el usuario más activo de hoy"
         heading: "Indice de Usuario"
+        no_items: "No hay usuarios"
       muted:
         title: "Fitness Tracker - Mis Usuarios Bloqueados"
         heading: "Mis Usuarios Silenciados"
