@@ -8,7 +8,7 @@
     <% end %>
     <%= tag.div class: %[col-xs-8] do %>
       <%= tag.div class: %[row] do %>
-        <%= image_tag "#{feed_item.activity_type.downcase}_icon", class: %w[mini-pic-display] %>
+        <%= image_tag asset_path("#{feed_item.activity_type.downcase}_icon"), class: %w[mini-pic-display] %>
         <%= render partial: File.join("achievements",feed_item.activity_type.downcase), locals: {feed_item.activity_type.downcase.to_sym => feed_item} %>
       <% end %>
       <%= tag.div class: %[row] do %>

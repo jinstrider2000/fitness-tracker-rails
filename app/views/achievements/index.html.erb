@@ -3,7 +3,7 @@
 <% end %>
 
 <%= tag.div class: %w[row text-center] do %>
-  <%= image_tag "#{@activity_type}_icon", class: %w[img-responsive index-icon], alt: "#{t("activerecord.models.#{@activity_type}")} Icon" %>
+  <%= image_tag asset_path("#{@activity_type}_icon"), class: %w[img-responsive index-icon], alt: "#{t("activerecord.models.#{@activity_type}")} Icon" %>
   <% if viewing_own_profile_while_logged_in? %>
     <%= tag.h2 t ".my_heading", record_name: t("activerecord.models.#{@activity_type}").pluralize %>
   <% else %>
